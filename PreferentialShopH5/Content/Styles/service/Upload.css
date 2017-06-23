@@ -1,0 +1,124 @@
+﻿body {
+}
+.section{
+    padding:0rem 0.2rem;
+}
+.Up_div{
+    display:flex;
+    height:0.3rem;
+    padding-top:0.4rem;
+    padding-bottom:0.2rem;
+    font-size:14px;
+    align-items:center;
+}
+.Up_num{
+    color:#000;
+    padding-right:0.1rem;
+}
+.Up_mandatory{
+    color:#1093E7;
+    height: 100%;
+    line-height: 0.4rem;
+}
+.input_box{
+    width:100%;
+    display:flex;
+    height:0.85rem;
+    border-radius:3px;
+    background-color:#fff;
+    align-items:center;
+}
+.readonly_box{
+       width:100%;
+    display:flex;
+    height:0.85rem;
+    border-radius:3px;
+    background-color:#EEEEEE;
+    align-items:center;
+}
+.up_input{
+    flex-grow:1;
+    padding:0rem 0.2rem;
+    color:#666666;
+    font-size:12px;
+    outline:none;
+    border:none;
+    height:100%;
+}
+.up_img{
+    display:flex;
+    align-items:center;
+    width:0.6rem;
+    height:100%;
+}
+.up_img img{
+    width:0.31rem;
+    height:0.31rem;
+}
+.border{
+    border:1px solid #1093E7;
+}
+.pop-up{
+    position:absolute;
+    top:0px;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background-color:rgba(119, 122, 123, 0.7);
+}
+.pop-ul{
+    width:5.04rem;
+    height:3.75rem;
+    background-color: #EAE9E9;
+    position:absolute;
+    left:50%;
+    top:2.1rem;
+    margin-left:-2.52rem;
+    border-radius:3px;
+}
+.list_top{
+    padding:0.2rem 0.3rem;
+    display:flex;
+    align-items:center;
+    height:0.45rem;
+    justify-content:center;
+}
+.list_out{
+    width:0.27rem;
+    height:100%;
+}
+.list_name{
+    flex-grow:1;
+    font-size:14px;
+    text-align:center;
+}
+.list{
+    width:100%;
+    display:flex;
+    align-items:center;
+    height:0.68rem;
+    border-top:1px solid #C0C0C0;
+}
+.first{
+    border:none;
+}
+.list_yuan{
+    width:1rem;
+    height:100%;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+}
+.list_bian{
+    width:0.38rem;
+    height:0.38rem;
+    border-radius:50%;
+    border: 1px solid #C0C0C0;
+    margin-left: 0.56rem;
+}
+.name_active{
+    color:rgb(2, 140, 229);
+}
+.yuan_active{
+     background-color:rgb(2, 140, 229);
+}

@@ -1,0 +1,366 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "我的代金券";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+<div class="shawDowDiv"></div>
+
+<div class="pb60">
+    <div class="yj">
+        <ul class="pt4 pb4 pl30 pr30 white-bg parbox broli">
+            <li class="box flex1 ac">
+                <p class="broSum">@ViewBag.comsionAccount["commission"]</p>
+                <p class="broTitle fs14">账户余额</p>
+            </li>
+            <li class="box flex1 ac">
+                <p class="broSum">@ViewBag.comsionAccount["withdrewCommission"]</p>
+                <p class="broTitle fs14">累计提现</p>
+            </li>
+        </ul>
+    </div>
+    <div class="mt4 white-bg">
+        <ul class="sidebar-menu">
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <span class="username fs14"> 账户详情</span>
+                    <span class="glyphicon fr"></span>
+                </a>
+                <ul class="accountList fs12" id="sub">
+                    <li onclick="javascript: (window.location.href = '/userAbout/preLottery?settlementStatus=2')">
+                        <i class="djs"><img src="../Content/images/djs.png" /></i>待发放
+                        <span class="fr fs14 je">@ViewBag.comsionAccount["pendingSettlement"]<i class="fr glyphicon ml2 getWill"></i></span>
+                    </li>
+                    <li onclick="javascript: (window.location.href = '/userAbout/preLottery?settlementStatus=1')">
+                        <i class="ktx"><img src="../Content/images/yjs.png" /></i>已发放
+
+                        <span class="fr fs14 je">@ViewBag.comsionAccount["settled"]<i class="fr glyphicon ml2 getWill"></i></span>
+
+                    </li>
+                    <li><i class="ktx"><img src="../Content/images/ktx.png" /></i>可提现金额<span class="fr fs14 je">@ViewBag.comsionAccount["canWithdrawCommission"]</span></li>
+                    <li><i class="txz"><img src="../Content/images/txz.png" /></i>提现申请中<span class="fr fs14 je">@ViewBag.comsionAccount["withdrawingCommission"]</span></li>
+                    <li><i class="zrk"><img src="../Content/images/zrk.png" /></i>转入猫市联合卡<span class="fr fs14 je">@ViewBag.comsionAccount["toErPaoCommission"]</span></li>
+                </ul>
+            </li>
+            <li class="subMenu">
+                <a onclick="javascript: (window.location.href = '/userAbout/commissionList')">
+                    <span class="username fs14">历史提现</span>
+                    <span class="glyphicon fr " style="transform: rotate(-90deg); -webkit-transform: rotate(-90deg); margin-top: .3rem; "></span>
+                </a>
+                <div class="brohistory" id="sub">
+                    @if (ViewBag.comsionList.Length > 0)
+                    {
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="al">结款时间</th>
+                                    <th class="ac">申请时间</th>
+                                    <th class="ac">申请金额</th>
+                                    <th class="ar">打款金额</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var comsionList in ViewBag.comsionList)
+                                {
+                                    <tr>
+                                        <th class="al">@comsionList["paymentTime"]</th>
+                                        <th class="ac">@comsionList["applyTime"]</th>
+                                        <th class="ac">@comsionList["withdrawalsAmount"]</th>
+                                        <th class="ac">@comsionList["payment"]</th>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="fs14 pt4 pb4">暂无您的提现记录</p>
+                    }
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="pl30 pr30 broSub">
+        <span class="brotx ac fs16" data-minwithdraw='@ViewBag.comsionAccount["commissionMinWithdraw"]' data-commission='@ViewBag.comsionAccount["commission"]'>申请提现</span>
+        <span class="brozc ac fr fs16" data-phone='@ViewBag.UserResult.Phone'>转入猫市联合卡</span>
+    </div>
+    @*<div class="brotip fs12 pl30 pr30">
+        <p class="brocomWord">温馨提示：</p>
+        <p class="brocomWord">1-待结算金额：已完成收货订单的红包</p>
+        <p class="brocomWord">2-可提现金额：已完成结算的红包余额</p>
+        <p class="brocomWord">3-提现申请中：已申请提现的红包</p>
+        <p class="brospeWord mt4">结算周期：按月结算未发生退货退款的订单</p>
+    </div>*@
+</div>
+
+
+
+
+
+@*<div class="redirectToerPao">
+    <p></p>
+    <div class="margin-left"><span>当前用户</span><span class="toErpaoNickName" style=" color: #0000ff;"></span></div>
+    <div class="margin-left"><span>金额(元)</span><input type="text" class="inputMission" /></div>
+    <div class="operationArea"><span style="border-right:1px solid #dadada" onclick="cancelDo()">取消</span><span onclick="confirmDo()">确定</span></div>
+</div>*@
+
+<div class="_alert" id="_alert">
+    <div class="in">
+        <div class="alert_title">
+            <p class="fs14 ac">转入猫市联合卡</p>
+        </div>
+        <div class="alert_input parbox center fs12">
+            <span class="title">当前用户</span>
+            <p class="flex1 toErpaoNickName" style=" color: #408cff;"></p>
+        </div>
+        <div class="alert_input parbox center fs12">
+            <span class="title">金额(元)</span>
+            <input class="flex1 inputMission" type="text" placeholder="">
+        </div>
+        <div class="alert_btns parbox">
+            <a href="javascript:void(0)" class="alert_btn alert_calcle flex1 fs14" id="alertCancle" onclick="cancelDo()">取消</a>
+            <a href="javascript:void(0)" class="alert_btn alert_save flex1 fs14" id="alertSave" onclick="confirmDo()">确定</a>
+        </div>
+    </div>
+</div>
+<div class="_alert" id="_alertTwo">
+    <div class="in">
+        <div class="alert_input parbox center fs12">
+            <p class="flex1 ac">您还未绑定手机号，<br />确定绑定手机号。</p>
+        </div>
+        <div class="alert_btns parbox">
+            <a href="javascript:void(0)" class="alert_btn alert_calcle flex1 fs14" id="alertCancle" onclick="cancelAlert()">取消</a>
+            <a href="javascript:void(0)" class="alert_btn alert_save flex1 fs14" id="alertSave" onclick="confirmAlert()">确定</a>
+        </div>
+    </div>
+</div>
+
+@section Footer
+{
+    <style type="text/css">
+        .shawDowDiv {
+            background-color: black;
+            opacity: 0.1;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: none;
+        }
+
+        .margin-left {
+            line-height: 2rem;
+            height: 25%;
+            margin-left: 10%;
+        }
+
+            .margin-left span {
+                margin-right: 5%;
+            }
+
+            .margin-left input {
+                height: 1.2rem;
+                border-width: 0px;
+                color: #0000ff;
+            }
+
+        .operationArea span {
+            width: 49.8%;
+            height: 100%;
+            display: inline-block;
+            text-align: center;
+            color: #0000ff;
+        }
+
+        .operationArea {
+            line-height: 2rem;
+            border-top: 1px solid #dadada;
+        }
+
+        .redirectToerPao {
+            display: none;
+            position: fixed;
+            left: 7.5%;
+            top: 30%;
+            width: 85%;
+            font-size: 0.56rem;
+            background-color: white;
+        }
+        .center {
+            -webkit-box-align: center;
+            align-items: center;
+        }
+        ._alert {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1999;
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+            ._alert > .in {
+                background: #fff;
+                min-width: 10rem;
+                border-radius: 0.3rem;
+                position: relative;
+                margin: 0 1rem;
+            }
+
+                ._alert > .in .alert_title {
+                    padding: 0.5rem;
+                    border-bottom: 1px solid #dedede;
+                }
+
+                ._alert > .in .alert_title p {
+                    color: #000;
+                    text-align: center;
+                    font-size: 0.56rem;
+                }
+
+               ._alert > .in .alert_input {
+                    margin: 0.5rem 0.4rem;
+                    height: 1.2rem;
+                }
+                ._alert > .in .alert_input .title{
+                    display:block;
+                    width:2.8rem;
+                }
+                ._alert > .in .alert_input input {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    text-indent: 0.3rem;
+                    color: #408cff;
+                    background: #fff;
+                    border: 1px solid #dedede;
+                    border-radius: 0.2rem;
+                }
+
+                ._alert > .in .alert_attention {
+                    color: #ff0000;
+                }
+
+                ._alert > .in .alert_btns {
+                    border-top: 1px solid #dedede;
+                    border-radius: 0 0 0.1rem 0.1rem;
+                }
+
+                ._alert > .in .alert_btn {
+                    display: block;
+                    width:100%;
+                    line-height: 1.4rem;
+                    margin: 0 auto;
+                    border-radius: 0.1rem;
+                    text-align: center;
+                }
+
+                ._alert > .in .alert_calcle {
+                }
+
+                ._alert > .in .alert_save {
+                    border-left: 1px solid #dedede;
+                    color: #408cff;
+                }
+
+            ._alert.show {
+                opacity: 1;
+                pointer-events: auto;
+            } 
+         .redirectToerPao p {
+            text-align: center;
+            line-height: 2rem;
+            border-bottom: 1px solid #dadada;
+        }
+    </style>
+}
+@section Scripts
+{
+
+    <script>
+        $(".sub-menu").on('click', '>a', function (e) {
+            e.preventDefault();
+            var nextSub = $(this).next(".sub");
+            $(this).next("#sub").slideToggle();
+            $(this).parent().addClass('selected').siblings().removeClass('selected').children(".sub").slideUp();
+        })
+        $(".brotx").click(function () {
+            var minwithdraw = parseInt($(this).data("minwithdraw"));
+            var commission = parseInt($(this).data("commission"));
+            if (commission >= minwithdraw) {
+                //alert("您的账户余额小于最小提现金额" + $(this).data("minwithdraw"));
+                window.location.href = "/userAbout/withDrawals";
+            } else {
+                smGlobal.heiAutoError("您的账户余额小于最小提现金额" + $(this).data("minwithdraw"),1500);
+                //alert("您的账户余额小于最小提现金额" + $(this).data("minwithdraw"));
+            }
+        })
+        $(".brozc").click(function () {
+            var phone = $(this).data("phone");
+            if (!phone) {
+                $("#_alertTwo").addClass("show");
+            }
+            else {
+                $("#_alert").addClass("show");
+            }
+        })
+        function cancelAlert() {
+            $("#_alertTwo").removeClass("show");
+        }
+        function confirmAlert() {
+            window.location.href = "/account/register?isUpdateBind=true";
+        }
+
+
+        var nickName = window.localStorage.getItem("nickName");
+        var canCommission =@ViewBag.comsionAccount["canWithdrawCommission"]
+        $(".inputMission").attr("placeholder", "可转入" + canCommission + "元");
+        $(".toErpaoNickName").text(nickName);
+
+
+        function cancelDo() {
+            $("#_alert").removeClass("show");
+        }
+
+        function confirmDo() {
+            $("#_alert").addClass("show");
+            var transferNum = parseFloat($(".inputMission").val());
+            if (isNaN(transferNum)) {
+                smGlobal.error("请输入正确金额");
+                return;
+            } else if (transferNum < 0.01) {
+                smGlobal.error("不能小于0.01");
+                return;
+            }
+            apiRequest({
+                method: "UserAccount/CommissionTransferToCombinedCard",
+                async: true,
+                type: "POST",
+                data: {
+                    TransferAmount: $(".inputMission").val()
+                },
+                success: function (data) {
+                    if (data.isBizSuccess) {
+                        smGlobal.error("转入成功");
+                        window.location.reload();
+                    } else {
+                        smGlobal.error("转入失败");
+                    }
+
+                },
+                error: function (data) {
+                    smGlobal.error("转入失败");
+                }
+            });
+        }
+    </script>
+}

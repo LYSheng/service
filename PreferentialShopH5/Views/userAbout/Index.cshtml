@@ -1,0 +1,392 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "我的";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css?v1.2")
+    <script>
+        window.localStorage.setItem("nickName", '@ViewBag.UserResult.NickName');
+        window.localStorage.setItem("Phone", '@ViewBag.UserResult.Phone');
+        $(function () {
+            var isAlert = smGlobal.getQueryString("isAlert");
+            if (isAlert != null && isAlert != "") {
+                $(".shadowCell").show();
+                $(".confirmAlertBox").show();
+                $(document.body).css({ "overflow": "hidden" });
+            }
+        })
+
+        //取消
+        function nobind() {
+            $(".shadowCell").hide();
+            $(".confirmAlertBox").hide();
+            $(".confirmAlertBoxValitePhone").hide();
+            $(document.body).css({ "overflow": "auto" });
+        }
+        //绑定
+        function bind() {
+            $(".shadowCell").hide();
+            $(".confirmAlertBox").hide();
+            $(".confirmAlertBoxValitePhone").hide();
+            $(document.body).css({ "overflow": "auto" });
+            window.location.href = "/account/Register?isUpdateBind=1";
+        }
+
+        //绑定手机号
+        function bindCellPhone(obj) {
+            var oldCellPhone = $(obj).find(".oldcellPhone").text();
+            if ($.trim(oldCellPhone).length >= 11) {
+                window.location.href = "/account/validatePsd";
+            } else {
+                window.location.href = "/account/register?isUpdateBind=true";
+            }
+        }
+
+
+        //直接退出
+        function logOut() {
+            window.location.href = "/Account/LogOff?islogoff=true"
+        }
+        $(function () {
+            $(".validatebtn").click(function (event) {
+                var oldCellPhone = $(".userBindPhone").text();
+                if ($(this).text() == "未认证") {
+                    if ($.trim(oldCellPhone).length >= 11) {
+                        window.location.href = 'userAbout/idauthentication';
+                    } else {
+                        $(".shadowCell").show();
+                        $(".confirmAlertBoxValitePhone").show();
+                        $(document.body).css({ "overflow": "hidden" });
+                    }
+
+                } else {
+                    window.location.href = 'userAbout/idauthentication';
+
+                }
+                event.stopPropagation();
+                return false;
+                //window.location.href = 'userAbout/idauthentication';
+
+            })
+        })
+    </script>
+    <style type="text/css">
+        .validatebtn {
+            margin-left: 0.5rem;
+            display: inline-block;
+            width: 2rem;
+            height: 1rem;
+            line-height: 1rem;
+            position: absolute;
+            top: 2.4rem;
+            text-align: center;
+            border-radius: 0.2rem;
+            font-size: 0.4rem !important;
+            background-color: #ff6666;
+        }
+    </style>
+}
+<div class="shadowCell"></div>
+<div class="confirmAlertBox">
+    <div class="alertTitle fs18">温馨提示<span onclick="nobind()" class="close_icon">x</span></div>
+    <div class="alertContent box fs14">
+        如果您退出此账户且不绑定手机号，将丢失此账户中的所有信息。
+        <p class="pt2 ac">是否绑定手机号？</p>
+    </div>
+    <div class="alertOperation"><span onclick="logOut()" class="box">不绑定</span><span onclick="    bind()">绑定</span></div>
+</div>
+
+<div class="confirmAlertBoxValitePhone">
+    <div class="alertTitle fs18">温馨提示<span onclick="nobind()" class="close_icon">x</span></div>
+    <div class="alertContent box fs14">
+        您还没绑定手机号，认证前请先绑定手机号。
+        <p class="pt2 ac">是否绑定手机号？</p>
+    </div>
+    <div class="alertOperation"><span onclick="nobind()" class="box">取消</span><span onclick="bind()">绑定</span></div>
+</div>
+
+<div class="perInfo">
+    <div class="mine_information">
+        <a href="/userAbout/myInfo?mobile=@ViewBag.UserResult.Phone">
+            <dl class="mine clearfix">
+                <dt class="touxiang fl"><img onerror="this.src = '/Content/images/myAvatar.png'" src="@ViewBag.UserResult.UserPic" alt="@ViewBag.UserResult.NickName" /></dt>
+                <dd class="info">
+                    <p class="nick_name">@ViewBag.UserResult.NickName</p>
+                    <p class="jiantou fr"></p>
+                    <p class="qr_new_icon fr"></p>
+                    <p class="address">@(ViewBag.UserResult.ProviderTypeName != "" ? @ViewBag.UserResult.ProviderTypeName : "游客")</p>
+                </dd>
+            </dl>
+        </a>
+    </div>
+    @* 我的钱包 *@
+    @{
+        if ((!ViewBag.MyMallsWalletResult.IsInvestment && @ViewBag.MyMallsWalletResult.BalanceCurrency > 0) || ViewBag.MyMallsWalletResult.BalanceDividend > 0 || ViewBag.MyMallsWalletResult.IsInvestment || ViewBag.MyMallsWalletResult.IsStore)
+        {
+
+            <div class="myBag white-bg">
+                <a href="/userAbout/myBank">
+                    <div class="mine_css clearfix">
+                        <span class="fl">Malls·钱包</span>
+                        <i class="fr jiantou"></i>
+                        @if (ViewBag.MyMallsWalletResult.CanDividends > 0)
+                        {
+                            <span class="fr fs14" style="font-size: 0.52rem; line-height: 0.52rem;position: relative; top: 0.1rem; ">待结算:￥<b style=" font-size: 0.52rem; top: 0;">@ViewBag.MyMallsWalletResult.CanDividends.ToString("0.00")</b></span>
+                        }
+                    </div>
+                    <div class="parbox myBagList">
+                        <div class="flex1 ">
+                            @if (!ViewBag.MyMallsWalletResult.IsInvestment)
+                            {
+                                <p>未充值</p>
+                            }
+                            else
+                            {
+                                <p>￥<span>@ViewBag.MyMallsWalletResult.BalanceAmount.ToString("0.00")</span></p>
+                            }
+
+                            <p>会员卡余额</p>
+                        </div>
+                        <div class="flex1">
+                            <p>￥<span>@ViewBag.MyMallsWalletResult.BalanceDividend.ToString("0.00")</span></p>
+                            <p>经营回馈余额</p>
+                        </div>
+                        <div class="flex1">
+                            <p>￥<span>@ViewBag.MyMallsWalletResult.BalanceCurrency.ToString("0.00")</span></p>
+                            <p>猫市币余额</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+
+    }
+
+
+    @* 订单 *@
+    <section>
+        <div class="total_dingdan mine_css clearfix">
+            <a href="javascript:void(0)" class="moreOrder" data-state="0">
+                <span class="fl">我的订单</span>
+                <i class="fr jiantou"></i>
+                <span class="fr moreOrder">查看更多订单</span>
+            </a>
+        </div>
+        <ul class="trad_status clearfix parbox">
+            <li class="flex1 moreOrder" data-state="1">
+                <a href="javascript:void(0)">
+                    <b class="person_pay"></b>
+                    <span>待付款</span>
+                    @if (Model.WaitPayOrderCount != 0)
+                    {
+                        <em>@Model.WaitPayOrderCount</em>
+                    }
+                </a>
+            </li>
+            <li class="flex1 moreOrder" data-state="2">
+                <a href="javascript:void(0)">
+                    <b class="person_delv"></b>
+                    <span>待发货</span>
+                    @if (Model.YetPayCount != 0)
+                    {
+                        <em>@Model.YetPayCount</em>
+                    }
+                </a>
+            </li>
+            <li class="flex1 moreOrder" data-state="3">
+                <a href="javascript:void(0)">
+                    <b class="person_sh"></b>
+                    <span>待收货</span>
+                    @if (Model.YetSendGoodsCount != 0)
+                    {
+                        <em>@Model.YetSendGoodsCount</em>
+                    }
+
+                </a>
+            </li>
+            <li class="flex1 moreOrder" data-state="4">
+                <a href="javascript:void(0)">
+                    <b class="person_appraise"></b>
+                    <span>待评价</span>
+                    @if (Model.ReceivedCount != 0)
+                    {
+                        <em>@Model.ReceivedCount</em>
+                    }
+                </a>
+            </li>
+            @*<li class="flex1">
+                    <a href="/userAbout/orderRefunds">
+                        <b class="person_refunds"></b>
+                        <span>退款/售后</span>
+                        @if (Model.ReceivedCount != 0)
+                        {
+                            <em>@Model.ReceivedCount</em>
+                        }
+                    </a>
+                </li>*@
+        </ul>
+    </section>
+
+
+    @* 更多工具 *@
+    <section class="mt3 moreTools white-bg">
+        <div class="mine_css">
+            <span>更多工具</span>
+        </div>
+        <ul class="clearfix">
+            <li class="fl">
+                <a href="javascript:void(0)" id="payCard">
+                    <span class="icon_payCard"></span>
+                    <p>充值成为会员</p>
+                </a>
+            </li>
+            <li class="fl two">
+                <a href="/userAbout/myAllies">
+                    <span class="icon_myAllies"></span>
+                    <p>我的好友</p>
+                </a>
+            </li>
+            <li class="fl">
+                <a href="/userAbout/myShare">
+                    <span class="icon_myShare"></span>
+                    <p>分享给好友</p>
+                </a>
+            </li>
+            <li class="fl">
+                <a href="/userAbout/attentMalls">
+                    <span class="icon_attentMalls"></span>
+                    <p>关注公众号</p>
+                </a>
+            </li>
+            <li class="fl two">
+                <a href='tel:4009633696'>
+                    <span class="icon_tel"></span>
+                    <p>客服电话(9:00-21:00)</p>
+                </a>
+            </li>
+            <li class="fl">
+                <a href="/userAbout/myCoupon">
+                    <span class="icon_myCoupon"></span>
+                    <p>领券中心</p>
+                </a>
+            </li>
+            <li class="fl">
+                <a href="/bargain/list">
+                    <span class="icon_mybargain"></span>
+                    <p>我的众砍</p>
+                </a>
+            </li>
+        </ul>
+
+    </section>
+
+
+    <p class="infoout">
+        <a href="javascript:void(0)">退出登录</a>
+    </p>
+</div>
+<div class="myQrCodeNew hide">
+    <div>
+        <img class="userimg scrollLoading" src="~/Content/Images/loading_250.png" data-url="@Html.Raw(ViewBag.InvitUrl)" />
+    </div>
+</div>
+@*<div class="giftDialogue"><div class="inDialogue"><img src="../content/images/gift01.png" class="fl full-width"><img src="../content/images/gift02.png" class="fl full-width "><a href="javascript:void(0)" class="goMyCoupon closeDia"></a><a href="javascript:void(0)" class="goShare closeDia"></a> <img src="../content/images/gift03.png" class="fl closeDia" id="closeDia"></div></div>*@
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("scrollLoading.js")
+
+    <script>
+
+        $(function () {
+            var sesStorage = window.sessionStorage;
+            var orderStatusFlag = parseInt(sesStorage.getItem("orderStatusFlag"));
+            if (orderStatusFlag && orderStatusFlag != '') {
+                sesStorage.removeItem("orderStatusFlag")
+            }
+            $(".myQrCodeNew").on("click", function () {
+                $(this).addClass("hide");
+            })
+            $(".qr_new_icon").on("click", function () {
+                $(".myQrCodeNew").removeClass("hide");
+                return false;
+            })
+            var serviceStoreUserId = getCookie("serviceStoreUserId") ? getCookie("serviceStoreUserId") : "";
+            $("#payCard").on("click", function () {
+                apiRequest({
+                    method: 'MyWallet/GetMySelServiceStore',
+                    data: { "IsInvestment": true, serviceStoreUserId: serviceStoreUserId },
+                    async: false,
+                    success: function (obj) {
+                        console.log(obj.data.serviceStoreUserId)
+                        sesStorage.setItem("chargeFlag", "2");
+                        if (obj.data.serviceStoreUserId > 0) {
+                            window.location.href = "/userAbout/payCard?storeUserId=" + obj.data.serviceStoreUserId;
+                        } else {
+                            window.location.href = "/userAbout/chooseShop";
+                        }
+                    },
+                    error: function (data) {
+                        smGlobal.error("获取门店信息失败");
+                    }
+                });
+            })
+            var declarObj = sesStorage.getItem("declarObj");
+            var _isPaymentPassword = false;
+            apiRequest({
+                method: "User/IsPaymentPassword",
+                async: true,
+                success: function (obj) {
+                    smGlobal.removeHomeGif();
+                    _isPaymentPassword = obj.data;
+                    sesStorage.setItem("isPaymentPassword", _isPaymentPassword);
+                },
+                error: function (obj) {
+                    smGlobal.removeHomeGif();
+                    if (obj == "用户不存在") {
+                        window.location.href = "/";
+                    } else {
+                        smGlobal.error(obj);
+                    }
+                }
+            });
+
+            $("#setPayPwd").click(function () {
+                if (!_isPaymentPassword) {
+                    window.location.href = "/userAbout/payPwd?type=0";
+                } else {
+                    window.location.href = "/userAbout/payPwd?type=1";
+                }
+            })
+            //查看订单
+            $(".moreOrder").off().on("click", function () {
+                var state = $(this).data("state");
+                sesStorage.setItem("orderState", state);
+                window.location.href = "/userAbout/orderList";
+            })
+
+            $(".infoout a").click(function () {
+                if (hasClicked(this)) {
+                    return false;
+                }
+                try {
+                    if (declarObj) {
+                        sesStorage.removeItem("declarObj");
+                        console.log("remove");
+                    }
+                    mobile.removeLoginCookie();
+                } catch (e) {
+                    console.log(e.message);
+                }
+                window.location.href = "/Account/LogOff";
+            })
+            $(".scrollLoading").scrollLoading();
+        })
+
+    </script>
+}

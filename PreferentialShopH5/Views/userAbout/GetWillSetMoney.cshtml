@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = (Request["settlementStatus"] == "1"?"已结算总额(元)":"待结算总额(元)");
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+
+    @WebHelper4H5.RegisterStyles("userAbout/willsetMoney.css")
+}
+
+<div class="header-willsetMoney">
+    <div class="headertitle">@(Request["settlementStatus"] == "1"?"已结算总额(元)":"待结算总额(元)")</div>
+    <div class="headMoneyCount"></div>
+</div>
+
+<div class="willContentList" data-bind="foreach:settinglist" style="padding-bottom:50px;">
+    <div class="contentItem">
+        <div><span class="contentLeft">订单收货时间</span><span class="contentRight" data-bind="text:reciveTime"></span></div>
+        <div><span class="contentLeft">订单号</span><span class="contentRight" data-bind="text:orderPackageCode"></span></div>
+        <div><span class="contentLeft">红包:</span><span data-bind="text:commission"></span><span class="contentRight">红包类别:<span data-bind="text:referrerSettlementTypeName"></span></span></div>
+        <div><span class="contentLeft">购买者:</span><span data-bind="text:buyUserName"></span><span class="contentRight">用户类别:<span data-bind="text:buyUserTypeName"></span></span></div>
+    </div>
+</div>
+
+
+@section Footer{
+
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/userabout/willSet.js"></script>
+}
+
+

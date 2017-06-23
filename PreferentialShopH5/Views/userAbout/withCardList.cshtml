@@ -1,0 +1,51 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "银行卡";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+<div class="withCardListCon pl20 pr20 ">
+    @foreach (var cardItem in ViewBag.withCardList)
+    {
+        <div class="withCardList white-bg pl20 pr20  mt4">
+            <dl class="cardObj">
+                <dd class="chooseB" data-cardnum="@cardItem["bankCardNum"]" data-cardname="@cardItem["bankName"]" data-bankid="@cardItem["bankCardId"]">
+                    <i class="cardBox">
+                        <img src="@cardItem["bankLogoUrl"]" onerror="this.src = '/content/images/maoshi.png'" />
+                    </i>
+                    <p class="fr fs36 cardNum">
+                        ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;<span class="fs16">@cardItem["bankCardNum"]</span>
+                    </p>
+                </dd>
+                <dt class="clearfix" data-cardid="@cardItem["bankCardId"]" onclick="window.location.href = '/userAbout/withBankAction?bankCardId=@cardItem["bankCardId"]'">
+                    @if (cardItem["isDefault"]==1)
+                    {
+                        <i class="fs12 cardDefault box">默认</i>
+                    }
+                    <span class="fr cardDetail fs14">@cardItem["bankName"] | @cardItem["cardTypeName"]</span>
+                </dt>
+            </dl>
+        </div>
+    }
+</div>
+<p class="ac adradd ml4 mr4 mt4 fs14" id="addAddress"><i class="person_adradd mr4"></i>添加银行卡</p>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/withDrawals.js")
+    <script>
+        var sestorage = window.sessionStorage;
+        var resFlag = sestorage.getItem("refreshFlag");
+        if (resFlag == "true") {
+            sestorage.removeItem("refreshFlag");
+            window.location.reload();
+        }
+    </script>
+}

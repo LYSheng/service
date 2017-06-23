@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "经营回馈";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/businessFeedBack.css")
+}
+
+<div class="list myCard white-bg" id="memberShow">
+        <div class="parbox list-box">
+            <p class="flex1 ac">会员经营回馈</p>
+        </div>
+        <div class="list-detail ac clearfix">
+            <div class="parbox fl ww skips" data-src="/userAbout/labourServiceWage?actionType=0">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:dividendsToInvestmentSum"></span></p>
+                    <p>上月待结算</p>
+                </div>
+                <i class="jiantou"></i>
+            </div>
+            <div class="parbox fl skips" data-src="/userAbout/labourServiceWage?actionType=1">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:withdrewDividends"></span></p>
+                    <p>累计回馈</p>
+                </div>
+            </div>
+            <div class="parbox fl skips" data-src="/userAbout/labourServiceWage?actionType=1">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:canDividends"></span></p>
+                    <p>应返回馈</p>
+                </div>
+                <i class="jiantou"></i>
+            </div>
+        </div>
+</div>
+<div class="list white-bg store-all" id="storeAll">
+    <div class="list-store">
+        <p class="ac">店铺经营回馈</p>
+        <p class="ac">我有<span data-bind="text:storeCount"></span>家店铺</p>
+    </div>
+    <div class="back-hui list-detail clearfix" id="isFinanceShow" data-id="-1">
+        <div class="parbox fl toBacks other-one yellow left">
+            <div class="flex1 ">
+                <p><span class="rmb">￥</span><span class="price" data-bind="text:dividendsSum"></span></p>
+                <p>上月待结算总额</p>
+            </div>
+        </div>
+        <div class="parbox fl toBacks other-one yellow right">
+            <div class="flex1">
+                <p><span class="rmb">￥</span><span class="price" data-bind="text:feedBackSum"></span></p>
+                <p>累计回馈总额</p>
+            </div>
+            <i class="jiantou"></i>
+        </div>
+
+        <div class="parbox fl toRecharges other-list">
+            <div class="flex1 ">
+                <p><span class="rmb">￥</span><span class="price" data-bind="text:investmentAmountMonth"></span></p>
+                <p>本月充值总额</p>
+            </div>
+        </div>
+        <div class="parbox fl toRecharges other-list">
+            <div class="flex1">
+                <p><span class="rmb">￥</span><span class="price" data-bind="text:investmentAmountSum"></span></p>
+                <p>累计充值总额</p>
+            </div>
+            <i class="jiantou"></i>
+        </div>
+        <div class="parbox fl toMembers other-list yellow left">
+            <div class="flex1 ">
+                <p><span class="price" data-bind="text:newAddUserMonth"></span></p>
+                <p>本月新增会员总数</p>
+            </div>
+        </div>
+        <div class="parbox fl toMembers other-list yellow right">
+            <div class="flex1">
+                <p><span class="price" data-bind="text:newAddUserSum"></span></p>
+                <p>累计会员总数</p>
+            </div>
+            <i class="jiantou"></i>
+        </div>
+        <div class="parbox fl toSales other-list">
+            <div class="flex1 ">
+                <p><span class="rmb">￥</span><span class="price" data-bind="text:salesAmountMonth"></span></p>
+                <p>本月销售总额</p>
+            </div>
+        </div>
+        <div class="parbox fl toSales other-list">
+            <div class="flex1">
+                <p><span class="rmb">￥</span><span class="price" data-bind="text:salesAmountSum"></span></p>
+                <p>累计销售总额</p>
+            </div>
+            <i class="jiantou"></i>
+        </div>
+        </div>
+        <div style="height:0.2rem"></div>
+    </div>
+
+<div class="store" id="storeList" data-bind="foreach:bFBList">
+    <div data-bind="css:isTransfer?'list myCard white-bg transfer':'list myCard white-bg'">
+        <p class="store-name" data-bind="text:storeName"></p>
+        <div class="list-detail clearfix" data-bind="attr:{'data-id':storeUserId}">
+
+            <div class="parbox fl yellow1 left">
+                <div class="flex1 ">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:dividendsToInvestmentSum.toFixed(2)"></span></p>
+                    <p>上月待结算</p>
+                </div>
+            </div>
+            <div class="parbox fl yellow1 right ">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:withdrewDividends.toFixed(2)"></span></p>
+                    <p>累计回馈</p>
+                </div>
+            </div>
+            <!-- ko if: isFinance -->
+            <div class="parbox fl toRecharges">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:investmentAmount.toFixed(2)"></span></p>
+                    <p>本月充值额</p>
+                </div>
+            </div>
+            <div class="parbox fl toRecharges">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:accumulatedInvestmentAmount.toFixed(2)"></span></p>
+                    <p>累计充值额</p>
+                </div>
+                <i class="jiantou"></i>
+            </div>
+            <div class="parbox fl toMembers yellow1 left">
+                <div class="flex1">
+                    <p><span class="price" data-bind="text:newAddUser"></span></p>
+                    <p>本月新增会员数</p>
+                </div>
+            </div>
+            <div class="parbox fl toMembers yellow1 right">
+                <div class="flex1">
+                    <p><span class="price" data-bind="text:userCount"></span></p>
+                    <p>累计会员数</p>
+                </div>
+                <i class="jiantou"></i>
+            </div>
+            
+            <div class="parbox fl toSales">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:salesAmount.toFixed(2)"></span></p>
+                    <p>本月销售额</p>
+                </div>
+            </div>
+            <div class="parbox fl toSales">
+                <div class="flex1">
+                    <p><span class="rmb">￥</span><span class="price" data-bind="text:accumulatedSalesAmount.toFixed(2)"></span></p>
+                    <p>累计销售额</p>
+                </div>
+                <i class="jiantou"></i>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<div style="height:0.5rem"></div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userAbout/businessFeedBack.js")
+}
+
+
+
+
+
+
+
+

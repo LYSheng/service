@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>O2O</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/common.css" type="text/css" rel="stylesheet" />
+    <link href="css/landing.css" type="text/css" rel="stylesheet" />
+    <script src="../Scripts/jquery-1.8.2.min.js"></script>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <style>
+        .w {
+            width: 200px;
+            position: absolute;
+            background: #999;
+            left: 20%;
+            z-index: 999999;
+            top: 200px;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .x {
+            width: 180px;
+            position: relative;
+            background: #ff9;
+            border: 1px solid #F96;
+            padding: 10px;
+            left: -4px;
+            top: -4px;
+        }
+
+        .y, .z {
+            position: absolute;
+            left: 130px;
+        }
+
+        .y {
+            color: #ff9;
+            top: -6px;
+        }
+
+        .z {
+            color: #f96;
+            top: -7px;
+        }
+    </style>
+
+</head>
+<body>
+    <script>
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function JumpToIphone() {
+            var ua = navigator.userAgent.toLowerCase();
+            //if (/iphone|ipod/.test(ua)) {
+            location.href = "http://mp.weixin.qq.com/mp/redirect?url=https://itunes.apple.com/cn/app/oto-wei-lai-shang-dian-ke/id922362835?mt=8";
+            if (/micromessenger/.test(ua)) {
+                document.getElementById("popweixin").style.display = "block";
+                var X = $($('.ios_icon')[0]).offset().top;
+                $(".w").css("top", X + 20);
+                $("#info").html("微信浏览器暂时不支持跳转appstore，如果您是ios用户请点击微信右上角按钮在safari中打开点击下载(点我消失)");
+            }
+            else {
+                location.href = "https://itunes.apple.com/cn/app/oto-wei-lai-shang-dian-ke/id922362835?mt=8";
+            }
+            //} else {
+            //    location.href = "https://itunes.apple.com/cn/app/oto-wei-lai-shang-dian-ke/id922362835?mt=8";
+            //}
+        }
+        function JumpToAndroid() {
+            if (isWeiXin()) {
+                document.getElementById("popweixin").style.display = "block";
+                var X = $($('.android_icon')[0]).offset().top;
+                $(".w").css("top", X + 20);
+                $("#info").html("微信浏览器暂时不支持第三方apk下载，请点击微信右上角按钮在其他浏览器中打开点击下载(点我消失)");
+            } else {
+                window.open("http://sj.qq.com/myapp/detail.htm?apkName=com.cn.tloto.activity");
+            }
+        }
+        function hideme() {
+            $("#popweixin").hide();
+        }
+    </script>
+    <header class="head">
+    关于我们
+    </header>
+    <article class="content padding10">
+	<div class="logo">
+		<img src="img/144.png" alt="" />
+		<p>禾农客户端</p>
+	</div>
+    <div id="popweixin" onclick="hideme();" style="display:none;">
+        <div class="w"> 
+        <div class="x"><p id="info"></p> 
+        <div class="z">&#9670</div> 
+        <div class="y">&#9670</div> 
+        </div> 
+        </div> 
+    </div>
+	<ul class="download_list">
+			<li class="download_ios" onclick="JumpToIphone()">
+				<i class="ios_icon">ios</i>
+				Iphone下载
+			</li>
+			<li  class="download_android" onclick="JumpToAndroid()">
+				<i class="android_icon">安卓</i>
+				Android下载
+			</li>
+            <li  class="download_h5">
+                <a style="color:white" href="/">
+				    <i class="h5_icon">html5</i>
+				    Html5网页版
+                </a>
+			</li>
+	</ul>
+    <div class="qr_code clear">
+    	<img class="fri" src="image/qrcode_for_gh_dabfd8b95f4a_430.jpg" />
+        <div class="qr_code_info">
+        	<p>微信公众号</p>
+        	<span>关注<mark>《公众号名称》</mark></span>
+            <strong>轻松实现微信购物</strong>
+        </div>
+    </div>
+</article>
+
+</body>
+</html>

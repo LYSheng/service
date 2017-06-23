@@ -1,0 +1,47 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "个人信息";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+<header class="u-header clearfix white-bg ac">
+    <div class="u-hd-left fl btnPrev">
+        <a href="javascript:void(0)" class="J_backToPrev">
+            <span class="u-icon i-hd-back ml4 mt4"></span>
+        </a>
+    </div>
+    <div class="u-hd-tit"><span class="fs36">修改昵称</span></div>
+    <div class="fr u-hd-right nickAction">保存</div>
+</header>
+<div class="perInfo">
+    <section class="mt5">
+        <span class="posrela nickNameArea white-bg">
+            <input class="full-width fs12" id="nickName" type="text" value="@ViewBag.CurrentUser.NickName">
+            <a id="clearbtn" class="u-iconlist txt-clear posabsolute"></a>
+        </span>
+    </section>
+</div>
+<input type="hidden" value="@User.Identity.Name" id="uid" />
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/Account/jcropfile.js"></script>
+    <script>
+        $("#clearbtn").click(function () {
+            $("#nickName").val("");
+        })
+        var sesstion = window.sessionStorage;
+        if (sesstion.getItem("refreshFlag") == "true") {
+            sesstion.removeItem("refreshFlag");
+            setTimeout(function () { window.location.reload(); },100);
+           
+        }
+    </script>
+}

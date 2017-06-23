@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "猫市礼品卡充值";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("mallCard/recharge.css")
+
+}
+<div class="categBox desCategBox">
+    <div class="head">
+        <p class="ac fs14">当前余额(元)</p>
+        <p class="mt2 ac fs20" data-bind="text:rmb"></p>
+    </div>
+    <div class="user bd">
+        <p class="fs13 user-title bd">账户信息</p>
+        <p class="fs13 user-detail bd">用户名：<span data-bind="text:currentUserName"></span></p>
+        <p class="fs13 user-detail">手机号：<span data-bind="text:currentUserPhone"></span></p>
+    </div>
+    <div class="charge mt4">
+        <p class="fs13">请输入礼品卡卡号</p>
+        <div class="charge-input mt4">
+            <input type="text" class="fs13" placeholder="请输入礼品卡卡号" id="cardId" />
+        </div>
+        <p class="mt2 fs12 disnone" id="cardDetail"></p>
+    </div>
+    <div class="charge" data-bind="attr:{'data-ssss':initInfo.isCodeShow}">
+        <p class="fs13">请输入礼品卡密码</p>
+        <div class="charge-input mt4">
+            <input type="password" class="fs13" placeholder="请输入礼品卡密码" id="password" />
+        </div>
+        <!--ko if: initInfo.isCodeShow -->
+        <p class="fs13 mt4" id="codeTitle">请输入验证码</p>
+        <div class="mt4 parbox center" id="codeShow">
+            <div class="charge-input flex1">
+                <input type="text" class="fs13" placeholder="请输入验证码" id="code" maxlength="4" />
+            </div>
+            <img src="/VerificationCode?type=ShoppingCardRecharge" class="code-img" id="codeImg" onclick="chargeimg()" />
+            <a href="javascript:void(0)" class="charge-refresh fs12" id="chargeRefresh" onclick="chargeimg()">刷新</a>
+        </div>
+        <!-- /ko -->
+        <a href="javascript:void(0)" class="charge-btn fs14 ac" id="chargeBtn">充值到猫市礼品卡</a>
+    </div>
+    <div class="rule">
+        <p>温馨提示：</p>
+        <p>
+            1、礼品卡的密码位于卡片背面，密码需要刮开涂层获得。
+        </p>
+        <p>
+            2、礼品卡为不记名卡、不记名、不挂失、不计息、不兑换现金，获得礼品卡及密码后，请妥善保管，并及时充值到猫市礼品卡中。
+        </p>
+        <p>
+            3、每张礼品卡均有使用期限，请及时充值到猫市礼品卡中。
+        </p>
+        <p>
+            4、操作过程中如有疑问，请联系客服中心：<a href="tel:400-963-3696">400-963-3696</a>。
+        </p>
+    </div>
+    <div class="_alert" id="_alert">
+        <div class="in">
+            <a class="close-btn" id="alertClose"></a>
+            <div class="alert_title">
+                <img src="~/content/images/recharge_error.png" />
+                <p class="fs14 ac">很遗憾！充值失败.</p>
+            </div>
+            <div class="alert_btns">
+                <a href="javascript:void(0)" class="alert_btn fs14" id="saveBtn">重新充值</a>
+            </div>
+        </div>
+    </div>
+    <div class="_alert" id="_alertTwo">
+        <div class="in">
+            <div class="alert_title">
+                <p class="fs14 ac">您还没有绑定手机号，<br>请先绑定手机号</p>
+            </div>
+            <div class="alert_btns">
+                <a href="/account/register?isUpdateBind=true" class="alert_btn fs14">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+
+    @WebHelper4H5.RegisterScripts("mallCard/recharge.js")
+}
+
+
+
+

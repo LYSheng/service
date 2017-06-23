@@ -1,0 +1,63 @@
+﻿.bank_coin{  background: #fff;height: 54px;line-height: 54px;padding: 0px 4%;margin-bottom: 10px;}
+.bank_coin div{   font-size: 14px;color: #7d7d7d;}
+.bank_coin .skips{cursor: pointer; background: url("../../images/arowright.png") 100% center no-repeat;background-size:0.2rem;padding-right:0.4rem;}
+
+.bank_inventory_all{background:#fff;}
+.bank_inventory{text-align: center;padding-top: 17px;  padding-bottom: 12px;border-bottom: 1px dashed #dfdfdf;margin-left: 4%;overflow: hidden;}
+.bank_inventory > div{position: relative;float: left;width: 32%}
+.bank_inventory > div span{position: absolute;right: 0px;display: inline-block;border-right: 1px dashed #dfdfdf;height: 75%;bottom: 0px;}
+.bank_inventory > div p{font-size: 14px;color: #333333}
+.bank_inventory > div div{font-size: 17px;color: #b4282d}
+
+/*.bank_inventory .btn{margin-top: 12px;}*/
+.bank_inventory .btns btn{border:1px solid #b4282d;font-size: 13px;color: #b4282d;border-radius: 2px;padding:2px 10px;display: inline-block}
+.bank_inventory .btns a{font-size: 12px;color: #b4282d;display: block;margin: 3px 0;}
+.bank_money_all li{border-bottom:1px solid #dfdfdf;margin-left:4%;padding-left: 0px;margin-bottom: 0px;    height: 54px;line-height: 54px;padding: 0px 4%;}
+.bank_money_all li:last-child{border-bottom:0px}
+.bank_go_add{color: #fff;background: #b4282d;height: 47px;line-height: 47px;text-align: center;margin:0px 4%;border-radius: 3px;margin-top: 29px;margin-bottom: 55px;}
+.bank_money_all li p {color: #333333;}
+.bank_money_all .rightIcon{background: url("../../images/arowright.png") 100% center no-repeat;background-size:0.2rem;padding-right:0.4rem;}
+
+
+.list{margin:0.3rem 0.4rem;border-radius:0.2rem;}
+.list-box,.list-desc{padding: 0 0.4rem;-webkit-box-align:center;align-items: center;}
+.list-box{background:#f2f2f2;position:relative;}
+.list-box p{line-height:1.8rem;font-size: 0.58rem;color:#707070;text-align:center;}
+.list-box .jiantou{display: inline-block; width:0.32rem ;height: 0.74rem;background: url(../../images/right.png) 0 center no-repeat;background-size: 0.32rem;}
+.list-box .jiantou.pa{position:absolute;right:0.2rem;top:50%;margin-top:-0.37rem;color:#707070;height:0.74rem;width:3.5rem ;line-height:0.74rem;background: url(../../images/right_new.png) 100% center no-repeat;background-size: 0.32rem;}
+.list-desc{height:2.2rem;}
+.list-desc.bsw{box-shadow: 0.15rem 0.15rem 0.2rem #cdcdcd;}
+.list-desc p{font-size:0.58rem;color:#333333;}
+.list-desc p .rmb{color:#b4282d;}
+.list-desc p .price{color:#b4282d;font-size:0.8rem;}
+.list-desc .btn{display:block;width:2.4rem;height:1rem;line-height:1rem;color:#fff;font-size:0.52rem;background:#b4282d;border-radius:0.1rem;}
+
+.list-detail{}
+.list-detail.blue{background:#ddf0f8;border:1px solid #ddf0f8;margin: 0.4rem 0.2rem;}
+.list-detail.hui,.list-desc.hui{margin: 0.4rem 0.2rem;border:1px solid #e8e8e8;background:#fefefe;}
+
+.list-detail>div{width:calc(50% - 1rem);padding:0.4rem 0.5rem;-webkit-box-align:center;align-items: center;}
+.list-detail>div p{line-height:0.8rem;}
+.list-detail>div p .rmb{color:#333;font-size:0.48rem;}
+.list-detail>div p .price{color:#444;font-size:0.8rem;}
+.list-detail>div p .warring{display:inline-block;width:0.6rem;height:0.6rem;background:url("../../images/bank_warring.png");background-size:cover;position:absolute;margin:-0.1rem 0 0 0.2rem;}
+.list-detail>div p:last-child{color:#333;font-size:0.52rem;}
+.list-detail .jiantou{display: inline-block; width:0.32rem ;height: 0.74rem;background: url(../../images/right.png) 0 center no-repeat;background-size: 0.32rem;}
+.back-hui{background:#fff;box-shadow: 0.15rem 0.15rem 0.2rem #cdcdcd;}
+.back-hui.mt8{margin-top:0.8rem!important;padding:0.2rem 0;}
+.list-detail-btn{ display: inline-block;float: right;padding:0.2rem;color:#b4282d;border:1px solid #b4282d;margin:0.4rem 0.4rem 0.4rem 0;border-radius:0.1rem;}
+/*弹窗*/
+._alert { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 1999; display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center; background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none;}
+
+._alert>.in { background: #fff;min-width:8rem; border-radius: 0.3rem;position:relative; margin: 0 1.5rem;}
+._alert>.in .alert_title{padding: 1rem 0.6rem;}
+._alert>.in .alert_title p{color:#333;font-size:0.6rem;line-height:1rem;}
+._alert>.in .alert_title p.ll{padding:0.8rem 0;}
+._alert>.in .alert_btns{ border-top: 1px solid #dedede; border-radius: 0 0 0.1rem 0.1rem;}
+._alert>.in .alert_btn{width:100%;font-size:0.8rem;display:block;line-height:2.4rem;margin:0 auto;border-radius: 0.1rem;text-align:center;font-size:font-size:0.56rem;}
+._alert>.in .alert_calcle{color:#0879c1; }
+._alert>.in .alert_save{border-left: 1px solid #dedede;color:#ff0000; }
+._alert.show{opacity: 1; pointer-events: auto;}
+
+
+

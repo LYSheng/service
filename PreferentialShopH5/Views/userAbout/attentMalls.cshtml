@@ -1,0 +1,25 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "关注Malls·五洲精选公众号";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+<div class="codeBody">
+    <div class="codeImg">
+        <img src="~/Content/images/tdigCode.jpg" />
+    </div>
+    <p class="attTitle ac fs14 mt6" style="width:7.4rem;">@(Request["msg"] != "" && Request["msg"] != null ? Server.UrlDecode(Request["msg"]) : "请长按二维码图片关注\nMalls·五洲精选公众号")</p>
+</div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+
+   
+}

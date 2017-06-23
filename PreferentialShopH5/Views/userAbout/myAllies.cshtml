@@ -1,0 +1,44 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "我的好友";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+    <style>
+        body {
+            background: #fff;
+        }
+    </style>
+}
+<header class="u-header clearfix white-bg ac">
+    <div class="u-hd-left fl btnPrev">
+        <a href="javascript:void(0)" class="J_backToPrev">
+            <span class="u-icon i-hd-back ml4 mt4"></span>
+        </a>
+    </div>
+    <div class="u-hd-tit"><span class="fs36">推荐会员</span></div>
+    <div class="fr u-hd-right"><a href="./myShare">去推广</a></div>
+</header>
+<div style="height:0.4rem;background:#f6f6f6"></div>
+<div class="parbox allies-total">
+    <div class="flex1 allies-total-left ar"><span></span>好友总数：<i id="friendsTotal"></i></div>
+    <div class="flex1 allies-total-right"><span></span>充值人次：<i id="rechargePassengers"></i></div>
+</div>
+
+<div class="alliesCon ml6" id="alliesCon">
+
+
+</div>
+
+
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/Account/jcropfile.js"></script>
+    @WebHelper4H5.RegisterScripts("userabout/myAllies.js")
+}

@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewBag.Title = "账号绑定";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+<script src="~/Content/Scripts/base.js"></script>
+    @WebHelper4H5.RegisterStyles("account.css")
+    <style type="text/css">
+        .shawdowCell {
+            background-color: black;
+            opacity: 0.2;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: none;
+        }
+
+        .userList {
+            display: none;
+            border-radius: 0.2rem;
+            background-color: #fff;
+            z-index: 1000;
+            text-align: center;
+            font-size: 0.55rem;
+            position: fixed;
+            top: 40%;
+            top: 35%;
+            left: 10%;
+            width: 80%;
+            height: auto;
+        }
+
+        .userTitle {
+            text-align: center;
+            font-size: 0.65rem;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            line-height: 1rem;
+            height: 1rem;
+            color: white;
+            background: #dc6263;
+        }
+
+        .userItem {
+            margin-top: 10px;
+            font-size: 0.6rem;
+            color: #333;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+            .userItem:last-child {
+                margin-bottom: 15px;
+            }
+        .alertMsg {
+            color: #dc6263;
+            padding-top: 0.3rem;
+            padding-bottom: .2rem;
+            font-size: 0.5rem;
+        }
+        .leftIcon{
+            padding-top:0.5rem;
+        }
+        .person_CodeMsg {
+            width: .7rem;
+            height: 1rem;
+            background-position: -0.8rem -3.8rem;
+            margin-right: .7rem;
+        }
+        .accountRegisterArea{
+            width:12rem;
+        }
+        .currentPhoneNum2 {
+            color: #dc6263;
+            font-weight:bold;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var num = 60;
+        var reg = /^\d{11}\b/;
+        var isSubmit = false;
+        var nickName = window.localStorage.getItem("nickName") == null ? "" : window.localStorage.getItem("nickName");
+        var phoneNum = window.localStorage.getItem("Phone");
+        var UpdatePhoneModel = function () {
+            var self = this;
+            self.psd = ko.observable().extend({
+            });
+            self.captcha = ko.observable().extend({
+            });
+            self.phone = ko.observable().extend({
+            });
+            self.doInterval = function () {
+                if (num > 0) {
+                    num = num - 1;
+                    //self.showTime("重新发送(" + num + ")秒");
+                    $(".getCode").text(num + "秒重新发送").addClass("poiEventsNone");
+                    setTimeout(function () { self.doInterval() }, 1000);
+                }
+                else {
+                    $(".getCode").text("获取验证码").removeClass("poiEventsNone");
+                    num = 60;
+                }
+            };
+            self.getCaptcha = function () {
+                var $this = this;
+                if (this.phone() == "" || this.phone() == null) {
+                    smGlobal.error("请输入手机号");
+                    return false;
+                }
+                else {
+                    if (!reg.test(this.phone())) {
+                        smGlobal.error("手机号码不合法！");
+                        return false;
+                    }
+                    if (this.phone().length != 11) {
+                        smGlobal.error("手机号码长度不合法！");
+                        return false;
+                    }
+                }
+
+                if (phoneNum == this.phone()) {
+                    smGlobal.error("请输入新手机号");
+                    return;
+                }
+                var params = { Phone: this.phone() }
+                //console.log(params);
+                //return;
+                apiRequest({
+                    method: "User/SendBindCode",
+                    async: false,
+                    data: params,
+                    success: function (obj) {
+                        if (obj.data.isSend) {
+                            //captcha = obj.data.captcha;
+                            $this.doInterval();
+                        }
+                    },
+                    error: function (obj) {
+                        smGlobal.heiAutoError(obj, 2500);
+                    }
+                });
+            };
+            self.confirm = function () {
+                var params = { Phone: this.phone(), ValidateCode: this.captcha(), Psd: window.localStorage.getItem("psd") };
+                if (isSubmit) {
+                    return;
+                }
+                isSubmit = true;
+                apiRequest({
+                    method: "User/UpdatePhoneNumByUserId",
+                    async: false,
+                    data: params,
+                    success: function (obj) {
+                        if (obj.isBizSuccess) {
+                            smGlobal.error("修改成功！");
+                            var url = smGlobal.getQueryString("ReturnUrl");
+                            window.location.href = url;
+                        } else {
+                            isSubmit = false;
+                            smGlobal.error(obj.BizErrorMsg);
+                        }
+                    },
+                    error: function (obj) {
+                        isSubmit = false;
+                        smGlobal.heiAutoError(obj, 2500);
+                    }
+                });
+            };
+        }
+        $(function () {
+            getPhoneNum();
+            var model = new UpdatePhoneModel();
+            ko.applyBindings(model);
+            $("nav").hide();
+        });
+
+        function getPhoneNum() {
+           
+            phoneNum = phoneNum == null ? "您以前还没绑定手机号" : phoneNum;
+            $(".currentPhoneNum2").text(phoneNum);
+        }
+    </script>
+}
+
+
+<div class="accountRegisterArea" style="left:44%">
+    <h2 class="ac pb6"><img src="~/Content/images/bindAccount.png" style="height:32px" /></h2>
+    <div style="height:9rem" class="fullbg_register">
+        <div class="pl30 pr30 pt6">
+            <div class="parbox">
+                <label class="comlabel leftIcon"><i class="person_CodeMsg"></i></label>
+                <div class="alertMsg">
+                    当前手机号:<span class="currentPhoneNum2"></span>
+                    <br />
+                    更换手机号后,下次登录可使用新手机号登录
+                </div>
+            </div>
+
+            <div class="parbox comlineAreaRegister">
+                <label class="comlabel"><i class="person_Code"></i></label>
+                <input placeholder="新手机号码" class="flex1 comAccinput" type="text" id="userName" data-bind="value:phone" maxlength="11" />
+            </div>
+
+            <div class="parbox comlineAreaRegister">
+                <div class="codeBody  parbox box">
+                    <label class="comlabel"><i class="person_Code"></i></label>
+                    <input placeholder="输入验证码" class="flex1 comAccinput" type="text" id="passWord" data-bind="value: captcha" />
+                </div>
+                <span class="disblock getCode ac " data-bind="click:getCaptcha">获取验证码</span>
+            </div>
+            @*<div class="fs12 feature mt8 mb8 clearfix"><span class="fl" data-bind="click:pwdtypchange"><i class="showbox mr2"></i>显示密码</span><span class="fr"><a href="/account/login">已有登录账号</a></span></div>*@
+            <span class="subText ac fs14" style="margin-top:20px;" data-bind="click:confirm">确认</span>
+        </div>
+    </div>
+</div>
+<div class="accountbg">
+</div>
+
+
+
+<input type="hidden" id="shareid" value='@(Request.QueryString["shareid"]??"")' />
+@section Footer
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+}
+

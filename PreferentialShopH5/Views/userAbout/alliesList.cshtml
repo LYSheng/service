@@ -1,0 +1,96 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "好友";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+    <style>
+        body {
+            background: #fff;
+        }
+    </style>
+}
+<div class="searchHeader none parbox white-bg ">
+    <div class="flex1 searchArea posrela" id="searchArea">
+        <input class="searchBotton white-bg fs12" placeholder="搜索" id="searchTxt" />
+        <a href="javascript:void(0)" class="searchRemove" id="searchRemove"></a>
+    </div>
+    <a href="javascript:void(0)" class="fs12 search-btn" id="searchBtn">取消</a>
+</div>
+<div style="height:1.7rem;"></div>
+<div id="allieList" data-bind="foreach:getLists">
+    <div class="allieListCon ml6">
+        <dl class="parbox">
+            <dd class="ablumHead">
+                <img data-bind="attr:{src:photo}" onerror="this.src = '../Content/images/myAvatar.png'" />
+            </dd>
+            <dt class="flex1 pl30 fs13">
+                <ul class="list-one">
+                    <li>
+                        <span data-bind="text:userName"></span>
+                    </li>
+
+                    <li class="fs12 registTime">注册时间：<span data-bind="text:registrationTime"></span></li>
+                    <li class="showDetail" data-bind="attr:{'data-num':investmentAmountTotal}">
+                        累计充值金额：￥<span class="fbold" data-bind="text:investmentAmountTotal.toFixed(2)"></span><span class="span-arrow off" data-bind="style: { display: investmentAmountTotal > 0 ? 'inline-block' : 'none' }"></span>
+                    </li>
+                    <li class="parbox cl333 usnone allLine fDetail">
+                        <span class="flex1 al">充值金额</span>
+                        <span class="flex1 ac">充值时间</span>
+                        <span class="flex1 ac">收益状态</span>
+                    </li>
+                    <li class="usnone cl333 fDetail">
+                        <ul class="usdetail" data-bind="foreach:userSpreadDetailed">
+                            <li class="parbox">
+                                <span class="flex1 al" data-bind="text:'￥'+investmentAmount.toFixed(2)"></span>
+                                <span class="flex1 ac" data-bind="text:rechargeTime.substr(0,10)"></span>
+                                <span class="flex1 ac" data-bind="text:profitTypeName"></span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </dt>
+
+        </dl>
+    </div>
+</div>
+<div id="proList">
+
+</div>
+<div style="height:55px;"></div>
+
+@*
+    <div data-bind="foreach:alliesList" id="proList">
+        <div class="alliesCon ml6 mr6">
+            <dl class="parbox">
+                <dd class="ablumHead">
+                    <img data-bind="attr:{src:userPic}" onerror="this.src = '../Content/images/myAvatar.png'" />
+                </dd>
+                <dt class="flex1 pl30 fs13">
+                    <ul>
+                        <li>
+                            <span data-bind="text:userName"></span> <span class="fr" data-bind="text:providerType"></span>
+                        </li>
+                        <li>
+                            累计充值金额：<span data-bind="text:investmentAmount"></span>
+                        </li>
+                        <li class="fs12 registTime pt2">注册时间：<span data-bind="text:registerTime"></span></li>
+                    </ul>
+                </dt>
+
+            </dl>
+        </div>
+    </div>
+    <div style="height:50px;"></div>
+    <input type="hidden" value='@Request["level"]' id="level" />*@
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userAbout/allieList.js")
+
+}

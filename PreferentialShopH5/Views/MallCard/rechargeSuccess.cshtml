@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "充值成功";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("mallCard/recharge.css")
+
+}
+<div class="categBox desCategBox">
+    <img src="~/content/images/recharge_success.png" class="success-img"/>
+    <div class="success-info ac fs15">
+        <p><span>恭喜您！</span>成功充值<span id="faceValue"></span>元</p>
+        <p>猫市礼品卡余额：<span id="rmb"></span>元</p>
+    </div>
+    <a href="/MallCard/RechargeDetail" class="success-btn ac fs14 success-detail">查看收支明细</a>
+    <a href="/MallCard/index?id=-12" class="success-btn ac fs14 success-close">关闭</a> 
+</div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+    @WebHelper4H5.RegisterScripts("mallCard/rechargeSuccess.js")
+}
+
+
+
+

@@ -1,0 +1,67 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "使用优惠券";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+<style>
+    body {
+        background: #f2f2f2;
+    }
+</style>
+<div class="loading3" style="display:block" isglobleload=true></div>
+<div class="clearfix  mb4">
+
+    <div class="myYouhui coupBody">
+        <div class="clearfix mt6 posrela selCoupon">
+            <div class="fl selRadio posabsolute" data-deductamount=0 data-mycouponid=0 data-fullamount=0 data-realitydeductamount=0>
+
+            </div>
+            <div class="couponCon parbox  coupSelected fs12" style="line-height:1rem;">
+                不使用优惠券
+            </div>
+        </div>
+    </div>
+    <div class="myYouhui coupBody" data-bind="foreach:canUseCoupon">
+        <div class="clearfix mt6 posrela selCoupon">
+            <div class="fl selRadio posabsolute" data-bind='attr:{"data-deductamount":deductAmount,"data-mycouponid":myCouponId,"data-fullamount":fullAmount,"data-realitydeductamount":realityDeductAmount}'>
+
+            </div>
+            <div class="couponCon parbox white-bg  coupSelected" style="display:none;">
+                <div class="flex1 disblock pl20 pr20  pt4 pb4 posrela">
+                    <div class="pb2">
+                        <ul class="mycountDetail">
+                            <li class="mycouponTitle fs18 pb2 mb2" data-bind="text:couponTitle"></li>
+                            <li class="couponFullDedu fs12" data-bind='text:fullAmount==0?"":"满"+fullAmount +"元减"+ deductAmount'></li>
+                            <li class="couponFullDedu fs12" data-bind='text:"券码："+couponCode'></li>
+                            <li class="couponTime fs12" data-bind='text:validBeginTime +" - "+validEndTime'></li>
+                        </ul>
+                    </div>
+
+                    <div class="mycoupRule fs10 clearfix mt2" data-bind='text:"使用规则:"+couponRule'></div>
+                    <i class="claimWareL posabsolute"></i>
+                </div>
+                <p class="disblock myclaim posrela">
+                    <i class="conpJe posabsolute ac fs36 mycountP ac">
+                        <span style="font-size:0.68rem;">￥</span><i data-bind='text:deductAmount,style:{"font-size":deductAmount.toString().length>3?"1rem":"1.2rem"}'></i>
+                    </i>
+                    <i class="claimWareR posabsolute"></i>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="index" value="@Request["index"]"/>
+<input type="hidden" id="isImmediately" value="@Request["isImmediately"]" />
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/couponSelected.js")
+}

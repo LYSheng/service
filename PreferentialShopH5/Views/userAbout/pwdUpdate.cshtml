@@ -1,0 +1,42 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "修改密码";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+    <style>
+    .pwdWarring {
+        color: #fa5d68;
+    }
+</style>
+
+}
+<p class="pwdWarring fs12 mt5 pl30 pr30">密码修改成功后，需要重新登录当前账户</p>
+<div class="white-bg fs14 mt5 pl30 pr30">
+    <p class="comAdrArea parbox">
+        <label>原密码</label>
+        <input class="flex1 addusername disblock" type="password" value="" id="password" maxlength="16" data-bind="value: pwd">
+    </p>
+    <p class="comAdrArea parbox">
+        <label>新密码</label>
+        <input class="flex1 addiphone disblock" type="password" value="" id="newPwd" maxlength="16" data-bind="value: newPwd">
+    </p>
+    <p class="comAdrArea parbox">
+        <label>确认密码</label>
+        <input class="flex1 addiphone disblock" type="password" value="" id="confirmPwd" maxlength="16" data-bind="value: confirmPwd">
+    </p>
+</div>
+<div class="fs12 feature mb8 clearfix" style="margin-right: 4%; margin-top: 0.3rem; font-size: 0.6rem"><span class="fl"><i class="showbox mr2"></i></span><span class="fr"><a href="/account/forgetPwd?ReturnUrl=/userAbout">找回密码</a></span></div>
+<p class="adraddBtn ac fs16" data-bind="click:confirm">保存</p>
+<input type="hidden" value="@ViewBag.CurrentUser.NickName" id="nickName"/>
+
+<input type="hidden" value="@ViewBag.CurrentUser.Phone" id="phone" />
+@section Footer
+{
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/pwdUpdate.js")
+}

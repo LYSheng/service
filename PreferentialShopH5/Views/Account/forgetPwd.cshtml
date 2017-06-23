@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "找回密码";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("account.css")
+
+}
+<div class="accountArea">
+    <h2 class="ac pb6"><img src="~/Content/images/serviceimage/Malls.png" style="height:28px" /></h2>
+    <div class="fullbg">
+        <div class="" data-bind='style:{display:isFirstStep()?"block":"none"}'>
+            <div class="pl30 pr30 pt6">
+                <div class="parbox comlineArea">
+                    <label class="comlabel"><i class="home_acctIcon"></i></label>
+                    <input placeholder="请输入手机号" class="flex1 comAccinput" type="text" id="userName" data-bind="value:phone" maxlength="11" />
+                </div>
+                <div class="parbox comlineArea pt6">
+                    <div class="codeBody  parbox box">
+                        <label class="comlabel"><i class="person_Code"></i></label>
+                        <input placeholder="请输入验证码" class="flex1 comAccinput" type="text" id="passWord" data-bind="value: captcha" />
+                    </div>
+                    <span class="disblock getCode ac " data-bind="click:getCaptcha">获取验证码</span>
+                </div>
+                <div class="fs12 feature mt8 mb8 clearfix"><span class=""><a href="/Account/login">已找回登录密码</a></span></div>
+                <span class="subText ac fs14" data-bind="click:forPwdNext">下一步</span>
+            </div>
+        </div>
+        <div class="disNone" data-bind='style:{display:isFirstStep()?"none":"block"}'>
+            <div class="pl30 pr30 pt6">
+                <div class="parbox comlineArea">
+                    <label class="comlabel"><i class="home_acctIcon"></i></label>
+                    <input placeholder="请输入手机号或用户昵称" class="flex1 comAccinput" type="text" id="userName" data-bind="value: nickName" readonly />
+                </div>
+                <div class="parbox comlineArea">
+                    <label class="comlabel"><i class="home_acctPass"></i></label>
+                    <input placeholder="请输入密码" class="flex1 comAccinput" type="password" id="passWord" data-bind="value: password" />
+                </div>
+                <div class="parbox comlineArea mb8">
+                    <label class="comlabel"><i class="home_acctPass"></i></label>
+                    <input placeholder="请输入确认密码" class="flex1 comAccinput" type="password" id="confirmPwd" data-bind="value: confirmPwd" />
+                </div>
+                <span class="subText ac fs14" data-bind="click:retrievePwd">确定</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accountbg">
+</div>
+<div class="fixedbg" data-bind='style:{display:isShow()?"none":"block"}'></div>
+<div class="nickSelect" data-bind='style:{display:isShow()?"none":"block"}'>
+    <h2 class="fs16 ac">请选择您的用户昵称</h2>
+    <ul class="" data-bind='foreach:nickNameList'>
+        <li data-bind='text:nickName,attr:{"dada-userid":userId},click:$parent.forPwdNextJump'></li>
+    </ul>
+</div>
+@section Footer
+{
+    @WebHelper4H5.RegisterScripts("Account/forgetPwd.js")
+}
+@section Scripts
+{
+
+}

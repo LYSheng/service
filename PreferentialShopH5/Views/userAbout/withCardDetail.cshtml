@@ -1,0 +1,61 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "新增银行卡";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+<div class="white-bg fs14 mt5 pl30 pr30">
+    <div class="comAdrArea parbox">
+        <label style="width:3.5rem;">持卡人<span class="inputStar"></span></label>
+        <input class="flex1 addiphone disblock" type="text" value="" id="userName" maxlength="30" placeholder="请输入姓名">
+    </div>
+    <div class="comAdrArea parbox">
+        <label style="width:3.5rem;">身份证号</label>
+        <input class="flex1 addiphone disblock" type="text" value="" id="IdCardNo" maxlength="30" placeholder="请输入您的身份证号码">
+    </div>
+    <div class="comAdrArea parbox">
+        <label style="width:3.5rem;">银行卡号<span class="inputStar"></span></label>
+        <input class="flex1 addiphone disblock" type="text" value="" id="bankCardNum" maxlength="30" placeholder="请输入银行卡号">
+    </div>
+</div>
+<div class="white-bg fs14 mt5 pl30 pr30">
+    <div class="comAdrArea parbox">
+        <label style="width:3.5rem;">开户行<span class="inputStar"></span></label>
+        <label class="flex1 addusername disblock posrelative">
+            <span class="bankChose fs14 ca9" data-id="" id="bankId">请选择开户行</span>
+            <select class="posabsolute bankSel">
+                <option value="">请选择开户行</option>
+                @foreach (var cardItem in ViewBag.bankList)
+                {
+                    <option value="@cardItem["bankId"]">@cardItem["bankName"]</option>
+                }
+            </select>
+        </label>
+
+    </div>
+    <div class="comAdrArea parbox">
+        <label style="width:3.5rem;">开户所在地<span class="inputStar"></span></label>
+        <p class="flex1 addiphone disblock areaHui" id="area" onclick="chooseArea()" data-provinceid="" data-areaid="" data-cityid="">请选择开户所在地</p>
+    </div>
+    <div class="comAdrArea parbox">
+        <label style="width:3.5rem;">所属支行<span class="inputStar"></span></label>
+        <input class="flex1 addiphone disblock" type="text" value="" id="bankBranchName" maxlength="30" placeholder="请输入所属支行">
+    </div>
+    </div>
+
+<p class="adraddBtn ac fs16" onclick="confirm()">保存</p>
+<div class="popback"></div>
+
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/withCardDetail.js")
+    @WebHelper4H5.RegisterScripts("Account/addrInfo.js")
+}

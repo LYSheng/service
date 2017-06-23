@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "代理详情";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("agent/agentDetail.css")
+@*<script src=https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    var isSetShare = true;
+    var isShareLoadOk = false;
+    var projectId = smGlobal.getQueryString("projectId");
+    var appShareUrl = '@WebConfig.WXMVCUrl/Share/Arrive?ReferrerUserId=@CurrentUser.Instance.UserId&ReturnUrl=@HttpUtility.UrlEncode(
+string.Format("/agent/agentDetail?projectId=" + @Request["projectId"]))';
+
+    //微信分享到朋友，朋友圈，qq等  目前只能 修改内容不能 按钮 弹出
+    
+
+</script>*@
+}
+
+<div class="categBox desCategBox">
+    <div class="mt4 agent white-bg parbox center">
+        <div class="agent-img">
+            <img src="~/Content/Images/loading.gif" class="scrollLoading" data-bind='attr:{"data-url":projectLogo}' />
+        </div>
+        <div class="agent-detail flex1 ml4">
+            <p class="agent-title fs13" data-bind="text:projectShortName"></p>
+            <p class="agent-descripe mt4 fs12" data-bind="text:proWeishanDaiLiDec"></p>
+        </div>
+    </div>
+    <div class="shop mt4 white-bg">
+        <a class="shop-title" href="javascript:void(0)" id="shopMore">
+            <span class="fs13 fr shop-title-more">更多 ></span>
+            <p class="fs13">相关商品</p>
+        </a>
+        <ul class="shop-list shop-more clearfix">
+                <!-- ko foreach:skuList -->
+                    <li>
+                        <p class="shop-list-img" data-bind='style:{"background":"url("+src+") center","background-size":"cover"}'></p>
+                        <p class="shop-list-title mt2 fs13" data-bind="text:longName"></p>
+                        <p class="shop-list-specification mt2 fs12">规格：<span data-bind="text:specs"></span></p>
+                        <p class="shop-list-price mt2 fs12">建议零售价：￥<span data-bind="text:salesPrice"></span></p>
+                    </li>
+                <!-- /ko -->
+                <li>
+                    <p class="shop-list-img" style="background:#eeeeee url('../../content/images/no-more-icon.png') center center no-repeat;background-size:contain;"></p>
+                    <p class="shop-list-title mt2 fs13">敬请期待......</p>
+                    <div class="shop-chair"></div>
+                </li>
+                <li>
+                    <p class="shop-list-img" style="background:#eeeeee url('../../content/images/no-more-icon.png') center center no-repeat;background-size:contain;"></p>
+                    <p class="shop-list-title mt2 fs13">敬请期待......</p>
+                    <div class="shop-chair"></div>
+                </li>
+        </ul>
+    </div>
+    <div class="detail mt4 clearfix white-bg">
+        <a class="shop-title" href="javascript:void(0)">
+            <p class="fs13">招商介绍</p>
+        </a>
+        @*<p class="fs12 pd04" data-bind="text:proDaiLiDec"></p>*@
+        @*<img src="~/Content/Images/loading.gif" class="scrollLoading" data-bind='attr:{"data-url":proDaiLiImg}' />*@
+        <div class="detail-info" data-bind="html:agentIntrDetail"></div>
+    </div>
+    <nav class="cart-btm-fixed">
+        <div class="cart-concern fl fs14 ac">
+            @*<a class="love-heart-icn " href="javascript:void(0)" id="onMenuShareTimeline">
+                <span class="shareIcon focus-out mr2"></span>
+                <span class="focus-info">分享</span>
+            </a>*@
+        </div>
+        <div class="agent-action-list fr fs15" id="shop">
+            <a class="cart-btn agent-btn " id="agentApply"> 申请代理 </a>
+        </div>
+    </nav>
+</div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("scrollLoading.js")
+    @WebHelper4H5.RegisterScripts("agent/agentDetail.js")
+}

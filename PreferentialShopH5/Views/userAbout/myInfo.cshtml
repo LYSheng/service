@@ -1,0 +1,101 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "个人信息";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+   
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+    <script>
+        //绑定手机号
+        function bindCellPhone(obj) {
+            var oldCellPhone = $(obj).find(".oldcellPhone").text();
+            if ($.trim(oldCellPhone).length >= 11) {
+                window.location.href = "/account/validatePsd";
+            } else {
+                window.location.href = "/account/register?isUpdateBind=true";
+            }
+        }
+    </script>
+}
+<div class="perInfo">
+    <section class="mt5">
+        <div class="myAvatar mine_avatar clearfix fs14">
+            <span class="fl">头像</span>
+            <label class="usermimg half-width fr">
+                <img class="myhdpic" src='' id="myhdpic" data-src="@ViewBag.CurrentUser.UserPic">
+            </label>
+            <i class="jiantou"></i>
+            <input type="file" id="file1" style="display:none;" name="photo">
+        </div>
+        <div class="item_center mine_css clearfix">
+            <a href="./changeNickName">
+                <span class="fl">昵称</span>
+                <i class="fr jiantou"></i>
+                <b class="username fr pr20 fs14">@ViewBag.CurrentUser.NickName</b>
+            </a>
+        </div>
+        <div class="item_center mine_css clearfix">
+            <a href="./withCardList">
+                <span class="fl">我的银行卡</span>
+                <i class="fr jiantou"></i>
+            </a>
+        </div>
+        <div class="item_center mine_css clearfix">
+            <a href="./addressList">
+                <span class="fl">收货地址</span>
+                <i class="fr jiantou"></i>
+            </a>
+        </div>
+        <div class="item_center mine_css clearfix">
+            <a href="javascript:void(0)" onclick="bindCellPhone(this)">
+                <span class="fl">绑定手机号</span>
+                <i class="fr jiantou"></i>
+                <b class="username fr pr20 fs14 oldcellPhone">
+                    @if (Request["mobile"] != null)
+                    {
+                        <text>@Request["mobile"]</text>
+                    }
+                </b>
+            </a>
+        </div>
+        <div class="item_center mine_css clearfix">
+            <a href="./pwdUpdate">
+                <span class="fl">修改登录密码</span>
+                <i class="fr jiantou"></i>
+            </a>
+        </div>
+        <div class="item_center mine_css clearfix">
+            <a href="./payPwd">
+                <span class="fl">修改支付密码</span>
+                <i class="fr jiantou"></i>
+            </a>
+        </div>
+    </section>
+</div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/Photo/binaryajax.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/Photo/exif.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/Photo/megapix-image.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/Account/jcropfile.js"></script>
+    <script>
+        var _myhdpic = $("#myhdpic").data("src");
+        if (_myhdpic) {
+            $("#myhdpic").attr("src", _myhdpic);
+        } else {
+            $("#myhdpic").attr("src", '/Content/images/myAvatar.png');
+        }
+        var sestorage = window.sessionStorage;
+        var resFlag = sestorage.getItem("refreshFlag", true);
+        if (resFlag == "true") {
+            sestorage.removeItem("refreshFlag");
+            setTimeout(function () { window.location.reload(); }, 100);
+        }
+    </script>
+}

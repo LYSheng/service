@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "密码校验";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("account.css")
+    <style type="text/css">
+        .alertMsg {
+            color: #dc6263;
+            padding-top: 0.6rem;
+            padding-bottom: .2rem;
+            font-size:0.45rem;
+        }
+        .person_Code {
+            width: .7rem;
+            height: 0.8rem;
+            background-position: -1.5rem -2.8rem;
+            margin-left: .1rem;
+        }
+
+    </style>
+}
+
+
+<div class="accountRegisterArea">
+    <h2 class="ac pb6"><img src="~/Content/images/validatePsd.png" style="height:32px" /></h2>
+    <div style="height:7.3rem" class="fullbg_register">
+        <div class="pl30 pr30 mt6">
+            <div class="parbox alertMsg">
+                @*<label class="comlabel"><i class="person_Code"></i></label>
+                <input placeholder="请输入手机号" class="flex1 comAccinput" type="text" id="userName" data-bind="value:phone" maxlength="11" />*@
+                为了您的账号安全, 请填写登录密码进行校验
+            </div>
+            <div class="parbox comlineAreaRegister pt6">
+                <div class="codeBody  parbox box">
+                    <label class="comlabel"><i class="person_Code"></i></label>
+                    <input placeholder="请输入登录密码" class="flex1 comAccinput" type="password" id="passWord" data-bind="value:psd" />
+                </div>
+            </div>
+            @*<div class="fs12 feature mt8 mb8 clearfix"><span class="fl" data-bind="click:pwdtypchange"><i class="showbox mr2"></i>显示密码</span><span class="fr"><a href="/account/login">已有登录账号</a></span></div>*@
+            <span class="subText ac fs14" style="margin-top:20px;" data-bind="click:confirm">确认</span>
+        </div>
+    </div>
+</div>
+<div class="accountbg">
+</div>
+
+
+<input type="hidden" id="shareid" value='@(Request.QueryString["shareid"]??"")' />
+@section Footer
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+    @WebHelper4H5.RegisterScripts("Account/ValidatePsd.js")
+}
+

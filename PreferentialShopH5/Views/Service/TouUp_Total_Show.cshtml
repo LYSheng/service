@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "充值总计";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("service/show.css")
+}
+<header class="header">
+    <a href="#" class="back"><</a>
+    <h4 class="Title">店铺充值</h4>
+    <a href="#" class="back"></a>
+</header>
+<section class="Month_Box" style="width:100%;display:block">
+    <table class="table_box">
+        <thead>
+            <tr>
+                <th class="show_th"><a href="#">月度</a></th>
+                <th class="show_th"><a href="#">会员数(人)</a></th>
+                <th class="show_th"><a href="#">充值笔次(数)</a></th>
+                <th class="show_th"><a href="#">充值额(元)</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1031</td>
+                <td>98</td>
+                <td>654</td>
+                <td>654</td>
+            </tr>
+            <tr>
+                <td>1021</td>
+                <td>99</td>
+                <td>624</td>
+                <td>924</td>
+            </tr>
+            <tr>
+                <td>1011</td>
+                <td>123</td>
+                <td>6</td>
+                <td>424</td>
+            </tr>
+            <tr>
+                <td>1026</td>
+                <td>4</td>
+                <td>610</td>
+                <td>824</td>
+            </tr>
+            <tr>
+                <td>1016</td>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+            <tr>
+                <td>2016.12</td>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+            <tr>
+                <td>2016.11</td>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("service/rem.js")
+    @WebHelper4H5.RegisterScripts("service/Total.js")
+}

@@ -1,0 +1,40 @@
+﻿.snone{display:none;}
+.nodata img{width:1.92rem;display:block;margin:3rem auto 0 auto;}
+.nodata p{margin-top:0.5rem;line-height:0.8rem;}
+.nodata a{display:block;width:6rem;height:1.6rem;line-height:1.6rem;margin:1rem auto;color:#fff!important;background:#b4282d;text-align:center;border-radius:0.2rem;}
+
+.memInfo{}
+/*.memInfo .memList{margin: 0.48rem;padding:0 0.4rem 0 1.68rem;border:1px solid #ddd;border-radius:0.2rem;background:#75191c url("../../images/memBac_icon.png")}*/
+.memInfo .memList{margin:0.8rem 1.2rem;padding:0.4rem;border-radius:0.4rem;background:#75191c url("../../images/memBac_icon.png") -0.4rem -0.4rem;background-size:1rem 0.84rem;}
+.memInfo .memList div{color:#fff;}
+.memInfo .memList .newStore{font-size:0.48rem;}
+.memInfo .memList .newMemNo{font-size:0.8rem; font-style: italic;line-height:4.5rem;text-align:center;background:url("../../images/memNobg_icon.png")center center no-repeat;background-size:3.4rem 3.4rem;}
+.memInfo .memList .newMemNo p{display: inline-block;text-indent: 1rem; background:url("../../images/memNo_icon.png") 0 center no-repeat;background-size: 0.96rem 0.96rem;}
+.memInfo .memList .newMemAccount{text-align:right;font-size:0.52rem;}
+
+/*.memInfo .memList p{font-size:0.52rem;}*/
+/*.memInfo .memList div{padding:0.55rem 0;}*/
+/*.memInfo .memList .dtop{border-bottom:1px dotted #ddd;position:relative;}
+.memInfo .memList .dtop::after{content:'';position:absolute;width:0.96rem;height:0.96rem;    left: 0;bottom: 0;margin: 0 0 -0.48rem -1.34rem;background: url(../../images/myMem_icon.png);background-size: contain;}
+.memInfo .memList .memNO{color:#333;}
+.memInfo .memList .memAccount{color:#b4282d;}
+.memInfo .memList .storeName{color:#666;}
+.memInfo .memList .storeAddress{color:#666;margin-top:0.32rem;}*/
+
+.memCardDetail{}
+.memCardDetail .detailList{padding:0.3rem 0;margin:0 0.56rem;border-bottom:1px solid #dfdfdf;}
+.memCardDetail .detailList:last-child{border-bottom:none;}
+.memCardDetail .detailList p{font-size:0.6rem;line-height:1rem;}
+.memCardDetail .detailList .dleft{border-right:1px dotted #dfdfdf;width:2rem;}
+.memCardDetail .detailList .dright{margin-left:0.2rem;}
+.memCardDetail .detailList .time1{color:#a7a7a7;font-size:0.48rem;}
+.memCardDetail .detailList .time2{color:#a7a7a7;font-size:0.48rem;}
+.memCardDetail .detailList .memAmount{color:#333333;}
+.memCardDetail .detailList .memDetail{color:#7d7d7d;}
+
+.investmentList{margin:10px;background:#fff;font-size:14px;border-radius:5px;overflow: hidden;}
+.investmentList h2{line-height:55px;color:#fff;font-size:14px;padding:0 10px;font-weight: normal;}
+.investmentList h2.type1{background: url(/Content/images/newImages/tt1.png);}
+.investmentList p{margin:0 10px;border-bottom:1px dotted #dfdfdf;line-height:40px;}
+.investmentList p:last-child{border-bottom:none;}
+.wdgwc {width:2.28rem;height:1.84rem;background-image: url(../../images/nodata_membericon.png);background-size:contain;}

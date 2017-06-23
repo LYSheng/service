@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="referrer" content="always">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @*@Styles.Render("~/Content/css")*@
+    @WebHelper4H5.RegisterStyles("reset.css")
+    @WebHelper4H5.RegisterStyles("common.css")
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/jquery-2.1.1.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/modernizr-2.6.2.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/jquery.cookie.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/knockout-2.2.0.debug.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/knockout.validation.js"></script>
+
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/NewScripts/main.js?v=1.12"></script>
+
+    @*  @Scripts.Render("~/bundles/scripts/plugin")*@
+    @WebHelper4H5.RegisterScripts("global.js")
+    <!--弹出层插件-->
+    <link href="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/layer.m/need/layer.css" rel="stylesheet" />
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/layer.m/layer.m.js"></script>
+    @WebHelper4H5.RegisterScripts("base.js")
+    <!--全局弹出loading -->
+    @RenderSection("Head", false)
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+    @if (!string.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["BaiDuTongJi"]))
+    {
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?@System.Configuration.ConfigurationManager.AppSettings["BaiDuTongJi"]";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    }
+    @if (Request.Cookies.Get("IsHasCoupons") != null && Request.Cookies.Get("IsHasCoupons").Value == "1")
+    {
+        <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        var WXShare = Service.Site.wxService.WXShare(Request.Url.ToString());
+        <script>
+            $(function () {
+                setTimeout(function () { platinumBag(@(Json.Encode(WXShare))); }, 500)
+            });
+        </script>
+    }
+
+</head>
+<body>
+    @RenderBody()
+    @RenderSection("Footer", false)
+    @RenderSection("Scripts", false)
+    <div style="display: none;">
+        @Html.AntiForgeryToken()
+    </div>
+</body>
+</html>

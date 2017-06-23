@@ -1,0 +1,70 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "银行卡";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+@foreach (var cardItem in ViewBag.withCardList)
+{
+    <div class="white-bg fs14 mt5 pl30 pr30 pt4 pb4">
+        <dl class="cardObj">
+            <dd class="clearfix pt2 border0">
+                <i class="cardBox fl">
+                    <img src="@cardItem["bankLogoUrl"]" onerror="this.src = '/content/images/maoshi.png'" />
+                </i>
+                <ul class="ml8 bankDetail fs14">
+                    <li class="mb2"><strong>@cardItem["bankName"]</strong></li>
+                    <li class="grayColor">尾号@(cardItem["bankCardNum"])  @cardItem["cardTypeName"]</li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <div class="white-bg fs14 mt5 pl30 pr30 grayColor">
+        <p class="comAdrArea parbox">
+            <label style="width:3.5rem;">开户行</label>
+            <label class="flex1 addusername disblock posrelative ar">
+                @cardItem["bankName"]
+            </label>
+
+        </p>
+        <p class="comAdrArea parbox">
+            <label style="width:3.5rem;">开户所在地</label>
+            <label class="flex1 addusername disblock posrelative ar">
+                @cardItem["provinceName"]@cardItem["cityName"]@cardItem["areaName"]
+            </label>
+
+        </p>
+        <p class="comAdrArea parbox">
+            <label style="width:3.5rem;">所属支行</label>
+            <label class="flex1 addusername disblock posrelative ar">
+                @cardItem["bankBranchName"]
+            </label>
+
+        </p>
+    </div>
+}
+<p class="mt6 white-bg fs14 ac commonLine" id="delBank">删除</p>
+<p class="mt6 white-bg fs14 ac commonLine" id="setDefault">设为默认</p>
+<input type="hidden" id="bankCardId" value="@Request["bankCardId"]" />
+<div class="popback"></div>
+<div class="custom" style="height: 3.7rem;">
+    <p>确定要删除银行卡信息吗？</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="adrqx">取消</a>
+        <a href="javascript:;" class="adrqd">确定</a>
+    </p>
+</div>
+
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/withCardDetail.js")
+    @WebHelper4H5.RegisterScripts("Account/addrInfo.js")
+}

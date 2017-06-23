@@ -1,0 +1,173 @@
+﻿@using System.Configuration;
+@using Service.Site;
+
+@{
+    ViewBag.Title = "推荐分享";
+
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("style.css")
+
+}
+<style type="text/css">
+    .copyArea {
+        margin: 0 auto;
+        text-align: center;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        width: 95%;
+        background-color: #66c1c4;
+        margin-bottom: 0.2rem;
+        color: white;
+        border-radius: 5px;
+        display: none;
+    }
+</style>
+<article class="content" style="padding-top:0px!important;display:none" id="mainArticle">
+    <h2 class="fs12 pl40 pr40 shareTitle">方法一：直接发送推荐链接</h2>
+    <div class="white-bg  pb6 pt6 fs12">
+        <p class="shareDes pb4 pl40 pr40">推荐链接：</p>
+        <p class="shareDes pb4 pl40 pr40 shareUrl">@string.Format(WebConfig.WXMVCUrl + "/Share/Arrive?ReferrerUserId={0}", ViewBag.CurrentUser.UserId)</p>
+        <div class="copyArea">复制推荐链接</div>
+        <p class="shareDes pl40 pr40">您可以复制推荐链接，粘帖到短信或者邮件中发送给对方，推荐好友成为会员，与好友共享等值好礼。</p>
+        <div class="ml4 mr4 ac pt4 pb4 mt6 soperate fs14" style="display:none;">复制链接</div>
+    </div>
+
+    <h2 class="fs12 pl40 pr40 shareTitle">方法二：分享推荐链接到微信好友或朋友圈中</h2>
+    <div class="white-bg  pb6 pt6 fs12">
+        <div class="shareDss ml4 mr4 mb6  pb4">
+            <h2 class="fs14 pl20  st">分享标题：Malls·五洲精选推荐您加入</h2>
+            <div class="parbox">
+                <p class="nlogo pl20 pr30">
+                    <img src="@WebConfig.WXMVCUrl/Content/images/mallslog.png">
+                </p>
+                <div class="flex1 shareDes pr30">
+                    严选世间好物，品质生活，值得拥有
+                </div>
+            </div>
+        </div>
+        <p class="shareDes pl40 pr40">把上述内容分享到微信好友、微信朋友圈中，推荐好友成为会员，与好友共享等值好礼。</p>
+        <div id="onMenuShareTimeline" class="ml4 mr4 ac pt4 pb4 mt6 soperate fs14">分享</div>
+    </div>
+
+    <h2 class="fs12 pl40 pr40 shareTitle">方法三：当面推荐</h2>
+    <div class="white-bg  pb6 pt6 fs12">
+        <p class="ac  pb6">
+            <img id='showShare' src="@Html.Raw(ViewBag.InvitUrl)" style="width:4rem" />
+        </p>
+        <p class="shareDes pl40 pr40">向对方展示上面的二维码，通过扫描该二维码推荐好友成为会员，与好友共享等值好礼。（可点击二维码图片全屏展示）</p>
+    </div>
+</article>
+<div id="hfooter"></div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+
+}
+
+
+<script>
+
+    var shareObj = {
+        link: '@string.Format(WebConfig.WXMVCUrl + "/Share/Arrive?ReferrerUserId={0}", ViewBag.CurrentUser.UserId)',
+        desc: '严选世间好物，品质生活，值得拥有',
+        title: 'Malls·五洲精选',
+        imgUrl: '@WebConfig.WXMVCUrl/Content/images/mallslog.png'
+    }
+    $(function () {
+        $('#mainArticle').show();
+
+        $(".copyArea").click(function () {
+            //复制链接
+            try {
+                if (typeof mobile.shareCopy == "function") {
+                    $(".copyArea").show();
+                    mobile.shareCopy($(".shareUrl").text());
+                    return;
+                }
+            } catch (e) {
+
+            }
+            if (typeof shareCopy == "function") {
+                $(".copyArea").show();
+                shareCopy($(".shareUrl").text());
+                return;
+            }
+
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.shareCopy) {
+                $(".copyArea").show();
+                window.webkit.messageHandlers.shareCopy.postMessage($(".shareUrl").text())
+                return;
+            }
+
+        })
+
+        setTimeout(function () {
+            try {
+                if (typeof mobile.shareCopy == "function") {
+                    $(".copyArea").show();
+                }
+            } catch (e) {
+
+            }
+            if (typeof shareCopy == "function") {
+                $(".copyArea").show();
+            }
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.shareCopy) {
+                $(".copyArea").show();
+            }
+            
+
+        }, 100);
+        
+
+        $("#onMenuShareTimeline").click(function () {
+            //移动端专用
+            try {
+                if (typeof mobile.appShareClickDo == "function") {
+                    mobile.appShareClickDo(shareObj.link, shareObj.desc, shareObj.imgUrl, shareObj.title);
+                    return;
+                }
+            } catch (e) {
+
+            }
+            if (typeof appShareClickDo == "function") {
+                appShareClickDo(shareObj.link, shareObj.desc, shareObj.imgUrl, shareObj.title);
+                return;
+            }
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.showName) {
+                
+                window.webkit.messageHandlers.showName.postMessage([shareObj.link, shareObj.desc, shareObj.imgUrl, shareObj.title])
+                return;
+            }
+
+
+            $("body").append("<div class='layer' style='z-index:999;height:100%;width:100%;top:0px;position:fixed;background:rgba(0, 0, 0,0.70);text-align:right'> <img id='sharefriend' style='width:80%;' src='@WebConfig.WXMVCUrl/Content/images/share.png'  /></div>")
+            setTimeout(function () {
+                $(".layer").off().on("click", function () {
+                    $(this).remove();
+                })
+            }, 0);
+        });
+
+        $("#showShare").click(function () {
+            $("body").append("<div class='layer' style='z-index:999;height:100%;width:100%;top:0px;position:fixed;background:rgba(0, 0, 0,0.70);text-align:center'> <img id='showShare' style='height:50%;margin-top:25%;' src='@Html.Raw(ViewBag.InvitUrl)'  /></div>")
+            setTimeout(function () {
+                $(".layer").off().on("click", function () {
+                    $(this).remove();
+                })
+            }, 0);
+        });
+
+
+    })
+</script>
+<style>
+
+</style>

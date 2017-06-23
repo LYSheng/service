@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "门店新增会员详情";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/businessFeedBack.css")
+}
+
+<div class="storeMember white-bg" data-bind="foreach:smList">
+    <div class="member-list memberShow hide" data-bind="attr:{'data-year':year,'data-month':month,'data-count':count}" data-no="1" data-size="10">
+        <div class="member-title parbox ">
+            <p class="flex1" data-bind="text:year+'/'+month+'月'"></p>
+            <span><b data-bind="text:count"></b><b class="memSmall fs12">(人次)</b></span>
+        </div>
+        <div class="member-desc parbox">
+            <p class="flex1 time fs14">时间</p>
+            <p class="flex1 name fs14">昵称</p>
+            <p class="flex1 money fs14">充值金额<span>(元)</span></p>
+        </div>
+        <ul></ul>
+        <div class="member-more">
+
+        </div>
+    </div>
+    
+</div>
+<div class="members-btn">
+    <a href="javascript:void(0)" class="ac white-bg"><span class="members-btn-icon"></span>查看<span id="year">2016</span>年详情</a>
+</div>
+<div id="proList"></div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("scrollfix.js")
+    @WebHelper4H5.RegisterScripts("userAbout/storeMembers.js")
+}
+
+
+
+
+
+
+
+

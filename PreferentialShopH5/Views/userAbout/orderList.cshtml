@@ -1,0 +1,151 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "我的订单";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+
+}
+<div class="searchHeader none parbox white-bg ">
+    <div class="flex1 searchArea posrela" id="searchArea">
+        <input class="searchBotton white-bg fs12" placeholder="搜索商品" id="searchTxt" />
+        <a href="javascript:void(0)" class="searchRemove" id="searchRemove"></a>
+    </div>
+    <a href="javascript:void(0)" class="fs12 search-btn" id="searchBtn">取消</a>
+</div>
+
+
+
+<div class="orderHeader white-bg fs12 box">
+    <ul class="parbox" id="stuTab">
+        <li class="flex1 ac on" data-status="0"><i>全部</i></li>
+        <li class="flex1 ac" data-status="10"><i>待付款</i></li>
+        <li class="flex1 ac" data-status="20"><i>待发货</i></li>
+        <li class="flex1 ac" data-status="40"><i>待收货</i></li>
+        <li class="flex1 ac" data-status="45"><i>待评价</i></li>
+        @*<li class="flex1 ac" data-status="-5"><i>已退款</i></li>*@
+    </ul>
+</div>
+<div style="height:3.4rem;"></div>
+<div class="full-width wareObj">
+    <div id="proList" data-bind="foreach:orderModel.orderList" style="display:none">
+        <!--订单列表-->
+        <section data-bind='css:orderState==20?"orderSec mt4 white-bg state20":"orderSec mt4 white-bg"'>
+            <h2 class="orderCode">
+                <i class="mr4 person_store"></i><i data-bind="text:showTitle"></i>
+                <!-- ko if: isSea==true -->
+                <span class="overseas" style="display: inline-block; margin-left: 5px;"></span>
+                <!-- /ko -->
+                <span class="fr orderStatus fs12" data-bind="text:orderStateName">-</span>
+            </h2>
+            <div class="promercList">
+                <!--商铺列表start-->
+                <a data-bind='attr:{"href":orderState==10?"./showOrderDetail?orderId="+orderId:"showPackageDetail?orderPackageId="+orderId}'>
+                    <div class="promercSec">
+                        @*<h2 class="fs12 storename">夏琳服饰经销商</h2>*@
+                        <div class="storeProList" data-bind="foreach:orderItem">
+                            <!--商品列表start-->
+                            <div class="storeComRpro">
+                                <ul class="parbox">
+                                    <li class="imgBox">
+                                        <img data-bind='attr: { "src": src }' onerror="this.src = '/content/images/loading_250.png'" />
+                                    </li>
+                                    <li class="flex1 pl20 fs12">
+                                        <p class="textlist" data-bind='text:longName'>-</p>
+                                        <p class="spec">
+                                            已选:<span class="specDetail" data-bind="text:specs">-</span>
+                                            <br />
+                                            <span class="fs12 errTip" data-bind='text:is_over==1?"该商品活动已结束或已终止":""'></span>
+                                        </p>
+                                    </li>
+                                    <li class="relProdeil ar">
+                                        <p class="price fs11"><strong data-bind='text:"￥"+price'>-</strong></p>
+                                        <p class="amont" data-bind='text:"x"+count'>-</p>
+                                        <p class="mt4 red fs12" style="color:#ff9900" data-bind="text:isPickedUp?'门店自提':''"></p>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!--商品列表end-->
+                        </div>
+                    </div>
+                </a>
+                <!--商铺列表end-->
+            </div>
+            </a>
+            <p class="totalsettleResult fs12 pl20 pr20">
+                共<strong class="pl10 pr10" data-bind="text:productCount">-</strong>件商品
+                <span class="fr ">
+                    小计：<strong class="fs15 total" data-bind='text:"￥"+showMayPayPrice'>-</strong>
+                    <i class="fs10" data-bind='text:"(含运费：￥"+postFee+")"'>-</i>
+                </span>
+            </p>
+            <div data-bind="if:orderState==10">
+                <div class="ar action fs12">
+                    <span class="mr6 orderCancel" data-bind='attr:{"data-orderid":orderId}'>取消订单</span>
+                    <span class="orderPay" data-bind='attr:{"data-orderid":orderId,"data-price":showMayPayPrice}'>立即付款</span>
+                </div>
+            </div>
+            <div data-bind="if:orderState==40">
+                <div class="ar action fs12">
+                    @*<span class="mr6 orderExtend" data-bind='attr:{"data-orderid":orderId}'>延长收货</span>*@
+                    <a data-bind='attr:{"href":"./logisticsDetail?orderPackageId="+orderId}'>
+                        <span class="mr6 orderCkwl" data-bind='attr:{"data-orderid":orderId}'>查看物流</span>
+                    </a>
+                    <span class="orderQrsh" data-bind='attr:{"data-orderid":orderId,"data-originalid":originalId}'>确认收货</span>
+                </div>
+            </div>
+            <div data-bind="if:orderState==45">
+                <div class="ar action fs12">
+                    <a data-bind='attr:{"href":"./promotionAddEva?orderId="+originalId+"&orderPackageId="+orderId}'>
+                        <span class="orderParise">我要评价</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="infinite-scroll-preloader clearfix mt3">
+        <div class="preloader"></div>
+    </div>
+</div>
+<input type="hidden" value='@Request["redirect"]' id="redirect" />
+<input type="hidden" value='@ViewBag.uid' id="uid" />
+<input type="hidden" id="dataTime" value="@ViewBag.DateTime" />
+<input type="hidden" id="payToSign" value="@ViewBag.PayToSign" />
+<div class="popback"></div>
+<div class="custom" style="height: 3.7rem;">
+    <p>您确定要取消此订单吗？</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="adrqx">取消</a>
+        <a href="javascript:;" class="adrqd">确定</a>
+    </p>
+</div>
+<div class="custom1 " style="height: 4.4rem;">
+    <p class="pl20 pr20">请货物到了之后再确认收货，否则会导致人财两空！！！</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="qrshqx">取消</a>
+        <a href="javascript:;" class="qrshqd">确定</a>
+    </p>
+</div>
+@*<div class=" custom custom2 " style="height: 4.4rem;">
+    <p>您确定要取消此订单吗？</p>
+    <p class="pl20">每笔订单只能延迟一次哦</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="qrshqx">取消</a>
+        <a href="javascript:;" class="qrshqd">确定</a>
+    </p>
+</div>*@
+<div style="height:2rem;"></div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        var PGIUrl = "@System.Configuration.ConfigurationManager.AppSettings["PGIUrl"]";
+    </script>
+    @WebHelper4H5.RegisterScripts("Account/orderLoading.js")
+}

@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "订单销售额总计";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("service/show.css")
+}
+<header class="header">
+    <a href="#" class="back"><</a>
+    <h4 class="Title">订单销售额总计</h4>
+    <a href="#" class="back"></a>
+</header>
+<section class="Month_Box" style="width:100%;display:block">
+    <table class="table_box">
+        <thead>
+            <tr class="show_th">
+                <th class="no-sort"><a href="#">月度</a></th>
+                <th class="no-sort"><a href="#">汇总(元)</a></th>
+                <th class="number"><a href="#">境内(元)</a></th>
+                <th class="number"><a href="#">跨境购(元)</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2017.04</td>
+                <td>98.00</td>
+                <td>654.00</td>
+                <td>654.00</td>
+            </tr>
+            <tr>
+                <td>2017.03</td>
+                <td>99</td>
+                <td>624</td>
+                <td>924</td>
+            </tr>
+            <tr>
+                <td>1011</td>
+                <td>123</td>
+                <td>6</td>
+                <td>424</td>
+            </tr>
+            <tr>
+                <td>1026</td>
+                <td>4</td>
+                <td>610</td>
+                <td>824</td>
+            </tr>
+            <tr>
+                <td>1016</td>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+            <tr>
+                <td>2016.12</td>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+            <tr>
+                <td>2016.11</td>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("service/rem.js")
+    @WebHelper4H5.RegisterScripts("service/Total_Store_show.js")
+}

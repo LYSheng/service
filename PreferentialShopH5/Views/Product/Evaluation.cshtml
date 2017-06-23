@@ -1,0 +1,61 @@
+﻿@using System.Configuration;
+@using System.Text.RegularExpressions;
+@using Service.Site;
+@{
+    ViewBag.Title = "商品评价";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("product/product.css")
+    @WebHelper4H5.RegisterStyles("Touch.css")
+<style> body{background:#fff;}</style>
+}
+<div class=" full-width">
+    <div id="proList" style="display:none">
+        <!-- ko foreach: evaluationList -->
+        <section class="parbox pl20 pr20 pt4 pb4 fs14 eSec">
+            <a class="ablum disblock">
+                <img onerror="this.src = '../Content/images/myAvatar.png'" data-bind='attr:{"src":photo}' />
+            </a>
+            <ul class="flex1 pl30">
+                <li class="evaluatHead pb2">
+                    <i data-bind="text:nickName" class="fs15"></i>
+                    <i data-bind="text:createTime" class="fr fs12 crtime"></i>
+                </li>
+                <li class="evaluatCon fs14" data-bind="text:content">
+                </li>
+                <!-- ko if: evalPicsList.length>0 -->
+                <li class="evaluatCon fs14 clearfix pt4" data-bind="foreach:evalPicsList">
+                    <span class="disblock fl mr4 praiseImgbox">
+                        <img data-bind="attr:{'src':$data}" class="praise" />
+                    </span>
+                </li>
+                <!-- /ko -->
+                <li class="evaluatCon fs14">
+                    <!-- ko if: answerContent -->
+                    <div class="evaluat-item-request">
+                        <p class="fs14 evaluat-item-title pb2">
+                            <i class="fs12" data-bind="text:'【'+adminUserName+'】：'"></i>
+                            <i class="fr fs12 crtime" data-bind="text:answerTime"></i>
+                        </p>
+                        <p class="fs12 evaluat-item-content" data-bind="text:answerContent">
+                        </p>
+                    </div>
+                    <!-- /ko -->
+                </li>
+            </ul>
+        </section>
+        <!-- /ko -->
+    </div>
+    <div class="infinite-scroll-preloader clearfix mt3">
+        <div class="preloader"></div>
+    </div>
+</div>
+<div style="height:2rem;"></div>
+<input type="hidden" value="@("["+Request["skuId"]+"]")" id="skuId" />
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Touch.jquery.js"> </script>
+    @WebHelper4H5.RegisterScripts("Product/evaluation.js")
+}

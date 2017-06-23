@@ -1,0 +1,357 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "订单详情";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+    @WebHelper4H5.RegisterStyles("malls/seaOrder.css")
+
+}
+<style>
+    .daifh, .goods_receipt {
+        padding: 0.54rem 1.72rem;
+    }
+</style>
+<section class="order_details" style='@(ViewBag.OrderPackageShow["orderPackageStatus"] == 40 || ViewBag.OrderPackageShow["orderPackageStatus"] == 45 || ViewBag.OrderPackageShow["orderPackageStatus"] == 50 ? "padding-bottom:50px" : "")'>
+    <div class="daifh">
+        <h1>@ViewBag.OrderPackageShow["orderPackageStatusName"] &nbsp;&nbsp;&nbsp;&nbsp;
+            @if (ViewBag.OrderPackageShow["isPickedUp"])
+            {
+                <span>门店自提</span>
+            }
+        </h1>
+        <p class="total_price">订单金额：<i>￥@ViewBag.OrderPackageShow["beforePmnPrice"]</i></p>
+        <p class="yunfei">
+            运费:&nbsp; @ViewBag.OrderPackageShow["expressPriceName"]
+
+        </p>
+    </div>
+    @if (ViewBag.OrderPackageShow["isPickedUp"])
+    {
+        <div class="orderPackage white-bg">
+            <div class="order_delivery_address mt4">
+                <div>
+                    <p class="clearfix">
+                        自提门店:<span>@ViewBag.StoreShow["storeName"]</span>
+                        @if (ViewBag.OrderPackageShow["orderPackageStatus"] == 20)
+                        {
+                            <span class="fr">正在配货</span>
+                        }
+                    </p>
+                    <p>门店地址:<span>@ViewBag.StoreShow["address"]</span></p>
+                    @if (!string.IsNullOrEmpty(ViewBag.StoreShow["storeTelPhone"]))
+                    {
+                        <p>联系电话:<span>@ViewBag.StoreShow["storeTelPhone"]</span></p>
+                    }
+                    else
+                    {
+                        <p>联系电话:<span>4009633696</span></p>
+                    }
+                </div>
+            </div>
+            <div class="order_delivery_p">
+                @if (!string.IsNullOrEmpty(ViewBag.OrderPackageShow["pickedUpCode"]))
+                {
+                    <p class="clearfix order_delivery_img">
+                        <span class="fl ">提货二维码:</span><img class="fl" src="@ViewBag.OrderPackageShow["pickedUpCode"]" />
+                    </p>
+                }
+                
+            </div>
+            
+        </div>
+        
+    }
+    else
+    {
+        <div class="goods_receipt">
+            <p class="goods_person clearfix">
+                <span class="fl shr">收货人:@ViewBag.OrderPackageShow["receiveName"]</span>
+                <span class="fr tel">@ViewBag.OrderPackageShow["mobile"]</span>
+            </p>
+            <p class="goods_address">收货地址：@ViewBag.OrderPackageShow["allAddress"]</p>
+        </div>
+    }
+    
+    <div class="h21"></div>
+    @* 海外购信息模块 *@
+    @if (!string.IsNullOrEmpty(ViewBag.OrderPackageShow["declarationUserName"]))
+    {
+        <div class="mb4 white-bg seaUserInfo open" id="seaUserInfo">
+            <div>
+                <p class="seaTitle red fs12">跨境商品需填写以下信息：</p>
+            </div>
+            <div class="parbox seaInput pd fs12">
+                <p class="left">姓名：</p>
+                <p>@ViewBag.OrderPackageShow["declarationUserName"]</p>
+            </div>
+            <div class="parbox seaInput pd fs12">
+                <p class="left">身份证号码：</p>
+                <p>@ViewBag.OrderPackageShow["declarationIdCard"]</p>
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.OrderPackageShow["declarationIdCardImg"]) || !string.IsNullOrEmpty(ViewBag.OrderPackageShow["declarationIdCardBgImg"]))
+            {
+                <div>
+                    <p class="fs12 seaCardTitle c6">身份证正反面照片</p>
+                    <ul class="clearfix seaCardPhoto">
+                        @if (!string.IsNullOrEmpty(ViewBag.OrderPackageShow["declarationIdCardImg"]))
+                        {
+                            <li class="bnone">
+                                <img src="@ViewBag.OrderPackageShow["declarationIdCardImg"]"/>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(ViewBag.OrderPackageShow["declarationIdCardBgImg"]))
+                        {
+                            <li class="bnone">
+                                <img src="@ViewBag.OrderPackageShow["declarationIdCardBgImg"]"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            
+        </div>
+    }
+
+
+    <div class="goods_details white-bg pl20 pr20">
+
+        <p class="store_name"><i class="mr4 person_store"></i>@ViewBag.OrderPackageShow["providerName"]</p>
+        @foreach (var orderPackage in ViewBag.OrderPackageShow["orderPackageItemList"])
+{
+
+    <ul class="parbox pb4 clickDetail" data-product="@orderPackage["productId"]" data-title="@System.Web.HttpUtility.UrlEncode(orderPackage["productName"])">
+        <li class="imgBox">
+            <img src="@orderPackage["productPic"]" onerror="this.src = '/content/images/loading_250.png'" />
+        </li>
+        <li class="flex1 pl20 fs12">
+            <p class="textlist">@orderPackage["productName"]</p>
+            <p class="spec">
+                已选:<span class="specDetail">已选:@orderPackage["specs"]</span>
+                <br />
+            </p>
+        </li>
+        <li class="relProdeil ar">
+            <p class="price fs11"><strong>@orderPackage["price"]</strong></p>
+            <p class="amont">x<i>@orderPackage["count"]</i></p>
+        </li>
+    </ul>
+}
+        @if (!string.IsNullOrEmpty(ViewBag.OrderPackageShow["userNote"]))
+        {
+            <p class="usermark">
+                买家留言：@ViewBag.OrderPackageShow["userNote"]
+            </p>
+        }
+
+    </div>
+    <ul class="expense  white-bg">
+        <li class="clearfix">
+            <span class="fl">商品总价：</span>
+            <span class="fr">￥@ViewBag.OrderPackageShow["productFee"]</span>
+        </li>
+        <li class="clearfix">
+            <span class="fl">运费:</span>
+            <span class="fr">￥@ViewBag.OrderPackageShow["postFee"]</span>
+        </li>
+        <li class="clearfix">
+            <span class="fl">优惠：</span>
+            <span class="fr">- ￥@ViewBag.OrderPackageShow["pmnPrice"]</span>
+        </li>
+        @foreach (var oPayList in ViewBag.OrderPackageShow["orderPayList"])
+        {
+            <li class="clearfix">
+                <span class="fl">@oPayList["title"]</span>
+                <span class="fr">-￥@oPayList["payMoney"]</span>
+            </li>
+        }
+        <li class="clearfix">
+            <span class="fl">合计付款：</span>
+            <span class="redword fr">￥@ViewBag.OrderPackageShow["payPrice"]</span>
+        </li>
+    </ul>
+    @if (ViewBag.OrderPackageShow["useInvoice"] == 1)
+    {
+        <ul class="number_details white-bg">
+            <li>发票信息</li>
+            <li>发票类型：@ViewBag.OrderPackageShow["invoiceTypeName"]</li>
+            <li>发票抬头：@ViewBag.OrderPackageShow["invoiceTitle"]</li>
+        </ul>
+    }
+    <ul class="number_details white-bg">
+        <li>订单号：@ViewBag.OrderPackageShow["orderPackageCode"]</li>
+        <li>创建时间：@ViewBag.OrderPackageShow["createTime"] </li>
+        @if (ViewBag.OrderPackageShow["payTime"] != null)
+        {
+            <li>付款时间：@ViewBag.OrderPackageShow["payTime"]</li>
+        }
+        @if (ViewBag.OrderPackageShow["deliveryTime"] != null)
+        {
+            <li>发货时间：@ViewBag.OrderPackageShow["deliveryTime"]</li>
+        }
+        @if (ViewBag.OrderPackageShow["remainingDay"] != null)
+        {
+            <li>距离自动确认收货时间：<span class="red">@ViewBag.OrderPackageShow["remainingDay"]天</span></li>
+        }
+        @if (ViewBag.OrderPackageShow["reciveTime"] != null)
+        {
+            <li>收货时间：@ViewBag.OrderPackageShow["reciveTime"]</li>
+        }
+    </ul>
+</section>
+@if (ViewBag.OrderPackageShow["orderPackageStatus"] == 40)
+{
+    <div class="ar action fs12 white-bg payInt box">
+
+        @*<span class="mr6 orderCkwl" data-orderpakgeid='@Request["orderPackageId"]' data-orderid="@ViewBag.OrderPackageShow["orderId"]">延长收货</span>*@
+        <span class="mr6 orderCkwl" data-orderpakgeid='@Request["orderPackageId"]' data-orderid="@ViewBag.OrderPackageShow["orderId"]">查看物流</span>
+        <span class="orderQrsh" data-orderpakgeid='@Request["orderPackageId"]' data-orderid="@ViewBag.OrderPackageShow["orderId"]">确认收货</span>
+    </div>
+}
+@if (ViewBag.OrderPackageShow["orderPackageStatus"] == 45)
+{
+    <div class="ar action fs12 white-bg payInt box">
+        <span class="mr6 orderCkwl" data-orderpakgeid='@Request["orderPackageId"]' data-orderid="@ViewBag.OrderPackageShow["orderId"]">查看物流</span>
+        <a href="./promotionAddEva?orderId=@ViewBag.OrderPackageShow["orderId"]&orderPackageId=@Request["orderPackageId"]">
+            <span class="orderParise">我要评价</span>
+        </a>
+    </div>
+}
+@if (ViewBag.OrderPackageShow["orderPackageStatus"] == 50)
+{
+    <div class="ar action fs12 white-bg payInt box">
+        <span class="orderCkwl" data-orderpakgeid='@Request["orderPackageId"]' data-orderid="@ViewBag.OrderPackageShow["orderId"]">查看物流</span>
+
+    </div>
+}
+
+<input type="hidden" id="uid" value="@ViewBag.uid" />
+<input type="hidden" id="orderPackageStatus" value="@ViewBag.OrderPackageShow["orderPackageStatus"]" />
+<div class="popback"></div>
+<div class="custom" style="height: 4.4rem;">
+    <p class="pl20 pr20">请货物到了之后再确认收货，否则会导致人财两空！！！</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="adrqx">取消</a>
+        <a href="javascript:;" class="adrqd">确定</a>
+    </p>
+</div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        var orderQrshobj;
+        var sesStorage = window.sessionStorage;
+        $(".orderCkwl").click(function () {
+            var orderpakgeid = $(this).data("orderpakgeid");
+            var orderid = $(this).data("orderid");
+            window.location.href = "./logisticsDetail?&orderPackageId=" + orderpakgeid;
+        })
+        $(".order_delivery_img img").on("click", function () {
+            if($(this).hasClass("big")){
+                $(this).removeClass("big");
+            } else {
+                $(this).addClass("big");
+            }
+        })
+        $(".orderQrsh").click(function () {
+            var $window_w = $(window).width();
+            var $window_h = $(window).height();
+            var $custom_w = $(".custom").width();
+            var $custom_h = $(".custom").height();
+            var $scroll_height = document.body.scrollTop;
+            $(".custom").css({ "top": ($window_h - $custom_h) / 2, "left": ($window_w - $custom_w) / 2 });
+            $(".popback").show();
+            $(".custom").show();
+            orderQrshobj = $(this);
+        })
+        $(".adrqx").click(function () {
+            $(".popback").hide();
+            $(".custom").hide();
+        });
+        $(".adrqd").click(function () {
+            var orderpakgeid = $(orderQrshobj).data("orderpakgeid");
+            var orderId = $(orderQrshobj).data("orderid");
+            apiRequest({
+                method: 'OrderPackage/UserRecived',
+                async: false,
+                data: { OrderPackageId: orderpakgeid },
+                beforeSend: function () {
+                    $(".orderQrsh").addClass("poiEventsNone");
+                },
+                success: function (obj) {
+                    $(".orderQrsh").removeClass("poiEventsNone");
+                    if (obj.isBizSuccess) {
+                        smGlobal.error("确认收货成功！");
+                        setTimeout(function () {
+                            window.location.href = "./promotionAddEva?orderId=" + orderId + "&orderPackageId=" + orderpakgeid;
+                        }, 1000);
+
+                    }
+                    $(".popback").hide();
+                    $(".custom").hide();
+                },
+                error: function (obj) {
+                    $(".orderQrsh").removeClass("poiEventsNone");
+                    $(".popback").hide();
+                    $(".custom").hide();
+                    smGlobal.error(obj);
+                }
+            });
+        });
+        var refreshFlag = getCookie("refreshFlag");
+        if (refreshFlag == "true") {
+            setCookie("refreshFlag", null, "", "/", 30);
+            window.location.reload();
+
+        }
+        $(function () {
+            $.each($(".imgBo"), function (i, v) {
+                $(v).css("height", $(v).parent().css("height"));
+            })
+
+            //查看商品分类和商品详情
+            $(".clickDetail").on("click", function () {
+                var productId = $(this).data("product"), title = $(this).data("title");
+
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.orderDetails) {
+
+                    window.webkit.messageHandlers.orderDetails.postMessage([productId, title]);
+                    return;
+                }
+
+                window.location.href = '/Classify/themePromoList?ProductId='+productId+'&isShareProduct=2&hideCat=1&title='+title;
+            })
+
+            var flag = 0;
+            var orderPackageStatus = $("#orderPackageStatus").val();
+            switch (parseInt(orderPackageStatus)) {
+                case 10:
+                    flag = 1;
+                    break;
+                case 20:
+                    flag = 2;
+                    break;
+                case 40:
+                    flag = 3;
+                    break;
+                case 45:
+                    flag = 4;
+                    break;
+                case -5:
+                    flag = 5;
+                    break;
+                default:
+                    break;
+            }
+            if (parseInt(sesStorage.getItem("orderStatusFlag")) == 0) {
+                flag = 0;
+            }
+            sesStorage.setItem("orderStatusFlag", flag);
+        })
+    </script>
+}

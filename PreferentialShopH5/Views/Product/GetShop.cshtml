@@ -1,0 +1,282 @@
+﻿
+@using System.Linq;
+@{
+    ViewBag.Title = "选择店铺";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userabout/getShop.css")
+    
+}
+
+
+<div >
+<div class="searchWord parbox">
+    <div class="flex1">
+        <input id="keyword" placeholder="搜索门店" />
+    </div>
+    <span id="search">搜索</span>
+</div>
+<div id="map"></div>
+<div id="storeList"></div>
+  
+</div>
+<div class="loadingFixed"></div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("areaChoose.js")
+    @WebHelper4H5.RegisterScripts("LAreaData1.js")
+    <script>
+        $(".loadingFixed").show();
+        var cardId = $_GET['cardId'];
+        var _type = !smGlobal.getQueryString("type") ? 0 : smGlobal.getQueryString("type");
+        //选择支付方式
+        $(document).on("click", ".select", function () {
+            $(".select").removeClass('icon-chose').removeClass('active').addClass('icon-nochose');
+            $(this).addClass('icon-chose').addClass('active').removeClass("icon-nochose");
+            $("#shopId").val($(this).attr("value"));
+        });
+        $(".head_tit_right").click(function () {
+            var shopId = $("#shopId").val();
+            if (shopId > 0) {
+                window.location.href = "/userAbout/checkstand?cardId=" + cardId + "&shopId=" + shopId;
+            } else {
+                smGlobal.error("请选择加盟店！");
+            }
+        });
+        
+        $("#backurl").on("click", function () {
+            window.location.href = history.go(-1);
+        })
+
+        function goShop(userid, username, address, storeTelPhone) {
+                var _userId = userid;
+                var _userName = username;
+                var sesStorge = window.sessionStorage;
+                sesStorge.setItem("ServiceStoreUserId", _userId);
+                sesStorge.setItem("ServiceStoreUserName", _userName);
+                var storeObj = {};
+                storeObj["storeUserId"] = userid;
+                storeObj["storeName"] = username;
+                storeObj["address"] = address;
+                storeObj["storeTelPhone"] = storeTelPhone;
+                sesStorge.setItem("storeObj", JSON.stringify(storeObj));
+                if (!_userId) {
+                    smGlobal.error("请选择店铺");
+                } else {
+                    if (_type == 3) {
+                        window.location.replace('../userAbout/bargainOrderImmediate');
+                        return false;
+                    }
+                    if (_type != 1) {
+                        window.location.href = '../userAbout/orderConfirm';
+                    } else {
+                        window.location.href = '../userAbout/orderConfirmImmediate';
+                    }
+                }
+        }
+    </script>
+    <script language="javascript" src="https://webapi.amap.com/maps?v=1.3&key=036059dae6341c0e5c68e2f91b6497ec&plugin=AMap.Autocomplete,AMap.PlaceSearch"></script>
+    <script type="text/javascript">
+        (function () {
+            var mapHeight = document.body.clientHeight - 100;
+            var storeInfo;
+            document.getElementById('map').style.height = mapHeight + 'px';
+            var map = new AMap.Map('map');
+            var geolocation = null;
+            map.plugin('AMap.Geolocation', function () {
+                geolocation = new AMap.Geolocation({
+                    enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                    timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+                    maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+                    convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+                    showButton: false,        //显示定位按钮，默认：true
+                    buttonPosition: 'LB',    //定位按钮停靠位置，默认：'LB'，左下角
+                    buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                    showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+                    showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+                    panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+                    zoomToAccuracy: false      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+                });
+                geolocationFun();
+                map.addControl(geolocation);
+                AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+                //AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+            });
+
+            //地图中添加地图操作ToolBar插件
+            map.plugin(["AMap.ToolBar"], function () {
+                toolBar = new AMap.ToolBar(); //设置地位标记为自定义标记
+                map.addControl(toolBar);
+            });
+
+            /*
+             *获取当前位置信息
+             */
+            function geolocationFun() {
+                geolocation.getCurrentPosition(function (status, result) {
+
+                    if (status === "complete") {
+                        //显示范围圈
+                        // var cpoint = [result.position.lng,result.position.lat];
+                        // placeSearch.searchNearBy('', cpoint, 2000, function(status, result) {
+
+                        // });
+                        //标记点
+                        var _isCreateOrder = true;
+                        var param;
+                        if (_type == 3) {
+                            param={
+                                isPickedUp:true
+                            }
+                        } else {
+                            param = {
+                                isCreateOrder: true
+                            }
+                        }
+                        apiRequest({
+                            method: "Investment/PreferentialShopStatisticListGet",
+                            async: true,
+                            data: param,
+
+                            success: function (ret) {
+                                var markers = ret.models;
+                                storeInfo = markers;                    //给全局变量赋值
+                                //计算定位的位置到标记点的距离                            
+                                var lnglat = new AMap.LngLat(result.position.lng, result.position.lat);
+                                markers.forEach(function (marker) {
+                                    if (marker.lng && marker.lat) {
+                                        var length = lnglat.distance([marker.lng, marker.lat]) / 1000;
+                                        length = length.toFixed(2);
+                                        marker.length = length;
+                                    } else {
+                                        marker.length = "1000000";  //虚拟门店距离，排序排到最后
+                                    }
+                                });
+
+                                // 添加一些点到地图上
+                                markers.sort(function (x, y) { return y.length - x.length }); //倒序排列
+                                map.setFitView();
+                                markers.forEach(function (marker) {
+                                    if (marker.lng && marker.lat) {
+                                        var m = new AMap.Marker({
+                                            icon: "../Content/images/location_msth_icon.png",
+                                            map: map,
+                                            position: [marker.lng, marker.lat],
+                                            // offset: new AMap.Pixel(-12, -36),
+                                        });
+                                        m.content = "<div class='storeAddress'><div class='storeMaster'>" + marker.nickName + "</div><div>" + marker.address + "</div>";
+                                        m.on('click', markerClick);
+                                        m.emit('click', { target: m });
+                                        //console.log(m);
+                                    } else {
+                                        //虚拟门店
+                                    }
+                                });
+
+                                function markerClick(e) {
+                                    var infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(10, -30) });
+                                    infoWindow.setContent(e.target.content);
+                                    infoWindow.open(map, e.target.getPosition());
+                                }
+
+
+                                markers.sort(function (x, y) { return x.length - y.length });  //给距离排序
+                                var storeList = "";
+                                markers.forEach(function (marker) {
+                                    if (marker.lng && marker.lat) {
+                                        if (marker.length <= 20) {
+                                            storeList += "<a onclick='goShop(" + marker.userId + ",&quot;" + marker.nickName + "&quot;,&quot;" + marker.address + "&quot;,&quot;" + marker.storeTelPhone + "&quot;);'><div class='store'><div class='storeName'>" + marker.nickName + "<div class='storeLen'>" + marker.length + "km</div></div><div class='storeAdd'>" + marker.address + "</div></div></a>";
+                                        }
+                                    } else {
+                                        //虚拟门店，不显示距离,显示本区域内的门店
+                                        
+                                        if (_type != 3 && marker.address.indexOf(result.addressComponent.province) >= 0) {
+                                            storeList += "<a onclick='goShop(" + marker.userId + ",&quot;" + marker.nickName + "&quot;,&quot;" + marker.address + "&quot;,&quot;" + marker.storeTelPhone + "&quot;);'><div class='store'><div class='storeName'>" + marker.nickName + "</div><div class='storeAdd'>" + marker.address + "</div></div>";
+                                        }
+                                    }
+
+                                });
+
+                                $("#storeList").html(storeList);
+                                $(".loadingFixed").hide();
+
+
+                            }
+                        });
+
+                    } else {
+                        //定位失败
+                        smGlobal.removeHomeGif();
+                        smGlobal.heiAutoError("定位失败，请重新加载！", 2000);
+                    }
+                });
+            }
+            /*
+             *解析定位结果
+             */
+            function onComplete(data) {
+                //console.log(data);
+                map.setZoomAndCenter(12, [data.position.getLng(), data.position.getLat()]); //设置显示精确级别
+
+            };
+
+            //构造地点查询类
+            var placeSearch = new AMap.PlaceSearch({
+                map: map,
+            });  
+            
+            var serchFun = function(){
+                //console.log(storeInfo);
+
+                var searchWords = $("#keyword").val();
+                if (!searchWords) {
+                    smGlobal.heiAutoError("请输入您要搜索的门店或区域！", 2000);
+                    return false;
+                }
+                    var searchList="";
+                    for(var i=0;i<storeInfo.length;i++)
+                    {
+                        if(storeInfo[i].address.indexOf(searchWords)>=0 || storeInfo[i].nickName.indexOf(searchWords)>=0)
+                        {
+                            if(storeInfo[i].lng && storeInfo[i].lat)
+                            {
+                                searchList += "<a onclick='goShop(" + storeInfo[i].userId + ",&quot;" + storeInfo[i].nickName + "&quot;,&quot;" + storeInfo[i].address + "&quot;,&quot;" + storeInfo[i].storeTelPhone + "&quot;);'><div class='store'><div class='storeName'>" + storeInfo[i].nickName + "<div class='storeLen'>" + storeInfo[i].length + "km</div></div><div class='storeAdd'>" + storeInfo[i].address + "</div></div></a>";
+                            }else{
+                                //虚拟门店，不显示距离
+                                if (_type != 3) {
+                                    searchList += "<a onclick='goShop(" + storeInfo[i].userId + ",&quot;" + storeInfo[i].nickName + "&quot;,&quot;" + storeInfo[i].address + "&quot;,&quot;" + storeInfo[i].storeTelPhone + "&quot;);'><div class='store'><div class='storeName'>" + storeInfo[i].nickName + "</div><div class='storeAdd'>" + storeInfo[i].address + "</div></div>";
+                                }
+                                
+                            }
+                            //console.log(storeInfo[i]);
+                        }                  
+                    }
+                    if(searchList != "")
+                    {    
+                        placeSearch.search(searchWords);                    
+                        $("#storeList").html(searchList);
+                    }else{                       
+                        smGlobal.removeHomeGif();
+                        smGlobal.heiAutoError("未搜索到该门店！",2000);
+                    }
+                    
+
+            };
+            $("#search").on("click", function () {
+                serchFun();
+            })
+            $("#keyword").keydown(function (e) {
+
+                if (e.which == "13") {
+                    $(this).blur();
+                    serchFun();
+                }
+            })
+})();
+    </script>
+    }
+
+

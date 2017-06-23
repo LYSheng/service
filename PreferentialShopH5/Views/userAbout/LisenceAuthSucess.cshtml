@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "认证详情";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+<style type="text/css">
+    .sucessTitle{background-color:#ff6666;color:white;text-align:center;line-height:1.5rem;font-size:0.5rem}
+    .topImg{text-align:center;}
+    .topImg img{width:2.45rem;height:2.45rem;}
+    .warnMsg {
+        background-color: white;
+        text-align: center;
+        line-height: 1.5rem;
+        font-size: 0.6rem;
+    }
+    body{background-color:white;}
+
+    .finishBtn{ width:95%;margin:0 auto;text-align:center;line-height:2rem;background-color:#66c0c4;font-size:0.6rem;border-radius:0.3rem;color:white;}
+    .alertMsg{padding:0.3rem 0.5rem;margin-bottom:0.8rem; text-align:center;font-size:0.6rem;}
+</style>
+<script type="text/javascript">
+    function finish() {
+        window.location.href = "/userabout";
+    }
+</script>
+<div class="contentArea">
+    <div class="sucessTitle">
+        认证详情
+    </div>
+    <div class="topImg mt8">
+        <img src="~/Content/Images/lisencesAuthSucess.png" />
+    </div>
+    <div class="warnMsg">提交认证成功</div>
+    <p class="mt2 alertMsg">申请认证审核周期一般为3-5个工作日,通过认证后,可在身份认证页面查看认证信息。</p>
+    <div class="mt8 finishBtn" onclick="finish()">完成</div>
+</div>

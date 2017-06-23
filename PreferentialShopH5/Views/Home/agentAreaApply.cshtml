@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "促销商城";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("home/home.css")
+}
+@section Title
+{
+    <h1 class="am-header-title">申请区域代理</h1>
+}
+ 
+<div class="mt2 am-margin-per">
+ 
+</div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+    <script type="text/javascript">
+        /*ajaxRequest("POST", "/Product/GetSkuModel", {
+            id: skuId
+        }, "JSON", true, true).done(function (res) {
+            if (res.isSuccess) {
+                //修改显示的价格
+                self.price(res.data.price);
+            } else {
+                $.Tip(res.errMsg);
+            }
+        });*/
+        //banner图效果
+        TouchSlide({
+            slideCell: "#focus",
+            titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell: ".bd ul",
+            effect: "leftLoop",
+            autoPlay: true,//自动播放
+            autoPage: true //自动分页
+        });
+    </script>
+    @*<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll4.2.0.js"></script>*@
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll.js"> </script>
+}

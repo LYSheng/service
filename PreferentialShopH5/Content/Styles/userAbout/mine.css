@@ -1,0 +1,408 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*个人中心*/
+[class*='person_']{background: url(../../images/person_split.png); display: inline-block; background-size: 6rem 6rem;}
+[class*='userA_']{background: url(../../images/userabout_icon.png); display: inline-block; background-size: 10rem 10rem;}
+.content{width:100%;box-sizing: border-box;}
+.perInfo{ padding-bottom:55px}
+.mine_information{width: 100%;height:4rem ;box-sizing: border-box;background: #fff;padding: 0.84rem 0.8rem;border-bottom:1px solid #f4f4f4;}
+/*.mine_information{width: 100%;height:4rem ;box-sizing: border-box;background: url(../../images/mine_bk.png) no-repeat;background-size:100% 4rem;padding: 0.84rem 0.8rem;}*/
+
+.mine{width:100%;box-sizing: border-box;}
+.mine .touxiang{width:2.42rem ;height: 2.42rem;border-radius: 2.42rem;border: 0.04rem solid #DBD6D2;margin-right: 0.6rem;}
+.mine .touxiang img{max-width: 2.41rem;max-height: 2.41rem;min-width:2.41rem;min-height: 2.41rem; border-radius: 2.41rem;}
+.mine .info{padding-top: 0.34rem;}
+.mine .info .nick_name{color: #000;font-size: 0.62rem;height: .75rem;max-width:6rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; }
+.mine .info .jiantou{display: inline-block; width:0.32rem ;height: 0.74rem;background: url(../../images/right.png) 0 center no-repeat;background-size: 0.32rem;}
+/*.mine .info .jiantou{display: inline-block; width:0.32rem ;height: 0.74rem;background: url(../../images/right_jiantou.png) 0 center no-repeat;background-size: 0.32rem;}*/
+
+.mine .info .address{margin-top: 0.6rem;}
+.mine .info .address {display: inline-block;color: #DBD7D8;font-size: 0.46rem;max-width:6rem;height: .75rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; color:#000;}
+.mine .info .address b{display: inline-block;width: 0.44rem;height: 0.6rem;background: url(../../images/address_icon.png) no-repeat;background-size:0.44rem ;margin-right: 0.2rem;position: relative;top: 0.1rem;}
+.trad_status{width: 100%;box-sizing: border-box;padding: 0.46rem 0rem;background: #fff;}
+.trad_status li{height: 1.54rem; display:block; text-align:center}
+.trad_status li a{display: block;color:#666 ;font-size: 0.46rem;position: relative;}
+.trad_status li a b{box-sizing: border-box;margin-bottom: 0.25rem;}
+.person_pay{height: 0.68rem; width:.64rem;}
+.person_delv{height:0.68rem;background-position:-.94rem 0;width:.64rem;}
+.person_sh{height: 0.68rem;background-position:-1.86rem 0;width:1.04rem;}
+.person_appraise{height: 0.68rem;background-position:-3.14rem  0;width:.9rem;}
+.person_refunds{height: 0.68rem;width:.9rem;background: url(../../images/orderRefunds_icon.png)center 0 no-repeat;background-size:contain;}
+.trad_status li:nth-child(6) a b{height: 0.7rem;background-position:-0.24rem -5.12rem ;margin-bottom: 0.34rem;}
+.trad_status li a span{display: block;color: #666;}
+.trad_status li a em{position: absolute;top: -0.3rem;left:50%;width: 0.6rem;height: 0.6rem;font-size:0.32rem ; border-radius: 0.6rem; background: #FC4D54;color: #fff;line-height: 0.6rem;}
+.mine_css,.mine_avatar{box-sizing: border-box;border-top: 1px solid #E5E5E5;background: #fff;}
+.mine_css a{display: block;height: .8rem;line-height: .8rem;padding: 0.58rem 0.72rem;}
+.mine_css span{font-size:0.54rem;color: #333;/*font-weight: bold;*/}
+.mine_css span b{width:0.7rem ;height: 0.7rem;margin-right: 0.48rem;position: relative;top:0.1rem;}
+.mine_css i{width:0.32rem ;height:0.52rem;background: url(../../images/right.png) no-repeat;background-size:0.32rem ;position: relative;top:0.1rem;}
+.mine_avatar i{width:0.32rem ;height:0.52rem;background: url(../../images/right.png) no-repeat;background-size:0.32rem;position:absolute; right:.7rem;top:1.1rem;}
+.person_menu{background-position:-1.04rem -1.14rem;}
+.person_cust{background-position:-2.3rem -3.9rem;}
+.person_address{background-position:-2.48rem -1.14rem;}
+.person_info{background-position:-1.8rem -1.14rem;}
+.person_news{background-position:-3.14rem -1.12rem;}
+.person_coupon{background-position:-3.92rem -1.14rem;}
+.person_pwdLock{background-position: -1rem -3rem;}
+.person_phoneCall{background-position: -3.8rem -2rem;}
+.person_myClock{background-position: -4.52rem -2rem;}
+.person_serClock{background-position: -5.24rem -2rem;}
+.person_attentMall{background-position: -3rem -2.9rem;}
+.person_phoneCall{background-position: 0 -2.3rem;}
+.person_djq{background-position: -2.5rem 0;}
+.person_myRemend {background-position: -3.7rem -3.6rem;width:.9rem; height:.7rem; vertical-align:middle}
+.person_zeroSy{background-position: -3rem -3.7rem;}
+.person_myalliens{background-position: -5.36rem -3.5rem;}
+.person_yfjq{background-position: -4.7rem -3.6rem;}
+
+/*猫市特惠店我的页面图标修改*/
+.userA_charge{background-position:0 0;}
+.userA_myBank{background-position:0 -0.7rem;}
+.userA_baitiao{background-position:0 -1.6rem;}
+.userA_myalliens{background-position:0 -2.63rem;}
+.userA_share{background-position: 0 -3.62rem;}
+.userA_menu{background-position: 0 -4.75rem;}
+.userA_address{background-position: 0 -5.68rem;}
+.userA_phone{background-position: 0 -6.55rem;}
+.userA_pwdLock{background-position: 0 -7.44rem;}
+.userA_qr{background-position: 0 -8.3rem;}
+.userA_phoneCall{background-position: 0 -9.1rem;}
+.userA_attentMall{background:url("../../images/msth_icon.png") no-repeat center center;background-size:cover;}
+
+.userA_myBankCard{background:url(../../images/bCardIcon.png) no-repeat center center ;background-size: contain;}
+.userA_myMemCard{background:url(../../images/mCardIcon.png) no-repeat center center ;background-size: contain;}
+.userA_myPayPwd{background:url(../../images/payPassword_icon.png) no-repeat center center ;background-size: contain;}
+
+/*malls钱包*/
+.myBag{margin:0.3rem 0.4rem;border-radius:0.25rem;overflow:hidden;box-shadow:0.15rem 0.15rem 0.2rem  #cdcdcd;}
+.myBag .mine_css{padding: 0.58rem 0.72rem;border:none;border-bottom:1px solid #f4f4f4;background:url("../../images/memNo_icon.png") 0.58rem center no-repeat;background-size:0.7rem 0.7rem;}
+.myBag .mine_css span{color:#707070;text-indent: 0.75rem;}
+.myBag .myBagList{padding:0.6rem 0;}
+.myBag .myBagList p{text-align:center;}
+.myBag .myBagList p:last-child{font-size:0.52rem;color:#666;line-height:0.8rem;}
+.myBag .myBagList p:first-child{font-size:0.52rem;color:#666;font-weight:bold;line-height:1.3rem;}
+.myBag .myBagList p:first-child span{font-size:0.8rem;color:#444;}
+@media screen and (max-width: 320px) { 
+.myBag .myBagList p:first-child{font-size:0.65rem;color:#444;font-weight:bold;}
+} 
+/*我的订单*/
+.total_dingdan {border-top:none;  border-bottom: 1px solid #f4f4f4;}
+.total_dingdan .moreOrder{position:relative;right:0.2rem;    font-size: 0.44rem;}
+/*更多工具*/
+.moreTools .mine_css{padding: 0.58rem 0.72rem;border:none;border-bottom:1px solid #f4f4f4;}
+.moreTools ul{}
+.moreTools li{width:30%;margin:0.4rem 0 0.2rem 0;}
+.moreTools li.two{width:40%;}
+/*@media screen and (max-width: 320px) {
+    .moreTools li {
+        width: 30%;
+    }
+    .moreTools li.two{width:40%;}
+}*/ 
+
+
+.moreTools li a{display:block;}
+.moreTools li span{display:block;width:1.4rem;height:1.4rem;margin:0 auto;border-radius:50%;background-image:url("../../images/mine_icon_new.png");background-repeat:no-repeat;background-size: 4.72rem 2.22rem;}
+.moreTools li span.icon_payCard{background-color:#f4f8fd;background-position: 0.3rem 0.35rem;}
+.moreTools li span.icon_myAllies{background-color:#f4f8fd;background-position: -1.7rem 0.35rem;}
+.moreTools li span.icon_myShare{background-color:#fff2ef;background-position: -3.57rem 0.35rem;}
+.moreTools li span.icon_myCoupon{background-color:#eafbf4;background-position: -3.57rem -1.15rem;}
+.moreTools li span.icon_attentMalls{background-color:#f3fafd;background-position: 0.35rem -1.15rem;}
+.moreTools li span.icon_tel{background-color:#fff2ef;background-position: -1.7rem -1.15rem;}
+.moreTools li span.icon_mybargain{background-image:url("../../images/mine_icon_bargain.png");background-color:#feeef0;background-size:0.8rem 0.7rem;background-position:center;}
+.moreTools li p{line-height:1.2rem;text-align:center;font-size:0.48rem;}
+
+.qr_new_icon{width:0.74rem;height:0.74rem;margin-right: 0.4rem;background:url("../../images/qr_new_icon.png") center center no-repeat;background-size:0.74rem;}
+
+/*我的二维码样式*/
+.myQrCodeNew{display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;position: fixed;width:100%;height:100%;top:0;left:0;z-index:1099;background:rgba(0,0,0,0.5)}
+.myQrCodeNew div{width:10rem;height:10rem;background:#fff;border-radius:0.2rem;}
+.myQrCodeNew div img{width:100%;height:100%;border-radius:0.2rem;}
+.myQrCodeNew.hide{display:none;}
+.redword{color: #FC575E;}
+.shareArea{ border-top: 1px solid #E5E5E5;border-bottom: 1px solid #E5E5E5; background:#fff}
+.ally{ padding-top:.2rem; padding-bottom:.3rem;}
+.ally li{display: block; text-align:center; border-right:1px solid #dcdcdc;box-sizing:border-box}
+.ally li:last-child{border-right:0}
+.ally li p{ line-height:1.4rem;}
+.sline{padding-top:.6rem;padding-bottom:.6rem; border-bottom:1px solid #E5E5E5; line-height:1rem;}
+.lineti{ display:inline-block;}
+.person_broadcast{ width:.9rem; background-position:0 -1.14rem; height:.5rem; vertical-align:middle}
+.sarright{width:0.32rem ;height:0.52rem;background: url(../../images/right.png) no-repeat;background-size:0.32rem ;position: relative;top:0.1rem; display:inline-block}
+.sline img{ width:.9rem; vertical-align:middle}
+.infoout a{display: block;color: #fff;font-size: .56rem;text-align: center;background-color: #fa5d68;height:1.6rem;line-height: 1.6rem;margin:1rem 4% .6rem;border-radius:.1rem;}
+.half-width{cursor:pointer;margin-right:1rem;text-align:right; width:50%;}
+.usermimg img{width: 2rem;height: 2rem;border-radius: 50%;float: right;}
+.myAvatar{ padding:0.3rem 0.72rem; vertical-align:middle; line-height:2rem;position:relative;}
+#file1{display: block;opacity: 0;width: 100%;height: 2.65rem;position: absolute;top:0;left: 0;cursor: pointer;filter:alpha(opacity=0);}
+.username{font-weight:normal;}
+/*昵称修改*/
+.u-header{ height:1.74rem;line-height:1.74rem;color: #000;border-bottom: 1px #dbd6d6 solid;}
+.i-hd-back{width:.98rem;height:.98rem;background:url(../../images/J_backToPrev.png) no-repeat; background-size:.96rem;display: block;}
+.u-hd-tit { position: absolute; top: 0; width: 100%;height:1.74rem;text-align: center;pointer-events: none}
+.u-hd-tit span{  display: inline-block;width: 5rem;color: #000;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-weight:bold}
+.u-hd-right{padding-right: .8rem;font-size:.68rem;color: #fd4c54;}
+.u-hd-right a{color: #fd4c54;}
+.nickNameArea{display: block;padding:.2rem .6rem;font-size: .56rem;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
+.nickNameArea a{display:inline-block;text-align: center;}
+.nickNameArea a.t-left{text-align: left;}
+.nickNameArea a.t-right{text-align: right;}
+.nickNameArea input{height:1.5rem;border: 0;line-height:1.5rem;}
+.u-iconlist{background-image:url(../../images/nickClose.png); background-size:cover}
+.txt-clear{width:.56rem;height:.56rem;right:.8rem;top:1.4em;}
+/*管理收货地址*/
+.adrcomlist{ border-bottom:1px solid #e8e8e8;border-top:1px solid #e8e8e8;}
+.adrBody dd{ color:#000; line-height:1rem;padding-left:.5rem;padding-right:.8rem;padding-bottom:.2rem}
+.adrBody dt{ color:#737373;line-height:.7rem;padding-left:.5rem;padding-right:.8rem; padding-bottom:.4rem}
+.adrBody p{ color:#737373; line-height:1.6rem;border-top:1px solid #e8e8e8;padding-left:.5rem;padding-right:.8rem;}
+.adrBody p a{ color:#737373;}
+.person_adrdefault{ width:.76rem; height:.76rem;vertical-align:middle; background-position:0 -2.94rem;}
+.person_adrdefault.onn{background-position:0 -2.04rem; width:0.75rem;height:0.74rem;}
+.person_adrEdit{ width:.52rem;height:.52rem;background-position:-1.06rem -2.12rem;}
+.person_adrDel{ width:.44rem;height:.5rem;background-position:-1.82rem -2.1rem;}
+.person_adradd{ width:.6rem; height:.6rem; background-position:-2.4rem -2rem;}
+.adradd{ background:#fff; border-radius:5px;border:1px dashed #ccc; line-height:1.6rem; color:#666;}
+/*添加收货地址*/
+.adrAdd{ background:#fff; padding:.2rem .6rem;}
+.comAdrArea{line-height:1.8rem;border-bottom:1px solid #e8e8e8;}
+.comAdrArea label{ width:2.8rem; display:block;}
+.comAdrArea input{ border:0;font-family:"微软雅黑";font-size:.56rem;/*text-align:right;*/outline:none; height:1.8rem;}
+.comAdrArea input::-webkit-input-placeholder{color:#a9a9a9;}
+.defaultinfo{ line-height:1.8rem;}
+.defaultinfo label{display:inline-block;}
+.verMiddle{vertical-align:middle}
+.adraddBtn{ line-height:1.7rem; background:#fa5d68; color:#fff; margin:.8rem .4rem 0 .4rem;border-radius:5px;}
+.arlist{border-bottom:1px solid #c8c7cc;line-height:1rem;text-align:center}
+.areaHui{color:#a9a9a9;}
+/*三级选择*/
+.layermcont1{
+   opacity:0;transform:scale(0);-webkit-transform:scale(0);background-color:#fff; font-size:14px; 
+   box-shadow:0 0 8px rgba(0, 0, 0, 0.1); position:absolute;
+    padding:2px 2px; border-radius:10px;width:80%; margin:0 auto;
+    height:400px; box-sizing:border-box;z-index:9999;
+}
+.layermcont1.on{opacity:1;transform:scale(1);-webkit-transform:scale(1);}
+.outer {height: 100%;overflow-y: scroll;}
+.ardllist{border-bottom:1px solid #c8c7cc; line-height:1.8rem;}
+/*我的盟友*/
+.alliesCon{ padding-top:.5rem; padding-bottom:.5rem;border-bottom:1px solid #e8e8e8;}
+.ablumHead{ width:1.8rem; height:1.8rem; display:block;}
+.ablumHead img{ width:100%;height:100%; border-radius:50%;}
+.alliesGrade{ color:#333;}
+.count{ color:#f00;}
+.allist{background: url(../../images/right.png) 97% center no-repeat;background-size:0.32rem ;}
+.registTime{ color:#999;}
+.alSearch{ height:1.7rem; border-bottom:1px solid #e8e8e8; padding-left:.6rem; padding-right:.8rem;}
+.searcAlies{ padding:.2rem .2rem .2rem 1.6rem;border:1px solid #c9c9c9; line-height:.8rem; width:100%;border-radius:4px;}
+.allmirro{ position:absolute; width:.5rem; left:1rem; top:.5rem;}
+.allmirro img{ width:100%;}
+
+/*我的盟友 new*/
+.allies-total{font-size:0.6rem;-webkit-box-pack:center;-webkit-box-align:center;border-top: 1px solid #e8e8e8;border-bottom: 1px solid #e8e8e8;color:#333;}
+.allies-total span{display:inline-block;width: 0.64rem;height:0.64rem;margin-right:0.2rem;background:url("../../images/alliestotal_icon.png") center 0 no-repeat;background-size:0.64rem 2.0rem;}
+.allies-total-left{line-height:1.8rem;padding-right:0.8rem;}
+.allies-total-left span{background-position:center -1.4rem;}
+.allies-total-right{line-height:1.8rem;padding-left:0.8rem;}
+.allies-total-right span{background-position:center 0.04rem;}
+
+/*盟友搜索*/
+/*盟友列表搜索*/
+.searchHeader{border-bottom:1px solid #e8e8e8;color:#666;position:fixed;top:0;left:0;width:100%;z-index:999;    line-height: 1.6rem;height: 1.6rem;-webkit-box-align:center;align-items: center;}
+/*.searchHeader .home_mirror{top: 50% !important; left: 0.6rem;margin-top:-0.4rem;}*/
+.searchHeader .searchArea{margin-left: 0.6rem; padding:0 1.2rem; height:1.1rem;background: #f1f0f0 url("../../images/search_icon.png") 0.5rem center no-repeat; background-size: 0.44rem 0.56rem;border-radius:0.55rem;}
+.searchHeader .searchArea .searchBotton{ height: 100%;display: block;width: 100%;border: none;background: #f1f0f0;padding: 0;}
+.searchHeader .search-btn{display:block;width: 2rem;color:#fc4d54;text-align:center;}
+.searchHeader .searchArea .searchRemove{ width: 1.2rem;height: 1.1rem;position: absolute;top: 0;right: 0;border: none;background: url("../../images/remove_icon.png") center center no-repeat;background-size: 0.6rem 0.6rem;z-index: 999;}
+.searchHeader.none .searchArea{margin-right: 0.6rem; }
+.searchHeader.none .searchRemove{display: none;}
+.searchHeader.none .search-btn{display:none; text-align:center;}
+
+.allieListCon{padding:0.3rem 0.6rem 0.3rem 0;border-bottom:1px solid #e8e8e8;}
+.list-one>li{line-height:1rem;}
+.allLine{border-top:1px solid #bdbdbd;}
+.cl333{color:#333;}
+.usnone{display:none;}
+.span-arrow{width:0.4rem;height:0.6rem;margin-left:0.3rem;background:url("../../images/arror_down.png") center center no-repeat;background-size:contain;}
+.span-arrow.off{background:url("../../images/arror_up.png") center center no-repeat;background-size:contain;}
+/*我的佣金*/
+.broSum{ font-size:.8rem; color:#f00; line-height:1.5rem;}
+broTitle{ color:#333;}
+.broli li:first-child{border-right:1px solid #dcdcdc;}
+.brotip{ margin-top:.8rem;}
+.brocomWord{ line-height:.8rem; color:#f75a53;}
+.brospeWord{ color:#f00;}
+.brotx,.brozc{ line-height:1.6rem;background:#fa5d68; display:inline-block; width:45%; color:#fff;}
+.broSub{ margin-top:1.2rem;}
+.sidebar-menu{border-bottom:1px solid #e9e9e9; border-top:1px solid #e9e9e9;}
+.sub-menu:first-child{border-bottom:1px solid #e9e9e9; }
+.sub-menu >a,.subMenu >a{display: block; position: relative;text-align: left;padding: 15px 15px 15px 25px;color:#333; text-decoration: none;outline: none;}
+.glyphicon{ width:.52rem; height:.28rem; display:inline-block; background:url(../../images/xia_jt.png); background-size:contain}
+.sub-menu a span.glyphicon,.subMenu a span.glyphicon{ font-size: 12px;transition:all 0.4s ease}
+.selected >a{color: #333;}
+.sub{display: none;}
+.selected span.glyphicon{-webkit-transform:rotate(180deg);transform:rotate(180deg);}
+.selected .sub{display: block;}
+.accountList{ padding:0 1rem; border-top:1px solid #e9e9e9;}
+.accountList li{  line-height:1.5rem;}
+.je{ color:#f00}
+.djs,.ktx{ width:.42rem; display:inline-block;padding-right:.32rem;}
+.txz,.zrk{width:.64rem; display:inline-block;padding-right:.16rem;}
+.djs img,.ktx img,.txz img,.zrk img{ width:100%;}
+.brohistory{padding:0 15px 0 25px}
+th{ font-style:normal; font-weight:normal}
+.brohistory thead tr th{ height:1.54rem; font-size:.48rem;}
+.brohistory tbody tr th{height: 1.54rem;font-size:.48rem;}
+.getWill{transform:rotate(-90deg);-webkit-transform:rotate(-90deg); margin-top:.6rem;}
+/*修改密码*/
+/*提示框*/
+.shadowCell{display:none;background-color:black;opacity:0.5;position:fixed;width:100%;height:100%; z-index:10}
+.confirmAlertBox{display: none;position: fixed;top: 33%;left: 11%;width: 78%;text-align: left;font-size: 0.6rem; color:#333; z-index:10; }
+.alertContent {padding-top:8px;padding-bottom:8px;background: #eee; border-top-left-radius:10px; border-top-right-radius:10px; border:1px solid #eee;padding:.5rem .5rem;}
+.alertTitle{text-align:center;line-height:2rem;height:2rem;background: #eee; border-radius:10px; border:1px solid #eee;}
+.alertOperation{border-top:1px solid #d2d2d2;border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-bottom:1px solid #eee; background:#eee;line-height:2rem;}
+.alertOperation span{display:inline-block;width:50%;text-align:center; }
+.alertOperation span:first-child{border-right:1px solid #d2d2d2; color:#0879c1;}
+.alertOperation span:last-child{ color:#f00;}
+/*我的银行卡*/
+.withCardList{border:1px solid #e5e5e5; border-radius:5px;}
+.cardObj dd{ border-bottom: 1px solid #e5e5e5; line-height:1.6rem;}
+.cardObj dt{  line-height:1.8rem; }
+.cardDefault{ display:inline-block; padding:.2rem .3rem;color:#fff; background:#f00; height:.8rem;line-height:.4rem; border-radius:10px;}
+.cardDetail{ color:#666;}
+.cardBox{ width:1rem;height:1rem; display:inline-block; vertical-align:middle;}
+.cardBox img{ width:100%; height:100%;}
+.cardNum{ letter-spacing:2px;}
+.cardActionDel{ line-height:1.7rem;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5; color:#626262}
+.cardDetailBody{border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5; color:#626262;}
+.cardDetailBody li{ line-height:1.6rem;border-bottom:1px solid #e5e5e5;}
+.cardDetailBody li:last-child{ border-bottom:0;}
+.cardDetailHead{border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;color:#626262;}
+.cradHeadBox{width:2rem; height:2rem;}
+.cradHeadBox img{ width:100%; height:100%;}
+.cardBObj{padding-top:.8rem;padding-bottom:.8rem;}
+.cardBObj dd{color:#000;}
+/*必填项*/
+.inputStar{    width: 0.4rem;height: 0.4rem;display: inline-block;margin-left: 0.2rem;background: url(../../images/seaStar_icon.png) no-repeat center center;background-size: 0.2rem 0.2rem;}
+.ca9{color:#a9a9a9;}
+/*我的优惠券*/
+.youhuiTab { width: 100%;height: 1.56rem; border-bottom: 1px solid #d0d0d0;position:fixed;left:0;top:0;z-index:100}
+.youhuiTab .tab1, .tab2 { width: 50%; cursor: pointer; font-size: 0.54rem; color: #666666;line-height: 1.56rem;}
+.active {color: #ff0000 !important; border-bottom: 2px solid #ff0000; }
+.couponList {padding: 1rem 1rem;}
+.couponList li {position:relative;}
+.couponList .coupon_title {font-size: 0.68rem; color: #fb5051; position: absolute;top: 0.1rem; left: 0.5rem; }
+.couponList .coupon_con {font-size: 0.42rem; color: #666666; position: absolute; left: 0.5rem;top: 1.5rem;text-align: left;}
+.couponList .coupon_rules {font-size: 0.27rem;color: #999999;position: absolute; top: 3.3rem; left: 0.5rem; text-align: left;}
+.coupon_price {color: #fdfcfc; font-size:1.36rem; position:absolute; top:1.3rem; right:0.5rem;}
+.getYouhui,.myYouhui{padding-left:.4rem;padding-right:.4rem;}
+.coupRule{color:#666;}
+.mycoupRule{color:#999;}
+.claim{ width:2.6rem; color:#fff;  vertical-align:middle;line-height:normal; background:#fb5051;box-sizing:border-box;min-height:3.6rem;}
+
+.myclaim{ width:3.1rem; color:#fff;  vertical-align:middle;line-height:normal; background:#fb5051;}
+.countP{ width:3rem;color: #fb5051; font-size:1.2rem; }
+.mycountP{ width:2.5rem;color: #fff; font-size:1.36rem; }
+.countDetail{ margin-left:3rem;}
+.couponTitle{color:#000;  word-break: break-all;}
+.mycouponTitle{border-bottom:1px solid #c9c9c9;color:#fb5051;}
+.couponFullDedu{ color:#666;}
+.couponTime{ color:#666;}
+.mycouponTime{ color:#999;}
+.claimAction{display:block;vertical-align:middle; width:2rem;left:50%;top:50%; margin-left:-1rem; height:3.3rem; margin-top:-1.65rem;}
+.conpJe{display:block;vertical-align:middle; width:100%;left:0;top:50%; height:1.8rem; margin-top:-0.9rem;}
+.claimWareR{background:url(../../images/wareR.png) right  repeat-y; background-size:0.1rem 0.28rem;width:.1rem; height:100%; right:-2px;top:0;}
+.claimWareL{background:url(../../images/wareL.png) right  repeat-y; background-size:0.1rem 0.28rem;width:0.1rem; height:100%; left:-2px;top:0;}
+.mycountDetail{ font-family:"宋体"}
+.used .mycouponTitle{color:#666666;}
+.used .myclaim{background:#b2b2b2}
+.used .claimWareR{background:url(../../images/wareRUsed.png) right  repeat-y; background-size:0.1rem 0.28rem;width:.1rem; height:100%; right:-2px;top:0;}
+.couponUsed{ right:-0.4rem;top:.3rem; width:3.6rem; height:3.6rem; z-index:100}
+.couponUsed img{width:100%}
+.coupSelected{margin-left:1rem;}
+.passwdDialog{ width:80%;position:fixed; top:40%; left:10%; z-index:99999; background:#f2f2f2;border-radius:6px; padding:.4rem 0 0 0;}
+.dialogTitle{ line-height:.8rem; font-weight:normal; font-size:.64rem;color:#333;border-bottom:1px solid #e6e6e6; padding-bottom:.4rem;}
+.ipt{  line-height:1rem; padding:.2rem .2rem; color:#808080;border:0; font-size:.48rem;}
+.btnBody{ line-height:2rem; border-top:1px solid #dadada;}
+.diaReset{border-right:1px solid #dadada;box-sizing:border-box;width:50%; color：#999; color:#f00;}
+.diaInsure{width:50%; color:#f00;
+}
+.selRadio{width:1rem; height:100%; background:url(../../images/selRadioOff.png) left center no-repeat; background-size:.7rem .7rem;left:0;top:0}
+.selRadio.on{background:url(../../images/selRadioOn.png) left center no-repeat; background-size:.7rem .7rem;}
+.close_icon{position:absolute;right:0.4rem;top:-0.5rem;width:1rem;color:red}
+.phoneCommon{width: 0.6rem; margin-right: 0.39rem; height: 0.68rem; vertical-align:middle;}
+.red{color:#f00}
+.red a{color:#f00;}
+a.red{color:#f00;}
+.codeImg{ width:7rem; height:7rem;padding:.2rem; border:1px solid #f00; border-radius:5px;}
+.codeImg img{ width:7rem; height:7rem;}
+.attTitle{color:#57534b; font-family:"宋体";}
+.codeBody{ left:50%; margin-left:-3.7rem; top:50%; margin-top:-5.5rem;position:absolute;}
+.phoneCall{width: 0.6rem;margin-right: 0.39rem;top:0.15rem;height:.68rem;}
+.person_geryPhoneCall{width: 0.65rem;margin-right: 0.39rem;top:0.15rem;height:.68rem; background-position:-3.8rem -2.8rem; display:inline-block}
+.person_headIcon{width: 0.6rem;margin-right: 0.39rem;top:0.15rem;height:.68rem; background-position:-4.6rem -2.9rem; display:inline-block}
+.serviceList{ padding-bottom:.24rem; margin-top:.24rem;border-bottom:1px solid #dcdcdc;}
+.serviceList:last-child{border-bottom:0;}
+.serviceList li{ border-right:1px solid #dcdcdc; width:1%;}
+.serviceList li:last-child{ border-right:0px;}
+.serviceList dl dd{ line-height:1rem; color:#868686;}
+.serviceList dl dt{ line-height:1rem;color:#333;}
+
+.bankSel{border:0; opacity:0;left:0;top:0;right:0;bottom:0; width:100%}
+.bankChose{}
+.bankDetail{ line-height:.8rem; margin-left:1.5rem}
+.grayColor{color:grey;}
+.commonLine{ line-height:1.6rem;color:#666; }
+.drawalMeta{border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin-top:1.2rem;}
+.drawalMeta li{ line-height:1.1rem;color:#323232;}
+.diawSuccessTop{margin-top:1.6rem;}
+.withdrawShowText{ margin-top:1rem;}
+.commitClose{background: #66c1c4; color:#fff; line-height:1.6rem; border-radius:5px;}
+/*优惠券改版*/
+.actionSpan{width:1.7rem;border-right:1px dashed #535547;box-sizing:border-box;}
+.couponImgBox{width: 4.55rem;height: 3.5rem;padding:0.05rem;/*border:1px solid #c9c9c9;*/margin-left:.25rem;}
+.couponImgBox img{display:block;width:100%;height:100%;}
+.rightCenterCircle,.leftCenterCircle {width: .5rem;height: 1rem;background-color: #515151;top:50%; margin-top:-.5rem;}
+.leftCenterCircle{left:-1px;border-radius:  .5rem 0 0 .5rem;border:0;-webkit-border-radius:  0 .5rem .5rem 0;}
+.rightCenterCircle{right:-1px;border-radius:  .5rem 0 0 .5rem;border:0;-webkit-border-radius: .5rem 0 0 .5rem;}
+.couponDetail{padding-left:.5rem; padding-right:.8rem;}
+.colst{color:#727272;}
+.deductAmount{font-family:Helvetica;font-weight:bold;font-size: 1.1rem !important;}
+.leftTopCircle{width: .24rem;height: .12rem;background-color: #515151;border-radius:0 0 .12rem .12rem;-webkit-border-radius: 0 0 .12rem .12rem;top:0; left:-.12rem;}
+.leftBottomCircle{width: .24rem;height: .12rem;background-color: #515151;border-radius:  .12rem .12rem 0 0;-webkit-border-radius:  .12rem .12rem 0 0;bottom:0; left:-.12rem;}
+.noMoreData{padding-top:.3rem;text-align:center;line-height:.8rem;color:#fff;font-size:.48rem}
+.coupFreeze{color:#777777; background:#777777;pointer-events:none}
+.couponUsed{right:0;top:0;width:2.4rem; height:2.3rem;z-index:99}
+.couponUsed img{width:100%; height:100%;}
+.coupshareIcon{right:.2rem;top:.2rem;width:1rem; height:1rem;z-index:98;padding:0 .2rem .2rem .2rem;}
+.coupshareIcon img{width:100%; height:100%;}
+/*预发奖券*/
+.selttleSub{ background:#e45f60;color:#fff;padding-left:20%;padding-top:.8rem;padding-bottom:.8rem;}
+.selttleList ul{padding-left:.6rem; padding-right:.6rem;border-bottom:1px solid #e8e8e8; border-top:1px solid #e8e8e8;}
+.selttleList ul li{line-height:1.6rem;font-weight:300}
+.selttleList ul li:not(:last-child){border-bottom:1px solid #e8e8e8;}
+.preFilter{line-height:1.2rem;border-bottom:1px solid #cdcccc;color:#3a3939}
+.preFilter img{ vertical-align:middle}
+.optionSelc{color:#3a3939;line-height:1rem;}
+.preOptions {padding-bottom:.7rem;}
+.preOptions span {display: inline-block; padding:.25rem .3rem;color:#f00;border:1px solid #f00;margin-top:.2rem;line-height:normal;}
+.optionChoose{top:1.2rem;left:0;right:0;z-index:10000;}
+.optionBorder{border-bottom:1px solid #cdcccc;}
+.commonLebel{color:#3a3939;line-height:1.5rem;}
+.commonInput{padding:.25rem .3rem;line-height:.6rem;height:.6rem;color:#3a3939;border:1px solid #a0a0a0;border-radius:3px; width:4.5rem;}
+.orderStatus i{display:inline-block; background:#e5e5e5;border-radius:3px; border:1px solid #e5e5e5;color:#3a3939;padding:.2rem .3rem;}
+.orderStatus i.active{border-color:#f00;color:#f00; background:#fff}
+.orderStatus i:not(:first-child){margin-left:.5rem;}
+.optionAction{border-top:1px solid #bfbfbf;font-size:.6rem}
+.optReset{ width:50%;line-height:1.8rem;color:#3a3939;}
+.optConfirm{ width:50%;line-height:1.8rem;background:#e45f60;color:#fff;}
+.receiveTip{color:#0066ff}
+.confirmAlertBoxValitePhone{display: none;position: fixed;top: 33%;left: 11%;width: 78%;text-align: left;font-size: 0.6rem; color:#333; z-index:10; }
+/**/
+.myQrCode{display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;position: absolute;width:100%;height:100%;background:#000;}
+.myQrCode .myQrCodeContent{width:11rem;height:16rem;background: #fff;border-radius:0.2rem;}
+.myQrCode .userContent{display:-webkit-box;-webkit-box-align:center;-webkit-box-pack:center;margin:0.6rem 0.6rem 0.2rem 0.6rem;}
+.myQrCode .userContent img{width:2.2rem;height:2.2rem;border-radius:0.2rem;}
+.myQrCode .userContent h2{color:#000;font-size: 0.56rem;}
+.myQrCode .userContent p{color:#777676;margin-top:0.3rem;font-size: 0.48rem;}
+.myQrCode .userimg{display:block;width:9.6rem;height:9.6rem;margin:0.4rem auto 0.4rem auto;}
+.myQrCode .warning{color:#777676;font-size: 0.48rem;}

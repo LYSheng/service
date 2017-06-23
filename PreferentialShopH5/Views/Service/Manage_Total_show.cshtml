@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "经营回馈总计";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("service/show.css")
+}
+<div class="explain_box">
+    <span class="explain">注：一下为已结算数据</span>
+</div>
+<section class="Month_Box" style="width:100%;display:block">
+    <table class="table_box">
+        <thead>
+            <tr class="show_th">
+                <th class="no-sort"><a href="#">月度</a></th>
+                <th class="no-sort"><a href="#">汇总-经营回馈<br>(金币)</a></th>
+                <th class="number"><a href="#">提现<br>(元)</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>98</td>
+                <td>654.00</td>
+                <td>654.00</td>
+            </tr>
+            <tr>
+                <td>99</td>
+                <td>624</td>
+                <td>924</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>6</td>
+                <td>424</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>610</td>
+                <td>824</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+            <tr>
+                <td>2012.12.12</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td>690</td>
+                <td>524</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("service/rem.js")
+    @WebHelper4H5.RegisterScripts("service/Total_Store_show.js")
+}

@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "众筹管理";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/dropload.min.js"></script>
+    @WebHelper4H5.RegisterStyles("malls/crowdFunding.css")
+    @WebHelper4H5.RegisterStyles("dropload.css")
+
+
+}
+
+<div class="loading3" style="display:block" isglobleload=true></div>
+<div class="crowdFundingContentArea">
+    <div class="crowd_tab fs16 ac white-bg">
+        <span data-bind="click:function() { getOrder('0')}" class="tab_selected pl20 pr20">发起订单</span>
+        <span data-bind="click:function() { getOrder('1')}" class="pl20 pr20">支持订单</span>
+    </div>
+
+
+    <div class="wrapper" data-bind="foreach:list" style="display:none">
+        <section class="todetail" data-bind='attr:{"data-id":crowdfundingOrderId}'>
+            <div class="crowd_detail_title">
+
+                <div class="title_headImg">
+                    <div data-bind="if:photo">
+                        <img data-bind="attr:{src:photo}" />
+                    </div>
+                    <div data-bind="ifnot: photo">
+                        <img src="/Content/images/myAvatar.png" />
+                    </div>
+
+                </div>
+                <div class="detail_right_content">
+                    <div class="title_top">
+                        <div data-bind="text:nickName" class="fl fs14"></div>
+                        <div data-bind="text:crowdfundingOrderStatusName" class="fr"></div>
+                    </div>
+                    <div class="title_bottom fs13"><div data-bind="text:creatTime"></div></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="title_bottom_line"></div>
+            <div class="crowd_detail_content parbox pl20 pr20 box pb2">
+                <div class="left_detail_img disblock"><img data-bind="attr:{src:productImgUrl}" /></div>
+                <div class="right_word_content flex1 disblock">
+                    <p data-bind="text:crowdfundingTitle" class="fs13"></p>
+                    <p data-bind="text:crowdfundingDesc" class="grayContent grayColor fs12"></p>
+                    <div>
+                        <span class="grayColor fs12">已选：</span> <span class="fs12 grayColor" data-bind="text:specs"></span>
+                        <span class="redcolor supportSpan fs10">已有<span data-bind="text:supportedCount"></span>人支持</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="detail_bottom pl30 pr30 white-bg fs14  ac clearfix">
+                <span class=" fl"><img src="/Content/images/target.png" style="width: .65rem; margin-right: .2rem; margin-top: -.1rem; " />目标:<b>￥<span data-bind="text:mayPayAmount"></span></b></span>
+                <span class=" "><img src="/Content/images/supportedAmount.png" style="width: .65rem; margin-right: .2rem; margin-top: -.1rem; " />已筹:<b>￥<span data-bind="text:supportedAmount"></span></b></span>
+                <!-- ko if: crowdfundingOrderStatus==10 -->
+                <span class=" fr"><img src="/Content/images/remainingDay.png" style="width: .65rem; margin-right: .2rem; margin-top:-.1rem; " />剩余:<b data-bind='text:remainingDay+"天"'></b></span>
+                <!-- /ko -->
+            </div>
+        </section>
+    </div>
+
+
+      
+    
+    
+    
+</div>
+
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/crowdFunding.js")
+}
+

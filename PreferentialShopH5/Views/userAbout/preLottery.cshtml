@@ -1,0 +1,95 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = (Request["settlementStatus"] == "5" ? "预发奖券" : (Request["settlementStatus"] == "1") ? "已发放奖券" : "待发放奖券");
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+}
+<div class="">
+    <p class="preFilter white-bg ar pr30 pl30 fs14" style="z-index:10000">
+        <i class="receiveTip fl fs12">@(Request["settlementStatus"] == "5" ? "收货后第二天自动转入待发放奖券" : "")</i>
+        <span id="preFilter" data-count="0">
+            <img src="~/content/images/lotteryLine.png" style="width:.65rem; margin-right:.1rem; margin-top:-0.05rem" />
+            筛选<img src="~/content/images/lotteryArrowDown.png" style="width: .3rem; margin-left: .2rem;" />
+        </span>
+    </p>
+    <!-- ko if: (preLottery.buyUserName() && preLottery.buyUserName()!='')||(preLottery.orderStatusName() && preLottery.orderStatusName()!='') || (preLottery.payBeginTime() && preLottery.payBeginTime()!='' ) || (preLottery.payEndTime() && preLottery.payEndTime()!='' ) -->
+    <section class="preOption fs14 white-bg  pr30 pl30 " data-bind="attr:{'data-sssss':preLottery.buyUserName()}">
+        <p class="fs14 optionSelc pt2">已选：</p>
+        <p class="preOptions fs12">
+            <!-- ko if: preLottery.buyUserName() && preLottery.buyUserName()!=''  -->
+            <span class="optionSelc red" data-bind="text:'购买者：'+ preLottery.buyUserName()"></span>
+            <!-- /ko -->
+            <!-- ko if: (preLottery.payBeginTime() && preLottery.payBeginTime()!='' ) || (preLottery.payEndTime() && preLottery.payEndTime()!='' )-->
+            <span class="optionSelc red" data-bind="text:'@(Request["settlementStatus"] == "5" ? "付款时间" : "收货时间")：'+ preLottery.payBeginTime()+'~'+preLottery.payEndTime()"></span>
+            <!-- /ko -->
+            <!-- ko if: preLottery.orderStatusName() && preLottery.orderStatusName()!=''  -->
+            <span data-bind="text:'订单状态：'+ preLottery.orderStatusName()"></span>
+            <!-- /ko -->
+        </p>
+    </section>
+    <!-- /ko -->
+    <section class="selttleSub">
+        <p class="fs13 pb1">奖券合计金额（元）：<span class="fs20" data-bind="text:preLottery.totalCommission"></span></p>
+        <p class="fs13 pt1">　订单合计数（单）：<span class="fs20" data-bind="text:preLottery.totalCount"></span></p>
+    </section>
+    <section class="selttleList">
+        <div class="disNone proList" data-bind="foreach:getList">
+            <ul class="mt4 white-bg fs13">
+                <li>订单号<span class="fr" data-bind="text:orderPackageCode"></span></li>
+                <li>订单状态<span class="fr" data-bind="text:orderPackageStatusName"></span></li>
+                @if (Request["settlementStatus"] == "5")
+                {
+                    <li>订单付款时间<span class="fr" data-bind="text:payTime"></span></li>
+                }
+                else
+                {
+                    <li>订单收货时间<span class="fr" data-bind="text:reciveTime"></span></li>
+                }
+                <li>奖券：<i data-bind="text:commission"></i><span class="fr">奖券类别：<i data-bind="text:referrerSettlementTypeName"></i></span></li>
+                <li>购买者：<i data-bind="text:buyUserName"></i><span class="fr">用户类别：<i data-bind="text:buyUserTypeName"></i></span></li>
+            </ul>
+        </div>
+        <div id="proList"></div>
+    </section>
+</div>
+<div class="fixbg disNone" data-bind="click:fixbgAction"></div>
+<div class="optionChoose posFixed disNone">
+    <div class="white-bg pl30 pr30">
+        <dl class="optionBorder">
+            <dt class="commonLebel fs13">购买者</dt>
+            <dt class="pb4"><input type="text" id="" placeholder="购买者昵称" class="commonInput" data-bind="value:buyUserName" /></dt>
+        </dl>
+        <dl class="@(Request["settlementstatus"] == "5" ? "optionBorder" : "pb4")">
+            <dt class="commonLebel fs13">@(Request["settlementStatus"] == "5" ? "付款时间" : "收货时间")</dt>
+            <dt class="pb4">
+                <input type="date" id="" placeholder="起始时间" class="commonInput" data-bind="value:payBeginTime" />
+                <span class="pl10 pr10">-</span>
+                <input type="date" id="" placeholder="起始时间" class="commonInput" data-bind="value:payEndTime" />
+            </dt>
+        </dl>
+
+        @if (Request["settlementstatus"] == "5")
+        {
+            <dl class="pb4">
+                <dt class="commonLebel fs13">订单状态</dt>
+                <dt class="orderStatus pb4 fs12">
+                    <i data-status="20">已付款</i><i data-status="-5">已退款</i>
+                    <i data-status="40">已发货</i><i data-status="45">已收货</i>
+                </dt>
+            </dl>
+        }
+    </div>
+    <div class="optionAction clearfix">
+        <span class="white-bg optReset disblock fl ac" data-bind="click:optReset">重置</span>
+        <span class="optConfirm disblock fl ac" data-bind="click:optConfirm">确定</span>
+    </div>
+</div>
+<div style="height:55px"></div>
+<input type="hidden" id="settlementstatus" value="@Request["settlementstatus"]" />
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/preLottery.js")
+}

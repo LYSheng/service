@@ -1,0 +1,18 @@
+.logo{text-align:center;padding:1.5rem 0;}
+.logo img{width:30%;margin:0 auto;}
+.logo p{font-size:1.8rem;margin-top:1.5rem;}
+.download_list{width:80%;margin:0 auto;}
+.download_list li{margin-bottom:1.5rem;line-height:4.4rem;text-align:center;color:#fff;position:relative;font-size:1.6rem}
+.download_list li.download_ios{background:#252525;}
+.download_list li.download_android{background:#64B721;}
+.download_list li.download_h5{background:#F6514F;}
+.download_list li i{width:2.4rem;height:2.4rem;display:block;top:1rem;left:1.5rem;position:absolute;text-indent:-99rem;overflow:hidden;}
+.download_list li i.ios_icon{background:url(../img/iphone.png) no-repeat;background-size:contain;}
+.download_list li i.android_icon{background:url(../img/android.png) no-repeat;background-size:contain;}
+.download_list li i.h5_icon{background:url(../img/html5.png) no-repeat;background-size:contain;}
+.qr_code{font-size:1.6rem;line-height:2rem;border-top:1px solid #aeaeae;padding:1rem 1.5rem;}
+.qr_code img{width:8rem;height:8rem;}
+.qr_code .qr_code_info p{font-size:1.2rem;}
+.qr_code .qr_code_info p,.qr_code .qr_code_info span mark{color:#53991a;}
+.qr_code .qr_code_info span{display:block;}
+.qr_code .qr_code_info strong{font-weight:normal;color:#999;}

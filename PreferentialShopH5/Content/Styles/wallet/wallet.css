@@ -1,0 +1,29 @@
+﻿@charset "utf-8";
+/* CSS Document */
+.topfixed {position: static;left: 0;top: 0;z-index: 10;width: 100%;background-color: #E45F60;}
+.tap-list {width: 100%;}
+.tap-list li {float: left;width: 50%;height: 44px;font-size: 16px;text-align: center;padding:8px 0 5px 0;position: relative;background-color: #E45F60; }
+.tap-list .tap-left{position:absolute;right:0px;}
+.tap-list .tap-right{position:absolute;left:0px;}
+.tap-list li.cur span{border-radius: 20px 0px 0 20px;color: #E45F60;background:#FFF3CF;}
+.tap-list li span {display:block; width: 90%; height: 1.5rem;line-height:1.5rem;border-radius: 0 20px 20px 0;color: #fff;border:solid 1px #FFF3CF;position:absolute;}
+.tap-list li.curr span{border-radius: 0 20px 20px 0;color: #E45F60;background:#FFF3CF;}
+.tap-list li span.tap-left{border-radius: 20px 0px 0 20px;border:solid 1px #FFF3CF;}
+
+.wallet_list,.wallet_uni_list{padding-top:58px;}
+.wallet_uni_list{display:none;}
+.wallet_list li,.wallet_uni_list li {height: 120px;padding: 1em 1.6em;position: relative;box-shadow:0px 5px 5px #cecece;background:#fff;margin-bottom:10px;}
+@media (min-width:640px){
+    .wallet_list li,.wallet_uni_list li{height:15em;}
+    .wallet_operate{padding:2em;}
+}
+.wallet_card{float:left;width:78%;}
+.title{color:#E45F60;font-size:.6rem;}
+.cardNum{font-size:.7rem;color:#a2a2a2;}
+.account{font-size:1.3rem;color:#e45f60;line-height: 1.3em;}
+.account em {font-size:.5rem;}
+.integral{color:#6dabde;font-size:.6rem;border-radius: 5px;border:solid 1px #6dabde;width:40%;padding:0 10px;text-align:center;}
+.wallet_operate{float:left;}
+.recharge{ width:60px;height:65px;display:block; text-decoration:none;}
+
+.recharge p {font-size:14px;}

@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "商品销售排行榜";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("service/show.css")
+}
+<header class="Text_Title">
+    <div class="Title_input"></div>
+    <span class="Title_title">商品销售排行榜</span>
+    <div class="Title_input">
+        <img class="Title_sou" src="/Content/images/serviceImage/放大镜.png" alt="Alternate Text" />
+    </div>
+</header>
+<nav class="nav_box">
+    <span class="Month nav_active">本月</span>
+    <span class="Month ">总计</span>
+</nav>
+<div class="Bg_box">
+    <section class="Month_Box cc">
+        <header class="Month_Title">2017/06月</header>
+        <table class="table_box">
+            <thead>
+                <tr>
+                    <th class="no-sort sort_th">
+                        <a class="sort_name" href="#">排名</a>
+                        <div class="sort_one">
+                            
+                        </div>
+                    </th>
+                    <th class="no-sort sort_th">
+                        <a class="sort_name" href="#">门店名称</a>
+                        <div class="sort_one">
+                            
+                        </div>
+                    </th>
+                    <th class="number sort_th sort_click">
+                        <a class="sort_name" href="#">会员数</a>
+                        <div class="sort_box">
+                            <div class="shang"></div>
+                            <div class="xia"></div>
+                            
+                        </div>
+                    </th>
+                    <th class="number sort_th sort_click">
+                        <a class="sort_name" href="#">充值笔数</a>
+                        <div class="sort_box">
+                            <div class="shang"></div>
+                            <div class="xia"></div>
+                        </div>
+                    </th>
+                    <th class="number sort_th sort_click">
+                        <a class="sort_name" href="#">充值额</a>
+                        <div class="sort_box">
+                            <div class="shang active"></div>
+                            <div class="xia"></div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1031</td>
+                    <td>李渊</td>
+                    <td>98</td>
+                    <td>654</td>
+                    <td>654</td>
+                </tr>
+                <tr>
+                    <td>1021</td>
+                    <td>张扬</td>
+                    <td>99</td>
+                    <td>624</td>
+                    <td>924</td>
+                </tr>
+                <tr>
+                    <td>1011</td>
+                    <td>吴敏</td>
+                    <td>123</td>
+                    <td>6</td>
+                    <td>424</td>
+                </tr>
+                <tr>
+                    <td>1026</td>
+                    <td>李小明</td>
+                    <td>4</td>
+                    <td>610</td>
+                    <td>824</td>
+                </tr>
+                <tr>
+                    <td>1016</td>
+                    <td>周谨</td>
+                    <td>44</td>
+                    <td>690</td>
+                    <td>524</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </section>
+    <section class="Month_Box ">
+        <header class="Month_Title">2017/13月</header>
+        <table class="table_box">
+            <thead>
+                <tr>
+                    <th class="no-sort"><a href="#">排名</a></th>
+                    <th class="no-sort"><a href="#">门店名称</a></th>
+                    <th class="number sort_th sort_click">
+                        <a class="sort_name" href="#">会员数</a>
+                        <div class="sort_box">
+                            <div class="shang"></div>
+                            <div class="xia"></div>
+                        </div>
+                    </th>
+                    <th class="number sort_th sort_click">
+                        <a class="sort_name" href="#">充值笔数</a>
+                        <div class="sort_box">
+                            <div class="shang"></div>
+                            <div class="xia"></div>
+                        </div>
+                    </th>
+                    <th class="number sort_th sort_click">
+                        <a class="sort_name" href="#">充值额</a>
+                        <div class="sort_box">
+                            <div class="shang"></div>
+                            <div class="xia"></div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1031</td>
+                    <td>李渊</td>
+                    <td>98</td>
+                    <td>654</td>
+                    <td>654</td>
+                </tr>
+                <tr>
+                    <td>1021</td>
+                    <td>张扬</td>
+                    <td>99</td>
+                    <td>624</td>
+                    <td>924</td>
+                </tr>
+                <tr>
+                    <td>1011</td>
+                    <td>吴敏</td>
+                    <td>123</td>
+                    <td>6</td>
+                    <td>424</td>
+                </tr>
+                <tr>
+                    <td>1026</td>
+                    <td>李小明</td>
+                    <td>4</td>
+                    <td>610</td>
+                    <td>824</td>
+                </tr>
+                <tr>
+                    <td>1016</td>
+                    <td>周谨</td>
+                    <td>44</td>
+                    <td>690</td>
+                    <td>524</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </section>
+</div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("service/rem.js")
+    @WebHelper4H5.RegisterScripts("service/jquery.tablesort.js")
+    @WebHelper4H5.RegisterScripts("service/show.js")
+}

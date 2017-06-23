@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "促销商城";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("home/home.css")
+    <script type="text/javascript">
+ 
+    </script>   
+}
+ 
+<section class="areaSection">
+    <header class="areaHeader">
+        <input type="text" id="search_input" placeholder="请输入城市名">
+   </header>
+    <div id="location">当前位置：<span class="location_city"></span><span class="location_type">GPS定位</span></div>
+</section>
+<div id="wrapper">
+    <div id="scroller">
+       
+    </div>
+</div>
+<!-- beforesend start-->
+<div class="loading3"></div>
+<!-- beforesend end-->
+   
+   
+
+
+    @section Scripts
+{      
+        <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script> 
+
+        
+        <script type="text/javascript">
+          
+        </script>
+
+
+
+        @*<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll4.2.0.js"></script>*@
+        <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/jquery.bigautocomplete.js"></script>
+        <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll.js"> </script>
+        <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/city_select.js?v=1.0"></script> 
+    }

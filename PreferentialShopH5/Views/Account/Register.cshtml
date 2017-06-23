@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Malls·五洲精选";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("account.css")
+    <style type="text/css">
+        .shawdowCell {
+            background-color: black;
+            opacity: 0.2;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: none;
+        }
+
+        .userList {
+            display: none;
+            border-radius: 0.2rem;
+            background-color: #fff;
+            z-index: 1000;
+            text-align: center;
+            font-size: 0.55rem;
+            position: fixed;
+            top: 40%;
+            top: 35%;
+            left: 10%;
+            width: 80%;
+            height: auto;
+        }
+
+        .userTitle {
+            text-align: center;
+            font-size: 0.65rem;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            line-height: 1rem;
+            height: 1rem;
+            color: white;
+            background: #dc6263;
+        }
+
+        .userItem {
+            margin-top: 10px;
+            font-size: 0.6rem;
+            color: #333;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+            .userItem:last-child {
+                margin-bottom: 15px;
+            }
+    </style>
+}
+
+
+<div class="accountRegisterArea">
+    @if (Request["isLogin"] == "1")
+    {
+        <h2 class="ac pb6"><img src="~/Content/images/login_title_new01.png" style="height:28px" /></h2>
+    }
+    else
+    {
+        <h2 class="ac pb6"><img src="~/Content/images/bindAccount.png" style="height:32px" /></h2>
+    }
+
+    <div style="height:8.3rem" class="fullbg_register">
+        <div class="pl30 pr30 pt6">
+            <div class="parbox comlineAreaRegister">
+                <label class="comlabel"><i class="person_Code"></i></label>
+                <input placeholder="请输入手机号" class="flex1 comAccinput" type="text" id="userName" data-bind="value:phone" maxlength="11" />
+            </div>
+            @*<div class="parbox comlinearearegister">
+                    <label class="comlabel"><i class="home_accticon"></i></label>
+                    <input placeholder="请输入用户昵称(首位不能为数字)" class="flex1 comaccinput" type="text" id="username" data-bind="value: nickname" />
+                </div>
+                <div class="parbox comlinearearegister">
+                    <label class="comlabel"><i class="home_acctpass"></i></label>
+                    <input placeholder="请输入6-12位密码" class="flex1 comaccinput" type="password" id="password" data-bind="value: password" />
+                </div>*@
+            <div class="parbox comlineAreaRegister pt6">
+                <div class="codeBody  parbox box">
+                    <label class="comlabel"><i class="person_Code"></i></label>
+                    <input placeholder="请输入验证码" class="flex1 comAccinput" type="text" id="passWord" data-bind="value: captcha" />
+                </div>
+                <span class="disblock getCode ac " data-bind="click:getCaptcha">获取验证码</span>
+            </div>
+            @if (Request["isUpdateBind"] == null)
+            {
+                <div class="fs12 feature mt8 mb8 clearfix">
+                    <span class="fl"><i class="showbox mr2"></i></span><span class="fr">
+                        @if (Request["isLogin"] == "1")
+                        {
+                            <a href="/account/login?ReturnUrl=@Request["ReturnUrl"]">使用密码登录</a>
+                        }
+                        else
+                        {
+                            <a href="/account/login?ReturnUrl=/userAbout">已有登录账号</a>
+                        }
+
+                    </span>
+                </div>
+            }
+            @*<div class="fs12 feature mt8 mb8 clearfix"><span class="fl" data-bind="click:pwdtypchange"><i class="showbox mr2"></i>显示密码</span><span class="fr"><a href="/account/login">已有登录账号</a></span></div>*@
+
+            @if (Request["isLogin"] == "1")
+            {
+                <span class="subText ac fs14" style="margin-top:20px;" data-bind="click:rejister">登录</span>
+            }
+            else
+            {
+                <span class="subText ac fs14" style="margin-top:20px;" data-bind="click:rejister">确认</span>
+            }
+        </div>
+    </div>
+</div>
+<div class="accountbg">
+</div>
+
+<div class="shawdowCell"></div>
+<div class="userList">
+    <div class="userTitle">请选择您的用户昵称</div>
+    <div data-bind="foreach:userlist">
+        <div class="userItem" onclick="selectedUser(this)" data-bind="attr:{'userId':userId},text:userName"></div>
+    </div>
+
+
+</div>
+
+<input type="hidden" id="shareid" value='@(Request.QueryString["shareid"]??"")' />
+@section Footer
+{
+    @WebHelper4H5.RegisterScripts("Account/Register.js")
+}
+@section Scripts
+{
+
+}

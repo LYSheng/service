@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "白条申请";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/baitiao.css")
+    @WebHelper4H5.RegisterScripts("exif.js")
+}
+
+<div>
+    <p class="warning red" id="bohui"></p>
+    <p class="warning">注:基本信息的有效性决定您是否激活白条，以及最终可获得的额度。</p>
+    <div class="contents">
+        <div class="contents-input">
+            <i class="bstar"></i>
+            <span>姓名</span>
+            <input type="text" placeholder="本人真实姓名" id="identityCardUserName" />
+        </div>
+        <div class="contents-input">
+            <i class="bstar"></i>
+            <span>身份证</span>
+            <input type="text" placeholder="仅支持中国大陆身份证号码" id="identityCardCode" />
+        </div>
+        <ul class="contents-upload clearfix">
+            <li>
+                <a href="javascript:void(0)" class="upload-remove"></a>
+                <input type="file" id="uploadFile1" class="uploadImg" accept="image/*">
+                <span></span>
+                <p>身份证正面</p>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="upload-remove"></a>
+                <input type="file" id="uploadFile2" class="uploadImg" accept="image/*">
+                <span></span>
+                <p>身份证反面</p>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="upload-remove"></a>
+                <input type="file" id="uploadFile3" class="uploadImg" accept="image/*">
+                <span></span>
+                <p>手持身份证半身照</p>
+            </li>
+        </ul>
+        <div class="contents-input">
+            <i class="bstar"></i>
+            <span>储蓄卡</span>
+            <input type="tel" placeholder="请输入银行卡号" id="bankCardNum" />
+        </div>
+        <div class="contents-input">
+            <i class="bstar"></i>
+            <span>手机号</span>
+            <input type="tel" placeholder="银行预留的手机号" id="iouMobilePhone" maxlength="11"/>
+        </div>
+        <div class="contents-input">
+            <i class="bstar"></i>
+            <span>服务密码</span>
+            <input type="text" placeholder="提供手机服务密码，方便查询" id="iouMobilePhonePwd" maxlength="6"/>
+        </div>
+    </div>
+    <div class="save">
+        <a href="javascript:void(0)" class="saveBtn fs14 ac" id="saveBtn">提交申请</a>
+    </div>
+    <div class="height60"></div>
+</div> 
+
+<div class="picLoading fs16" id="picLoading">
+    证照上传中...
+</div>
+
+@section Footer
+{
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/nobaitiao.js")
+
+}
+

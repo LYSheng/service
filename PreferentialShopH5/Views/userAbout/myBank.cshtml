@@ -1,0 +1,280 @@
+﻿@{
+    ViewBag.Title = "Malls·钱包";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    
+    @WebHelper4H5.RegisterStyles("userAbout/myBank.css")
+    
+
+}
+@{
+    if (ViewBag.Info["isInvestment"] || ViewBag.Info["isStore"])
+    {
+        
+        
+    <div class="list myStore">
+        <div class="parbox list-box skips" data-src="/userAbout/dividendRecords" data-isstore="@ViewBag.Info["isStore"]" data-isinvestment="@ViewBag.Info["isInvestment"]" data-isshowsummary="@ViewBag.Info["isShowSummary"]" data-isshowlist="@ViewBag.Info["isShowList"]" id="isinvestment" data-isfinance="@ViewBag.Info["isFinance"]">
+            <p class="flex1">经营回馈</p>
+            <i class="jiantou pa fs12">查看收支明细</i>
+        </div>
+            @if (!ViewBag.Info["isStore"])
+            {
+                <div class="back-hui mt4 pt2 pb2" >
+                    <div class="list-detail clearfix blue">
+                        <div class="parbox fl skips" data-src="/userAbout/labourServiceWage?actionType=0">
+                            <div class="flex1">
+                                <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["memberCanDividends"].ToString("0.00")</span><span class="warring"></span></p>
+                                <p>待结算</p>
+                            </div>
+                            <i class="jiantou"></i>
+                        </div>
+                        <div class="parbox fl skips" data-src="/userAbout/labourServiceWage?actionType=1">
+                            <div class="flex1">
+                                <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["dividends"].ToString("0.00")</span></p>
+                                <p>累计回馈</p>
+                            </div>
+                            <i class="jiantou"></i>
+                        </div>
+                    </div>
+                    <div class="parbox list-desc hui">
+                        <p class="flex1">账户余额：<span class="rmb">￥</span><span class="price">@ViewBag.Info["balanceDividends"].ToString("0.00")</span>(金币)</p>
+                        <span class="ac btn skips " data-src="/userAbout/withDrawalsDividends">申请提现</span>
+                    </div>
+                    <div class="list-detail clearfix blue">
+                        <div class="parbox fl returnClick">
+                            <div class="flex1">
+                                <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["freezingWithdrewDividends"].ToString("0.00")</span></p>
+                                <p>提现申请中</p>
+                            </div>
+                        </div>
+                        <div class="parbox fl skips" data-src="/userAbout/withDrawalsList?AccountType=100">
+                            <div class="flex1">
+                                <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["withdrewDividends"].ToString("0.00")</span></p>
+                                <p>累计提现</p>
+                            </div>
+                            <i class="jiantou"></i>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+
+
+
+                if (@ViewBag.Info["isFinance"])
+                {
+                    <div class="back-hui clearfix mt4">
+                        <div class="list-detail clearfix isinvestment blue">
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["canDividends"].ToString("0.00")</span><span class="warring" data-type="1"></span></p>
+                                    <p>本月待结算</p>
+                                </div>
+                            </div>
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["lastCanDividends"].ToString("0.00")</span></p>
+                                    <p>上月待结算</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-detail clearfix isinvestment hui">
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["rechargeMonth"].ToString("0.00")</span></p>
+                                    <p>本月充值额</p>
+                                </div>
+                            </div>
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["rechargeTotalAmount"].ToString("0.00")</span></p>
+                                    <p>累计充值额</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-detail clearfix isinvestment blue">
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["rechargeMonthCount"]</span></p>
+                                    <p>本月新增会员</p>
+                                </div>
+                            </div>
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["rechargeTotalAmountCount"]</span></p>
+                                    <p>累计会员数</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-detail clearfix isinvestment hui">
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["salesAmount"].ToString("0.00")</span></p>
+                                    <p>本月销售额</p>
+                                </div>
+                            </div>
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["accumulatedSalesAmount"].ToString("0.00")</span></p>
+                                    <p>累计销售额</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <p class="list-detail-btn fs14 isinvestment">查看经营回馈详情</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="back-hui clearfix mt4">
+                        <div class="list-detail clearfix isinvestment blue">
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["canDividends"].ToString("0.00")</span><span class="warring"></span></p>
+                                    <p>本月待结算</p>
+                                </div>
+                            </div>
+                            <div class="parbox fl ">
+                                <div class="flex1">
+                                    <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["lastCanDividends"].ToString("0.00")</span></p>
+                                    <p>上月待结算</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="list-detail-btn fs14 isinvestment">查看经营回馈详情</p>
+                    </div>
+                }
+                <div class="back-hui mt8">
+                    <div class="parbox list-desc hui">
+                        <p class="flex1">账户余额：<span class="rmb">￥</span><span class="price">@ViewBag.Info["balanceDividends"].ToString("0.00")</span>(金币)</p>
+                        <span class="ac btn toWithDrawalsDividends" data-src="/userAbout/withDrawalsDividends">申请提现</span>
+                    </div>
+                    <div class="list-detail clearfix blue">
+                        <div class="parbox fl returnClick">
+                            <div class="flex1">
+                                <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["freezingWithdrewDividends"].ToString("0.00")</span></p>
+                                <p>提现申请中</p>
+                            </div>
+                        </div>
+                        <div class="parbox fl skips" data-src="/userAbout/withDrawalsList?AccountType=100">
+                            <div class="flex1">
+                                <p><span class="rmb">￥</span><span class="price">@ViewBag.Info["withdrewDividends"].ToString("0.00")</span></p>
+                                <p>累计提现</p>
+                            </div>
+                            <i class="jiantou"></i>
+                        </div>
+                    </div>
+                </div>
+            }
+        
+    </div>
+    <div class="list myCard white-bg">
+            <a href="/userAbout/myMemCardDetail">
+                <div class="parbox list-box">
+                    <p class="flex1">会员卡</p>
+                    <i class="jiantou pa fs12">查看收支明细</i>
+                </div>
+            </a>
+    </div>
+    <div class="list myCard white-bg">
+        <div class="parbox list-desc bsw">
+            <p class="flex1">账户余额：<span class="rmb">￥</span><span class="price">@ViewBag.Info["balanceAmount"].ToString("0.00")</span></p>
+            <span class="ac btn " id="toCaharge">去充值</span>
+        </div>
+    </div>
+    }
+}
+
+<div class="list myBalanceCurrency white-bg">
+    <a href="/userAbout/moneyDetails">
+        <div class="parbox list-box">
+            <p class="flex1">猫市币</p>
+            <i class="jiantou pa fs12">查看收支明细</i>
+        </div>
+    </a>
+</div>
+<div class="list myBalanceCurrency white-bg">
+    <a href="/userAbout/moneyDetails">
+        <div class="parbox list-desc bsw">
+            <p class="flex1">账户余额：<span class="rmb">￥</span><span class="price">@ViewBag.Info["balanceCurrency"].ToString("0.00")</span></p>
+        </div>
+    </a>
+</div>
+<div id="hfooter"></div>
+<div class="_alert" id="_alert">
+    <div class="in">
+        <div class="alert_title">
+            <p class="fs14" id="content">
+                1）待结算金额仅供参考，不代表最终结算金额；<br>
+                2）每月15日为上月待结算款清算日，完成后可提现
+            </p>
+        </div>
+    </div>
+</div>
+@* @ViewBag.Info["canWithdrawDepositMoney"].ToString("0.00") 可提现金额 *@
+<script>
+    $(function () {
+        var sesStorage = window.sessionStorage;
+        $(".warring").on("click", function () {
+            if ($(this).data("type") == 1) {
+                $("#content").html("店主经营回馈=当月门店充值总额*10%").addClass("ll");
+            } else {
+                $("#content").html("1）待结算金额仅供参考，不代表最终结算金额；<br>2）每月15日为上月待结算款清算日，完成后可提现").removeClass("ll");
+            }
+            $("#_alert").addClass("show");
+            return false;
+        });
+        $("#_alert").on("click", function () {
+            $("#_alert").removeClass("show");
+            return false;
+        });
+        $("#returnClick").on("click", function () {
+            return false;
+        });
+        $(".isinvestment").on("click", function () {
+            var _this = $("#isinvestment");
+            var _isstore = _this.data("isstore"), _isShowSummary = _this.data("isshowsummary"), _isShowList = _this.data("isshowlist"), _isInvestment = _this.data("isinvestment"), _isFinance = _this.data("isfinance");
+            if (_isstore == "True") {
+                window.location.href = "/userAbout/businessFeedBack?isShowSummary=" + _isShowSummary + "&isShowList=" + _isShowList + "&isInvestment=" + _isInvestment + "&isFinance=" + _isFinance;
+            }
+        })
+        $(".toWithDrawalsDividends").on("click", function () {
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cashWithdrawals) {
+                window.webkit.messageHandlers.cashWithdrawals.postMessage("申请提现");
+                return;
+            }
+            window.location.href = "/userAbout/withDrawalsDividends";
+        })
+        var serviceStoreUserId = getCookie("serviceStoreUserId") ? getCookie("serviceStoreUserId") : "";
+        $("#toCaharge").on("click", function () {
+
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.gorRcharge) {
+                window.webkit.messageHandlers.gorRcharge.postMessage("充值");
+                return;
+            }
+            apiRequest({
+                method: 'MyWallet/GetMySelServiceStore',
+                data: { "IsInvestment": true, "serviceStoreUserId": serviceStoreUserId },
+                async: false,
+                success: function (obj) {
+                    console.log(obj.data.serviceStoreUserId)
+                    sesStorage.setItem("chargeFlag", "3");
+                    if (obj.data.serviceStoreUserId > 0) {
+                        window.location.href = "/userAbout/payCard?storeUserId=" + obj.data.serviceStoreUserId;
+                    } else {
+                        window.location.href = "/userAbout/chooseShop";
+                    }
+                    return false;
+                },
+                error: function (data) {
+                    smGlobal.error("获取门店信息失败");
+                }
+            });
+        })
+        
+    })
+</script>

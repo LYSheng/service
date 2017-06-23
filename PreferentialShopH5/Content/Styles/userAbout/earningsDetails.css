@@ -1,0 +1,25 @@
+﻿.stayout_filtrate{padding-left:0;}  
+.stayout_filtrate .text{margin-left:20px;}
+.stayout_filtrate .input{margin-left:20px;}
+.stayout_filtrate .bign_time{margin-right: 13px;}  
+.stayout_filtrate .end_time{margin-left: 13px;}  
+.stayout_filtrate .btn{padding:0;}
+.stayout_filtrate .btn a{display:block;width:50%;float:left;}
+.stayout_filtrate .btn .btnReset{color: #b4282d;background: #ffe8e9;}
+.stayout_filtrate .btn .btnSuccess{color: #fff;background: #b4282d;}
+.earling-all{text-align: center;background:#fff;padding:15px 0;}
+.earling-all span{color:#333;font-size:15px;}
+.earling-all p{color:#b4282d;font-size: 24px;font-weight: bold;}
+.earling-detail{}
+.earling-list{margin:10px;background:#fff;font-size:14px;border-radius:5px;overflow: hidden;}
+.earling-list h2{line-height:55px;color:#fff;font-size:14px;padding:0 10px;font-weight: normal;}
+.earling-list h2.type1{background:#ff7f7f;}
+.earling-list h2.type2{background:#1dc0a5;}
+.earling-list h2.type3{background:#ffcd24;}
+.earling-list h2.type4{background:#94b378;}
+.earling-list h2.type5{background:#f3842a;}
+.earling-list p{margin:0 10px;border-bottom:1px dotted #dfdfdf;line-height:40px;}
+.earling-list p:last-child{border-bottom:none;}
+.loadingFixed {left: 40%;top: 42%;width: 5.6rem;height: 5.6rem;background-size: 5.6rem;}
+.nodata_shop {margin: 10rem auto 2.6rem;font-size:1.2rem;}
+.wdgwc {background-image: url(../../images/no_earning.png);}

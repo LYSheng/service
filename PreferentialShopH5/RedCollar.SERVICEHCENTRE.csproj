@@ -1,0 +1,1046 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E6D84381-0FF2-429E-B0B8-6538E0A7D9C0}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>H5</RootNamespace>
+    <AssemblyName>H5</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <IncludeIisSettings>false</IncludeIisSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FileCoreSDK">
+      <HintPath>..\..\Ecommerce\TL.Refrences\FileCoreSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="FrontSDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Ecommerce\TL.Refrences\bin\FrontSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Ecommerce\TL.Refrences\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\Ecommerce\TL.Refrences\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PlatSDK">
+      <HintPath>..\..\Ecommerce\TL.Refrences\PlatSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\Ecommerce\TL.Refrences\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TL.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Ecommerce\TL.Refrences\FAPI\TL.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.Cache">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.Cache.Memcached">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.Cache.Memcached.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.Common">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.CommonService">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.CommonService.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.Json">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.Logging">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.Logging.NLog">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.Logging.NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.ServiceLocator">
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.ServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Tonglu.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Ecommerce\TL.Refrences\Tonglu.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\..\Ecommerce\TL.Refrences\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Log\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Log\LogAreaRegistration.cs" />
+    <Compile Include="Controllers\Alipay\AlipayController.cs" />
+    <Compile Include="Controllers\Alipay\AlipayNotifyController.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\ArbitraryGrabController.cs" />
+    <Compile Include="Controllers\MidAutumnFestivalActivityController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ShareController.cs" />
+    <Compile Include="Controllers\Site\HomeController.cs" />
+    <Compile Include="Controllers\RouteController.cs" />
+    <Compile Include="Controllers\Site\AccountController.cs" />
+    <Compile Include="Controllers\AuthorizeController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Site\WalletController.cs" />
+    <Compile Include="Controllers\UserAboutController.cs" />
+    <Compile Include="Controllers\VerificationCodeController.cs" />
+    <Compile Include="Controllers\WeChatResultController.cs" />
+    <Compile Include="Controllers\WX\OldMallsController.cs" />
+    <Compile Include="Controllers\WX\wtsController.cs" />
+    <Compile Include="Controllers\WX\WXPayInitController.cs" />
+    <Compile Include="Core\ThemeEngine.cs" />
+    <Compile Include="Filters\ActionUrlAttribute.cs" />
+    <Compile Include="Filters\AuthorizationAttribute.cs" />
+    <Compile Include="Filters\ErrorAttribute.cs" />
+    <Compile Include="Filters\LoginAuthorize.cs" />
+    <Compile Include="Filters\ReferrerFilterAttribute .cs" />
+    <Compile Include="Filters\UnityHttpControllerActivator.cs" />
+    <Compile Include="Filters\ValidateAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\MobileLoginModule.cs" />
+    <Compile Include="Handler\NewUploadhandler.ashx.cs">
+      <DependentUpon>NewUploadhandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site\CookieOperate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppDownload\css\common.css" />
+    <Content Include="AppDownload\css\landing.css" />
+    <Content Include="AppDownload\css\reset.css" />
+    <Content Include="AppDownload\image\qrcode_for_gh_dabfd8b95f4a_430.jpg" />
+    <Content Include="AppDownload\img\144.png" />
+    <Content Include="AppDownload\img\android.png" />
+    <Content Include="AppDownload\img\html5.png" />
+    <Content Include="AppDownload\img\iphone.png" />
+    <Content Include="AppDownload\landing.html" />
+    <Content Include="Content\ActSharkItOff\css\main.css" />
+    <Content Include="Content\ActSharkItOff\js\jquery.min.js" />
+    <Content Include="Content\ActSharkItOff\js\main.js" />
+    <Content Include="Content\ActSharkItOff\js\shake.js" />
+    <Content Include="Content\ActSharkItOff\js\slide.js" />
+    <Content Include="Content\ActSharkItOff\src\bc.jpg" />
+    <Content Include="Content\ActSharkItOff\src\bg.png" />
+    <Content Include="Content\ActSharkItOff\src\close.png" />
+    <Content Include="Content\ActSharkItOff\src\dis.png" />
+    <Content Include="Content\ActSharkItOff\src\hb.png" />
+    <Content Include="Content\ActSharkItOff\src\honbao1.png" />
+    <Content Include="Content\ActSharkItOff\src\hongbao.png" />
+    <Content Include="Content\ActSharkItOff\src\little.png" />
+    <Content Include="Content\ActSharkItOff\src\none.png" />
+    <Content Include="Content\ActSharkItOff\src\peo.png" />
+    <Content Include="Content\ActSharkItOff\src\pri.jpg" />
+    <Content Include="Content\ActSharkItOff\src\product.jpg" />
+    <Content Include="Content\ActSharkItOff\src\product.png" />
+    <Content Include="Content\ActSharkItOff\src\shack.png" />
+    <Content Include="Content\ActSharkItOff\src\share.png" />
+    <Content Include="Content\ActSharkItOff\src\top.png" />
+    <Content Include="Content\ActSharkItOff\src\xi.png" />
+    <Content Include="Content\ActSharkItOff\src\yao.mp3" />
+    <Content Include="Content\ActSharkItOff\src\youhuiquan.png" />
+    <Content Include="Content\ActSharkItOff\src\youhuiquan1.png" />
+    <Content Include="Content\ActSharkItOff\src\红包.png" />
+    <Content Include="Content\Images\200.png" />
+    <Content Include="Content\Images\201.png" />
+    <Content Include="Content\Images\404.png" />
+    <Content Include="Content\Images\ablum01.jpg" />
+    <Content Include="Content\Images\ablum02.jpg" />
+    <Content Include="Content\Images\ablumAllies.png" />
+    <Content Include="Content\Images\ablumAllies01.png" />
+    <Content Include="Content\Images\ablumAllies02.png" />
+    <Content Include="Content\Images\ablumAllies03.png" />
+    <Content Include="Content\Images\accountbg.jpg" />
+    <Content Include="Content\Images\actTimeCount.png" />
+    <Content Include="Content\Images\add.png" />
+    <Content Include="Content\Images\agentMine.png" />
+    <Content Include="Content\Images\agent_icon.png" />
+    <Content Include="Content\Images\alipay.png" />
+    <Content Include="Content\Images\allmirro.png" />
+    <Content Include="Content\Images\announce_icon.png" />
+    <Content Include="Content\Images\arowdownred.png" />
+    <Content Include="Content\Images\arowright.png" />
+    <Content Include="Content\Images\arowrightred.png" />
+    <Content Include="Content\Images\arrows.png" />
+    <Content Include="Content\Images\arrow_icon.png" />
+    <Content Include="Content\Images\artisan1.jpg" />
+    <Content Include="Content\Images\artisan2.jpg" />
+    <Content Include="Content\Images\artisan3.jpg" />
+    <Content Include="Content\Images\artisan3.png" />
+    <Content Include="Content\Images\artisan4.png" />
+    <Content Include="Content\Images\artisan5.png" />
+    <Content Include="Content\Images\artShow.png" />
+    <Content Include="Content\Images\artShow1.jpg" />
+    <Content Include="Content\Images\artShow2.jpg" />
+    <Content Include="Content\Images\artShow3.jpg" />
+    <Content Include="Content\Images\backarrow.png" />
+    <Content Include="Content\Images\bargain_icon.png" />
+    <Content Include="Content\Images\bargain_success.png" />
+    <Content Include="Content\Images\bargain_test.jpg" />
+    <Content Include="Content\Images\bargain_test01.jpg" />
+    <Content Include="Content\Images\beijing.png" />
+    <Content Include="Content\Images\bindAccount.png" />
+    <Content Include="Content\Images\blackBorderSelected.png" />
+    <Content Include="Content\Images\bookingRule.png" />
+    <Content Include="Content\Images\button.png" />
+    <Content Include="Content\Images\button1.png" />
+    <Content Include="Content\Images\canyu.png" />
+    <Content Include="Content\Images\cart_close.png" />
+    <Content Include="Content\Images\cart_icon.png" />
+    <Content Include="Content\Images\chair_icon.png" />
+    <Content Include="Content\Images\choice_icon.png" />
+    <Content Include="Content\Images\closeCopon.png" />
+    <Content Include="Content\Images\codeEwm.png" />
+    <Content Include="Content\Images\comment-star.png" />
+    <Content Include="Content\Images\coupClaim.png" />
+    <Content Include="Content\Images\coupon.png" />
+    <Content Include="Content\Images\coupon01.jpg" />
+    <Content Include="Content\Images\coupon02.png" />
+    <Content Include="Content\Images\coupon03.png" />
+    <Content Include="Content\Images\couponAction01.png" />
+    <Content Include="Content\Images\couponAction02.png" />
+    <Content Include="Content\Images\couponTimeOver.png" />
+    <Content Include="Content\Images\couponUsed.png" />
+    <Content Include="Content\Images\coupOver.png" />
+    <Content Include="Content\Images\coupshareIcon.png" />
+    <Content Include="Content\Images\coupUsed.png" />
+    <Content Include="Content\Images\crafDetail_left.png" />
+    <Content Include="Content\Images\crafDetail_right.png" />
+    <Content Include="Content\Images\cschecked.png" />
+    <Content Include="Content\Images\cschecking.png" />
+    <Content Include="Content\Images\custpaySel.png" />
+    <Content Include="Content\Images\darenBuilding.png" />
+    <Content Include="Content\Images\ddts.jpg" />
+    <Content Include="Content\Images\defaultAvatar.png" />
+    <Content Include="Content\Images\defaultHeadIcon.png" />
+    <Content Include="Content\Images\del.png" />
+    <Content Include="Content\Images\delete.png" />
+    <Content Include="Content\Images\delete_icon.png" />
+    <Content Include="Content\Images\detailicon.png" />
+    <Content Include="Content\Images\djs.png" />
+    <Content Include="Content\Images\errorimg.png" />
+    <Content Include="Content\Images\evaluat_icon.png" />
+    <Content Include="Content\Images\example.jpg" />
+    <Content Include="Content\Images\exclusive.png" />
+    <Content Include="Content\Images\failed-icon.png" />
+    <Content Include="Content\Images\failed.png" />
+    <Content Include="Content\Images\food01.jpg" />
+    <Content Include="Content\Images\fullbg.png" />
+    <Content Include="Content\Images\fullbg_register.png" />
+    <Content Include="Content\Images\gift01.png" />
+    <Content Include="Content\Images\gift02.png" />
+    <Content Include="Content\Images\gift03.png" />
+    <Content Include="Content\Images\goMyCoupon.png" />
+    <Content Include="Content\Images\goodCartIcon.png" />
+    <Content Include="Content\Images\goods.png" />
+    <Content Include="Content\Images\goodsDemo.jpg" />
+    <Content Include="Content\Images\goShare.png" />
+    <Content Include="Content\Images\gou.png" />
+    <Content Include="Content\Images\home1.jpg" />
+    <Content Include="Content\Images\home2.jpg" />
+    <Content Include="Content\Images\home3.jpg" />
+    <Content Include="Content\Images\home3.png" />
+    <Content Include="Content\Images\home4.jpg" />
+    <Content Include="Content\Images\home5.jpg" />
+    <Content Include="Content\Images\home5.png" />
+    <Content Include="Content\Images\home51.png" />
+    <Content Include="Content\Images\home6.png" />
+    <Content Include="Content\Images\home7.png" />
+    <Content Include="Content\Images\home8.png" />
+    <Content Include="Content\Images\homeloadingGif.gif" />
+    <Content Include="Content\Images\home_split.png" />
+    <Content Include="Content\Images\garbigeIcon.png" />
+    <Content Include="Content\Images\home_split1.png" />
+    <Content Include="Content\Images\home_split_bak.png" />
+    <Content Include="Content\Images\home_split_payment.png" />
+    <Content Include="Content\Images\hongbao.png" />
+    <Content Include="Content\Images\hotproduct.png" />
+    <Content Include="Content\Images\iconClear.png" />
+    <Content Include="Content\Images\icon_coupon.png" />
+    <Content Include="Content\Images\icon_doubtful.png" />
+    <Content Include="Content\Images\icon_message.png" />
+    <Content Include="Content\Images\icon_nav1.png" />
+    <Content Include="Content\Images\icon_nav2.png" />
+    <Content Include="Content\Images\icon_nav3.png" />
+    <Content Include="Content\Images\icon_nav4.png" />
+    <Content Include="Content\Images\icon_nav5.png" />
+    <Content Include="Content\Images\icon_overseas.png" />
+    <Content Include="Content\Images\icon_right2.png" />
+    <Content Include="Content\Images\icon_scan.png" />
+    <Content Include="Content\Images\lotteryArrowDown.png" />
+    <Content Include="Content\Images\lotteryLine.png" />
+    <Content Include="Content\Images\mallddts.png" />
+    <Content Include="Content\Images\moreIcon.png" />
+    <Content Include="Content\Images\moreSeckill.png" />
+    <Content Include="Content\Images\myCoupon01.png" />
+    <Content Include="Content\Images\myCoupon02.png" />
+    <Content Include="Content\Images\NewImages\jf.png" />
+    <Content Include="Content\Images\jrjp.jpg" />
+    <Content Include="Content\Images\jrx.png" />
+    <Content Include="Content\Images\lisencesAuthSucess.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\loadingAnimation.gif" />
+    <Content Include="Content\Images\lockIcon.png" />
+    <Content Include="Content\Images\malldjfs.png" />
+    <Content Include="Content\Images\maoshi.png" />
+    <Content Include="Content\Images\moduleDjfs.png" />
+    <Content Include="Content\Images\moduleHyth.png" />
+    <Content Include="Content\Images\moduleZero.png" />
+    <Content Include="Content\Images\myCoupon.png" />
+    <Content Include="Content\Images\NewImages\test1.png" />
+    <Content Include="Content\Images\NewImages\test2.png" />
+    <Content Include="Content\Images\NewImages\tt1.png" />
+    <Content Include="Content\Images\NewImages\tt2.png" />
+    <Content Include="Content\Images\NewImages\vip.jpg" />
+    <Content Include="Content\Images\newproduct.png" />
+    <Content Include="Content\Images\no-more-icon.png" />
+    <Content Include="Content\Images\pericon.png" />
+    <Content Include="Content\Images\perphone.png" />
+    <Content Include="Content\Images\photoClip.png" />
+    <Content Include="Content\Images\preloader.gif" />
+    <Content Include="Content\Images\progress_icon.png" />
+    <Content Include="Content\Images\progress_tip.png" />
+    <Content Include="Content\Images\qixi01.jpg" />
+    <Content Include="Content\Images\qixi02.jpg" />
+    <Content Include="Content\Images\qixi03.jpg" />
+    <Content Include="Content\Images\qixi04.jpg" />
+    <Content Include="Content\Images\qixi05.jpg" />
+    <Content Include="Content\Images\qixi06.jpg" />
+    <Content Include="Content\Images\qixi08.jpg" />
+    <Content Include="Content\Images\remainingDay.png" />
+    <Content Include="Content\Images\righticon.png" />
+    <Content Include="Content\Images\rule1.png" />
+    <Content Include="Content\Images\selected.png" />
+    <Content Include="Content\Images\selectedborder.png" />
+    <Content Include="Content\Images\selRadioOff.png" />
+    <Content Include="Content\Images\selRadioOn.png" />
+    <Content Include="Content\Images\serviceImage\asd.png" />
+    <Content Include="Content\Images\serviceImage\bj.png" />
+    <Content Include="Content\Images\serviceImage\home_mima.png" />
+    <Content Include="Content\Images\serviceImage\home_name.png" />
+    <Content Include="Content\Images\serviceImage\iphone.png" />
+    <Content Include="Content\Images\serviceImage\Malls.png" />
+    <Content Include="Content\Images\serviceImage\my.png" />
+    <Content Include="Content\Images\serviceImage\name.jpg" />
+    <Content Include="Content\Images\serviceImage\xian.png" />
+    <Content Include="Content\Images\serviceImage\充值总计.png" />
+    <Content Include="Content\Images\serviceImage\区域店铺.png" />
+    <Content Include="Content\Images\serviceImage\商品销售.png" />
+    <Content Include="Content\Images\serviceImage\密码.png" />
+    <Content Include="Content\Images\serviceImage\店铺.png" />
+    <Content Include="Content\Images\serviceImage\店铺充值.png" />
+    <Content Include="Content\Images\serviceImage\店铺销售.png" />
+    <Content Include="Content\Images\serviceImage\排行榜.png" />
+    <Content Include="Content\Images\serviceImage\放大镜.png" />
+    <Content Include="Content\Images\serviceImage\服务号-logo.png" />
+    <Content Include="Content\Images\serviceImage\笔.png" />
+    <Content Include="Content\Images\serviceImage\箭头灰色.png" />
+    <Content Include="Content\Images\serviceImage\箭头蓝色.png" />
+    <Content Include="Content\Images\serviceImage\经营回馈.png" />
+    <Content Include="Content\Images\serviceImage\银行卡.png" />
+    <Content Include="Content\Images\serviceImage\销售总计.png" />
+    <Content Include="Content\Images\setpsd.png" />
+    <Content Include="Content\Images\sevenDay.jpg" />
+    <Content Include="Content\Images\sevenDay.png" />
+    <Content Include="Content\Images\sevenDayShow.png" />
+    <Content Include="Content\Images\shareIcon.png" />
+    <Content Include="Content\Images\start_off.png" />
+    <Content Include="Content\Images\start_on.png" />
+    <Content Include="Content\Images\success.png" />
+    <Content Include="Content\Images\supportedAmount.png" />
+    <Content Include="Content\Images\target.png" />
+    <Content Include="Content\Images\tdigCode.jpg" />
+    <Content Include="Content\Images\timer.png" />
+    <Content Include="Content\Images\icon_address.png" />
+    <Content Include="Content\Images\icon_text.png" />
+    <Content Include="Content\Images\hotIcon.png" />
+    <Content Include="Content\Images\indexdefaultImgIco.png" />
+    <Content Include="Content\Images\J_backToPrev.png" />
+    <Content Include="Content\Images\ktx.png" />
+    <Content Include="Content\Images\labaIcon.png" />
+    <Content Include="Content\Images\loading3.gif" />
+    <Content Include="Content\Images\ma1.png" />
+    <Content Include="Content\Images\ma2.png" />
+    <Content Include="Content\Images\ma3.png" />
+    <Content Include="Content\Images\ma4.png" />
+    <Content Include="Content\Images\mallslog.png" />
+    <Content Include="Content\Images\mine_bk.png" />
+    <Content Include="Content\Images\mine_icon.png" />
+    <Content Include="Content\Images\mine_tubiao.png" />
+    <Content Include="Content\Images\minnum.png" />
+    <Content Include="Content\Images\myAvatar.png" />
+    <Content Include="Content\Images\myCoupon.jpg" />
+    <Content Include="Content\Images\next.png" />
+    <Content Include="Content\Images\nickClose.png" />
+    <Content Include="Content\Images\nlogo.png" />
+    <Content Include="Content\Images\nodataimg.png" />
+    <Content Include="Content\Images\noeval.png" />
+    <Content Include="Content\Images\noorder.png" />
+    <Content Include="Content\Images\noshop.png" />
+    <Content Include="Content\Images\order01.png" />
+    <Content Include="Content\Images\personCode.png" />
+    <Content Include="Content\Images\person_split.png" />
+    <Content Include="Content\Images\preloaderBg.png" />
+    <Content Include="Content\Images\proline.jpg" />
+    <Content Include="Content\Images\right.png" />
+    <Content Include="Content\Images\right_jiantou.png" />
+    <Content Include="Content\Images\round.png" />
+    <Content Include="Content\Images\round_tick.png" />
+    <Content Include="Content\Images\shang_jt.png" />
+    <Content Include="Content\Images\shopname.jpg" />
+    <Content Include="Content\Images\slidepic01.jpg" />
+    <Content Include="Content\Images\slidepic02.jpg" />
+    <Content Include="Content\Images\slidepic03.jpg" />
+    <Content Include="Content\Images\slidepic04.jpg" />
+    <Content Include="Content\Images\slidepic05.jpg" />
+    <Content Include="Content\Images\slidepic06.jpg" />
+    <Content Include="Content\Images\slidepic07.jpg" />
+    <Content Include="Content\Images\slidepic08.jpg" />
+    <Content Include="Content\Images\slidepic09.jpg" />
+    <Content Include="Content\Images\slidepic10.jpg" />
+    <Content Include="Content\Images\slidepic11.jpg" />
+    <Content Include="Content\Images\slidepic12.jpg" />
+    <Content Include="Content\Images\slidepic13.jpg" />
+    <Content Include="Content\Images\slidepic14.jpg" />
+    <Content Include="Content\Images\slidepic15.jpg" />
+    <Content Include="Content\Images\star-off.png" />
+    <Content Include="Content\Images\star-on.png" />
+    <Content Include="Content\Images\success-icon.png" />
+    <Content Include="Content\Images\syzslogo.png" />
+    <Content Include="Content\Images\titleIco1.png" />
+    <Content Include="Content\Images\titleIco2.png" />
+    <Content Include="Content\Images\titleIco3.png" />
+    <Content Include="Content\Images\turnonCombineCard.png" />
+    <Content Include="Content\Images\txz.png" />
+    <Content Include="Content\Images\u-iconlist.png" />
+    <Content Include="Content\Images\union.png" />
+    <Content Include="Content\Images\unselected.png" />
+    <Content Include="Content\Images\user_split.png" />
+    <Content Include="Content\Images\validatePsd.png" />
+    <Content Include="Content\Images\vip.png" />
+    <Content Include="Content\Images\wallet_income.png" />
+    <Content Include="Content\Images\wallet_income_more.png" />
+    <Content Include="Content\Images\wallet_more.png" />
+    <Content Include="Content\Images\wallet_recharge.png" />
+    <Content Include="Content\Images\wallet_recharge_more.png" />
+    <Content Include="Content\Images\wallet_uni_income.png" />
+    <Content Include="Content\Images\wallet_uni_integral.png" />
+    <Content Include="Content\Images\wallet_uni_more.png" />
+    <Content Include="Content\Images\wallet_uni_recharge.png" />
+    <Content Include="Content\Images\wareL.png" />
+    <Content Include="Content\Images\wareR.png" />
+    <Content Include="Content\Images\wareRUsed.png" />
+    <Content Include="Content\Images\weChartFriend.png" />
+    <Content Include="Content\Images\wechat.png" />
+    <Content Include="Content\Images\weChatIcon.png" />
+    <Content Include="Content\Images\weChatPay.png" />
+    <Content Include="Content\Images\whiteside.png" />
+    <Content Include="Content\Images\xia_jt.png" />
+    <Content Include="Content\Images\share.png" />
+    <Content Include="Content\Images\yj.png" />
+    <Content Include="Content\Images\yjs.png" />
+    <Content Include="Content\Images\zeroFail.png" />
+    <Content Include="Content\Images\zeroIng.png" />
+    <Content Include="Content\Images\zeroSuc.png" />
+    <Content Include="Content\Images\zeroTitleicon.png" />
+    <Content Include="Content\Images\zrk.png" />
+    <Content Include="Content\Images\OnlyMemberBuy.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\css\main.css" />
+    <Content Include="Content\MidAutumnFestivalActivity\js\cardDetail.js" />
+    <Content Include="Content\MidAutumnFestivalActivity\js\jquery.min.js" />
+    <Content Include="Content\MidAutumnFestivalActivity\js\luckdraw.js" />
+    <Content Include="Content\MidAutumnFestivalActivity\js\main.js" />
+    <Content Include="Content\MidAutumnFestivalActivity\js\rule.js" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\bc.jpg" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\bc2.jpg" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\bg.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\bnt.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\button.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\cake.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\card.jpg" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\chou.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\close.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\full.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\gang.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\goddess.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\ku.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\noon.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\prize.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\rabbit.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\reel.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\rule.jpg" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\rule.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\rule111.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\share.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\yao.mp3" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\zhong.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\吴刚主题卡.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\嫦娥主题卡.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\月饼主题卡.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\满月主题卡.png" />
+    <Content Include="Content\MidAutumnFestivalActivity\src\玉兔主题卡.png" />
+    <Content Include="Content\Scripts\exif.js" />
+    <Content Include="Content\Scripts\LAreaData1.js" />
+    <Content Include="Content\Scripts\NewScripts\jquery.mobile-1.3.2.min.js" />
+    <Content Include="Content\Scripts\NewScripts\main.js" />
+    <Content Include="Content\Scripts\Account\withDrawalsDividends.js" />
+    <Content Include="Content\Scripts\scrollfix.js" />
+    <Content Include="Content\Scripts\service\jquery-latest.min.js" />
+    <Content Include="Content\Scripts\service\jquery.tablesort.js" />
+    <Content Include="Content\Scripts\service\jquery.tablesort.min.js" />
+    <Content Include="Content\Scripts\service\rem.js" />
+    <Content Include="Content\Scripts\service\service_index.js" />
+    <Content Include="Content\Scripts\service\show.js" />
+    <Content Include="Content\Scripts\service\Stores.js" />
+    <Content Include="Content\Scripts\service\Total.js" />
+    <Content Include="Content\Scripts\service\Total_Store_show.js" />
+    <Content Include="Content\Scripts\service\Upload.js" />
+    <Content Include="Content\Scripts\Site\iscroll1.js" />
+    <Content Include="Content\Scripts\userabout\addressList.js" />
+    <Content Include="Content\Scripts\userabout\allieList.js" />
+    <Content Include="Content\Scripts\userabout\baitiao.js" />
+    <Content Include="Content\Scripts\userabout\baitiaoinfo.js" />
+    <Content Include="Content\Scripts\userabout\businessFeedBack.js" />
+    <Content Include="Content\Scripts\userabout\dividendRecords.js" />
+    <Content Include="Content\Scripts\userabout\earningsDetails.js" />
+    <Content Include="Content\Scripts\userabout\forgetPayPwd.js" />
+    <Content Include="Content\Scripts\userabout\idAuth.js" />
+    <Content Include="Content\Scripts\userabout\memberInvestment.js" />
+    <Content Include="Content\Scripts\userabout\myAllies.js" />
+    <Content Include="Content\Scripts\userabout\myMemCard.js" />
+    <Content Include="Content\Scripts\userabout\myMemCardDetail.js" />
+    <Content Include="Content\Scripts\userabout\nobaitiao.js" />
+    <Content Include="Content\Scripts\userabout\payPwd.js" />
+    <Content Include="Content\Scripts\userabout\storeBackDetail.js" />
+    <Content Include="Content\Scripts\userabout\storeMembers.js" />
+    <Content Include="Content\Styles\newStyles\demo-files\demo.css" />
+    <Content Include="Content\Styles\newStyles\demo-files\demo.js" />
+    <Content Include="Content\Styles\newStyles\demo.html" />
+    <Content Include="Content\Styles\newStyles\dyl.css" />
+    <Content Include="Content\Styles\newStyles\fonts\icomoon.svg" />
+    <Content Include="Content\Styles\newStyles\lsm.css" />
+    <Content Include="Content\Styles\newStyles\main.css" />
+    <Content Include="Content\Styles\newStyles\mzui\amazeui.css" />
+    <Content Include="Content\Styles\newStyles\mzui\amazeui.flat.css" />
+    <Content Include="Content\Styles\newStyles\mzui\amazeui.flat.min.css" />
+    <Content Include="Content\Styles\newStyles\mzui\amazeui.min.css" />
+    <Content Include="Content\Styles\newStyles\mzui\app.css" />
+    <Content Include="Content\Styles\newStyles\newmain.css" />
+    <Content Include="Content\Styles\newStyles\style.css" />
+    <Content Include="Content\Scripts\Account\addrInfo.js" />
+    <Content Include="Content\Scripts\Account\crowdFunding.js" />
+    <Content Include="Content\Scripts\Account\zeroList.js" />
+    <Content Include="Content\Scripts\Account\newRegister.js" />
+    <Content Include="Content\Scripts\Account\withCardDetail.js" />
+    <Content Include="Content\Scripts\Account\evaluation.js" />
+    <Content Include="Content\Scripts\Account\myAllies.js" />
+    <Content Include="Content\Scripts\Account\jcropfile.js" />
+    <Content Include="Content\Scripts\Account\historyOrder.js" />
+    <Content Include="Content\Scripts\Account\orderLoading.js" />
+    <Content Include="Content\Scripts\Account\forgetPwd.js" />
+    <Content Include="Content\Scripts\Account\ValidatePsd.js" />
+    <Content Include="Content\Scripts\Account\withDrawals.js" />
+    <Content Include="Content\Scripts\Account\Register.js" />
+    <Content Include="Content\Scripts\Account\pwdUpdate.js" />
+    <Content Include="Content\Scripts\Account\resetPsd.js" />
+    <Content Include="Content\Scripts\base.js" />
+    <Content Include="Content\Scripts\broadCast.js" />
+    <Content Include="Content\Scripts\dropload.js" />
+    <Content Include="Content\Scripts\dropload.min.js" />
+    <Content Include="Content\Scripts\dropload.min.js" />
+    <Content Include="Content\Scripts\global.js" />
+    <Content Include="Content\Scripts\iscroll.js" />
+    <Content Include="Content\Scripts\areaChoose.js" />
+    <Content Include="Content\Scripts\LAreaData.js" />
+    <Content Include="Content\Scripts\scrollLoading.js" />
+    <Content Include="Content\Scripts\shoppingCart.js" />
+    <Content Include="Content\Scripts\Site\secKill.js" />
+    <Content Include="Content\Scripts\Site\secKill2.js" />
+    <Content Include="Content\Scripts\Site\home.js" />
+    <Content Include="Content\Scripts\Site\iscroll.js" />
+    <Content Include="Content\Scripts\Account\login.js" />
+    <Content Include="Content\Scripts\swiper.min.js" />
+    <Content Include="Content\Scripts\upload\jquery.fileupload.js" />
+    <Content Include="Content\Scripts\upload\jquery.ui.widget.js" />
+    <Content Include="Content\Scripts\userabout\couponSelected.js" />
+    <Content Include="Content\Scripts\userabout\withDrawalsList.js" />
+    <Content Include="Content\Scripts\userabout\preLottery.js" />
+    <Content Include="Content\Scripts\userabout\myCoupon.js" />
+    <Content Include="Content\Scripts\userabout\chargemoney.js" />
+    <Content Include="Content\Scripts\userabout\myvip.js" />
+    <Content Include="Content\Scripts\userabout\PaymentDetail.js" />
+    <Content Include="Content\Scripts\userabout\payType.js" />
+    <Content Include="Content\Scripts\userabout\willSet.js" />
+    <Content Include="Content\Scripts\xr.ui.slider.js" />
+    <Content Include="Content\Scripts\xr.ui.slider_不轮播.js" />
+    <Content Include="Content\Styles\base.css" />
+    <Content Include="Content\Styles\dropload.css" />
+    <Content Include="Content\Styles\dropload.css" />
+    <Content Include="Content\Styles\home\home_new.css" />
+    <Content Include="Content\Styles\LArea.min.css" />
+    <Content Include="Content\Styles\newStyles\wxq.css" />
+    <Content Include="Content\Styles\payments.css" />
+    <Content Include="Content\Styles\reset.css" />
+    <Content Include="Content\Styles\account.css" />
+    <Content Include="Content\Styles\service\service_index.css" />
+    <Content Include="Content\Styles\service\show.css" />
+    <Content Include="Content\Styles\service\Stores.css" />
+    <Content Include="Content\Styles\service\Total.css" />
+    <Content Include="Content\Styles\service\Total_Store.css" />
+    <Content Include="Content\Styles\service\Upload.css" />
+    <Content Include="Content\Styles\shoppingCart.css" />
+    <Content Include="Content\Styles\style.css" />
+    <Content Include="Content\Styles\common.css" />
+    <Content Include="Content\Styles\home\home.css" />
+    <Content Include="Content\Styles\swiper.min.css" />
+    <Content Include="Content\Styles\userAbout\businessFeedBack.css" />
+    <Content Include="Content\Styles\userAbout\chargeMoney.css" />
+    <Content Include="Content\Styles\userAbout\default.css" />
+    <Content Include="Content\Styles\userAbout\earningsDetails.css" />
+    <Content Include="Content\Styles\userAbout\getShop.css" />
+    <Content Include="Content\Styles\userAbout\idAuth.css" />
+    <Content Include="Content\Styles\userAbout\mine.css" />
+    <Content Include="Content\Styles\userAbout\myBank.css" />
+    <Content Include="Content\Styles\userAbout\myMemCard.css" />
+    <Content Include="Content\Styles\userAbout\myVip.css" />
+    <Content Include="Content\Styles\userAbout\payType.css" />
+    <Content Include="Content\Styles\userAbout\willsetMoney.css" />
+    <Content Include="Content\Styles\newStyles\xq.css" />
+    <Content Include="Content\Styles\wallet\wallet.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\Log\Views\Web.config" />
+    <Content Include="Areas\Log\Views\Home\Index.cshtml" />
+    <Content Include="Handler\UploadHandler.ashx" />
+    <Content Include="NLog.config" />
+    <Content Include="AppDownload\apps\HeNong_Android.apk" />
+    <Content Include="packages.config" />
+    <Fakes Include="Fakes\FrontSDK.fakes" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Handler\NewUploadhandler.ashx" />
+    <Content Include="Content\Styles\newStyles\fonts\icomoon.eot" />
+    <Content Include="Content\Styles\newStyles\fonts\icomoon.ttf" />
+    <Content Include="Content\Styles\newStyles\fonts\icomoon.woff" />
+    <Content Include="Content\Styles\newStyles\selection.json" />
+    <None Include="Properties\PublishProfiles\HN.pubxml" />
+    <None Include="Properties\PublishProfiles\Mall.H5.pubxml" />
+    <None Include="Properties\PublishProfiles\Malls.pubxml" />
+    <None Include="Properties\PublishProfiles\songfei-file.pubxml" />
+    <None Include="Properties\PublishProfiles\TLOtO_H5_Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\webdeploy.pubxml" />
+    <None Include="Properties\PublishProfiles\zp_publish.pubxml" />
+    <Content Include="Scripts\BDconvertor.js" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\ajaxfileupload.js" />
+    <Content Include="Scripts\city_select.js" />
+    <Content Include="Scripts\cookieHandle.js" />
+    <Content Include="Scripts\global.js" />
+    <Content Include="Scripts\iplocation.js" />
+    <Content Include="Scripts\iscrollEx.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.bigautocomplete.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.downCount.js" />
+    <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.mobile-1.2.0.js" />
+    <Content Include="Scripts\jquery.mobile-1.2.0.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.mobile-1.3.2.min.js" />
+    <Content Include="Scripts\jquery.mobile.touch.min.js" />
+    <Content Include="Scripts\jquery.rotate.min.js" />
+    <Content Include="Scripts\jquery.uploadfile.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\knockout.mapping.js" />
+    <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Plugin\iScroll\iscroll-infinite.js" />
+    <Content Include="Scripts\Plugin\iScroll\iscroll-lite.js" />
+    <Content Include="Scripts\Plugin\iScroll\iscroll-probe.js" />
+    <Content Include="Scripts\Plugin\iScroll\iscroll-zoom.js" />
+    <Content Include="Scripts\Plugin\iScroll\iscroll.js" />
+    <Content Include="Scripts\Plugin\iScroll\iscroll4.2.0.js" />
+    <Content Include="Scripts\Plugin\Photo\hammer.js" />
+    <Content Include="Scripts\Plugin\Photo\iscroll-zoom.js" />
+    <Content Include="Scripts\Plugin\Photo\jquery.photoClip.js" />
+    <Content Include="Scripts\rem.js" />
+    <Content Include="Scripts\Touch.jquery.js" />
+    <Content Include="Scripts\upScoll.js" />
+    <Content Include="Scripts\Plugin\layer.m\layer.m.js" />
+    <Content Include="Scripts\Plugin\layer.m\need\layer.css" />
+    <Content Include="Scripts\Plugin\Photo\binaryajax.js" />
+    <Content Include="Scripts\Plugin\Photo\exif.js" />
+    <Content Include="Scripts\Plugin\Photo\megapix-image.js" />
+    <Content Include="Scripts\Plugin\rotate\jquery.rotate-2.2.js" />
+    <Content Include="Scripts\TouchSlide.1.1.source.js" />
+    <Content Include="404.html" />
+    <Content Include="sysError.html" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Alipay\ExecuteReturnIosUrl.cshtml" />
+    <Content Include="Views\Alipay\ExecuteReturnAndroidUrl.cshtml" />
+    <Content Include="Views\Shared\__Layout.cshtml" />
+    <Content Include="Views\Home\agentArea.cshtml" />
+    <Content Include="Views\Home\preference.cshtml" />
+    <Content Include="Views\Home\agentPolicy.cshtml" />
+    <Content Include="Views\Home\agentApply.cshtml" />
+    <Content Include="Views\Home\agentAreaApply.cshtml" />
+    <Content Include="Views\Home\wallet.cshtml" />
+    <Content Include="Views\Wallet\Index.cshtml" />
+    <Content Include="Views\Home\area.cshtml" />
+    <Content Include="Views\Shared\_LayoutTemp.cshtml" />
+    <Content Include="Views\Shared\_LayoutNone.cshtml" />
+    <Content Include="Views\UserAbout\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutFooter.cshtml" />
+    <Content Include="Views\Shared\_LayoutClassify.cshtml" />
+    <Content Include="Views\UserAbout\myInfo.cshtml" />
+    <Content Include="Views\UserAbout\changeNickName.cshtml" />
+    <Content Include="Views\UserAbout\addressList.cshtml" />
+    <Content Include="Views\UserAbout\addressEdit.cshtml" />
+    <Content Include="Views\UserAbout\myAllies.cshtml" />
+    <Content Include="Views\UserAbout\alliesList.cshtml" />
+    <Content Include="Views\UserAbout\myBrokerage.cshtml" />
+    <Content Include="Views\UserAbout\myCoupon.cshtml" />
+    <Content Include="Views\WXPayInit\PayComplete.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Account\forgetPwd.cshtml" />
+    <Content Include="Views\Shared\_PartialSearchHeader.cshtml" />
+    <Content Include="Views\UserAbout\myVipAccount.cshtml" />
+    <Content Include="Views\UserAbout\chargeMyMoney.cshtml" />
+    <Content Include="Views\UserAbout\GetShouZhiDetail.cshtml" />
+    <Content Include="Views\UserAbout\orderConfirm.cshtml" />
+    <Content Include="Views\UserAbout\orderConfirmImmediate.cshtml" />
+    <Content Include="Views\UserAbout\orderList.cshtml" />
+    <Content Include="Views\UserAbout\promotionAddEva.cshtml" />
+    <Content Include="Views\UserAbout\showOrderDetail.cshtml" />
+    <Content Include="Views\UserAbout\showPackageDetail.cshtml" />
+    <Content Include="Views\UserAbout\GetPayType.cshtml" />
+    <Content Include="Views\UserAbout\GetWillSetMoney.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\UserAbout\historyOrder.cshtml" />
+    <Content Include="Views\UserAbout\historyOrderDetail.cshtml" />
+    <Content Include="Views\UserAbout\pwdUpdate.cshtml" />
+    <Content Include="Views\Home\secKill.cshtml" />
+    <Content Include="Views\UserAbout\ClipImg.cshtml" />
+    <Content Include="Views\UserAbout\withDrawals.cshtml" />
+    <Content Include="Views\UserAbout\withCardList.cshtml" />
+    <Content Include="Views\UserAbout\withCardDetail.cshtml" />
+    <Content Include="Views\UserAbout\couponSelected.cshtml" />
+    <Content Include="Views\Home\Index - 复制.cshtml" />
+    <Content Include="Views\UserAbout\CrowdFunding.cshtml" />
+    <Content Include="Views\UserAbout\serviceCall.cshtml" />
+    <Content Include="Views\UserAbout\attentMalls.cshtml" />
+    <Content Include="Views\Account\NewRegister.cshtml" />
+    <Content Include="Views\UserAbout\withBankAction.cshtml" />
+    <Content Include="Views\UserAbout\withDrawalsSuccess.cshtml" />
+    <Content Include="Views\UserAbout\zeroConfirm.cshtml" />
+    <Content Include="Views\UserAbout\zeroList.cshtml" />
+    <Content Include="Views\Home\qixi2016.cshtml" />
+    <Content Include="Views\UserAbout\bargainOrderImmediate.cshtml" />
+    <Content Include="Views\UserAbout\preLottery.cshtml" />
+    <Content Include="Views\UserAbout\IdAuthentication.cshtml" />
+    <Content Include="Views\UserAbout\Partial1.cshtml" />
+    <Content Include="Views\UserAbout\UploadLisenceImg.cshtml" />
+    <Content Include="Views\UserAbout\LisenceAuthSucess.cshtml" />
+    <Content Include="Views\Home\secKill - 复制.cshtml" />
+    <Content Include="Views\UserAbout\myBank.cshtml" />
+    <Content Include="Views\UserAbout\withdrawalStype.cshtml" />
+    <Content Include="Views\UserAbout\moneyDetails.cshtml" />
+    <Content Include="Views\UserAbout\dividendRecords.cshtml" />
+    <Content Include="Views\UserAbout\withDrawalsDividends.cshtml" />
+    <Content Include="Views\UserAbout\withDrawalsList.cshtml" />
+    <Content Include="Views\UserAbout\labourServiceWage.cshtml" />
+    <Content Include="Views\UserAbout\earningsDetails.cshtml" />
+    <Content Include="Views\UserAbout\payCard.cshtml" />
+    <Content Include="Views\UserAbout\chooseShop.cshtml" />
+    <Content Include="Views\UserAbout\checkstand.cshtml" />
+    <Content Include="Views\UserAbout\BindMember.cshtml" />
+    <Content Include="Views\UserAbout\ApplyJoin.cshtml" />
+    <Content Include="Views\Account\AppDownload.cshtml" />
+    <Content Include="Views\Account\UpdateMobilePhone.cshtml" />
+    <Content Include="Views\Account\ValidatePsd.cshtml" />
+    <Content Include="Views\UserAbout\myqrCode.cshtml" />
+    <Content Include="Views\UserAbout\baitiao.cshtml" />
+    <Content Include="Views\UserAbout\nobaitiao.cshtml" />
+    <Content Include="Views\UserAbout\baitiaoinfo.cshtml" />
+    <Content Include="Views\UserAbout\myMemCard.cshtml" />
+    <Content Include="Views\UserAbout\myMemCardDetail.cshtml" />
+    <Content Include="Views\UserAbout\memberInvestment.cshtml" />
+    <Content Include="Views\UserAbout\member.cshtml" />
+    <Content Include="Views\Account\member.cshtml" />
+    <Content Include="Views\UserAbout\forgetPayPwd.cshtml" />
+    <Content Include="Views\UserAbout\orderRefunds.cshtml" />
+    <Content Include="Views\UserAbout\serviceChoice.cshtml" />
+    <Content Include="Views\Home\nowDapaiBuy.cshtml" />
+    <Content Include="Views\UserAbout\payPwd.cshtml" />
+    <Content Include="Views\UserAbout\businessFeedBack.cshtml" />
+    <Content Include="Views\UserAbout\storeMembers.cshtml" />
+    <Content Include="Views\UserAbout\storeSales.cshtml" />
+    <Content Include="Views\UserAbout\storeRecharge.cshtml" />
+    <Content Include="Views\UserAbout\storeBack.cshtml" />
+    <Content Include="Views\Service\Manage_detail_Show.cshtml" />
+    <Content Include="Views\Service\Manage_Store_List.cshtml" />
+    <Content Include="Views\Service\Manage_Total_show.cshtml" />
+    <Content Include="Views\Service\Ranking_goods.cshtml" />
+    <Content Include="Views\Service\Ranking_Sales.cshtml" />
+    <Content Include="Views\Service\Ranking_Store.cshtml" />
+    <Content Include="Views\Service\Regional_Stores.cshtml" />
+    <Content Include="Views\Service\Sales_Norm_show.cshtml" />
+    <Content Include="Views\Service\Sales_order_show.cshtml" />
+    <Content Include="Views\Service\Sales_Store_List.cshtml" />
+    <Content Include="Views\Service\Sales_Stroe.cshtml" />
+    <Content Include="Views\Service\Sales_totaled.cshtml" />
+    <Content Include="Views\Service\Sales_Total_show.cshtml" />
+    <Content Include="Views\Service\Service_Clerk_index.cshtml" />
+    <Content Include="Views\Service\Service_index.cshtml" />
+    <Content Include="Views\Service\Service_manage_index.cshtml" />
+    <Content Include="Views\Service\Total_sales_show.cshtml" />
+    <Content Include="Views\Service\TouUp_Store_detail.cshtml" />
+    <Content Include="Views\Service\TouUp_Store_List.cshtml" />
+    <Content Include="Views\Service\TouUp_Total_Show.cshtml" />
+    <Content Include="Views\Service\Upload.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Views\UserAbout\logisticsDetail.cshtml" />
+    <Content Include="Views\UserAbout\myShare.cshtml" />
+    <Content Include="Views\Account\SetPsd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Log\Models\" />
+    <Folder Include="Areas\Log\Views\Shared\" />
+    <Folder Include="Content\Images\images\" />
+    <Folder Include="Models\" />
+    <Folder Include="Upload\" />
+    <Folder Include="Views\WeChatResult\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ecommerce\TL.CacheHelper\TL.CacheHelper.csproj">
+      <Project>{49bd794c-98ef-4418-b7a9-710a6d424127}</Project>
+      <Name>TL.CacheHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RedCollar.BUI\Common\Common.csproj">
+      <Project>{5afdb5f2-dbba-49b8-b4ca-c61a54a9c2db}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{38c4ffef-5582-45b2-bb36-c8f2fd7456dd}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Phone.Alipay.Com\Phone.Alipay.Com.csproj">
+      <Project>{312c81d2-6ad5-4e28-a8c1-4643375451f2}</Project>
+      <Name>Phone.Alipay.Com</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Senparc.Weixin.MP\Senparc.Weixin.MP.csproj">
+      <Project>{e5615d20-33bb-4c10-9b0e-325018ba6a6d}</Project>
+      <Name>Senparc.Weixin.MP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{9d8ebda5-86c3-4958-b14d-0b4395b65cbb}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TenpayLib\TenpayLib.csproj">
+      <Project>{b5aaac34-89d8-4f36-b1dc-30012eba9412}</Project>
+      <Name>TenpayLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>9000</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:17010/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

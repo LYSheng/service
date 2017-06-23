@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "税费计算规则";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    <style>
+        body{background: #fff;}
+        .tax_rate_info {
+            padding: 0.5rem 0.5rem;
+            background: #fff;
+            font-size: 0.54rem;
+        }
+    </style>
+
+}
+
+<div class="tax_rate_info">
+    <p>个人行邮：按照商品类别分为两种，保健品收取销售价格的15%，化妆品收取销售价格的30%，但是同一个身份证在同一天的所有订单，销售总价所计算出的税费小于等于50元人民币，则免缴税。比如购买1件保键品100元，应缴税100*15%=15元，但小于50元，所以该订单实际免税。</p>
+    <br>
+    <p>电商直邮：统一按照销售价格的12%计算；比如同上面例子，应缴税100*12%=12元，实际缴税也是12元。</p>
+</div>

@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "促销商城";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("home/home.css")
+}
+@section Title
+{
+    <h1 class="am-header-title">申请代理</h1>
+}
+
+
+<div class="mt2 am-margin-per"> 
+    <div class="iscon am-margin-mer white-bg mt2 pb2">
+            <ul class="clearfix ">
+                <li> 
+                    <div class="list-thumb mr4" >
+                        <img src="~/Content/Images/food01.jpg" />
+                    </div>
+                    <div class="list-descriptions">
+                        <div class="list-descriptions-wrapper">
+                            <p class="name">
+                                <a class="flex1">台湾快食</a>
+                            </p> 
+                            <span class="list-content">台湾快食源于台湾本土具有当地特色的天然食材与传统制作方法</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <div class="iscon am-margin-mer white-bg mt2  pb2">
+        <div class="product-title">
+            <span class="item-title">相关商品</span>
+            <span class="item-more">更多></span>
+        </div>
+        <ul class="isconUl clearfix " data-bind="foreach:list">
+            <li>
+                <div class="isConlist">
+                    <a data-bind="attr:{href:'/product/detail?activityId='+actId}"><img data-bind="attr:{src:productImgUrl}" src="http://10.38.50.176:89/upload/20151104/s_c607d0e5d8312d1e3cbe68f76cbeff5c625.jpg"></a>
+                    <div class="word pr10">
+                        <p class="word-descriton parbox pt2">
+                            <a class="flex1" data-bind="text:productName,attr:{href:'/product/detail?activityId='+actId}" style="text-decoration:none;" >测试重量</a>
+                        </p>
+                        <p class="clearfix mb2 kucun_qishou">规格:<span data-bind="text:">995</span></p>
+                        <p class="clearfix kucun_qishou">
+                            建议零售价
+                            <em class=" redword" data-bind="text:">2</em>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="isConlist">
+                    <a data-bind="attr:{href:'/product/detail?activityId='+actId}"><img data-bind="attr:{src:productImgUrl}" src="http://10.38.50.176:89/upload/20151104/s_c607d0e5d8312d1e3cbe68f76cbeff5c625.jpg"></a>
+                    <div class="word pr10">
+                        <p class="word-descriton parbox pt2">
+                            <a class="flex1" data-bind="text:productName,attr:{href:'/product/detail?activityId='+actId}" style="text-decoration:none;">测试重量</a>
+                        </p>
+                        <p class="clearfix mb2 kucun_qishou">规格:<span data-bind="text:">995</span></p>
+                        <p class="clearfix kucun_qishou">
+                            建议零售价
+                            <em class=" redword" data-bind="text:">2</em>
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="iscon am-margin-mer white-bg mt2 pb2 pr20 pl20 word" >
+        <span class="agent-title">代理政策</span>
+        <p class="agent-content">台湾快食来自于台湾本土具有当地特色的天然食材与传统制作方法悲剧吧，很忙好评巨款的深接口规范一个很好看都哦大啊打卡小家伙。</p>
+        <img />
+        <span class="agent-btn mt20 mb8">申请区域代理</span>
+    </div>
+    <div class="iscon am-margin-mer white-bg mt2 pb2 pr20 pl20 word">
+        <span class="agent-title">微商政策</span>
+        <p class="agent-content">微信商城来自于时尚个性具有时代特色的信息平台与网络运营方式。</p>
+        <img />
+        <span class="agent-btn mt20 mb8">申请微商</span>
+    </div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+    @*<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll4.2.0.js"></script>*@
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll.js"> </script>
+}

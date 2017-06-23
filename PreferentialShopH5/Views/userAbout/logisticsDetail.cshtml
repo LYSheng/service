@@ -1,0 +1,56 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "查看物流";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+
+}
+<section class="logisticscon">
+    <div class="logistics">
+        <!-- <p class="fl wuliu_images"><img src="http://139.196.111.213:88/dxlq/images/express/yunda.png" alt="快递logo" /></p> -->
+        <p class="wuliu_word">
+            <span>快递名称：@ViewBag.OrderPackageShow["expressName"]</span>
+            <span>运单编号：@ViewBag.OrderPackageShow["expressNo"]</span>
+            <!--<span>物流状态：查询失败</span>-->
+        </p>
+    </div>
+    <div class="products_details">
+        <p class="xq">商品详情</p>
+        @foreach (var orderPackage in ViewBag.OrderPackageShow["orderPackageItemList"])
+        {
+            <dl class="goods_infor clearfix">
+                <dt class="fl"><a href="javascript:;"><img src="@orderPackage["productPic"]" onerror="this.src = '/content/images/defaultAvatar.png'"></a></dt>
+                <dd class="fl">
+                    <p class="shop-name clearfix">
+                        <a href="javascript:;"><span class="fl">@orderPackage["productName"]</span></a>
+                        <span class="fr">￥<b class="fblod">@orderPackage["price"]</b></span>
+                    </p>
+                    <p class="goods-name clearfix">
+                        <span class="fr amount">X<i>@orderPackage["count"]</i></span>
+                    </p>
+                    <p class="yixuan">已选:@orderPackage["specs"]</p>
+                </dd>
+            </dl>
+        }
+    </div>
+    <div class="logistics_details">
+        <p class="xq">物流详情</p>
+        <dl class="wuliu_xq clearfix">
+            <dt class="fl cur"><b class="yuan"></b></dt>
+            <dd class="fl cur">
+                <p><!--查询失败,请稍后查询!-->&nbsp;&nbsp;<a href="@ViewBag.OrderPackageShow["toCheckUrl"]" style="color:#ff6600; text-decoration: underline;">请点击查看快递网站信息</a></p>
+            </dd>
+        </dl>
+    </div>
+</section>
+@section Footer
+{
+
+}
+@section Scripts
+{
+
+}

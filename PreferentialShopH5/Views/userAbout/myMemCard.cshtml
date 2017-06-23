@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "我的会员卡";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/myMemCard.css")
+}
+<section class="snone nodata" id="sNodata">
+    <img src="~/content/images/noMemberCard.png" />
+    <p>您还没有会员卡</p>
+    <a href="/userAbout/payCard">去充值</a>
+</section>
+<section class="snone memInfo" id="memInfo">
+    <ul class="memContent">
+        <li class="memList white-bg">
+            <div class="newStore">Malls·五洲精选</div>
+            <div class="newMemNo"><p></p></div>
+            <div class="newMemAccount">￥<span data-bind="text:totalAlld"></span></div>
+        </li>
+        @*<!-- ko foreach: cardList -->
+    <li class="memList white-bg" data-bind="attr:{'data-infoid':investmentInfoId}">*@
+            @*<div class="parbox dtop">
+                <p class="flex1 memNO" data-bind="text:'编号：'+investmentCode"></p>
+                <p class="memAccount" data-bind="text:'余额：￥'+balanceAmount.toFixed(2)"></p>
+            </div>
+            <div class="ddown">
+                <p class="storeName" data-bind="text:'门店：'+storeNickName"></p>
+                <p class="storeAddress" data-bind="text:'地址：'+address"></p>
+            </div>*@
+            @*<div class="newStore" data-bind="text:storeNickName"></div>
+        <div class="newMemNo" ><p data-bind="text:investmentCode"></p></div>
+        <div class="newMemAccount" data-bind="text:'余额：￥'+balanceAmount.toFixed(2)"></div>
+    </li>
+    <!-- /ko-->*@
+    </ul>
+    <div style="height:55px;"></div>
+</section>
+
+
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/myMemCard.js")
+
+}
+

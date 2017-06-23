@@ -1,0 +1,75 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "管理收货地址";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+
+}
+@*<header class="u-header clearfix white-bg ac">
+    <div class="u-hd-left fl btnPrev">
+        <a href="javascript:void(0)" class="J_backToPrev">
+            <span class="u-icon i-hd-back ml4 mt4"></span>
+        </a>
+    </div>
+    <div class="u-hd-tit"><span class="fs36">管理收货地址</span></div>
+    <div class="fr u-hd-right"><a href="./addressEdit?actionType=@ViewBag.actionType">添加</a></div>
+</header>*@
+<div class="perInfo">
+    @foreach (var adrList in ViewBag.adrLists)
+    {
+        <section class="mt5 white-bg adrcomlist pt4">
+            <dl class="fs14 cl adrBody" data-adrid="@adrList["userAddressId"]" data-province="@adrList["province"]" data-city="@adrList["city"]" data-area="@adrList["area"]">
+                <dd><i id="name">@adrList["name"]</i><span class="pl30" id="phone">@adrList["phone"]</span></dd>
+                <dt><i id="provinceName">@adrList["provinceName"]</i><i id="cityName">@adrList["cityName"]</i><i id="areaName">@adrList["areaName"]</i><i id="address">@adrList["address"]</i></dt>
+                <p>
+                    @if (adrList["isDefault"])
+                    {
+                        @:<span class="setDefaultAdr" data-adrid='@adrList["userAddressId"]'><i class="person_adrdefault mr2 onn"></i>默认地址</span>
+                    }
+                    else
+                    {
+                        @:<span class="setDefaultAdr" data-adrid='@adrList["userAddressId"]'><i class="person_adrdefault mr2"></i>设为默认地址</span>
+                    }
+                    <span class="fr">
+                        <span class="adredit" data-adrid='@adrList["userAddressId"]'>
+                            <a href="./addressEdit?addressId=@adrList["userAddressId"]&actionType=@ViewBag.actionType"><i class="person_adrEdit mr2"></i>编辑</a>
+                        </span>
+                        <span class="adrdel" data-adrid="@adrList["userAddressId"]">
+                            <i class="person_adrDel  mr2 ml8"></i>删除
+                        </span>
+                    </span>
+                </p>
+            </dl>
+        </section>
+    }
+    <a href="./addressEdit?actionType=@ViewBag.actionType">
+        <p class="ac adradd ml4 mr4 mt4 fs14"><i class="person_adradd mr4"></i>添加收货地址</p>
+    </a>
+</div>
+<div class="popback"></div>
+<div class="custom" style="height: 3.7rem;">
+    <p>确定要删除该收货地址吗？</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="adrqx">取消</a>
+        <a href="javascript:;" class="adrqd">确定</a>
+    </p>
+</div>
+<input type="hidden" value="@ViewBag.actionType" id="actionType" />
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/jcropfile.js")
+    <script>
+        var refreshFlag = getCookie("refreshFlag");
+        if (refreshFlag == "true") {
+            setCookie("refreshFlag", null, "", "/", 30);
+            setTimeout(function () { window.location.reload(); }, 100);
+        }
+    </script>
+}

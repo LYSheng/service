@@ -1,0 +1,453 @@
+﻿@{
+    ViewBag.Title = "收银台";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @*@WebHelper4H5.RegisterStyles("newStyles/mzui/amazeui.css")*@
+    @WebHelper4H5.RegisterStyles("newStyles/style.css")
+    @WebHelper4H5.RegisterStyles("newStyles/main.css")
+    @WebHelper4H5.RegisterStyles("newStyles/dyl.css")
+    @WebHelper4H5.RegisterStyles("newStyles/wxq.css")
+    @WebHelper4H5.RegisterStyles("newStyles/lsm.css")
+    <style>
+        .select, #labourSeriveWagePay, .pay_apply {
+            cursor: pointer;
+        }
+
+        .icon-bai {
+            width: 25px;
+            height: 25px;
+            background: url("../content/images/bt_icon.png")center center;
+            background-size: 25px 24px;
+        }
+
+        .nobaitiao {
+            display: block;
+            width: 70px;
+            background: #b4282d;
+            text-align: center;
+            line-height: 27px;
+            color: #fff !important;
+            font-size: 12px;
+            margin-right: 4%;
+        }
+
+        .onError {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 16rem;
+            margin-left: -7rem;
+            margin-top: -4rem;
+            padding: 0 2rem;
+            max-width: 20rem;
+            border-radius: .2rem;
+            height: 3.6rem;
+            line-height: 3.6rem;
+            background: rgba(0,0,0,0.5);
+            text-align: center;
+            color: #fff;
+            font-size: 1rem;
+            z-index: 99999;
+        }
+
+        ._alert {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1999;
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+            ._alert > .in {
+                background: #fff;
+                min-width: 20rem;
+                border-radius: 0.6rem;
+                position: relative;
+                margin: 0 1rem;
+            }
+
+                ._alert > .in .alert_title {
+                    padding: 1rem;
+                    border-bottom: 1px solid #dedede;
+                }
+
+                    ._alert > .in .alert_title p {
+                        color: #000;
+                        text-align: center;
+                        font-size: 1.12rem;
+                    }
+
+                ._alert > .in .alert_input {
+                    margin: 1rem 0.8rem;
+                    height: 2.4rem;
+                }
+
+                    ._alert > .in .alert_input input {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        text-indent: 0.6rem;
+                        border: none;
+                        background: #fff;
+                        border: 1px solid #dedede;
+                        border-radius: 0.4rem;
+                        font-size: 0.96rem;
+                    }
+
+                ._alert > .in .alert_attention {
+                    color: #ff0000;
+                    font-size: 0.96rem;
+                }
+
+                ._alert > .in .alert_btns {
+                    border-top: 1px solid #dedede;
+                    border-radius: 0 0 0.2rem 0.2rem;
+                }
+
+                ._alert > .in .alert_btn {
+                    width: 100%;
+                    font-size: 1.12rem;
+                    display: block;
+                    line-height: 2.8rem;
+                    margin: 0 auto;
+                    border-radius: 0.2rem;
+                    text-align: center;
+                    font-size: 1.12rem;
+                }
+
+                ._alert > .in .alert_calcle {
+                }
+
+                ._alert > .in .alert_save {
+                    border-left: 1px solid #dedede;
+                    color: #408cff;
+                }
+
+            ._alert.show {
+                opacity: 1;
+                pointer-events: auto;
+            }
+    </style>
+
+}
+
+
+
+<section id="seWechet" class="bgwt chooseType">
+    <section class="webkit_box pay_data_list pay_data bm_f0f0f0">
+        <section class="pay_icon mr17"><span class="icon-zhi f25" style="color:#34b133;"></span></section>
+        <section class="box_flex">
+            <div class="pay_data_con">
+                <p>微信支付</p>
+                <p class="c99">极速、安全、新体验</p>
+            </div>
+        </section>
+        <section class="pay_choose"><span class="icon-nochose cdb f19 select" paytype='1'></span></section>
+    </section>
+</section>
+
+<section class="bgwt chooseType">
+    <section class="webkit_box pay_data_list pay_data bm_f0f0f0">
+        <section class="pay_icon mr17"><span class="icon-wei f25" style="color:#00aaef;"></span></section>
+        <section class="box_flex">
+            <div class="pay_data_con">
+                <p>支付宝支付</p>
+                <p class="c99">推荐支付宝用户使用</p>
+            </div>
+        </section>
+        <section class="pay_choose"><span class="icon-nochose cdb f19 select" paytype='2'></span></section>
+    </section>
+</section>
+<section class="bgwt" style="display: none;">
+    <section class="webkit_box pay_data_list pay_data bm_f0f0f0">
+        <section class="pay_icon mr17"><span class="icon-bcart f20" style="color:#36bc99"></span></section>
+        <section class="box_flex">
+            <div class="pay_data_con">
+                <p>银行卡支付</p>
+                <p class="c99">支付各大银行储蓄卡、信用卡</p>
+            </div>
+        </section>
+        <section class="pay_choose"><span class="icon-nochose cdb f19 select" paytype='3'></span></section>
+    </section>
+</section>
+
+@if (ViewBag.IsByCustomerSign != 1)
+{
+    <section class="bgwt mt10">
+        <section class="webkit_box pay_data_list pay_data bm_f0f0f0">
+            <section class="pay_icon mr17"><span class="icon-income f27" style="color:#f96268;"></span></section>
+            <section class="box_flex">
+                <div class="pay_data_con">
+                    <p>其他支付方式(经营回馈:￥@ViewBag.Balance)</p>
+                </div>
+            </section>
+            <section class="pay_choose"><span id="labourSeriveWagePay" data-type="4" data-canused="@ViewBag.Balance" class="icon-nochose cdb f19"></span></section>
+        </section>
+    </section>
+}
+<section class="pay_footer bgwt">
+    
+    <section class="w_webkit_box">
+        <div class="box_flex">已经使用经营回馈抵扣</div>
+        <div>
+            -<f>￥</f><span class="labour_serive_wage_can_pay">0.00</span>
+        </div>
+    </section>
+    <section class="webkit_box h50">
+        <section class="box_flex f15 thmcolor" style="padding-left: 4%;" id="paymoney">
+            支付：<f>￥</f><span class="need_pay">@ViewBag.InvestmentAmount</span>
+        </section>
+        <section class="pay_apply">下单</section>
+    </section>
+</section>
+
+<input type="hidden" id="payType" value="0" />
+
+<input type="hidden" id="Balance" value="@ViewBag.Balance" />
+<input type="hidden" id="InvestmentAmount" value="@ViewBag.InvestmentAmount" />
+<input type="hidden" id="InvestmentId" value="@ViewBag.InvestmentId" />
+<input type="hidden" id="InvestmentCode" value="@ViewBag.InvestmentCode" />
+<input type="hidden" id="uid" value="@ViewBag.uid" />
+<input type="hidden" id="dataTime" value="@ViewBag.DateTime" />
+<input type="hidden" id="payToSign" value="@ViewBag.PayToSign" />
+<input type="hidden" id="PayLaborWages" value="@ViewBag.PayLaborWages" />
+<input type="hidden" id="NeedPayPrice" value="@ViewBag.NeedPayPrice" />
+<input type="hidden" id="PayIou" value="@ViewBag.PayIou" />
+
+<div class="_alert" id="_alert">
+    <div class="in">
+        <div class="alert_title">
+            <p class="fs14 ac">输入支付密码</p>
+        </div>
+        <div class="alert_input">
+            <input type="password" placeholder="请输入您的支付密码" id="pwd" />
+            <p class="alert_attention" id="alertAttention"></p>
+        </div>
+        <div class="alert_btns parbox">
+            <a href="javascript:void(0)" class="alert_btn alert_calcle flex1 fs14" id="alertCancle">取消</a>
+            <a href="javascript:void(0)" class="alert_btn alert_save flex1 fs14" id="alertSave">确定</a>
+        </div>
+    </div>
+</div>
+
+<div class="_payPwd two" id="_payPwd">
+    <div class="in">
+        <div class="alert_title">
+            <p class="fs14">为了您的账户资金安全，请设置支付密码。</p>
+        </div>
+        <div class="alert_btns parbox">
+            <a href="javascript:void(0)" class="alert_btn alert_calcle flex1 fs14" id="payPwdCancle">稍后设置</a>
+            <a href="javascript:void(0)" class="alert_btn alert_save flex1 fs14" id="payPwdSave">前去设置</a>
+        </div>
+    </div>
+</div>
+@if (!Common.WebHelper.IsWeiXin(Request))
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+             $('#seWechet').hide();
+        });
+    </script>
+}
+<script>
+    var sesStorage = window.sessionStorage;
+    var _isPaymentPassword = true;
+        apiRequest({
+            method: "User/IsPaymentPassword",
+            async: true,
+            success: function (obj) {
+                smGlobal.removeHomeGif();
+                _isPaymentPassword = obj.data;
+                sesStorage.setItem("isPaymentPassword", _isPaymentPassword);
+            },
+            error: function (obj) {
+                smGlobal.removeHomeGif();
+                if (obj == "用户不存在") {
+                    window.location.href = "/";
+                } else {
+                    _isPaymentPassword = true;
+                }
+            }
+        });
+    console.log(_isPaymentPassword);
+    //_isPaymentPassword = true;
+    //if (_isPaymentPassword == "true") {
+    //    $("#_payPwd").addClass("show");
+    //}
+    $("#payPwdCancle").on("click", function () {
+        $("#_payPwd").removeClass("show");
+    })
+
+    var payLaborWages = parseFloat($("#PayLaborWages").val());
+    var needPayPrice = parseFloat($("#NeedPayPrice").val());
+    var payIou = parseFloat($("#PayIou").val());
+    var PGIUrl = "@System.Configuration.ConfigurationManager.AppSettings["PGIUrl"]";
+
+    var mobile;
+    var doAppWx;
+    var isSubmit = false;
+    $(function () {
+        if (payLaborWages != '' && payLaborWages > 0) {
+            $(".labour_serive_wage_can_pay").text(parseFloat(payLaborWages).toFixed(2));
+        }
+        if (payIou != '' && payIou > 0) {
+            $(".labour_serive_iou_can_pay").text(parseFloat(payIou).toFixed(2));
+        }
+
+        if (needPayPrice != '' && needPayPrice > 0) {
+            $(".need_pay").text(parseFloat(needPayPrice).toFixed(2));
+        }
+
+        $(".select").click(function () {
+            $(".select").removeClass('icon-chose').removeClass('thmcolor').addClass('icon-nochose');
+            $(this).addClass('icon-chose').addClass('thmcolor').removeClass("icon-nochose");
+            $("#payType").val($(this).attr("paytype"));
+        });
+
+        //弹窗点击取消
+        $("#alertCancle").on("click", function () {
+            $("#_alert").removeClass("show");
+            $("#iouTypePay").removeClass('icon-chose').removeClass('thmcolor').addClass('icon-nochose');
+            $("#labourSeriveWagePay").removeClass('icon-chose').removeClass('thmcolor').addClass('icon-nochose');
+        })
+        //前去设置支付密码
+        $("#payPwdSave").on("click", function () {
+            var url = $(this).data("url");
+            $("#_alert").removeClass("show");
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.setPayPassword) {
+
+                window.webkit.messageHandlers.setPayPassword.postMessage("支付密码");
+                return;
+            }
+            window.location.href = url + "userAbout/payPwd?type=1";
+        })
+        $("#labourSeriveWagePay").click(function () {
+            
+            var investmentId = $("#InvestmentId").val();
+            var investmentCode = $("#InvestmentCode").val();
+            var investmentAmount = $("#InvestmentAmount").val();
+            var _canUsed = $(this).data("canused");
+            if (_canUsed != '' && _canUsed > 0) {
+                $('.select').removeClass("icon-chose thmcolor").addClass("icon-nochose");
+                $(this).addClass('icon-chose').addClass('thmcolor').removeClass("icon-nochose");
+                if (_isPaymentPassword) {
+                    $("#_payPwd").addClass("show");
+                    return false;
+                }
+                $("#_alert").addClass("show");
+                $("#alertSave").off().on("click", function () {
+                    
+                    var _userPassword = $("#pwd").val();
+                    if (!_userPassword) {
+                        smGlobal.error("请输入您的支付密码");
+                    } else {
+                        var _payPrice;
+                        if (investmentAmount * 1 < _canUsed * 1) {
+                            _payPrice = investmentAmount;
+                        } else {
+                            _payPrice = _canUsed;
+                        }
+                        if (isSubmit) {
+                            return;
+                        }
+                        isSubmit = true;
+                        apiRequest({
+                            method: 'Investment/InvestmentPayBeforeValidate',
+                            async: true,
+                            data: {
+                                investmentId: investmentId,
+                                isUseLaborWages: true,
+                                userPassword: _userPassword
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                if (data.isBizSuccess) {
+                                    if (data.isEnough) {
+
+                                        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.paySuccessful) {
+
+                                            window.webkit.messageHandlers.paySuccessful.postMessage([investmentCode, investmentId]);
+                                            return;
+                                        }
+                                        window.location.href = PGIUrl + "Payment/PayComplete?orderCode=" + investmentCode + "&orderId=" + investmentId + "&payToType=50" + "&FromPlatform=PreferentialShopH5" + "&isSuccess=" + true;
+                                    } else {
+                                        window.location.reload();
+                                    }
+                                } else {
+                                    isSubmit = false;
+                                    smGlobal.error(data.bizErrorMsg);
+                                }
+                            },
+                            error: function (data) {
+                                isSubmit = false;
+                                smGlobal.error(data);
+                            }
+                        });
+
+
+                       
+                    }
+
+                })
+
+            } else {
+                smGlobal.error("可用金额为0，请换其他支付方式");
+                return false;
+            }
+        });
+
+        $(".pay_apply").click(function () {
+            var investmentId = $("#InvestmentId").val();
+            var investmentCode = $("#InvestmentCode").val();
+            var _type = 0;
+            for (var i = 0; i < $(".chooseType").length ; i++) {
+                var _this = $(".chooseType").eq(i).find(".select");
+                if (_this.hasClass("icon-chose")) {
+                    _type = _this.attr("paytype");
+                }
+            }
+            setTimeout(function () {
+                console.log(_type)
+                if (_type == 0) {
+                    smGlobal.error("请选择支付方式");
+                }
+                var payType = _type;
+                if (payType == 1) { //微信
+                    $("#payType").val(0);
+                    var tempJson = JSON.stringify({
+                        paymentId: 112,
+                        payToType: 50,
+                        orderId: investmentId,
+                        orderCode: investmentCode,
+                    });
+                    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.doAppWx) {
+                        window.webkit.messageHandlers.doAppWx.postMessage(tempJson)
+                        return;
+                    }
+
+                    if (doAppWx) {
+                        doAppWx(tempJson);
+                    } else if (mobile && mobile.doAppWx) {
+                        mobile.doAppWx(tempJson);
+                    }
+                    else {
+                        window.location.href = PGIUrl + "WXPayInit/JsApi?orderId=" + investmentId + "&wxXSuserId=" + $("#uid").val() + "&payToType=50&dataTime=" + $("#dataTime").val() + "&sign=" + $("#payToSign").val() + "&FromPlatform=PreferentialShopH5" + "&laborWages=" + 0;
+                    }
+                } else if (payType == 2) { //支付宝
+                    window.location.href = PGIUrl + "Alipay/SubmitAlipay?orderId=" + investmentId + "&userId=" + $("#uid").val() + "&payToType=50&dataTime=" + $("#dataTime").val() + "&sign=" + $("#payToSign").val() + "&FromPlatform=PreferentialShopH5" + "&laborWages=" + 0;
+                }
+            },0)
+            
+        });
+    });
+</script>

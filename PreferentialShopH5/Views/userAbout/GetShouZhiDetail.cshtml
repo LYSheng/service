@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+
+}
+@model FrontSDK.ApiRequest.PromotionInfoDto
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>收支明细</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @*@Styles.Render("~/Content/css")*@
+    @WebHelper4H5.RegisterStyles("reset.css")
+    @WebHelper4H5.RegisterStyles("common.css")
+    @Scripts.Render("~/bundles/scripts/core")
+    @*  @Scripts.Render("~/bundles/scripts/plugin")*@
+    @Scripts.Render("~/bundles/scripts/biz")
+    <link href="~/Content/Styles/base.css" rel="stylesheet" type="text/css" />
+    @WebHelper4H5.RegisterScripts("base.js")
+</head>
+<body class="white-bg">
+    <header class="posFixed full-width payHeader">
+        <div class="pl40 pr40 dateSelect ac"><h2 class="fs14 posrelative" id="date"><i class="pullLeft" data-event="pullLeft" data-date="@DateTime.Now.AddMonths(-1).ToString("yyyy.MM")"></i><i class="pullRight" data-event="pullRight" data-date="@DateTime.Now.AddMonths(1).ToString("yyyy.MM")"></i><span class="curDtae">@DateTime.Now.ToString("yyyy年MM月")</span></h2></div>
+        <div class="fs13 totalCount  pl40 pr40" data-bind="foreach:countTotal"><span class="fr">总收入：<i data-bind="text:totalIncome">0</i></span>总支出：<i data-bind="text:totalOutcome">0</i></div>
+    </header>
+    <div class="fs12 paycon">
+        <div class="paymentList" data-bind="foreach:paymentList">
+            <h2 class="pl40 pr40"><span class="fr">支：￥<i data-bind="text:sumOneDayZhizhu">0</i>  收：￥<i data-bind="text:sumOneDayShouRu"></i></a></span><i data-bind="text:dateTime"></i></h2>
+            <div class="pl40 pr40" data-bind="foreach:list">
+                <dl data-bind="attr:{class:shouZhi==1?'recharge posrelative pt2 pb2':(shouZhi==2?'payorder posrelative pt2 pb2':'advance posrelative pt2 pb2')}">
+                    <dd class="fs14 clearfix"><span class="fr"><i data-bind="text:jiaoYiMoney"></i></span><i data-bind="text:typeName"></i>   </dd>
+                    <dt><span class="fr" data-bind="text:sysNo"></span><i class="home_clock"></i><i data-bind="text:datetime"></i></dt>
+                </dl>
+            </div>
+        </div>
+       
+    </div>
+    <div style="display: none;">
+        @Html.AntiForgeryToken()
+    </div>
+    <input type="hidden" value="@Request["UserId"]" id="UserId" />
+    <input type="hidden" value="@Request["AccountType"]" id="AccountType" />
+    <input type="hidden" value="@Request["ProjectIds"]" id="ProjectIds" />
+    <script src="~/Scripts/knockout-2.2.0.debug.js"></script>
+    <script src="~/Scripts/knockout.validation.js"></script>
+    <script src="~/Content/Scripts/userabout/PaymentDetail.js"></script>
+</body>
+</html>

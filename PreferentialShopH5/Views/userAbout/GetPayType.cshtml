@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "支付方式";
+}
+@section Head
+{
+
+    @WebHelper4H5.RegisterStyles("userAbout/payType.css")
+}
+
+<div class="payHeadTile">支付金额:<span></span></div>
+
+<section class="payTypeSection">
+    <div class="alipay pt4 pb4"><span><img src="/content/images/alipay.png" /></span>支付宝支付</div>
+    <div class="wechat pt4 pb4"><span><img src="/content/images/wechat.png" /></span>微信支付</div>
+</section>
+<div class="wechatUrl" style="display:none">@Service.Site.wxService.WXPayInit</div>
+<div class="userid" style="display:none">@ViewBag.userid</div>
+<input type="hidden" id="dataTime" value="@ViewBag.DateTime" />
+<input type="hidden" id="payToSign" value="@ViewBag.PayToSign" />
+@section Footer{
+
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/userabout/payType.js"></script>
+}

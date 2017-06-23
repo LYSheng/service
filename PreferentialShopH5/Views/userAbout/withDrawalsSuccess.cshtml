@@ -1,0 +1,40 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "提现详情";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+}
+<div class="ac diawSuccessTop">
+    <p><img src="/Content/images/success-icon.png" style="width:3rem;" /></p>
+    <p class="fs16 withdrawShowText">提现申请已经提交</p>
+</div>
+<ul class="white-bg fs15 pl40 pr40 drawalMeta pt2 pb3">
+    <li>
+        转入账号
+        <span class="fr">@Request["cardName"]　@Request["bankCardNum"]</span>
+    </li>
+    <li>
+        提现金额
+        <span class="fr">￥@Request["withdrawalsAmount"]</span>
+    </li>
+</ul>
+<p class="mt8 fs16 ac ml4 mr4 commitClose" onclick="okGoTu()">完成</p>
+@section Footer
+{
+    <script type="text/javascript">
+        function okGoTu() {
+            if ('@Request["form"]' == "Dividends") {
+                location.replace("/userAbout/myBank");
+            } else {
+                window.history.go(-1);
+            }
+        }
+    </script>
+}
+@section Scripts
+{
+
+}

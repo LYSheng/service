@@ -1,0 +1,581 @@
+﻿@{
+    ViewBag.Title = "申请代理";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("agent/agentApply.css")
+    
+}
+<div class="categBox desCategBox">
+    <div class="info">
+        <p class="title"></p>
+        <div class="white-bg form">
+            <div class="parbox center">
+                <i class="agent_project"></i>
+                <div class="flex1 parbox form-detail bb">
+                    <p class="fs12 form-title">项目名称</p>
+                    <p class="flex1 fs12 ar form-info" id="projectName"></p>
+                </div>
+            </div>
+            <div class="parbox center">
+                <i class="agent_user"></i>
+                <div class="flex1 parbox form-detail">
+                    <p class="fs12 form-title">用户昵称</p>
+                    <p class="flex1 fs12 ar form-info" id="userName">@CurrentUser.Instance.NickName</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="basic">
+        <p class="title fs13">基本信息</p>
+        <div class="white-bg form">
+            <div class="parbox center">
+                <i class="agent_name"></i>
+                <div class="flex1 parbox form-detail bb">
+                    <p class="fs12 form-title">姓名<em> * </em></p>
+                    <input type="text" class="flex1 ar form-input" placeholder="请填写您的真实姓名" maxlength="10" id="name"/>
+                    @*<p class="flex1 ar">小鲜鲜啤酒</p>*@
+                </div>
+            </div>
+            <div class="parbox center">
+                <i class="agent_tel"></i>
+                <div class="flex1 parbox form-detail bb">
+                    <p class="fs12 form-title">电话<em> * </em></p>
+                    <input type="tel" class="flex1 ar form-input" placeholder="请填写您的联系电话" id="tel"/>
+                </div>
+            </div>
+            <div class="parbox center">
+                <i class="agent_merchant"></i>
+                <div class="flex1 parbox form-detail">
+                    <p class="fs12 form-title">意向代理区域<em> * </em></p>
+                    <p class="flex1 ar form-area fs12" id="choiceArea">请选择您希望代理的区域</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="message">
+        <p class="title fs13">留言</p>
+        <div class="white-bg form form-textarea fs12">
+            <textarea class="form-message fs12" placeholder="请填写您的留言信息" maxlength="300" id="message"></textarea>
+        </div>
+    </div>
+    <div class="btns">
+        <a href="javascript:void(0)" class="apply-btn ac fs14 disabled" id="applyBtn">提交申请</a>
+    </div>
+    <div class="_alert" id="_alert">
+        <div class="in">
+            <div class="alert_title">
+                <p class="fs14 ac">恭喜您的代理申请已提交，我们会在<br />2个工作日联系您。谢谢您的关注！</p>
+            </div>
+            <div class="alert_btns">
+                <a href="javascript:history.back(-1);" class="alert_btn fs16" id="saveBtn">确定</a>
+            </div>
+        </div>
+    </div>
+    <div class="areas" id="areas">
+        <div class="area-list fs14" id="areaList">
+            <div class="area-province mt4">
+                <div class="area-detail all" data-id="1" data-name="全国"><p class="flex1">全国</p><a href="javascript:void(0)" class="area-choice-icon" id="all"></a></div>
+            </div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2" data-name="北京市"><p class="flex1">北京市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+            </div>
+            <div class="area-province">
+                <div class="area-detail province" data-id="890" data-name="上海市"><p class="flex1">上海市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+            </div>
+            <div class="area-province">
+                <div class="area-detail province" data-id="23" data-name="天津市"><p class="flex1">天津市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+            </div>
+            <div class="area-province">
+                <div class="area-detail province" data-id="2530" data-name="重庆市"><p class="flex1">重庆市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+            </div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="45" data-name="河北省"><i class="area-arrow-icon"></i><p class="flex1">河北省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="46" data-name="石家庄市"><p class="flex1">石家庄市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="71" data-name="唐山市"><p class="flex1">唐山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="87" data-name="秦皇岛市"><p class="flex1">秦皇岛市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="97" data-name="邯郸市"><p class="flex1">邯郸市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="118" data-name="邢台市"><p class="flex1">邢台市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="139" data-name="保定市"><p class="flex1">保定市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="167" data-name="张家口市"><p class="flex1">张家口市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="186" data-name="承德市"><p class="flex1">承德市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="199" data-name="沧州市"><p class="flex1">沧州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="217" data-name="廊坊市"><p class="flex1">廊坊市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="231" data-name="衡水市"><p class="flex1">衡水市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="244" data-name="山西省"><i class="area-arrow-icon"></i><p class="flex1">山西省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="245" data-name="太原市"><p class="flex1">太原市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="257" data-name="大同市"><p class="flex1">大同市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="270" data-name="阳泉市"><p class="flex1">阳泉市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="277" data-name="长治市"><p class="flex1">长治市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="293" data-name="晋城市"><p class="flex1">晋城市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="301" data-name="朔州市"><p class="flex1">朔州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="309" data-name="晋中市"><p class="flex1">晋中市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="322" data-name="运城市"><p class="flex1">运城市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="337" data-name="忻州市"><p class="flex1">忻州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="353" data-name="临汾市"><p class="flex1">临汾市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="372" data-name="吕梁市"><p class="flex1">吕梁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="387" data-name="内蒙古自治区"><i class="area-arrow-icon"></i><p class="flex1">内蒙古自治区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="388" data-name="呼和浩特市"><p class="flex1">呼和浩特市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="399" data-name="包头市"><p class="flex1">包头市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="410" data-name="乌海市"><p class="flex1">乌海市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="415" data-name="赤峰市"><p class="flex1">赤峰市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="429" data-name="通辽市"><p class="flex1">通辽市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="439" data-name="鄂尔多斯市"><p class="flex1">鄂尔多斯市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="449" data-name="呼伦贝尔市"><p class="flex1">呼伦贝尔市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="464" data-name="巴彦淖尔市"><p class="flex1">巴彦淖尔市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="473" data-name="乌兰察布市"><p class="flex1">乌兰察布市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="486" data-name="兴安盟"><p class="flex1">兴安盟</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="494" data-name="锡林郭勒盟"><p class="flex1">锡林郭勒盟</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="508" data-name="阿拉善盟"><p class="flex1">阿拉善盟</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="513" data-name="辽宁省"><i class="area-arrow-icon"></i><p class="flex1">辽宁省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="514" data-name="沈阳市"><p class="flex1">沈阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="532" data-name="大连市"><p class="flex1">大连市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="546" data-name="鞍山市"><p class="flex1">鞍山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="556" data-name="抚顺市"><p class="flex1">抚顺市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="565" data-name="本溪市"><p class="flex1">本溪市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="573" data-name="丹东市"><p class="flex1">丹东市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="581" data-name="锦州市"><p class="flex1">锦州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="590" data-name="营口市"><p class="flex1">营口市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="598" data-name="阜新市"><p class="flex1">阜新市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="607" data-name="辽阳市"><p class="flex1">辽阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="616" data-name="盘锦市"><p class="flex1">盘锦市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="622" data-name="铁岭市"><p class="flex1">铁岭市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="631" data-name="朝阳市"><p class="flex1">朝阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="640" data-name="葫芦岛市"><p class="flex1">葫芦岛市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="648" data-name="吉林省"><i class="area-arrow-icon"></i><p class="flex1">吉林省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="649" data-name="长春市"><p class="flex1">长春市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="665" data-name="吉林市"><p class="flex1">吉林市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="676" data-name="四平市"><p class="flex1">四平市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="684" data-name="辽源市"><p class="flex1">辽源市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="690" data-name="通化市"><p class="flex1">通化市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="699" data-name="白山市"><p class="flex1">白山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="707" data-name="松原市"><p class="flex1">松原市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="714" data-name="白城市"><p class="flex1">白城市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="721" data-name="延边朝鲜族自治州"><p class="flex1">延边朝鲜族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="731" data-name="黑龙江省"><i class="area-arrow-icon"></i><p class="flex1">黑龙江省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="732" data-name="哈尔滨市"><p class="flex1">哈尔滨市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="754" data-name="齐齐哈尔市"><p class="flex1">齐齐哈尔市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="772" data-name="鸡西市"><p class="flex1">鸡西市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="783" data-name="鹤岗市"><p class="flex1">鹤岗市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="793" data-name="双鸭山市"><p class="flex1">双鸭山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="803" data-name="大庆市"><p class="flex1">大庆市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="814" data-name="伊春市"><p class="flex1">伊春市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="833" data-name="佳木斯市"><p class="flex1">佳木斯市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="846" data-name="七台河市"><p class="flex1">七台河市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="852" data-name="牡丹江市"><p class="flex1">牡丹江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="864" data-name="黑河市"><p class="flex1">黑河市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="872" data-name="绥化市"><p class="flex1">绥化市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="884" data-name="大兴安岭地区"><p class="flex1">大兴安岭地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="913" data-name="江苏省"><i class="area-arrow-icon"></i><p class="flex1">江苏省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="914" data-name="南京市"><p class="flex1">南京市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="929" data-name="无锡市"><p class="flex1">无锡市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="940" data-name="徐州市"><p class="flex1">徐州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="953" data-name="常州市"><p class="flex1">常州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="962" data-name="苏州市"><p class="flex1">苏州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="977" data-name="南通市"><p class="flex1">南通市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="989" data-name="连云港市"><p class="flex1">连云港市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="998" data-name="淮安市"><p class="flex1">淮安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1008" data-name="盐城市"><p class="flex1">盐城市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1019" data-name="扬州市"><p class="flex1">扬州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1029" data-name="镇江市"><p class="flex1">镇江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1037" data-name="泰州市"><p class="flex1">泰州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1045" data-name="宿迁市"><p class="flex1">宿迁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="1052" data-name="浙江省"><i class="area-arrow-icon"></i><p class="flex1">浙江省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="1053" data-name="杭州市"><p class="flex1">杭州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1068" data-name="宁波市"><p class="flex1">宁波市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1081" data-name="温州市"><p class="flex1">温州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1094" data-name="嘉兴市"><p class="flex1">嘉兴市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1103" data-name="湖州市"><p class="flex1">湖州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1110" data-name="绍兴市"><p class="flex1">绍兴市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1118" data-name="金华市"><p class="flex1">金华市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1129" data-name="衢州市"><p class="flex1">衢州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1137" data-name="舟山市"><p class="flex1">舟山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1143" data-name="台州市"><p class="flex1">台州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1154" data-name="丽水市"><p class="flex1">丽水市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="1165" data-name="安徽省"><i class="area-arrow-icon"></i><p class="flex1">安徽省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="1166" data-name="合肥市"><p class="flex1">合肥市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1177" data-name="芜湖市"><p class="flex1">芜湖市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1186" data-name="蚌埠市"><p class="flex1">蚌埠市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1195" data-name="淮南市"><p class="flex1">淮南市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1203" data-name="马鞍山市"><p class="flex1">马鞍山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1209" data-name="淮北市"><p class="flex1">淮北市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1215" data-name="铜陵市"><p class="flex1">铜陵市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1221" data-name="安庆市"><p class="flex1">安庆市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1234" data-name="黄山市"><p class="flex1">黄山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1243" data-name="滁州市"><p class="flex1">滁州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1253" data-name="阜阳市"><p class="flex1">阜阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1263" data-name="宿州市"><p class="flex1">宿州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1276" data-name="六安市"><p class="flex1">六安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1285" data-name="亳州市"><p class="flex1">亳州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1291" data-name="池州市"><p class="flex1">池州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1297" data-name="宣城市"><p class="flex1">宣城市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="1306" data-name="福建省"><i class="area-arrow-icon"></i><p class="flex1">福建省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="1307" data-name="福州市"><p class="flex1">福州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1322" data-name="厦门市"><p class="flex1">厦门市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1330" data-name="莆田市"><p class="flex1">莆田市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1337" data-name="三明市"><p class="flex1">三明市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1351" data-name="泉州市"><p class="flex1">泉州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1365" data-name="漳州市"><p class="flex1">漳州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1378" data-name="南平市"><p class="flex1">南平市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1390" data-name="龙岩市"><p class="flex1">龙岩市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1399" data-name="宁德市"><p class="flex1">宁德市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="1410" data-name="江西省"><i class="area-arrow-icon"></i><p class="flex1">江西省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="1411" data-name="南昌市"><p class="flex1">南昌市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1425" data-name="景德镇市"><p class="flex1">景德镇市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1431" data-name="萍乡市"><p class="flex1">萍乡市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1438" data-name="九江市"><p class="flex1">九江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1452" data-name="新余市"><p class="flex1">新余市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1456" data-name="鹰潭市"><p class="flex1">鹰潭市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1461" data-name="赣州市"><p class="flex1">赣州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1482" data-name="吉安市"><p class="flex1">吉安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1497" data-name="宜春市"><p class="flex1">宜春市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1509" data-name="抚州市"><p class="flex1">抚州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1522" data-name="上饶市"><p class="flex1">上饶市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="1536" data-name="山东省"><i class="area-arrow-icon"></i><p class="flex1">山东省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="1537" data-name="济南市"><p class="flex1">济南市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1549" data-name="青岛市"><p class="flex1">青岛市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1564" data-name="淄博市"><p class="flex1">淄博市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1574" data-name="枣庄市"><p class="flex1">枣庄市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1582" data-name="东营市"><p class="flex1">东营市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1591" data-name="烟台市"><p class="flex1">烟台市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1605" data-name="潍坊市"><p class="flex1">潍坊市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1620" data-name="济宁市"><p class="flex1">济宁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1634" data-name="泰安市"><p class="flex1">泰安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1642" data-name="威海市"><p class="flex1">威海市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1648" data-name="日照市"><p class="flex1">日照市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1654" data-name="莱芜市"><p class="flex1">莱芜市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1658" data-name="临沂市"><p class="flex1">临沂市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1672" data-name="德州市"><p class="flex1">德州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1686" data-name="聊城市"><p class="flex1">聊城市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1696" data-name="滨州市"><p class="flex1">滨州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1705" data-name="菏泽市"><p class="flex1">菏泽市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="1716" data-name="河南省"><i class="area-arrow-icon"></i><p class="flex1">河南省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="1717" data-name="郑州市"><p class="flex1">郑州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1733" data-name="开封市"><p class="flex1">开封市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1745" data-name="洛阳市"><p class="flex1">洛阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1761" data-name="平顶山市"><p class="flex1">平顶山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1773" data-name="安阳市"><p class="flex1">安阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1784" data-name="鹤壁市"><p class="flex1">鹤壁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1791" data-name="新乡市"><p class="flex1">新乡市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1805" data-name="焦作市"><p class="flex1">焦作市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1814" data-name="济源市"><p class="flex1">济源市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1818" data-name="濮阳市"><p class="flex1">濮阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1826" data-name="许昌市"><p class="flex1">许昌市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1834" data-name="漯河市"><p class="flex1">漯河市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1841" data-name="三门峡市"><p class="flex1">三门峡市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1849" data-name="南阳市"><p class="flex1">南阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1864" data-name="商丘市"><p class="flex1">商丘市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1875" data-name="信阳市"><p class="flex1">信阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1887" data-name="周口市"><p class="flex1">周口市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1899" data-name="驻马店市"><p class="flex1">驻马店市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="1911" data-name="湖北省"><i class="area-arrow-icon"></i><p class="flex1">湖北省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="1912" data-name="武汉市"><p class="flex1">武汉市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1927" data-name="黄石市"><p class="flex1">黄石市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1935" data-name="十堰市"><p class="flex1">十堰市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1946" data-name="宜昌市"><p class="flex1">宜昌市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1963" data-name="襄阳市"><p class="flex1">襄阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1974" data-name="鄂州市"><p class="flex1">鄂州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1979" data-name="荆门市"><p class="flex1">荆门市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1986" data-name="孝感市"><p class="flex1">孝感市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="1995" data-name="荆州市"><p class="flex1">荆州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2005" data-name="黄冈市"><p class="flex1">黄冈市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2017" data-name="咸宁市"><p class="flex1">咸宁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2026" data-name="随州市"><p class="flex1">随州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2031" data-name="恩施土家族苗族自治州"><p class="flex1">恩施土家族苗族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2041" data-name="仙桃市"><p class="flex1">仙桃市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2042" data-name="潜江市"><p class="flex1">潜江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2043" data-name="天门市"><p class="flex1">天门市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2044" data-name="神农架林区"><p class="flex1">神农架林区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2045" data-name="湖南省"><i class="area-arrow-icon"></i><p class="flex1">湖南省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="2046" data-name="长沙市"><p class="flex1">长沙市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2057" data-name="株洲市"><p class="flex1">株洲市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2068" data-name="湘潭市"><p class="flex1">湘潭市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2075" data-name="衡阳市"><p class="flex1">衡阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2089" data-name="邵阳市"><p class="flex1">邵阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2103" data-name="岳阳市"><p class="flex1">岳阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2114" data-name="常德市"><p class="flex1">常德市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2125" data-name="张家界市"><p class="flex1">张家界市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2131" data-name="益阳市"><p class="flex1">益阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2139" data-name="郴州市"><p class="flex1">郴州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2152" data-name="永州市"><p class="flex1">永州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2165" data-name="怀化市"><p class="flex1">怀化市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2179" data-name="娄底市"><p class="flex1">娄底市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2186" data-name="湘西土家族苗族自治州"><p class="flex1">湘西土家族苗族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2196" data-name="广东省"><i class="area-arrow-icon"></i><p class="flex1">广东省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="2197" data-name="广州市"><p class="flex1">广州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2212" data-name="韶关市"><p class="flex1">韶关市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2224" data-name="深圳市"><p class="flex1">深圳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2232" data-name="珠海市"><p class="flex1">珠海市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2239" data-name="汕头市"><p class="flex1">汕头市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2248" data-name="佛山市"><p class="flex1">佛山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2255" data-name="江门市"><p class="flex1">江门市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2264" data-name="湛江市"><p class="flex1">湛江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2275" data-name="茂名市"><p class="flex1">茂名市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2283" data-name="肇庆市"><p class="flex1">肇庆市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2293" data-name="惠州市"><p class="flex1">惠州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2300" data-name="梅州市"><p class="flex1">梅州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2310" data-name="汕尾市"><p class="flex1">汕尾市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2316" data-name="河源市"><p class="flex1">河源市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2324" data-name="阳江市"><p class="flex1">阳江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2330" data-name="清远市"><p class="flex1">清远市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2340" data-name="东莞市"><p class="flex1">东莞市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2341" data-name="中山市"><p class="flex1">中山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2342" data-name="潮州市"><p class="flex1">潮州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2348" data-name="揭阳市"><p class="flex1">揭阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2356" data-name="云浮市"><p class="flex1">云浮市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2363" data-name="广西壮族自治区"><i class="area-arrow-icon"></i><p class="flex1">广西壮族自治区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="2364" data-name="南宁市"><p class="flex1">南宁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2378" data-name="柳州市"><p class="flex1">柳州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2390" data-name="桂林市"><p class="flex1">桂林市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2409" data-name="梧州市"><p class="flex1">梧州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2418" data-name="北海市"><p class="flex1">北海市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2424" data-name="防城港市"><p class="flex1">防城港市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2430" data-name="钦州市"><p class="flex1">钦州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2436" data-name="贵港市"><p class="flex1">贵港市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2443" data-name="玉林市"><p class="flex1">玉林市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2451" data-name="百色市"><p class="flex1">百色市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2465" data-name="贺州市"><p class="flex1">贺州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2471" data-name="河池市"><p class="flex1">河池市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2484" data-name="来宾市"><p class="flex1">来宾市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2492" data-name="崇左市"><p class="flex1">崇左市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2501" data-name="海南省"><i class="area-arrow-icon"></i><p class="flex1">海南省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="2502" data-name="海口市"><p class="flex1">海口市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2508" data-name="三亚市"><p class="flex1">三亚市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2509" data-name="五指山市"><p class="flex1">五指山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2510" data-name="琼海市"><p class="flex1">琼海市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2511" data-name="儋州市"><p class="flex1">儋州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2512" data-name="文昌市"><p class="flex1">文昌市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2513" data-name="万宁市"><p class="flex1">万宁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2514" data-name="东方市"><p class="flex1">东方市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2515" data-name="定安县"><p class="flex1">定安县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2516" data-name="屯昌县"><p class="flex1">屯昌县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2517" data-name="澄迈县"><p class="flex1">澄迈县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2518" data-name="临高县"><p class="flex1">临高县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2519" data-name="白沙黎族自治县"><p class="flex1">白沙黎族自治县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2520" data-name="昌江黎族自治县"><p class="flex1">昌江黎族自治县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2521" data-name="乐东黎族自治县"><p class="flex1">乐东黎族自治县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2522" data-name="陵水黎族自治县"><p class="flex1">陵水黎族自治县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2523" data-name="保亭黎族苗族自治县"><p class="flex1">保亭黎族苗族自治县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2524" data-name="琼中黎族苗族自治县"><p class="flex1">琼中黎族苗族自治县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2525" data-name="西沙群岛"><p class="flex1">西沙群岛</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2526" data-name="南沙群岛"><p class="flex1">南沙群岛</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2527" data-name="中沙群岛的岛礁及其海域"><p class="flex1">中沙群岛的岛礁及其海域</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2573" data-name="四川省"><i class="area-arrow-icon"></i><p class="flex1">四川省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="2574" data-name="成都市"><p class="flex1">成都市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2595" data-name="自贡市"><p class="flex1">自贡市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2603" data-name="攀枝花市"><p class="flex1">攀枝花市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2610" data-name="泸州市"><p class="flex1">泸州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2619" data-name="德阳市"><p class="flex1">德阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2627" data-name="绵阳市"><p class="flex1">绵阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2639" data-name="广元市"><p class="flex1">广元市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2648" data-name="遂宁市"><p class="flex1">遂宁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2655" data-name="内江市"><p class="flex1">内江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2662" data-name="乐山市"><p class="flex1">乐山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2675" data-name="南充市"><p class="flex1">南充市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2686" data-name="眉山市"><p class="flex1">眉山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2694" data-name="宜宾市"><p class="flex1">宜宾市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2706" data-name="广安市"><p class="flex1">广安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2714" data-name="达州市"><p class="flex1">达州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2723" data-name="雅安市"><p class="flex1">雅安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2733" data-name="巴中市"><p class="flex1">巴中市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2739" data-name="资阳市"><p class="flex1">资阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2745" data-name="阿坝藏族羌族自治州"><p class="flex1">阿坝藏族羌族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2760" data-name="甘孜藏族自治州"><p class="flex1">甘孜藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2780" data-name="凉山彝族自治州"><p class="flex1">凉山彝族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2799" data-name="贵州省"><i class="area-arrow-icon"></i><p class="flex1">贵州省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="2800" data-name="贵阳市"><p class="flex1">贵阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2813" data-name="六盘水市"><p class="flex1">六盘水市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2819" data-name="遵义市"><p class="flex1">遵义市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2835" data-name="安顺市"><p class="flex1">安顺市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2843" data-name="铜仁地区"><p class="flex1">铜仁地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2855" data-name="黔西南布依族苗族自治州"><p class="flex1">黔西南布依族苗族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2865" data-name="毕节地区"><p class="flex1">毕节地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2875" data-name="黔东南苗族侗族自治州"><p class="flex1">黔东南苗族侗族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2893" data-name="黔南布依族苗族自治州"><p class="flex1">黔南布依族苗族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="2907" data-name="云南省"><i class="area-arrow-icon"></i><p class="flex1">云南省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="2908" data-name="昆明市"><p class="flex1">昆明市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2924" data-name="曲靖市"><p class="flex1">曲靖市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2935" data-name="玉溪市"><p class="flex1">玉溪市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2946" data-name="保山市"><p class="flex1">保山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2953" data-name="昭通市"><p class="flex1">昭通市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2966" data-name="丽江市"><p class="flex1">丽江市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2973" data-name="普洱市"><p class="flex1">普洱市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2985" data-name="临沧市"><p class="flex1">临沧市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="2995" data-name="楚雄彝族自治州"><p class="flex1">楚雄彝族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3007" data-name="红河哈尼族彝族自治州"><p class="flex1">红河哈尼族彝族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3022" data-name="文山壮族苗族自治州"><p class="flex1">文山壮族苗族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3032" data-name="西双版纳傣族自治州"><p class="flex1">西双版纳傣族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3037" data-name="大理白族自治州"><p class="flex1">大理白族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3051" data-name="德宏傣族景颇族自治州"><p class="flex1">德宏傣族景颇族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3058" data-name="怒江傈僳族自治州"><p class="flex1">怒江傈僳族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3064" data-name="迪庆藏族自治州"><p class="flex1">迪庆藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3069" data-name="西藏自治区"><i class="area-arrow-icon"></i><p class="flex1">西藏自治区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3070" data-name="拉萨市"><p class="flex1">拉萨市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3080" data-name="昌都地区"><p class="flex1">昌都地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3093" data-name="山南地区"><p class="flex1">山南地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3107" data-name="日喀则地区"><p class="flex1">日喀则地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3127" data-name="那曲地区"><p class="flex1">那曲地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3139" data-name="阿里地区"><p class="flex1">阿里地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3148" data-name="林芝地区"><p class="flex1">林芝地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3157" data-name="陕西省"><i class="area-arrow-icon"></i><p class="flex1">陕西省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3158" data-name="西安市"><p class="flex1">西安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3173" data-name="铜川市"><p class="flex1">铜川市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3179" data-name="宝鸡市"><p class="flex1">宝鸡市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3193" data-name="咸阳市"><p class="flex1">咸阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3209" data-name="渭南市"><p class="flex1">渭南市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3222" data-name="延安市"><p class="flex1">延安市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3237" data-name="汉中市"><p class="flex1">汉中市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3250" data-name="榆林市"><p class="flex1">榆林市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3264" data-name="安康市"><p class="flex1">安康市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3276" data-name="商洛市"><p class="flex1">商洛市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3285" data-name="甘肃省"><i class="area-arrow-icon"></i><p class="flex1">甘肃省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3286" data-name="兰州市"><p class="flex1">兰州市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3296" data-name="嘉峪关市"><p class="flex1">嘉峪关市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3297" data-name="金昌市"><p class="flex1">金昌市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3301" data-name="白银市"><p class="flex1">白银市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3308" data-name="天水市"><p class="flex1">天水市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3317" data-name="武威市"><p class="flex1">武威市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3323" data-name="张掖市"><p class="flex1">张掖市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3331" data-name="平凉市"><p class="flex1">平凉市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3340" data-name="酒泉市"><p class="flex1">酒泉市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3349" data-name="庆阳市"><p class="flex1">庆阳市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3359" data-name="定西市"><p class="flex1">定西市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3368" data-name="陇南市"><p class="flex1">陇南市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3379" data-name="临夏回族自治州"><p class="flex1">临夏回族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3389" data-name="甘南藏族自治州"><p class="flex1">甘南藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3399" data-name="青海省"><i class="area-arrow-icon"></i><p class="flex1">青海省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3400" data-name="西宁市"><p class="flex1">西宁市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3409" data-name="海东地区"><p class="flex1">海东地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3417" data-name="海北藏族自治州"><p class="flex1">海北藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3423" data-name="黄南藏族自治州"><p class="flex1">黄南藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3429" data-name="海南藏族自治州"><p class="flex1">海南藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3436" data-name="果洛藏族自治州"><p class="flex1">果洛藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3444" data-name="玉树藏族自治州"><p class="flex1">玉树藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3452" data-name="海西蒙古族藏族自治州"><p class="flex1">海西蒙古族藏族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3459" data-name="宁夏回族自治区"><i class="area-arrow-icon"></i><p class="flex1">宁夏回族自治区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3460" data-name="银川市"><p class="flex1">银川市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3468" data-name="石嘴山市"><p class="flex1">石嘴山市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3473" data-name="吴忠市"><p class="flex1">吴忠市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3480" data-name="固原市"><p class="flex1">固原市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3487" data-name="中卫市"><p class="flex1">中卫市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3492" data-name="新疆维吾尔自治区"><i class="area-arrow-icon"></i><p class="flex1">新疆维吾尔自治区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3493" data-name="乌鲁木齐市"><p class="flex1">乌鲁木齐市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3504" data-name="克拉玛依市"><p class="flex1">克拉玛依市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3510" data-name="吐鲁番地区"><p class="flex1">吐鲁番地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3515" data-name="哈密地区"><p class="flex1">哈密地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3520" data-name="昌吉回族自治州"><p class="flex1">昌吉回族自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3530" data-name="博尔塔拉蒙古自治州"><p class="flex1">博尔塔拉蒙古自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3535" data-name="巴音郭楞蒙古自治州"><p class="flex1">巴音郭楞蒙古自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3546" data-name="阿克苏地区"><p class="flex1">阿克苏地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3557" data-name="克孜勒苏柯尔克孜自治州"><p class="flex1">克孜勒苏柯尔克孜自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3563" data-name="喀什地区"><p class="flex1">喀什地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3577" data-name="和田地区"><p class="flex1">和田地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3587" data-name="伊犁哈萨克自治州"><p class="flex1">伊犁哈萨克自治州</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3599" data-name="塔城地区"><p class="flex1">塔城地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3608" data-name="阿勒泰地区"><p class="flex1">阿勒泰地区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3617" data-name="石河子市"><p class="flex1">石河子市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3618" data-name="阿拉尔市"><p class="flex1">阿拉尔市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3619" data-name="图木舒克市"><p class="flex1">图木舒克市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3620" data-name="五家渠市"><p class="flex1">五家渠市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3621" data-name="台湾省"><i class="area-arrow-icon"></i><p class="flex1">台湾省</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3622" data-name="台北市"><p class="flex1">台北市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3636" data-name="高雄市"><p class="flex1">高雄市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3649" data-name="台南市"><p class="flex1">台南市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3657" data-name="台中市"><p class="flex1">台中市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3667" data-name="金门县"><p class="flex1">金门县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3668" data-name="南投县"><p class="flex1">南投县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3669" data-name="基隆市"><p class="flex1">基隆市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3678" data-name="新竹市"><p class="flex1">新竹市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3683" data-name="嘉义市"><p class="flex1">嘉义市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3687" data-name="新北市"><p class="flex1">新北市</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3688" data-name="宜兰县"><p class="flex1">宜兰县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3689" data-name="新竹县"><p class="flex1">新竹县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3690" data-name="桃园县"><p class="flex1">桃园县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3691" data-name="苗栗县"><p class="flex1">苗栗县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3692" data-name="彰化县"><p class="flex1">彰化县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3693" data-name="嘉义县"><p class="flex1">嘉义县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3694" data-name="云林县"><p class="flex1">云林县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3695" data-name="屏东县"><p class="flex1">屏东县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3696" data-name="台东县"><p class="flex1">台东县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3697" data-name="花莲县"><p class="flex1">花莲县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3698" data-name="澎湖县"><p class="flex1">澎湖县</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3699" data-name="香港特别行政区"><i class="area-arrow-icon"></i><p class="flex1">香港特别行政区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3700" data-name="香港岛"><p class="flex1">香港岛</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3705" data-name="九龙"><p class="flex1">九龙</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3711" data-name="新界"><p class="flex1">新界</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div>
+            <div class="area-province mt4">
+                <div class="area-detail province" data-id="3721" data-name="澳门特别行政区"><i class="area-arrow-icon"></i><p class="flex1">澳门特别行政区</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-city">
+                <div class="area-detail" data-id="3722" data-name="澳门半岛"><p class="flex1">澳门半岛</p><a href="javascript:void(0)" class="area-choice-icon"></a></div>
+                <div class="area-detail" data-id="3723" data-name="离岛"><p class="flex1">离岛</p><a href="javascript:void(0)" class="area-choice-icon"></a></div></div></div></div>
+        <div class="areas-btn parbox center white-bg">
+            <a href="javascript:void(0)" class="flex1 fs14 ac area-cancle" id="areaCancle">取消</a>
+            <a href="javascript:void(0)" class="flex1 fs14 ac area-save" id="areaSave">确定</a>
+        </div>
+    </div>
+    <div style="height:55px;"></div>
+</div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("agent/agentApply.js")
+}

@@ -1,0 +1,501 @@
+﻿@{
+    ViewBag.Title = "区域负责人首页";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("service/service_index.css")
+}
+
+<section class="Bg_box">
+    <header class="Title_box">
+        <div class="Personal">
+            <img class="myLogo" src="/Content/images/serviceImage/my.png" />
+        </div>
+
+        <div class="Title">malls管理平台</div>
+    </header>
+    <div class="section_box">
+        <div class="identity_box">
+
+            <div class="identity_top">
+                <span class="identity_logo">
+                    <img class="Service-logo" src="/Content/images/serviceImage/服务号-logo.png" alt="Alternate Text" />
+                </span>
+                <span class="identity">我是区域负责人</span>
+            </div>
+            <div class="identity_buttom">
+                <span class="identity_one">负责 <span class="identity_two">188</span> 家店铺</span>
+            </div>
+        </div>
+        <div class="Stores">
+            <div class="Stores_top">
+                <div class="Stores_Left"></div>
+                <div class="Stores_name_box">
+                    <span class="Stores_icon">
+                        <img class="Stores_img" src="/Content/images/serviceImage/区域店铺.png" alt="Alternate Text" />
+                    </span>
+                    <span class="Stores_name">区域店铺</span>
+                </div>
+                <a href="#" class="Stores_show">
+                    <span class="Stores_A">查看明细</span>
+                    <span class="Stores_B">
+                        <img class="Stores_Jt" src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                    </span>
+                </a>
+            </div>
+            <div class="Stores_buttom">
+                <div class="Stores_left">
+                    <h3>12</h3>
+                    <p class="Stores_num">本月新增(家)</p>
+                </div>
+                <div class="Stores_right Stores_left">
+                    <h3>188</h3>
+                    <p class="Stores_num">总计(家)</p>
+                </div>
+            </div>
+        </div>
+        <div class="ranking_Bigbox">
+            <div class="Stores_top">
+                <div class="Stores_Left"></div>
+                <div class="Stores_name_box">
+                    <span class="Stores_icon">
+                        <img class="Stores_img" src="/Content/images/serviceImage/排行榜.png" alt="Alternate Text" />
+                    </span>
+                    <span class="Stores_name">排行榜</span>
+                </div>
+                <a href="#" class="Stores_show"></a>
+            </div>
+            <ul class="ranking_box">
+                <li class="ranking_list">
+                    <a href="#">
+                        <span class="ranking_icon">
+                            <img class="ranking_img" src="/Content/images/serviceImage/店铺充值.png" alt="Alternate Text" />
+                        </span>
+                        <span class="ranking_jian">
+                            <img class="ranking_Jt" src="/Content/images/serviceImage/箭头蓝色.png" alt="Alternate Text" />
+                        </span>
+                    </a>
+                    <p class="ranking_fenlei">店铺充值排行榜</p>
+                </li>
+                <li class="ranking_list">
+                    <a href="#">
+                        <span class="ranking_icon">
+                            <img class="ranking_img" src="/Content/images/serviceImage/店铺销售.png" alt="Alternate Text" />
+                        </span>
+                        <span class="ranking_jian">
+                            <img class="ranking_Jt" src="/Content/images/serviceImage/箭头蓝色.png" alt="Alternate Text" />
+                        </span>
+                    </a>
+                    <p class="ranking_fenlei">店铺销售排行榜</p>
+                </li>
+                <li class="ranking_list">
+                    <a href="#">
+                        <span class="ranking_icon">
+                            <img class="ranking_img" src="/Content/images/serviceImage/商品销售.png" alt="Alternate Text" />
+                        </span>
+                        <span class="ranking_jian">
+                            <img class="ranking_Jt" src="/Content/images/serviceImage/箭头蓝色.png" alt="Alternate Text" />
+                        </span>
+                    </a>
+                    <p class="ranking_fenlei">商品销售排行榜</p>
+                </li>
+            </ul>
+        </div>
+        <div class="Top-up_box">
+            <div class="Stores_top">
+                <div class="Stores_Left"></div>
+                <div class="Stores_name_box">
+                    <span class="Stores_icon">
+                        <img class="Stores_img" src="/Content/images/serviceImage/充值总计.png" alt="Alternate Text" />
+                    </span>
+                    <span class="Stores_name">充值总计</span>
+                </div>
+                <a href="#" class="Stores_show">
+                    <span class="Stores_A">查看详情</span>
+                    <span class="Stores_B">
+                        <img class="Stores_Jt" src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                    </span>
+                </a>
+            </div>
+            <div class="Top-up_section">
+                <div class="tables_bgbox">
+                    <table class="table_box">
+                        <thead>
+                            <tr>
+                                <th class="th_Title"></th>
+                                <th class="th_Title">本月</th>
+                                <th class="th_Title">环比增长</th>
+                                <th class="th_Title">总计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td_name">会员数</td>
+                                <td class="td_num">12</td>
+                                <td class="td_num">17.41%</td>
+                                <td class="td_num">134</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">充值笔次</td>
+                                <td class="td_num">14</td>
+                                <td class="td_num">18.46%</td>
+                                <td class="td_num">168</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">充值额</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="detail_box">
+                <div class="detail_bai"></div>
+                <div class="detail">
+                    <span class="detail_dian"></span>
+                    <span class="detail_name">店铺充值明细</span>
+                </div>
+                <a href="#" class="detail-Tiao">
+                    <span class="detail_A">查看明细</span>
+                    <span class="detail_B">
+                        <img class="detail_B_img" src="/Content/images/serviceImage/箭头灰色.png" alt="" />
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="Sales">
+            <div class="Stores_top">
+                <div class="Stores_Left"></div>
+                <div class="Stores_name_box">
+                    <span class="Stores_icon">
+                        <img class="Stores_img" src="/Content/images/serviceImage/销售总计.png" alt="Alternate Text" />
+                    </span>
+                    <span class="Stores_name">销售总计</span>
+                </div>
+                <a href="#" class="Stores_show">
+                    <span class="Stores_A">查看明细</span>
+                    <span class="Stores_B">
+                        <img class="Stores_Jt" src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                    </span>
+                </a>
+            </div>
+            <div class="Top-up_section Top-up_section_Title">
+                <div class="detail_box detail_Title">
+                    <div class="detail">
+                        <span class="detail_dian"></span>
+                        <span class="detail_name detail_Title_name">订单销量额</span>
+                    </div>
+                    <a href="#" class="detail-Tiao detail-padding">
+                        <span class="detail_A detail_Title_name">查看明细</span>
+                        <span class="detail_B">
+                            <img class="detail_B_img" src="/Content/images/serviceImage/箭头灰色.png" alt="" />
+                        </span>
+                    </a>
+                </div>
+
+                <div class="tables_bgbox">
+                    <table class="table_box">
+                        <thead>
+                            <tr>
+                                <th class="th_Title"></th>
+                                <th class="th_Title">本月</th>
+                                <th class="th_Title">环比增长</th>
+                                <th class="th_Title">总计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td_name">会员数</td>
+                                <td class="td_num">12</td>
+                                <td class="td_num">17.41%</td>
+                                <td class="td_num">134</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">充值笔次</td>
+                                <td class="td_num">14</td>
+                                <td class="td_num">18.46%</td>
+                                <td class="td_num">168</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">充值额</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="detail_box detail_Title">
+                    <div class="detail">
+                        <span class="detail_dian"></span>
+                        <span class="detail_name detail_Title_name">订单销售额</span>
+                    </div>
+                    <a href="#" class="detail-Tiao detail-padding">
+                        <span class="detail_A detail_Title_name">查看明细</span>
+                        <span class="detail_B">
+                            <img class="detail_B_img" src="/Content/images/serviceImage/箭头灰色.png" alt="" />
+                        </span>
+                    </a>
+                </div>
+                <div class="tables_bgbox">
+                    <table class="table_box">
+                        <thead>
+                            <tr>
+                                <th class="th_Title"></th>
+                                <th class="th_Title">本月</th>
+                                <th class="th_Title">环比增长</th>
+                                <th class="th_Title">总计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td_name">订单销售额-境内</td>
+                                <td class="td_num">12</td>
+                                <td class="td_num">17.41%</td>
+                                <td class="td_num">134</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">订单销售额-海外购</td>
+                                <td class="td_num">14</td>
+                                <td class="td_num">18.46%</td>
+                                <td class="td_num">168</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">订单销售额-总计</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="detail_box detail_Title">
+                    <div class="detail">
+                        <span class="detail_dian"></span>
+                        <span class="detail_name detail_Title_name">标准销售额</span>
+                    </div>
+                    <a href="#" class="detail-Tiao detail-padding">
+                        <span class="detail_A detail_Title_name">查看明细</span>
+                        <span class="detail_B">
+                            <img class="detail_B_img" src="/Content/images/serviceImage/箭头灰色.png" alt="" />
+                        </span>
+                    </a>
+                </div>
+                <div class="tables_bgbox">
+                    <table class="table_box">
+                        <thead>
+                            <tr>
+                                <th class="th_Title"></th>
+                                <th class="th_Title">本月</th>
+                                <th class="th_Title">环比增长</th>
+                                <th class="th_Title">总计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td_name">标准销售额-境内</td>
+                                <td class="td_num">12</td>
+                                <td class="td_num">17.41%</td>
+                                <td class="td_num">134</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">标准销售额-海外购</td>
+                                <td class="td_num">14</td>
+                                <td class="td_num">18.46%</td>
+                                <td class="td_num">168</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">标准销售额-总计</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="detail_box">
+                <div class="detail_bai"></div>
+                <div class="detail">
+                    <span class="detail_dian"></span>
+                    <span class="detail_name">店铺销售明细</span>
+                </div>
+                <a href="#" class="detail-Tiao">
+                    <span class="detail_A">查看明细</span>
+                    <span class="detail_B">
+                        <img class="detail_B_img" src="/Content/images/serviceImage/箭头灰色.png" alt="" />
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="Management">
+            <div class="Stores_top">
+                <div class="Stores_Left"></div>
+                <div class="Stores_name_box">
+                    <span class="Stores_icon">
+                        <img class="Stores_img" src="/Content/images/serviceImage/经营回馈.png" alt="Alternate Text" />
+                    </span>
+                    <span class="Stores_name">经营回馈总计</span>
+                </div>
+                <a href="#" class="Stores_show">
+                    <span class="Stores_A">查看明细</span>
+                    <span class="Stores_B">
+                        <img class="Stores_Jt" src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                    </span>
+                </a>
+            </div>
+            <div class="Top-up_section">
+                <div class="tables_bgbox">
+                    <table class="table_box">
+                        <thead>
+                            <tr>
+                                <th class="th_Title"></th>
+                                <th class="th_Title">本月待结算</th>
+                                <th class="th_Title">上月待结算</th>
+                                <th class="th_Title">已结算</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td_name">会员经营回馈</td>
+                                <td class="td_num">12</td>
+                                <td class="td_num">17.41%</td>
+                                <td class="td_num">134</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">店主经营回馈</td>
+                                <td class="td_num">14</td>
+                                <td class="td_num">18.46%</td>
+                                <td class="td_num">168</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">运营商经营回馈</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">投资引荐人经营回馈</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">经营回馈-总计</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+            <div class="detail_box">
+                <div class="detail_bai"></div>
+                <div class="detail">
+                    <span class="detail_dian"></span>
+                    <span class="detail_name">店铺充值明细</span>
+                </div>
+                <a href="#" class="detail-Tiao">
+                    <span class="detail_A">查看明细</span>
+                    <span class="detail_B">
+                        <img class="detail_B_img" src="/Content/images/serviceImage/箭头灰色.png" alt="" />
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<div class="Mask">
+    <div class="Mask_Left">
+        <div class="Mask_left_top">
+            <div class="Mask_top_box">
+                <div class="Mask_img_box">
+                    
+                </div>
+                <div class="Mask_bj">
+                    <h4 class="Mask_name">韩信</h4>
+                    <span class="Mask_redact">
+                        <img src="/Content/images/serviceImage/笔.png" alt="Alternate Text" />
+                    </span>
+                    <input class="bj_input" type="text" name="" placeholder="请输入昵称"/>
+                </div>
+            </div>
+        </div>
+        <div class="Mask_buttom">
+            <ul class="Mask_ul">
+                <li class="Mask_list">
+                    <a href="#" class="Mask_list_A">
+                        <div class="Mask_list_left">
+                            <div class="Mask_icon">
+                                <img src="/Content/images/serviceImage/iphone.png" alt="Alternate Text" />
+                            </div>
+                            <span class="Mask_text">绑定手机号</span>
+                        </div>
+                        <div class="Mask_list_right">
+                            <span class="Mask_list_number">
+                                13478569369
+                            </span>
+                            <span class="Mask_Jt">
+                                <img src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="Mask_list">
+                    <a href="#" class="Mask_list_A">
+                        <div class="Mask_list_left">
+                            <div class="Mask_icon">
+                                <img src="/Content/images/serviceImage/银行卡.png" alt="Alternate Text" />
+                            </div>
+                            <span class="Mask_text">我的银行卡</span>
+                        </div>
+                        <div class="Mask_list_right">
+                            <span class="Mask_Jt">
+                                <img src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="Mask_list">
+                    <a href="#" class="Mask_list_A">
+                        <div class="Mask_list_left">
+                            <div class="Mask_icon">
+                                <img src="/Content/images/serviceImage/密码.png" alt="Alternate Text" />
+                            </div>
+                            <span class="Mask_text">密码</span>
+                        </div>
+                        <div class="Mask_list_right">
+                            <span class="Mask_Jt">
+                                <img src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="Mask_list">
+                    <span class="Mask_update">
+                        更新时间
+                        <span class="Mask_date">2016/12/12</span>
+                        <span class="Mask_Time">13:33:35</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <button class="Mask_out">
+            退出登录
+        </button>  
+    </div>
+    <div class="Mask_right"></div>
+</div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("service/rem.js")
+    @WebHelper4H5.RegisterScripts("service/service_index.js")
+}
+

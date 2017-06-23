@@ -1,0 +1,27 @@
+﻿.StoreItem {padding:10px 15px;border:1px solid #f0f0f0;}
+.StoreItem .StoreLeft p { font-size: 14px !important; margin: 0 !important;line-height: 24px;}
+.StoreItem .StoreLeft .StoreName .StoreMoney {text-align: right;height: auto;width: 100%;color: #e74a4a;line-height: 24px;background-color: #fff;vertical-align: middle;margin-right: 0px;} 
+.nodata_shop {font-size: 1rem !important;} 
+.nodatatip {padding:0.8rem 0.8rem !important;} 
+.no-icon {width: 6rem !important;height: 6rem !important;background-size: 6rem !important;}
+#map {position: relative;width: 100%;height: 317px !important;}
+/*搜索框*/
+.searchWord {top: 5px;position: absolute;z-index: 200;border: 1px solid #dedede;width: 80%;left: 50%;margin-left: -40%;background: #fff ;border-radius: 5px;overflow: hidden;}
+.searchWord > div {border-radius: 2px;position: relative;}
+.searchWord > span {display: block;font-size:14px;width: 2rem;height: 1.6rem;line-height: 1.6rem;background: #d00000;text-align: center;color: #fff;}
+#keyword {border: none;display: block;width: calc(100% - 1.6rem);height:1.6rem;padding:0 0.8rem;}
+
+.storeAddress{width:200px;background: white;line-height: 19px;padding: 4px;}
+.storeMaster{font-size: 14px;color:#333333;}
+.storeAddress div:last-child{color:#727272;font-size:12px;}
+#storeList {width:100%;height:auto; background:#fff;border-bottom:1px solid #b0afaf;}
+.storeName{font-size: 15px;color:#333;}
+.storeLen{float:right;font-size: 14px;color:#727272;padding-left: 16px;background:url("../../images/location_icon.png") 0px center no-repeat; background-size: 12px;}
+.store{height: auto;padding: 12px 0;margin: 0 12px;border-bottom:1px solid #b0afaf;}
+#storeList a:last-child .store{border-bottom:none;}
+.storeAdd{line-height: 30px;font-size: 14px;color:#727272;}
+/*覆盖api引入样式*/
+.amap_lib_placeSearch_poi { display: none;}     
+.amap-info-content { padding: 5px 10px;border: 1px solid #cf2727;}  
+.amap-info-sharp{background-image:url("../../images/sharp.png");background-size: 30px;}
+.amap-info-outer, .amap-menu-outer {box-shadow: 0 3px 10px rgba(0,0,0,.4);}

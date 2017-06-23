@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "设置支付密码";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/payPwd.css")
+}
+<section class="" id="">
+    <div class="white-bg inputArea">
+        <div class="parbox inputTxt">
+            <span class="input-title fs14">手机号</span>
+            <input class="flex1 fs14" type="tel" id="tel" maxlength="11" />
+        </div>
+        <div class="parbox inputTxt">
+            <span class="input-title fs14">验证码</span>
+            <input class="flex1 fs14" type="tel" id="code" maxlength="6" />
+            <a href="javascript:void(0)" class="fs12" id="upCode">获取验证码</a>
+        </div>
+    </div>
+    <div class="btns">
+        <a class="btnClick" href="javascript:void(0)" id="btnClick">下一步</a>
+    </div>
+</section>
+
+
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/forgetPayPwd.js")
+
+}

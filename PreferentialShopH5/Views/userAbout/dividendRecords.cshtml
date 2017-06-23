@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "经营回馈明细";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @*@WebHelper4H5.RegisterStyles("newStyles/mzui/amazeui.css")*@
+    @WebHelper4H5.RegisterStyles("newStyles/style.css")
+    @WebHelper4H5.RegisterStyles("newStyles/main.css")
+    @WebHelper4H5.RegisterStyles("newStyles/dyl.css")
+    @WebHelper4H5.RegisterStyles("newStyles/wxq.css")
+    @WebHelper4H5.RegisterStyles("newStyles/lsm.css")
+<style type="text/css">
+    .nodata_shop {
+        margin: 5rem auto 5rem;
+        color: #757575;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .no-icon {
+        height: 8rem;
+        width: 8rem;
+        background-size: 8rem;
+    }
+
+    .nodatatip {
+        line-height: 1.6rem;
+        padding: .8rem 1.2rem;
+    }
+</style>
+
+}
+
+<div id="IntegralList">
+    <ul data-bind="foreach:dividendList">
+            <li class="IntegralItem">
+                <div>
+                    <div class="integraltime">
+                        <p data-bind="text:dateName"></p>
+                        <p data-bind="text:timeName"></p>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        <span data-bind="text:amount.toFixed(2)"></span>
+                        <!-- ko if:categoryName =="支出"-->
+                        <span class="fr integral_result" data-bind="text:categoryName"></span>
+                        <!-- /ko -->
+                        <!-- ko if:categoryName =="收入"-->
+                        <span class="fr integral_result fail" data-bind="text:categoryName"></span>
+                        <!-- /ko -->
+                    </p>
+                    <p><span data-bind="text:preferentialShopTradeDetailName"></span>&nbsp;&nbsp;<span data-bind="text:relateNo"></span></p>
+                </div>
+            </li>
+    </ul>
+
+</div>
+<div id="proList"></div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userAbout/dividendRecords.js")
+}

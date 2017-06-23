@@ -1,0 +1,42 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "我的二维码";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css?v1.2")
+}
+<div class="myQrCode">
+    <div class="myQrCodeContent">
+        <div class="userContent">
+            <div class="mr4">
+                <img onerror="this.src = '/Content/images/myAvatar.png'" src="@ViewBag.UserResult.UserPic" alt="@ViewBag.UserResult.NickName" />
+            </div>
+            <div class="flex1">
+                <h2 class="fs28">@ViewBag.UserResult.NickName</h2>
+                <p class="fs24">@(ViewBag.UserResult.ProviderTypeName != "" ? @ViewBag.UserResult.ProviderTypeName : "消费者")</p>
+            </div>
+        </div>
+        <img class="userimg scrollLoading" src="~/Content/Images/load_480_2.png" data-url="@Html.Raw(ViewBag.InvitUrl)" />
+        <p class="fs24 ac warning">充值时给门店扫二维码，获取我的会员信息</p>
+    </div>
+</div>
+
+
+
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("scrollLoading.js")
+    <script type="text/javascript">
+        $(".scrollLoading").scrollLoading();
+    </script>
+}
+
+
+
+

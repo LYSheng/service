@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "店长首页";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("service/service_index.css")
+}
+<section class="Bg_box">
+    <header class="Title_box">
+        <div class="Personal">
+            <img class="myLogo" src="/Content/images/serviceImage/my.png" />
+        </div>
+
+        <div class="Title">malls管理平台</div>
+    </header>
+    <div class="section_box">
+        <div class="identity_box">
+
+            <div class="identity_top">
+                <span class="identity_logo">
+                    <img class="Service-logo" src="/Content/images/serviceImage/服务号-logo.png" alt="Alternate Text" />
+                </span>
+                <span class="identity">我是店长</span>
+            </div>
+            <div class="identity_buttom">
+                <span class="Shop_Name">南通农工路店</span>
+            </div>
+        </div>
+        <div class="Top-up_box">
+            <div class="Stores_top">
+                <div class="Stores_Left"></div>
+                <div class="Stores_name_box">
+                    <span class="Stores_icon">
+                        <img class="Stores_img" src="/Content/images/serviceImage/充值总计.png" alt="Alternate Text" />
+                    </span>
+                    <span class="Stores_name">店铺充值总合计</span>
+                </div>
+                <a href="#" class="Stores_show">
+                    <span class="Stores_A">查看详情</span>
+                    <span class="Stores_B">
+                        <img class="Stores_Jt" src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                    </span>
+                </a>
+            </div>
+            <div class="Top-up_section">
+                <div class="tables_bgbox">
+                    <table class="table_box Clerk_table">
+                        <thead>
+                            <tr>
+                                <th class="th_Title"></th>
+                                <th class="th_Title">本月</th>
+                                <th class="th_Title">环比增长</th>
+                                <th class="th_Title">总计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="td_name">会员数</td>
+                                <td class="td_num">12</td>
+                                <td class="td_num">17.41%</td>
+                                <td class="td_num">134</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">充值笔次</td>
+                                <td class="td_num">14</td>
+                                <td class="td_num">18.46%</td>
+                                <td class="td_num">168</td>
+                            </tr>
+                            <tr>
+                                <td class="td_name">充值额</td>
+                                <td class="td_num">5000</td>
+                                <td class="td_num">25.32%</td>
+                                <td class="td_num">13500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="" class="upload">
+        代用户上传身份证信息
+    </a>
+</section>
+<div class="Mask">
+    <div class="Mask_Left">
+        <div class="Mask_left_top">
+            <div class="Mask_top_box">
+                <div class="Mask_img_box">
+
+                </div>
+                <h4 class="Mask_name">韩信</h4>
+                <span class="Mask_redact">
+                    <img src="/Content/images/serviceImage/笔.png" alt="Alternate Text" />
+                </span>
+            </div>
+        </div>
+        <div class="Mask_buttom">
+            <ul class="Mask_ul">
+                <li class="Mask_list">
+                    <a href="#" class="Mask_list_A">
+                        <div class="Mask_list_left">
+                            <div class="Mask_icon">
+                                <img src="/Content/images/serviceImage/手机.png" alt="Alternate Text" />
+                            </div>
+                            <span class="Mask_text">绑定手机号</span>
+                        </div>
+                        <div class="Mask_list_right">
+                            <span class="Mask_list_number">
+                                13478569369
+                            </span>
+                            <span class="Mask_Jt">
+                                <img src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="Mask_list">
+                    <a href="#" class="Mask_list_A">
+                        <div class="Mask_list_left">
+                            <div class="Mask_icon">
+                                <img src="/Content/images/serviceImage/银行卡.png" alt="Alternate Text" />
+                            </div>
+                            <span class="Mask_text">我的银行卡</span>
+                        </div>
+                        <div class="Mask_list_right">
+                            <span class="Mask_Jt">
+                                <img src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="Mask_list">
+                    <a href="#" class="Mask_list_A">
+                        <div class="Mask_list_left">
+                            <div class="Mask_icon">
+                                <img src="/Content/images/serviceImage/密码.png" alt="Alternate Text" />
+                            </div>
+                            <span class="Mask_text">密码</span>
+                        </div>
+                        <div class="Mask_list_right">
+                            <span class="Mask_Jt">
+                                <img src="/Content/images/serviceImage/箭头灰色.png" alt="Alternate Text" />
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="Mask_list">
+                    <span class="Mask_update">
+                        更新时间
+                        <span class="Mask_date">2016/12/12</span>
+                        <span class="Mask_Time">13:33:35</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <button class="Mask_out">
+            退出登录
+        </button>
+    </div>
+    <div class="Mask_right"></div>
+</div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("service/rem.js")
+    @WebHelper4H5.RegisterScripts("service/service_index.js")
+}

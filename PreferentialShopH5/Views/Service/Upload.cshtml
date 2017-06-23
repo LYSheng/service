@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "身份上传";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("service/Upload.css")
+}
+<section class="section">
+    <ul>
+        <li>
+            <div class="Up_div">
+                <span class="Up_num">用户手机号</span>
+                <span class="Up_mandatory">*</span>
+            </div>
+            <div class="input_box">
+                <input id="Mobile" class="up_input" type="number" name="" placeholder="请输入绑定的手机号" />
+                <span class="up_img">
+                    <img src="/Content/images/serviceImage/放大镜.png" alt="Alternate Text" />
+                </span>
+            </div>
+        </li>
+        <li>
+            <div class="Up_div">
+                <span class="Up_num">用户昵称</span>
+                <span class="Up_mandatory">*</span>
+            </div>
+            <div class="readonly_box">
+                <input readonly="readonly"  id="nickname" class="up_input" type="text" name="" />
+            </div>
+
+        </li>
+        <li>
+            <div class="Up_div">
+                <span class="Up_num">身份证姓名</span>
+                <span class="Up_mandatory">*</span>
+            </div>
+            <div class="input_box">
+                <input class="up_input" type="text" name="" placeholder="请输入身份证姓名" />
+            </div>
+           
+        </li>
+        <li>
+            <div class="Up_div">
+                <span class="Up_num">用户身份证</span>
+                <span class="Up_mandatory">*</span>
+            </div>
+            <div class="input_box">
+                <input class="up_input" type="text" name="" placeholder="请输入身份证号码" />
+            </div>
+        </li>
+        <li>
+            <div class="Up_div">
+                <span class="Up_num">用户身份证图片：</span>
+            </div>
+
+        </li>
+    </ul>
+</section>
+<div class="pop-up">
+    <ul class="pop-ul">
+        <li class="list_top">
+            <div class="list_out"></div>
+            <span class="list_name">请选择您的用户昵称</span>
+            <div class="list_out">
+                <img src="~/Content/images/serviceImage/asd.png" style="height:0.27rem" />
+            </div>
+        </li>
+        <li class="list first">
+            <span class="list_bian"></span>
+            <span class="list_name">土豆</span>
+            <div class="list_yuan"></div>
+        </li>
+        <li class="list">
+            <span class="list_bian"></span>
+            <span class="list_name">菜花</span>
+            <div class="list_yuan"></div>
+        </li>
+        <li class="list">
+            <span class="list_bian"></span>
+            <span class="list_name">小明</span>
+            <div class="list_yuan"></div>
+        </li>
+        <li class="list">
+            <span class="list_bian"></span>
+            <span class="list_name">毛毛虫</span>
+            <div class="list_yuan"></div>
+        </li>
+    </ul>
+</div>
+
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("service/rem.js")
+    @WebHelper4H5.RegisterScripts("service/Upload.js")
+}
+
+

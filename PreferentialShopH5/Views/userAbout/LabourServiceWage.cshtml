@@ -1,0 +1,170 @@
+﻿@{
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @*@WebHelper4H5.RegisterStyles("newStyles/mzui/amazeui.css")*@
+    @WebHelper4H5.RegisterStyles("newStyles/style.css")
+    @WebHelper4H5.RegisterStyles("newStyles/main.css")
+    @WebHelper4H5.RegisterStyles("newStyles/dyl.css")
+    @WebHelper4H5.RegisterStyles("newStyles/wxq.css")
+    @WebHelper4H5.RegisterStyles("newStyles/lsm.css")
+
+    <style>
+        .subs_item .subs_store.subs_ing {
+            background: url("/Content/images/newImages/tt1.png");
+        }
+
+        .subs_item .subs_store.subs_end {
+            background: url("/Content/images/newImages/tt2.png");
+        }
+    </style>
+}
+
+
+<div class="subs_head pad4" style="display: none;">
+    <div>
+        <div>
+            <p>累计充值金额</p>
+            <p>
+                <f>&yen;</f>5000
+            </p>
+        </div>
+
+    </div>
+    <div>
+        <div>
+            <p>累计收益金额</p>
+            <p>
+                <f>&yen;</f>5000
+            </p>
+        </div>
+    </div>
+    <div>
+        <div>
+            <p>累计提现金额</p>
+            <p>
+                <f>&yen;</f>5000
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="subs_list">
+    <ul>
+        @if (ViewBag.InfoList.Length == 0)
+        {
+            <div class="empty">@(ViewBag.ActionType == 0 ? "没有待结算记录" : "没有已结算记录")</div>
+        }
+        else
+        {
+            for (var index = 0; index < ViewBag.InfoList.Length; index++)
+            {
+                var item = ViewBag.InfoList[index];
+                if (@item["earningsType"] != 300)
+                {
+                    <li class="subs_item">
+                    @if (item["isRoofed"])
+                    {
+                        <div class="subs_store subs_end">
+                            <p>@item["investmentCode"]</p>
+                            @if (item["earningsType"] == 100)
+                            {
+                                <p>结束收益</p>
+                            }
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="subs_store subs_ing">
+                            <p>@item["investmentCode"]</p>
+                            @if (item["earningsType"] == 100 || item["earningsType"] == 300)
+                            {
+                                <p>进行中</p>
+                            }
+                        </div>
+                    }
+                    <div class="subs_wrapper">
+                        @if (item["earningsType"] == 100)
+                        {
+                            <div>
+                                <p>充值门店</p>
+                                <p>
+                                    @item["nickName"]
+                                </p>
+                            </div>
+                            <div>
+                                <p>充值金额</p>
+                                <p>
+                                    <f>&yen;</f>@item["investmentAmount"].ToString("0.00")
+                                </p>
+                            </div>
+                            <div>
+                                <p>应回馈额</p>
+                                <p>
+                                    <f>&yen;</f>@item["canDividends"].ToString("0.00")
+                                </p>
+                            </div>
+                            <div>
+                                <p>充值时间</p>
+                                <p>@item["payEndTime"]</p>
+                            </div>
+                        }
+                        @*@if (item["earningsType"] == 300)
+                        {
+                            <div>
+                                <p>合伙门店</p>
+                                <p>
+                                    @item["nickName"]
+                                </p>
+                            </div>
+                            <div>
+                                <p>投入金额</p>
+                                <p>
+                                    <f>&yen;</f>@item["investmentAmount"].ToString("0.00")
+                                </p>
+                            </div>
+                            <div>
+                                <p>年化收益率</p>
+                                <p>
+                                    @((item["annualizedReturn"] * 100).ToString("0.00")) %
+                                </p>
+                            </div>
+                            <div>
+                                <p>回馈比例</p>
+                                <p>
+                                    @((item["dividendsRatio"] * 100).ToString("0.00")) %
+                                </p>
+                            </div>
+                            <div>
+                                <p>投入时间</p>
+                                <p>@item["payEndTime"]</p>
+                            </div>
+                            <div>
+                                <p>结算起止时间</p>
+                                <p>@item["dividendsInterval"]</p>
+                            </div>
+                        }*@
+                        <div>
+                            <p class="subs_price">
+                                @if (ViewBag.ActionType == 1)
+                                {
+                                    <span>已结算:<f>&yen;</f>@item["settledDividends"].ToString("0.00")</span>
+                                }
+                                else
+                                {
+                                    <span>待结算:<f>&yen;</f>@item["settledDividends"].ToString("0.00")</span>
+                                }
+                            </p>
+                            <p class="skips" data-src="/userAbout/earningsDetails?investmentInfoId=@(item["investmentInfoId"])&EarningsType=@(item["earningsType"])&isYetDividends=@(ViewBag.ActionType == 1 ? true : false)"><span class="more_btn">详情</span></p>
+                        </div>
+                    </div>
+                </li>
+                }
+                
+            }
+        }
+    </ul>
+</div>

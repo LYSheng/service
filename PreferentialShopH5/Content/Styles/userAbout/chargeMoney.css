@@ -1,0 +1,121 @@
+﻿
+.accountinfo{
+    margin-top:10px;
+    
+   background-color:#ffffff;
+}
+.accountLbl{
+    padding-left:10px;
+    border-top:1px solid #f2f2f2;
+    border-bottom:1px solid #f2f2f2;
+    color:#ff0000;
+    font-size:0.55rem;
+    height:1.2rem;
+    line-height:1.2rem;
+}
+.accountName,.accountType,.info-cardNum{
+    padding-left:10px;
+    font-size:0.55rem;
+        height:1.2rem;
+    line-height:1.2rem;
+}
+.bottomInfo-line{
+    height:1px;
+    background-color:#f2f2f2;
+    margin-left:10px;
+}
+.accountName span,.accountType span,.info-cardNum span{
+    padding-left:10px;
+}
+.accountChargeArea{
+    margin-top:10px;
+    background-color:#ffffff;
+}
+.accountMoneyLbl{
+    color:#ff0000;
+      height:1.2rem;
+    line-height:1.2rem;
+    font-size:0.55rem;
+    padding-left:10px;
+    border-bottom:1px solid #f2f2f2;
+    
+}
+.selectedmoneyArea{
+    padding-top:15px;
+    padding-bottom:15px;
+}
+.selectedmoneyAreaspan{
+    background-size:100% 1.32rem;
+    display:inline-block;
+    width:25%;
+    margin-left:16.5%;
+    background-image:url("/content/Images/blackBorderSelected.png");
+    height:1.3rem;
+    line-height:1.3rem;
+    text-align:center;
+    border-radius:0.1rem;
+    font-size:0.6rem;
+}
+.otherMoneyArea{
+    padding-left:10px;
+    font-size:0.55rem;
+        height:1.2rem;
+    line-height:1.2rem;
+    padding-bottom:10px;
+}
+.input-otherMoney{
+    color:red;
+    width:25%;
+    border-right-style:none;
+    border-top-style:none;
+    border-left-style:none;
+    margin-left:5px;
+    margin-right:5px;
+    border-bottom:1.5px solid #959595;
+    text-align: center;
+    height: 1rem;
+    font-size: 0.6rem;
+}
+.otherMoneyArea button{
+    width:2rem;
+    height:1rem;
+    color:white;
+    border-radius:0.1rem;
+    border:0px none white;
+    background-color:#fc4d54;
+    margin-left:10px;
+}
+.chargeResultArea{
+    background-color:white;
+    margin-top:15px;
+}
+.chargeResultArea strong{
+    margin-left:10px;
+}
+.chargeResultArea div{
+    border-bottom:1px solid #f2f2f2;
+    padding-left:10px;
+    font-size:0.55rem;
+    height:1.2rem;
+    line-height:1.2rem;
+}
+.confirm-btn{
+    margin:0 auto;
+    margin-top:1rem;
+    text-align:center;
+    vertical-align:middle;
+    color:white;
+    font-size:0.6rem;
+    border-radius:0.3rem;
+    background-color:#fc4d54;
+    height:1.4rem;
+    line-height:1.4rem;
+    width:80%;
+    margin-bottom:50px;
+}
+.selectedborder{
+    background-size:100% 1.3rem;
+    width:27%;
+    background-image:url("/content/Images/selectedborder.png");
+    
+}

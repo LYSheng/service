@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "我的猫市联合卡";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+   
+}
+@section Head
+{
+    
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+    @WebHelper4H5.RegisterStyles("userAbout/myVip.css")
+}
+@{
+    if (ViewBag.lianheCardCount > 0)
+    {
+        <div class="mainContent">
+    <div class="headTitle">
+        <div class="head-moneyLbl">金额(元)</div>
+        <div class="head-Money">@ViewBag.myAccount["aprmb"]</div>
+    </div>
+    <div class="cradNum">
+
+        卡号:<strong>@ViewBag.myAccount["cartNo"]</strong>
+    </div>
+    <section class="tableSection">
+        <div class="item_center mine_css clearfix">
+            <a href="/userAbout/chargeMyMoney?cartNo=@ViewBag.myAccount["cartNo"]&Id=@ViewBag.myAccount["id"]">
+                <span class="fl"><b style="width: 0.8rem;background-position: 0rem -4.9rem; " class="person_info"></b>充值</span>
+                <i class="fr jiantou"></i>
+            </a>
+            <div class="cellBottomline"></div>
+        </div>
+
+        <div class="item_center mine_css clearfix">
+            <a href="/userAbout/GetShouZhiDetail?UserId=@ViewBag.userid&AccountType=@ViewBag.myAccount["accountTypeId"]&ProjectIds=@ViewBag.myAccount["projectIds"]">
+                <span class="fl"><b class="person_info" style="width: 0.8rem; height: 0.8rem; background-position: -1.1rem -4.87rem; "></b>收支明细</span>
+                <i class="fr jiantou"></i>
+            </a>
+        </div>
+
+
+    </section>
+
+    <section class="tableSection" style="display:none">
+        <div class="item_center mine_css clearfix">
+            <a href="####">
+                <span class="fl"><b style="width: 0.7rem; height: 0.8rem; background-position: -2.2rem -4.83rem; " class="person_info"></b>积分</span>
+                <i class="fr jiantou"></i>
+            </a>
+        </div>
+    </section>
+
+    
+</div>
+    }
+    else
+    {
+        <div class="noCardMsg">您还没有开通猫市联合卡</div>
+        <div class="turnonCombineCard"><img onclick="turnOnCombineCard()" src="~/Content/Images/turnonCombineCard.png" /></div>
+    }
+}
+
+
+
+<div class="warningMsg">
+    <p class="pb2">温馨提示:</p>
+    <p class="fs12">猫市联合卡资金可用于支付购买猫市自营产品 @{
+        if (ViewBag.WarningMsg!=null)
+        {
+            <text>(@ViewBag.WarningMsg)</text>
+        }
+        else
+        {
+            <text></text>
+        }
+
+},暂不可提现</p>
+</div>
+@section Footer{
+
+  <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/userabout/myvip.js"></script>
+}
+

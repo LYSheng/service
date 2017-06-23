@@ -1,0 +1,76 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "订单详情";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+
+}
+<section class="order_details" style="padding-bottom:50px">
+    <div class="daifh">
+        <h1>@ViewBag.HistoryDetail["orderStatus"]</h1>
+        <p class="total_price">订单金额（含运费）：<i>￥@ViewBag.HistoryDetail["paidAmount"]</i></p>
+    </div><div class="goods_receipt">
+        <p class="goods_person clearfix">
+            <span class="fl shr">收货人:@ViewBag.HistoryDetail["receciveName"]</span>
+            <span class="fr tel">@ViewBag.HistoryDetail["receiveMobile"]</span>
+        </p>
+        <p class="goods_address">收货地址：@ViewBag.HistoryDetail["receciveAddress"]</p>
+    </div><div class="h21"></div>
+    <div class="goods_details white-bg   pl20 pr20">
+        @foreach (var orderItem in ViewBag.HistoryDetail["detail"])
+        {
+            <p class="store_name"><i class="mr4 person_store"></i>@orderItem["orderId"]</p>
+                <dl class="goods_infor clearfix parbox">
+                    <dt class="disblock">
+                        <a href="#">
+                            <img src="@orderItem["src"]" alt="茉莉清茶" onerror="this.src = '/content/images/maoshi.png'">
+                        </a>
+                    </dt>
+                    <dd class="flex1 disblock">
+                        <p class="shop-name clearfix">
+                            <a href="#"><span class="fl">@orderItem["longName"]</span></a>
+                            <span class="fr">
+                                ￥<b class="fblod">@orderItem["salesPrices"]</b>
+                            </span>
+                        </p>
+                        <p class="goods-name clearfix">
+                            <span class="fr amount">X<i>@orderItem["count"]</i></span>
+                        </p>
+                        <p class="yixuan">已选:@orderItem["specs"]</p>
+                    </dd>
+                </dl>
+            <p class="usermark">
+                运费:<span class=""> @(orderItem["postfee"]==null? 0 : orderItem["postfee"])元</span>
+            </p>
+        }
+    </div>
+    <ul class="expense  white-bg">
+        <li class="clearfix">
+            <span class="fl">实付款（含运费）：</span>
+            <span class="redword fr">￥@ViewBag.HistoryDetail["paidAmount"]</span>
+        </li>
+    </ul>
+    <ul class="number_details white-bg">
+        <li>订单号：@ViewBag.HistoryDetail["orderId"]</li>
+        <li>创建时间：@ViewBag.HistoryDetail["creatTime"] </li>
+    </ul>
+</section>
+<input type="hidden" id="uid" value="@ViewBag.uid" />
+<div class="popback"></div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        $(function () {
+            $.each($(".imgBo"), function (i, v) {
+                $(v).css("height", $(v).parent().css("height"));
+            })
+        })
+    </script>
+}

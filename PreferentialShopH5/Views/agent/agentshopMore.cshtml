@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "相关商品";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("agent/agentDetail.css")
+}
+<div class="categBox desCategBox">
+    <div class="shop ">
+        <ul class="shop-list clearfix">
+            <!-- ko foreach: skuList -->
+                <li class="white-bg">
+                    <p class="shop-list-img" data-bind='style:{"background":"url("+src+") center","background-size":"cover"}'></p>
+                    <p class="shop-list-title mt2 fs13" data-bind="text:longName"></p>
+                    <p class="shop-list-specification mt2 fs12">规格：<span data-bind="text:specs"></span></p>
+                    <p class="shop-list-price mt2 mb2 fs12">建议零售价：￥<span data-bind="text:salesPrice"></span></p>
+                </li>
+            <!-- /ko -->
+        </ul>
+        <div class="nodata" style="display:none"><div class="nodata_shop"><p class="no-icon wdgwc"></p><p class="nodatatip">暂无数据</p></div></div>
+        <div style="height:50px;"></div>
+    </div>
+</div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("agent/agentShopMore.js")
+}
+

@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "经营回馈详情";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @*@WebHelper4H5.RegisterStyles("userAbout/mine.css")*@
+    @WebHelper4H5.RegisterStyles("newStyles/style.css")
+    @WebHelper4H5.RegisterStyles("newStyles/main.css")
+    @WebHelper4H5.RegisterStyles("newStyles/dyl.css")
+    @WebHelper4H5.RegisterStyles("newStyles/wxq.css")
+    @WebHelper4H5.RegisterStyles("userAbout/earningsDetails.css")
+
+}
+
+
+<header id="head_tit">
+    <div class="head_tit_left back">
+        <span class="icon-left"></span>
+    </div>
+    <div class="head_tit_center">
+        经营回馈详情
+    </div>
+    <div class="head_tit_right f14" style="color:#7d7d7d">
+        筛选
+    </div>
+</header>
+<div class="HT_45 hideHeaderIOS"></div>
+
+<section id="showData" style="display:none;">
+    @*<div class="earling-all">
+        <span>收益合计：</span>
+        <p>￥7000.00</p>
+    </div>*@
+    <div class="earling-detail">
+        <!-- ko foreach:getLists -->
+        <div class="earling-list fs28">
+            @* 充值佣金 *@
+            <!-- ko if:type == 1 || type==2  -->
+                <!-- ko if:type == 1 -->
+                    <h2 class="clearfix type1">
+                        <span>类型</span>
+                        <span class="fr" data-bind="text:dividendsTypeName"></span>
+                    </h2>
+                <!-- /ko -->
+                <!-- ko if:type==2 -->
+                    <h2 class="clearfix type2">
+                        <span>类型</span>
+                        <span class="fr" data-bind="text:dividendsTypeName"></span>
+                    </h2>
+                <!-- /ko -->
+                <p>
+                    <span>统计月份</span>
+                    <span class="fr" data-bind="text:time"></span>
+                </p>
+                <p>
+                    <span>销售额</span>
+                    <span class="fr" data-bind="text:'￥'+incomeAmount.toFixed(2)"></span>
+                </p>
+                <p>
+                    <span>充值占比</span>
+                    <span class="fr" data-bind="text:(earningsProportion*100).toFixed(2)+'%'"></span>
+                </p>
+                <p>
+                    <span>其他比例</span>
+                    <span class="fr" data-bind="text:(otherRatio*100).toFixed(2)+'%'"></span>
+                </p>
+                <p>
+                    <span>我的回馈</span>
+                    <span class="fr" data-bind="text:'￥'+myEarnings.toFixed(2)"></span>
+                </p>
+                <!-- ko if:settlementTime -->
+                    <p>
+                        <span>结算时间</span>
+                        <span class="fr" data-bind="text:settlementTime"></span>
+                    </p>
+                <!-- /ko -->
+            <!-- /ko -->
+            @* 其他分红 *@
+            <!-- ko if:type==3 || type==4 || type==5 || type == 9 -->
+            <!-- ko if:type==3  -->
+            <h2 class="clearfix type3">
+                <span>类型</span>
+                <span class="fr" data-bind="text:dividendsTypeName"></span>
+            </h2>
+            <!-- /ko -->
+            <!-- ko if:type==4  -->
+            <h2 class="clearfix type4">
+                <span>类型</span>
+                <span class="fr" data-bind="text:dividendsTypeName"></span>
+            </h2>
+            <!-- /ko -->
+            <!-- ko if:type==5 -->
+            <h2 class="clearfix type5">
+                <span>类型</span>
+                <span class="fr" data-bind="text:dividendsTypeName"></span>
+            </h2>
+            <!-- /ko -->
+            <!-- ko if:type==9 -->
+            <h2 class="clearfix type2">
+                <span>类型</span>
+                <span class="fr" data-bind="text:dividendsTypeName"></span>
+            </h2>
+            <!-- /ko -->
+            <!-- ko if:storeNickName -->
+            <p>
+                <span>服务门店</span>
+                <span class="fr" data-bind="text:storeNickName"></span>
+            </p>
+            <!-- /ko -->
+            <p>
+                <span>订单编号</span>
+                <span class="fr" data-bind="text:orderPackageCode"></span>
+            </p>
+            <p>
+                <span>销售额</span>
+                <span class="fr" data-bind="text:'￥'+incomeAmount.toFixed(2)"></span>
+            </p>
+            <p>
+                <span>回馈比例</span>
+                <span class="fr" data-bind="text:(dividendsRatio*100).toFixed(2)+'%'"></span>
+            </p>
+            <p>
+                <span>其他比例</span>
+                <span class="fr" data-bind="text:(otherRatio*100).toFixed(2)+'%'"></span>
+            </p>
+            <p>
+                <span>我的回馈</span>
+                <span class="fr" data-bind="text:'￥'+myEarnings.toFixed(2)"></span>
+            </p>
+            <!-- ko if:orderPackageReciveTime -->
+            <p>
+                <span>确认收货日期</span>
+                <span class="fr" data-bind="text:orderPackageReciveTime"></span>
+            </p>
+            <!-- /ko -->
+            <!-- ko if:settlementTime -->
+            <p>
+                <span>结算时间</span>
+                <span class="fr" data-bind="text:settlementTime"></span>
+            </p>
+            <!-- /ko -->
+            <!-- /ko -->
+            
+            @* 融资部分详情 *@
+            <!-- ko if:type == 6 -->
+            <h2 class="clearfix type1">
+                <span>类型</span>
+                <span class="fr" data-bind="text:dividendsTypeName"></span>
+            </h2>
+            <!-- ko if:storeNickName -->
+            <p>
+                <span>服务门店</span>
+                <span class="fr" data-bind="text:storeNickName"></span>
+            </p>
+            <!-- /ko -->
+            <p>
+                <span>订单编号</span>
+                <span class="fr" data-bind="text:orderPackageCode"></span>
+            </p>
+            <p>
+                <span>销售额</span>
+                <span class="fr" data-bind="text:'￥'+incomeAmount.toFixed(2)"></span>
+            </p>
+            <p>
+                <span>回馈比例</span>
+                <span class="fr" data-bind="text:(dividendsRatio*100).toFixed(2)+'%'"></span>
+            </p>
+            <p>
+                <span>其他比例</span>
+                <span class="fr" data-bind="text:(otherRatio*100).toFixed(2)+'%'"></span>
+            </p>
+            <p>
+                <span>我的回馈</span>
+                <span class="fr" data-bind="text:'￥'+myEarnings.toFixed(2)"></span>
+            </p>
+            <!-- ko if:orderPackageReciveTime -->
+            <p>
+                <span>确认收货日期</span>
+                <span class="fr" data-bind="text:orderPackageReciveTime"></span>
+            </p>
+            <!-- /ko -->
+            <!-- ko if:settlementTime -->
+            <p>
+                <span>结算时间</span>
+                <span class="fr" data-bind="text:settlementTime"></span>
+            </p>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if:type==7 || type==8 -->
+                <!-- ko if:type == 7 -->
+                <h2 class="clearfix type2">
+                    <span>类型</span>
+                    <span class="fr" data-bind="text:dividendsTypeName"></span>
+                </h2>
+                <!-- /ko -->
+                <!-- ko if:type ==8 -->
+                <h2 class="clearfix type5">
+                    <span>类型</span>
+                    <span class="fr" data-bind="text:dividendsTypeName"></span>
+                </h2>
+                <!-- /ko -->
+                <p>
+                    <span>服务门店</span>
+                    <span class="fr" data-bind="text:storeNickName"></span>
+                </p>
+                
+                <!-- ko if:type ==7 || type ==8 -->
+                <p>
+                    <span>结算起止时间</span>
+                    <span class="fr" data-bind="text:beginTime.substr(0,10)+'~'+endTime.substr(0,10)"></span>
+                </p>
+                <p>
+                    <span>回馈保障金额</span>
+                    <span class="fr" data-bind="text:'￥'+minAmount.toFixed(2)"></span>
+                </p>
+                <p>
+                    <span>已结算金额</span>
+                    <span class="fr" data-bind="text:'￥'+financeDividendsAmount.toFixed(2)"></span>
+                </p>
+                <p>
+                    <span>补缺金额</span>
+                    <span class="fr" data-bind="text:'￥'+reissuedAmount.toFixed(2)"></span>
+                </p>
+                <!-- ko if:settlementTime -->
+                <p>
+                    <span>结算时间</span>
+                    <span class="fr" data-bind="text:settlementTime"></span>
+                </p>
+                <!-- /ko -->
+                <!-- /ko -->
+
+                
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+    <div id="proList"></div>
+</section>
+<section class="stayout_filtrate" style="display:none">
+    <div class="text">按时间筛选</div>
+    <div class="input">
+        <input type="date" class="bign_time" id="beginTime" placeholder="开始时间"><span class="dx"></span><input type="date" placeholder="截止时间" class="end_time" id="endTime">
+    </div>
+    <div class="btn">
+        <a href="javascript:void(0)" class="btnReset" id="btnReset">重置</a>
+        <a href="javascript:void(0)" class="btnSuccess" id="btnSuccess">完成</a>
+    </div>
+</section>
+<div id="mask"></div>
+
+@section Scripts
+{
+    <script>
+        var PGIUrl = "@System.Configuration.ConfigurationManager.AppSettings["PGIUrl"]";
+    </script>
+    @WebHelper4H5.RegisterScripts("userAbout/earningsDetails.js")
+}
+
+

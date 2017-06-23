@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "促销商城";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("home/home.css")
+}
+@section Title
+{
+    <h1 class="am-header-title">特惠精选</h1>
+}
+@section SearchArea
+{
+    <div class="am-padding-per parbox locaarea">
+        <span class="location pr30 fs13">上海 <i class="home_sarrowdown"></i></span>
+        <p class="flex1 searchArea posrela">
+            <i class="home_mirror"></i>
+            <input type="text" class="searchBotton full-width white-bg fs12" id="" placeholder="搜索您要找的商品" />
+        </p>
+    </div>
+}
+@section CategoryList
+{
+    <div class="am-padding-per pt2 bg2f pb3">
+        <ul class="categoryList clearfix">
+            <li class="ac box " rel="catelist"><a href="/">新品尝鲜</a></li>
+            <li class="ac box active" rel="catelist"><a href="/Home/preference">特惠精选</a></li>
+            <li class="ac box " rel="catelist"><a href="/Home/agentArea">代理专区</a></li>
+        </ul>
+    </div>
+}
+    <div class="slidePic banner" style="overflow: hidden" id="focus">
+    <div class="bd">
+        <ul id="div_banners">
+            <li>
+                <a href="####">
+                    <img src="~/Content/Images/slidepic01.jpg" />
+                </a>
+            </li>
+            <li>
+                <a href="####">
+                    <img src="~/Content/Images/slidepic02.jpg" />
+                </a>
+            </li>
+            <li>
+                <a href="####">
+                    <img src="~/Content/Images/slidepic03.jpg" />
+                </a>
+            </li>
+            <li>
+                <a href="####">
+                    <img src="~/Content/Images/slidepic04.jpg" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="hd">
+        <ul class="slide text_indent clear">
+            <li class="onn"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+</div> 
+   <div class="mt2 am-margin-per">
+        <dl class="parbox full-width classification pt2 pb2">
+            <dd class="flex1 ac fs13 active">全部</dd>
+            <dd class="flex1 ac fs13">男装</dd>
+            <dd class="flex1 ac fs13">女装</dd>
+            <dd class="flex1 ac fs13">零食</dd>
+            <dd class="flex1 ac fs13">母婴</dd>
+            <dt class="flex1 ac fs13"><i class="home_sadown"></i></dt>
+        </dl>
+        <div class="iscon am-margin-mer white-bg mt2  pb2">
+            <ul class="isconUl clearfix ">
+                <li>
+                    <div class="isConlist">
+                        <img src="~/Content/Images/food01.jpg" />
+                        <div class="word pr10">
+                            <p class="word-descriton parbox pt2">
+                                <a tid="467" class="flex1 fs13">钢琴侠智能钢琴</a>
+                                <span class="zan ar">
+                                    <i class="home_heart cl ar"></i>
+                                    <em class="fs10">99+</em>
+                                </span>
+                            </p>
+                            <p class="kucun_qishou mb2 fs12">
+                                <span class="qishou fr">起售量：<i>5</i></span>
+                                <span class="kucun">库存：<i>999+</i></span>
+                            </p>
+                            <p class="clearfix mb2"><span class="sm-price fs13">￥12,999.00</span></p>
+                            <p class="clearfix">
+                                <em class="bg-price redword fs14">￥7,999.00</em>
+                                <span data-promotionid="467" data-proid="1101" class="home_cart fr"></span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="isConlist">
+                        <img src="~/Content/Images/food01.jpg" />
+                        <div class="word pr10">
+                            <p class="word-descriton parbox pt2">
+                                <a tid="467" class="flex1 fs13">钢琴侠智能钢琴</a>
+                                <span class="zan ar">
+                                    <i class="home_heart ar"></i>
+                                    <em class="fs10">99+</em>
+                                </span>
+                            </p>
+                            <p class="kucun_qishou mb2 fs12">
+                                <span class="qishou fr">起售量：<i>5</i></span>
+                                <span class="kucun">库存：<i>999+</i></span>
+                            </p>
+                            <p class="clearfix mb2"><span class="sm-price fs13">￥12,999.00</span></p>
+                            <p class="clearfix">
+                                <em class="bg-price redword fs14">￥7,999.00</em>
+                                <span data-promotionid="467" data-proid="1101" class="home_cart fr"></span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="isConlist">
+                        <img src="~/Content/Images/food01.jpg" />
+                        <div class="word pr10">
+                            <p class="word-descriton parbox pt2">
+                                <a tid="467" class="flex1 fs13">钢琴侠智能钢琴钢琴侠智能钢琴钢琴侠智能钢琴钢琴侠智能钢琴</a>
+                                <span class="zan ar">
+                                    <i class="home_heart cl ar"></i>
+                                    <em class="fs10">99+</em>
+                                </span>
+                            </p>
+                            <p class="kucun_qishou mb2 fs12">
+                                <span class="qishou fr">起售量：<i>5</i></span>
+                                <span class="kucun">库存：<i>999+</i></span>
+                            </p>
+                            <p class="clearfix mb2"><span class="sm-price fs13">￥12,999.00</span></p>
+                            <p class="clearfix">
+                                <em class="bg-price redword fs14">￥7,999.00</em>
+                                <span data-promotionid="467" data-proid="1101" class="home_cart fr"></span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="isConlist">
+                        <img src="~/Content/Images/food01.jpg" />
+                        <div class="word pr10">
+                            <p class="word-descriton parbox pt2">
+                                <a tid="467" class="flex1 fs13">钢琴侠智能钢琴</a>
+                                <span class="zan ar">
+                                    <i class="home_heart ar"></i>
+                                    <em class="fs10">99+</em>
+                                </span>
+                            </p>
+                            <p class="kucun_qishou mb2 fs12">
+                                <span class="qishou fr">起售量：<i>5</i></span>
+                                <span class="kucun">库存：<i>999+</i></span>
+                            </p>
+                            <p class="clearfix mb2"><span class="sm-price fs13">￥12,999.00</span></p>
+                            <p class="clearfix">
+                                <em class="bg-price redword fs14">￥7,999.00</em>
+                                <span data-promotionid="467" data-proid="1101" class="home_cart fr"></span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="isConlist">
+                        <img src="~/Content/Images/food01.jpg" />
+                        <div class="word pr10">
+                            <p class="word-descriton parbox pt2">
+                                <a tid="467" class="flex1 fs13">钢琴侠智能钢琴</a>
+                                <span class="zan ar">
+                                    <i class="home_heart cl ar"></i>
+                                    <em class="fs10">99+</em>
+                                </span>
+                            </p>
+                            <p class="kucun_qishou mb2 fs12">
+                                <span class="qishou fr">起售量：<i>5</i></span>
+                                <span class="kucun">库存：<i>999+</i></span>
+                            </p>
+                            <p class="clearfix mb2"><span class="sm-price fs13">￥12,999.00</span></p>
+                            <p class="clearfix">
+                                <em class="bg-price redword fs14">￥7,999.00</em>
+                                <span data-promotionid="467" data-proid="1101" class="home_cart fr"></span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="isConlist">
+                        <img src="~/Content/Images/food01.jpg" />
+                        <div class="word pr10">
+                            <p class="word-descriton parbox pt2">
+                                <a tid="467" class="flex1 fs13">钢琴侠智能钢琴</a>
+                                <span class="zan ar">
+                                    <i class="home_heart ar"></i>
+                                    <em class="fs10">99+</em>
+                                </span>
+                            </p>
+                            <p class="kucun_qishou mb2 fs12">
+                                <span class="qishou fr">起售量：<i>5</i></span>
+                                <span class="kucun">库存：<i>999+</i></span>
+                            </p>
+                            <p class="clearfix mb2"><span class="sm-price fs13">￥12,999.00</span></p>
+                            <p class="clearfix">
+                                <em class="bg-price redword fs14">￥7,999.00</em>
+                                <span data-promotionid="467" data-proid="1101" class="home_cart fr"></span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    @section Scripts
+{
+        <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+        <script type="text/javascript">
+            /*ajaxRequest("POST", "/Product/GetSkuModel", {
+                id: skuId
+            }, "JSON", true, true).done(function (res) {
+                if (res.isSuccess) {
+                    //修改显示的价格
+                    self.price(res.data.price);
+                } else {
+                    $.Tip(res.errMsg);
+                }
+            });*/
+            //banner图效果
+            TouchSlide({
+                slideCell: "#focus",
+                titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                mainCell: ".bd ul",
+                effect: "leftLoop",
+                autoPlay: true,//自动播放
+                autoPage: true //自动分页
+            });
+        </script>
+        @*<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll4.2.0.js"></script>*@
+        <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll.js"> </script>
+    }

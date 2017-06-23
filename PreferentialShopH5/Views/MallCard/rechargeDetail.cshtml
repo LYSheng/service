@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "收支明细";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("mallCard/rechargeDetail.css")
+
+}
+<div class="categBox desCategBox">
+    <div class="search fs12 parbox center">
+        <span >时间</span>
+        <input class="flex1 ac" type="date" placeholder="" id="firstDate"/>
+        <span>—</span>
+        <input class="flex1 ac" type="date" placeholder="" id="secondDate"/>
+        <a href="javascript:void(0)" class="search-btn search-choice mr2 ac" id="searchChoice">筛选</a>
+        <a href="javascript:void(0)" class="search-btn search-clear ac"id="searchClear">清空</a>
+    </div>
+    <div class="total parbox center fs15">
+        <div class="flex1 ac total-pay">总支出：<span data-bind="text:totalZhi"></span></div>
+        <span>|</span>
+        <div class="flex1 ac total-income">总收入：<span data-bind="text:totalShou"></span></div>
+    </div>
+    <ul class="list">
+        <!-- ko foreach: detailList -->
+        <li class="list-detail parbox">
+            <div class="flex1 al mr1">
+                @*Category  1收 2支  *@
+                <!-- ko if:category == 1 -->
+                <p class="fs16 list-detail-income">+<span data-bind="text:amount"></span></p>
+                <!-- /ko-->
+                <!-- ko if:category == 2 -->
+                <p class="fs16 list-detail-pay"><span data-bind="text:amount"></span></p>
+                <!-- /ko-->
+                <p></p>
+                <p class="fs12" data-bind="text:createTime"></p>
+            </div>
+            <div class="flex1 ar ml1">
+                <p class="fs13 list-detail-title" data-bind="text:typeName"></p>
+                <!-- ko if:category == 1 && typeName == "礼品卡充值"-->
+                <p class="fs13">充值卡号：<span data-bind="text:relateNo"></span></p>
+                <!-- /ko-->
+                <!-- ko if:category == 1 && typeName == "后台退款"-->
+                <p class="fs13" data-bind="text:productNames"></p>
+                <!-- /ko-->
+                <!-- ko if:category == 2 -->
+                <p class="fs13" data-bind="text:productNames"></p>
+                <!-- /ko-->
+                <p class="fs12" data-bind="text:serialsNumber"></p>
+                
+            </div>
+        </li>
+        <!-- /ko-->
+        
+    </ul>
+    <div id="proList" style="display:none"><div class="nodata_shop"><p class="no-icon wdgwc"></p><p class="nodatatip">暂无数据</p></div></div>
+</div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+    @WebHelper4H5.RegisterScripts("mallCard/rechargeDetail.js")
+}
+
+
+
+

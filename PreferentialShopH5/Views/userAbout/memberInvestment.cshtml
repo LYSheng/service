@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "当月预计佣金";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/myMemCard.css")
+}
+<div class="investment" id="investment">
+    <ul>
+        <!-- ko foreach: memberInvestmentList -->
+        <li class="investmentList">
+
+            <h2 class="clearfix type1">
+                <span data-bind="text:investmentCode"></span>
+                <span class="fr" >进行中</span>
+            </h2>
+            <p>
+                <span>充值门店</span>
+                <span class="fr" data-bind="text:storeUserName"></span>
+            </p>
+            <p>
+                <span>当月营业额</span>
+                <span class="fr" data-bind="text:'￥'+thisMonthOrderTurnover.toFixed(2)"></span>
+            </p>
+            <p>
+                <span>充值占比</span>
+                <span class="fr" data-bind="text:(rechargeRatio*100).toFixed(2)+'%'"></span>
+            </p>
+            <p>
+                <span>充值金额</span>
+                <span class="fr" data-bind="text:'￥'+payPrice.toFixed(2)"></span>
+            </p>
+            <p>
+                <span>充值时间</span>
+                <span class="fr" data-bind="text:payEndTime"></span>
+            </p>
+            <p>
+                <span>预计佣金</span>
+                <span class="fr" data-bind="text:'￥'+expectedDividends.toFixed(2)"></span>
+            </p>
+            <p>
+                <span>数据更新时间</span>
+                <span class="fr" data-bind="text:createTime"></span>
+            </p>
+        </li>
+        <!-- /ko-->
+    </ul>
+</div>
+<div id="proList"></div>
+
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/memberInvestment.js")
+
+}
+

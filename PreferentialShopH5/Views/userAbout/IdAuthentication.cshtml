@@ -1,0 +1,502 @@
+﻿@{
+    ViewBag.Title = "身份认证";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("../styles/userAbout/idAuth.css")
+    @WebHelper4H5.RegisterScripts("exif.js")
+
+    <script type="text/javascript">
+        var type = 1;
+        var dataListModel;
+        var uploadImgUrl = "";
+        var hasApply = false;
+        var authDataModel = function () {
+            var self = this;
+            self.firstLisence = ko.observable({});
+            self.secondLisence = ko.observable({});
+            self.userTypeList = ko.observableArray([]);
+            self.industryList = ko.observableArray([]);
+            self.lisenceList = ko.observableArray([]);
+            self.getIndustryId = function () {
+                var ids = "";
+                var names = "";
+                $(".industryItem").find("span[class='areaSelected']").each(function (i, ele) {
+                    ids += $(ele).attr("industryId") + ",";
+                    names += $(ele).siblings().text() + "/";
+                })
+                if (ids.length > 1) {
+                    ids = ids.substr(0, ids.length - 1);
+                }
+                if (names.length > 1) {
+                    names = names.substr(0, names.length - 1);
+                }
+                $(".industryInput").attr("ids", ids);
+                console.log(names)
+                $(".industryInput").val(names);
+                $(".IndustryIds").val(ids);
+                self.hideList();
+            }
+            self.selectedUserType = function (obj) {
+                if (hasApply) {
+                    return;
+                }
+                $(".userType").val(obj.providerTypeName);
+                $(".userType").attr("code", obj.providerTypeCode);
+                $(".ProviderTypeCode").val(obj.providerTypeCode);
+                self.hideList();
+            }
+            self.clickIndustry = function (data, event) {
+                if (hasApply) {
+                    return;
+                }
+                $(event.target).attr("industryId", data.industryId);
+                if ($(event.target).hasClass("areaUnselected")) {
+                    $(event.target).toggleClass("areaSelected").removeClass("areaUnselected");
+                } else {
+                    $(event.target).toggleClass("areaUnselected").removeClass("areaSelected");
+                }
+                var selectedCount = $(".industryItem").find("span[class='areaSelected']").length;
+                if (selectedCount > 3) {
+                    smGlobal.error("最多能选三个");
+                    if ($(event.target).hasClass("areaSelected")) {
+                        $(event.target).removeClass("areaSelected").addClass("areaUnselected");
+                    }
+                    return;
+                }
+            }
+            self.showUserTypeList = function () {
+                if (hasApply) {
+                    return;
+                }
+                $(".mask").show();
+                $(".idTypeList").show();
+            }
+            self.hideList = function () {
+                $(".mask").hide();
+                $(".idTypeList").hide();
+                $(".industryList").hide();
+            }
+            self.showIndustryList = function () {
+                if (hasApply) {
+                    return;
+                }
+                $(".industryList").show();
+                $(".mask").show();
+            }
+            self.historySearchList = ko.observableArray([]);
+            self.searchResultList = ko.observableArray([]);
+        }
+        function selectedAuthType(obj) {
+            if (hasApply) {
+                return;
+            }
+            type = parseInt($(obj).attr("type"));
+            if (!$(obj).hasClass("authSelected")) {
+                $(obj).addClass("authSelected").removeClass("authUnselected");
+                $(obj).parent().parent().siblings().find(".auth").removeClass("authSelected").addClass("authUnselected");
+            } else {
+                $(obj).parent().parent().siblings().find(".auth").removeClass("authSelected").addClass("authUnselected");
+            }
+        }
+        $(function () {
+            dataListModel = new authDataModel();
+            ko.applyBindings(dataListModel);
+
+            getUserType();
+            getIndustryList();
+            getLisenceList();
+            getApplyInfo();
+            //$('.uploadInput').fileupload({
+            //    autoUpload: true, //是否自动上传
+            //    url: "/Account/UploadImage", //上传地址
+            //    formData: {
+            //        path: "TempImg",
+            //        name: "data",
+            //    }, //上传参数
+            //    progressall: function (e, data) {
+            //        smGlobal.loadding3();
+            //        console.log($("#uploadFile").val())
+            //    },
+            //    dataType: 'json',
+            //    done: function (e, result) { //设置文件上传完毕事件的回调函数
+            //        console.log(result.result);
+
+            //        result = result.result;
+
+            //    }
+            //});
+
+
+        })
+
+        function getUserType() {
+            apiRequest({
+                method: "ProviderApply/GetParameterByType",
+                data: { ParameterType: 'ProviderType' },
+                success: function (obj) {
+                    dataListModel.userTypeList(obj.data);
+                },
+                error: function (obj) {
+                    smGlobal.error(obj);
+                }
+            });
+        }
+
+        function getIndustryList() {
+
+            apiRequest({
+                method: "Help/GetIndustryInfoList",
+                success: function (obj) {
+                    dataListModel.industryList(obj.data);
+                },
+                error: function (obj) {
+                    smGlobal.error(obj);
+                }
+            });
+        }
+
+        function getLisenceList() {
+            smGlobal.loadding();
+            apiRequest({
+                method: "ProviderApply/GetEntLicenseList",
+                success: function (obj) {
+                    smGlobal.removeLoadingGif();
+                    dataListModel.lisenceList(obj.data);
+                    if (obj.data.length > 1) {
+                        //$(".firstNames").text(obj.data[0].licenseName);
+                        //$(".openSpan").attr("type", obj.data[0].licenseTypeId);
+                        //$(".secondNames").text(obj.data[1].licenseName);
+                        //$(".idSpan").attr("type", obj.data[1].licenseTypeId);
+
+                    }
+                },
+                error: function (obj) {
+                    smGlobal.removeLoadingGif();
+                    smGlobal.error(obj);
+                }
+            });
+        }
+        function handleFiles(files) {
+            if (files.length) {
+                var file = files[0];
+                var reader = new FileReader();
+                reader.onload = function () {
+                    console.log(this.result);
+                };
+                reader.readAsText(file);
+            }
+        }
+        function showUpload() {
+            //background: #000;
+            //color: #D5D6E2;
+            if (hasApply) {
+                return;
+            }
+            $(".authContent").hide();
+            $(".uploadChooseArea").show();
+            $("body").css("background", "#000");
+        }
+
+        function getApplyInfo() {
+            //ProviderApply/Get
+            smGlobal.loadding3();
+            apiRequest({
+                method: "ProviderApply/Get",
+                success: function (obj) {
+                    smGlobal.removeLoadingGif();
+                    var data = obj.data;
+                    console.log(data);
+                    if (data != null) {
+                        $(".linsenceArea").hide();
+                        $(".linsenceArea2").show();
+                        //$("input").css("text-align", "right");
+                        switch (data.auditStatus) {
+                            case 1:
+                                document.title = "身份认证审核中";
+                                break;
+                            case 2:
+                                document.title = "身份认证驳回";
+                                break;
+                            case 3:
+                                document.title = "身份认证成功";
+                                break;
+                            default:
+                                break;
+
+                        }
+                        if (data.auditStatus > 0 && smGlobal.getQueryString("isReSubmit") == "") {
+                            $(".submit_btn").hide();
+                            $("input").attr("readonly", "readonly");
+                            $("#uploadFile").hide();
+                            $("#uploadSrc").attr("src", data.businessLicensePic).addClass("imgShow");
+                            $("#upTxt").hide();
+                            hasApply = true;
+                            $(".warmMsg,.bottomTitle,.topTitle").hide();
+                        }
+                        if (data.auditStatus == 2) {
+                            var audiContent = data.auditContent;
+                            if (audiContent.length > 0) {
+                                audiContent = "驳回原因:" + data.lastAuditContent;
+                            }
+                            $(".topTitle").show().text(audiContent);
+                            $(".warmMsg").show();
+                            if (smGlobal.getQueryString("isReSubmit") == "true") {
+                                document.title = "身份认证";
+                                $(".linsenceArea").show();
+                                $("#uploadSrc").attr("src", data.businessLicensePic).addClass("imgShow");
+                                $("#upTxt").hide();
+                                $(".linsenceArea2").hide();
+                                $(".bottomTitle").show();
+                                $(".topTitle").hide();
+                                $(".submit_btn").show().text("提交");
+                                hasApply = false;
+                            } else {
+                                $(".submit_btn").show().text("重新提交");
+                            }
+
+                        } else if (data.auditStatus == 1) {
+                            $(".topTitle").text("您提交的身份认证正在审核中，审核周期一般为：3~5个工作日").show();
+                        }
+                        $("span[type=" + data.licenseTypeId + "]").trigger("click");
+                        $(".linsenceName").text(data.licenseType);
+
+                        $("input[name='ProviderName']").val(data.providerName);
+                        $("input[name='BusinessLicenseNO']").val(data.businessLicenseNO);
+                        $("input[name='IndustryIds']").val(data.industryIds);
+                        $(".industryInput").val(data.industryNames);
+                        $("input[name='ProviderTypeCode']").val(data.providerTypeCode);
+                        $(".userType").val(data.providerTypeName);
+                        $("input[name='Linkman']").val(data.linkman);
+                        $("input[name='Mobile']").val(data.mobile);
+                        //$(".uploadArea").html("<span style='height:100%;display:inline-block;vertical-align:middle'></span><img style='vertical-align:middle' alt='证照加载中...' src='" + data.businessLicensePic + "'/>")
+                        uploadImgUrl = data.businessLicensePic;
+                    } else {
+                        document.title = "身份认证";
+                    }
+
+
+                },
+                error: function (obj) {
+                    smGlobal.removeLoadingGif();
+                    smGlobal.error(obj);
+                }
+            });
+        }
+
+        function submit(obj) {
+            if ($(obj).text() == "重新提交" && smGlobal.getQueryString("isReSubmit") == "") {
+                window.location.href = '/userAbout/idauthentication?isReSubmit=true';
+                return;
+            }
+            if (!uploadImgUrl) {
+                smGlobal.error("请上传证照图片");
+                return;
+            }
+            if ($("input[name='ProviderName']").val() == "") {
+                smGlobal.error("请输入名称");
+                return;
+            }
+            if ($("input[name='BusinessLicenseNO']").val() == "") {
+                smGlobal.error("请输入证照编号");
+                return;
+            }
+            if ($("input[name='IndustryIds']").val() == "") {
+                smGlobal.error("请选择所属行业");
+                return;
+            }
+            if ($("input[name='ProviderTypeCode']").val() == "") {
+                smGlobal.error("请选择身份类型");
+                return;
+            }
+            if ($("input[name='Linkman']").val() == "") {
+                smGlobal.error("请填写联系人");
+                return;
+            }
+            if ($("input[name='Mobile']").val() == "") {
+                smGlobal.error("请填写手机号码");
+                return;
+            }
+            var params = {
+                ProviderName: $("input[name='ProviderName']").val(),
+                BusinessLicenseNO: $("input[name='BusinessLicenseNO']").val(),
+                IndustryIds: $("input[name='IndustryIds']").val(),
+                LicenseTypeId: type,
+                ProviderTypeCode: $("input[name='ProviderTypeCode']").val(),
+                Linkman: $("input[name='Linkman']").val(),
+                Mobile: $("input[name='Mobile']").val(),
+            };
+            params.LicenseType = $("span[type=" + type + "]").parent().siblings().text();
+            console.log(params.LicenseType)
+            if (type == 2) {
+                // = $(".firstNames").text();
+            } else {
+                //params.LicenseType = $(".secondNames").text();
+            }
+            params.BusinessLicensePic = uploadImgUrl;
+            console.log(params);
+            smGlobal.loadding();
+            //$(obj).addClass("poiEventsNone");
+            confirmSubmit(params);
+        }
+        var creatParams;
+        function confirmSubmit(params) {
+            var paramsNew = params;
+            apiRequest({
+                method: "ProviderApply/Create",
+                data: paramsNew,
+                success: function (obj) {
+                    window.location.href = "/userAbout/LisenceAuthSucess"
+                    smGlobal.removeLoadingGif();
+                },
+                error: function (obj) {
+                    if (obj.length >= 12) {
+                        if (obj.substr(0, 12) == "您输入的证照编号已被其他") {
+                            $(".confirmMsg").text(obj);
+                            $(".popback").show();
+                            $(".custom").show();
+                            paramsNew.isAgreeToMerge = true;
+                            creatParams = paramsNew;
+                            return;
+                            if (confirm(obj)) {
+                                paramsNew.isAgreeToMerge = true;
+                                confirmSubmit(paramsNew);
+                                return;
+                            } else {
+                                return;
+                            }
+                        }
+                    }
+                    smGlobal.removeLoadingGif();
+                    smGlobal.error(obj);
+                }
+            });
+        }
+
+        function cancelDo() {
+            $(".popback").hide();
+            $(".custom").hide();
+        }
+        function confirmDo() {
+            $(".popback").hide();
+            $(".custom").hide();
+            confirmSubmit(creatParams);
+        }
+
+
+    </script>
+}
+<div class="authContent">
+
+    <div class="border-b border-t topTitle mt2 white-bg">您提交的身份认证正在审核中,审核周期一般为:3-5个工作日。</div>
+    <div class="uploadArea border-b border-t">
+        <p id="upTxt" class="upTxt">点击上传营业执照或身份证照片</p>
+
+        <img id="uploadSrc" class="uploadSrc" />
+        <input type="file" id="uploadFile" class="uploadImg" accept="image/*">
+    </div>
+
+    <section class="mt2 border-t border-b pl40 whiteBg fs26">
+        <div class="contentItem border-b linsenceArea">
+            <span class="inBlock width25">证照类型</span>
+            <div class="inBlock lisenceType" data-bind="foreach:lisenceList">
+                <span>
+                    <span class="inBlock width09"><span data-bind="attr:{type:licenseTypeId}" onclick="selectedAuthType(this)" class="auth authUnselected  inBlock authSpan"></span></span>
+                    <span class="inBlock mr20 firstNames" data-bind="text:licenseName">证照编号</span>
+                </span>
+            </div>
+
+
+        </div>
+        <div class="contentItem border-b linsenceArea2">
+            <span class="inBlock width25">证照类型</span>
+            <span class="linsenceName" style="display:inline-block;width:8rem;"></span>
+        </div>
+        <div class="contentItem border-b">
+            <span class="inBlock width25">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+            <span class="inBlock"><input class="width8 border0" name="ProviderName" type="text" placeholder="请填写营业执照名或身份证姓名" /></span>
+        </div>
+        <div class="contentItem border-b">
+            <span class="inBlock width25">证照编号</span>
+            <span class="inBlock"><input class="width8 border0" name="BusinessLicenseNO" type="text" placeholder="请输入您的证照编号" /></span>
+        </div>
+        <div class="contentItem border-b">
+            <span class="inBlock width25">所属行业</span>
+            <input type="hidden" name="IndustryIds" class="IndustryIds" />
+            <span class="inBlock"><input readonly data-bind="click:showIndustryList" class="width8 border0 industryInput" type="text" placeholder="点击选择所属行业" /></span>
+        </div>
+        <div class="contentItem">
+            <span class="inBlock width25">身份类型</span>
+            <input type="hidden" name="ProviderTypeCode" class="ProviderTypeCode" value="ProviderType90" />
+            <span class="inBlock"><input readonly class="width8 border0 userType" data-bind="click:showUserTypeList" type="text" placeholder="点击选择您的身份类型" /></span>
+
+        </div>
+    </section>
+
+    <section class="mt2 border-t border-b pl40 whiteBg fs26">
+
+
+        <div class="contentItem border-b">
+            <span class="inBlock width25">联&nbsp;&nbsp;系&nbsp;&nbsp;人</span>
+            <span class="inBlock"><input class="width8 border0" name="Linkman" type="text" placeholder="请填写联系人" /></span>
+        </div>
+        <div class="contentItem">
+            <span class="inBlock width25">手机号码</span>
+            <span class="inBlock"><input class="width8 border0" name="Mobile" type="text" placeholder="请填写手机号" /></span>
+        </div>
+    </section>
+    @*<div class="mt3 pl40 bottomTitle fs45">
+            请正确填写联系人姓名和手机号,便于及时沟通。
+        </div>*@
+    <div class="mt6 submit_btn" onclick="submit(this)">
+        提交
+    </div>
+    <div class="pl40 mt3 warmMsg fs45 ">
+        <p>温馨提示:</p>
+        <p>1)请正确填写联系人姓名和手机号,便于及时沟通;</p>
+        <p>2)申请认证审核周期一般为3-5个工作日;</p>
+        <p>3)通过认证后,可在身份认证页面查看认证信息。</p>
+    </div>
+    <div class="mask" data-bind="click:hideList"></div>
+    <div class="idTypeList" data-bind="foreach:userTypeList">
+        <div class="border-b" data-bind="text:providerTypeName,click:$parent.selectedUserType,attr: { code: providerTypeCode, typeName: providerTypeName }"></div>
+    </div>
+    <div class="industryList">
+        <div class="industryContent">
+            <div class="industryTitle">请选择所属行业(最多三个)</div>
+            <div data-bind="foreach:industryList">
+                <div class="industryItem"><span data-bind="text:industryName"></span><span data-bind="click:$parent.clickIndustry" class="areaUnselected"></span></div>
+            </div>
+
+            <div style="height:1.5rem"></div>
+            <div class="chooseIndustyBtn" data-bind="click:getIndustryId">确定</div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="uploadChooseArea" style="display:none">
+    @{
+        Html.RenderAction("UploadLisenceImg", "UserAbout");
+    }
+</div>
+
+<div class="popback" style="display: none;"></div>
+<div class="custom" style="height: 5.2rem; display: none;">
+    <p class="confirmMsg" style="padding:0 0.3rem"></p>
+    <p class="custom_button">
+        <a href="javascript:;" onclick="cancelDo()" class="quxiao">取消</a>
+        <a href="javascript:;" onclick="confirmDo()" class="queding">确定</a>
+    </p>
+</div>
+
+<div class="picLoading fs16" id="picLoading">
+    证照上传中...
+</div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/idAuth.js")
+}
+

@@ -1,0 +1,107 @@
+﻿
+@WebHelper4H5.RegisterStyles("userAbout/default.css")
+<style>
+    #clipArea {
+        margin: 0px;
+        height: 300px;
+    }
+
+    #view {
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        display: none;
+    }
+
+    .imgAction {
+        margin-bottom: 50px;
+    }
+
+    .tablecellSpan {
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+
+<article class="htmleaf-container">
+    <header style="display:none;" class="htmleaf-header"></header>
+    <div id="clipArea"></div>
+    <div class="imgAction full-width box">
+        <div class="clipcancle fl posrelative fs36">
+            取消
+            <button id="backBtn" class="backBtn">取消</button>
+        </div>
+        <div class="clipsave fl posrelative fs36">
+            保存
+            <button id="clipBtn" class="clipBtn">保存</button>
+        </div>
+        <div class="clipfile fl posrelative fs36">
+            选择
+            <input type="file" id="file" value="选择照片" class="file">
+        </div>
+
+
+    </div>
+
+    <div id="view"></div>
+</article>
+<div class="loading3"></div>
+<div class="popback" style=" background:#000;"></div>
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/Photo/exif.js"></script>
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/Photo/iscroll-zoom.js"></script>
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/Photo/hammer.js"></script>
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/Photo/jquery.photoClip.js"></script>
+<script>
+    $("#backBtn").click(function () {
+        $(".uploadChooseArea").hide();
+        $(".authContent").show();
+        $("body").css("background", "#f2f2f2");
+    });
+    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    $("#clipArea").photoClip({
+        width: 200,
+        height: 200,
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function () {
+            console.log("照片读取中");
+        },
+        loadComplete: function () {
+            console.log("照片读取完成");
+        },
+        clipFinish: function (dataURL) {
+            $(".loading3").show();
+            $(".popback").show();
+            $(".uploadArea").html("<span style='height:100%;display:inline-block;vertical-align:middle'></span><img alt='证照加载中...' style='vertical-align:middle' src='" + uploadImgUrl + "' />");
+            //必须等压缩完才读取canvas值，否则canvas内容是黑帆布
+            $.ajax({
+                url: "/Account/imgUpload",
+                async: false,
+                type: "post",
+                data: { data: dataURL.substr(dataURL.indexOf(";base64,") + 8), name: document.getElementById("file").files[0].name },//data.substring(22)
+                dataType: "json",
+                success: function (result) {
+                    $(".popback").hide();
+                    $(".loading3").hide();
+                    uploadImgUrl = result.data;
+                    $(".uploadChooseArea").hide();
+                    $(".authContent").show();
+                    $("body").css("background", "#f2f2f2");
+                    $(".uploadArea").html("<span style='height:100%;display:inline-block;vertical-align:middle'></span><img alt='证照加载中...' style='vertical-align:middle' src='" + uploadImgUrl + "' />");
+                    console.log(result);
+                },
+                error: function (data) {
+                    $(".popback").hide();
+                    $(".loading3").hide();
+                    console.log(data)
+                }
+            });
+        }
+    });
+</script>
+
+@*<div class="infinite-scroll-preloader"><img src="/Content/images/loadingAnimation.gif"/></div>*@
+
+
+

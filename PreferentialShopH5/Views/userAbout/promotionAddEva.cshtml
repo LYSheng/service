@@ -1,0 +1,79 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "我要评价";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+    @WebHelper4H5.RegisterStyles("Touch.css")
+}
+<div class="evaluation">
+    <div class="dppj">店铺评价</div>
+    <p class="pj clearfix rl"><span class="fl">描述相符：</span><span class="star fl"><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i></span></p>
+    <p class="pj clearfix wl"><span class="fl">物流速度：</span><span class="star fl"><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i></span></p>
+    <p class="pj clearfix nomb fw"><span class="fl">服务态度：</span><span class="star fl"><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i></span></p>
+</div>
+<div style="padding-bottom:60px;">
+    <!-- 商品评价 start -->
+    @foreach (var orderPackage in ViewBag.OrderPackageShow["orderPackageItemList"])
+    {
+        <div class="sp_evaluation">
+            <input type="hidden" name="ProductId" class="ProductId" value="@orderPackage["productId"]">
+            <input type="hidden" name="SkuId" class="SkuId" value="@orderPackage["skuId"]">
+            <dl class="dp_details clearfix">
+                <dt class="fl"><img src="@orderPackage["productPic"]" alt="店铺图片" onerror="this.src = '/content/images/defaultAvatar.png'" /></dt>
+                <dd class="proMore">
+                    <p class="sp_name">@orderPackage["productName"]</p>
+                    <p class="sp_price redword">￥<b class="bold">@orderPackage["price"]</b></p>
+                    <p class="dp_total">共 @orderPackage["count"]件商品</p>
+                </dd>
+            </dl>
+            <p class="pj clearfix sp"><span class="fl">满意程度：</span><span class="star fl"><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i><i class="star-on"></i></span></p>
+            <div class="pingjia clearfix parbox">
+                <span class="evaPraise disblock pr10">评价：</span>
+                <div class="disblock flex1 pl10 praiseFrame pt2">
+                    <span class="fr spanIcon fs10 ac posrelative">
+                        <i class="photo_upload"></i><br/>
+                        发照片
+                        <input type="file" class="praisePicFile posabsolute praiseUpload" id="" />
+                    </span>
+                    <textarea name="pj" rows="1" cols="1" class="pj-textarea">很好！</textarea>
+                    <ul class="praisePic clearfix pb2">
+                        @*<li class="posrelative fl mr4">
+                            <img src="/content/images/ma4.png" />
+                            <i class="photo_cross"></i>
+                        </li>
+                        <li class="posrelative fl mr4">
+                            <img src="/content/images/ma4.png" />
+                            <i class="photo_cross"></i>
+                        </li>
+                        <li class="posrelative fl mr4">
+                            <img src="/content/images/ma4.png" />
+                            <i class="photo_cross"></i>
+                        </li>*@
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+<!-- 商品评价 end -->
+<footer class="tijiao clearfix">
+    <a href="javascript:" class="submit fr">提交</a>
+</footer>
+@section Footer
+{
+    <input type="hidden" id="orderId" value="@Request["orderId"]" />
+    <input type="hidden" id="orderPackageId" value="@Request["orderPackageId"]" />
+}
+@section Scripts
+{
+    <script src="~/Scripts/plugin/Photo/exif.js"></script>
+    <script src="~/Scripts/plugin/Photo/iscroll-zoom.js"></script>
+    <script src="~/Scripts/plugin/Photo/hammer.js"></script>
+    <script src="~/Scripts/plugin/Photo/jquery.photoClip.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Touch.jquery.js"> </script>
+    @WebHelper4H5.RegisterScripts("Account/evaluation.js")
+}

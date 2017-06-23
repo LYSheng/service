@@ -1,0 +1,304 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "订单详情";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+    @WebHelper4H5.RegisterStyles("malls/seaOrder.css")
+
+}
+<style>
+    .daifh, .goods_receipt {
+        padding: 0.54rem 1.72rem;
+    }
+</style>
+
+<section class="order_details" style="padding-bottom:50px">
+    <div class="daifh">
+        <h1>@ViewBag.OrderShow["orderStateName"] &nbsp;&nbsp;&nbsp;&nbsp;
+            @if (ViewBag.OrderShow["isPickedUp"])
+            {
+                <span>门店自提</span>
+            }
+        </h1>
+        <p class="total_price">订单金额：<i>￥@ViewBag.OrderShow["beforePmnPrice"]</i></p>
+    </div>
+    @if (ViewBag.OrderShow["isPickedUp"])
+    {
+     <div class="orderPackage white-bg">
+        <div class="order_delivery_address mt4">
+            <div>
+                <p class="clearfix">
+                    自提门店:<span>@ViewBag.StoreShow["storeName"]</span>
+                    @if (ViewBag.OrderShow["orderState"] == 20)
+                    {
+                        <span class="fr">正在配货</span>
+                    }
+                </p>
+                <p>门店地址:<span>@ViewBag.StoreShow["address"]</span></p>
+                @if (!string.IsNullOrEmpty(ViewBag.StoreShow["storeTelPhone"]))
+                {
+                    <p>联系电话:<span>@ViewBag.StoreShow["storeTelPhone"]</span></p>
+                }
+                else
+                {
+                    <p>联系电话:<span>4009633696</span></p>
+                }
+
+            </div>
+
+        </div>
+         <div class="order_delivery_p">
+             @if (!string.IsNullOrEmpty(ViewBag.OrderShow["pickedUpCode"]))
+             {
+                 <p class="clearfix order_delivery_img">
+                     <span class="fl ">提货二维码:</span><img class="fl" src="@ViewBag.OrderShow["pickedUpCode"]" />
+                 </p>
+             }
+         </div>
+    </div>
+    }
+    else
+    {
+        <div class="goods_receipt">
+            <p class="goods_person clearfix">
+                <span class="fl shr">收货人:@ViewBag.OrderShow["receiveName"]</span>
+                <span class="fr tel">@ViewBag.OrderShow["receiveMobile"]</span>
+            </p>
+            <p class="goods_address">收货地址：@ViewBag.OrderShow["userAddress"]</p>
+        </div>
+    }
+    <div class="h21"></div>
+    @* 海外购信息模块 *@
+    @if (!string.IsNullOrEmpty(ViewBag.OrderShow["declarationUserName"]))
+    {
+        <div class="mb4 white-bg seaUserInfo open" id="seaUserInfo">
+            <div>
+                <p class="seaTitle red fs12">跨境商品需填写以下信息：</p>
+            </div>
+            <div class="parbox seaInput pd fs12">
+                <p class="left">姓名：</p>
+                <p>@ViewBag.OrderShow["declarationUserName"]</p>
+            </div>
+            <div class="parbox seaInput pd fs12">
+                <p class="left">身份证号码：</p>
+                <p>@ViewBag.OrderShow["declarationIdCard"]</p>
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.OrderShow["declarationIdCardImg"]) || !string.IsNullOrEmpty(ViewBag.OrderShow["declarationIdCardBgImg"]))
+            {
+                <div>
+                    <p class="fs12 seaCardTitle c6">身份证正反面照片</p>
+                    <ul class="clearfix seaCardPhoto">
+                        @if (!string.IsNullOrEmpty(ViewBag.OrderShow["declarationIdCardImg"]))
+                        {
+                            <li class="bnone">
+                                <img src="@ViewBag.OrderShow["declarationIdCardImg"]" />
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(ViewBag.OrderShow["declarationIdCardBgImg"]))
+                        {
+                            <li class="bnone">
+                                <img src="@ViewBag.OrderShow["declarationIdCardBgImg"]" />
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    }
+    <div class="goods_details white-bg   pl20 pr20">
+        @foreach (var orderItems in ViewBag.OrderShow["orderItems"])
+        {
+            <p class="store_name"><i class="mr4 person_store"></i>@orderItems["ownerUserNickName"]</p>
+            foreach (var orderItem in @orderItems["orderItem"])
+            {
+
+                <ul class="parbox pb4 clickDetail" data-product="@orderItem["productId"]" data-title="@System.Web.HttpUtility.UrlEncode(orderItem["longName"])">
+                    <li class="imgBox">
+                        <img src="@orderItem["src"]" onerror="this.src = '/content/images/loading_250.png'" />
+                    </li>
+                    <li class="flex1 pl20 fs12">
+                        <p class="textlist">@orderItem["longName"]</p>
+                        <p class="spec">
+                            已选:<span class="specDetail">已选:@orderItem["specs"]</span>
+                            <br />
+                        </p>
+                    </li>
+                    <li class="relProdeil ar">
+                        <p class="price fs11"><strong>@orderItem["price"]</strong></p>
+                        <p class="amont">x<i>@orderItem["count"]</i></p>
+                    </li>
+                </ul>
+
+            }
+            if (!string.IsNullOrEmpty(orderItems["userNote"]))
+            {
+                <p class="usermark">
+                    买家留言：@orderItems["userNote"]
+                </p>
+            }
+            <p class="usermark" style="padding:0.2rem 0;">
+                运费:<span class="fr"> @orderItems["expressPriceName"]</span>
+            </p>
+            if (orderItems["pmnPrice"] != 0)
+            {
+                <p class="usermark" style="padding:0.2rem 0 .4rem 0;">
+                    优惠:<span class="fr">-￥ @orderItems["pmnPrice"]</span>
+                </p>
+            }
+        }
+    </div>
+    <ul class="expense  white-bg">
+        <li class="clearfix">
+            <span class="fl">商品总价：</span>
+            <span class="fr">￥@ViewBag.OrderShow["productFee"]</span>
+        </li>
+        <li class="clearfix">
+            <span class="fl">合计运费：</span>
+            <span class="fr">￥@ViewBag.OrderShow["postFee"]</span>
+        </li>
+        <li class="clearfix">
+            <span class="fl">合计优惠：</span>
+            <span class="fr">- ￥@ViewBag.OrderShow["pmnPrice"]</span>
+        </li>
+        @foreach (var oPayList in ViewBag.OrderShow["orderPayList"])
+        {
+            <li class="clearfix">
+                <span class="fl">@oPayList["title"]</span>
+                <span class="fr">-￥@oPayList["payMoney"]</span>
+            </li>
+        }
+        <li class="clearfix">
+            <span class="fl">还需付款：</span>
+            <span class="redword fr">￥@ViewBag.OrderShow["residualMayPayPrice"]</span>
+        </li>
+    </ul>
+    @if (ViewBag.OrderShow["useInvoice"] == 1)
+    {
+        <ul class="number_details white-bg">
+            <li>发票信息</li>
+            <li>发票类型：@ViewBag.OrderShow["invoiceTypeName"]</li>
+            <li>发票抬头：@ViewBag.OrderShow["invoiceTitle"]</li>
+        </ul>
+    }
+    <ul class="number_details white-bg">
+        <li>订单号：@ViewBag.OrderShow["orderCode"]</li>
+        <li>创建时间：@ViewBag.OrderShow["orderCreateTime"] </li>
+        @if (ViewBag.OrderShow["payTime"] != null)
+        {
+            <li>付款时间：@ViewBag.OrderShow["payTime"]</li>
+        }
+    </ul>
+</section>
+@if (ViewBag.OrderShow["orderState"] == 10)
+{
+    <div class="ar action fs12 white-bg payInt box">
+        <span class="mr6 orderCancel" data-orderid='@Request["orderId"]'>取消订单</span>
+        <span class="orderPay" data-orderid='@Request["orderId"]'>立即付款</span>
+    </div>
+}
+<input type="hidden" id="uid" value="@ViewBag.uid" />
+<input type="hidden" id="dataTime" value="@ViewBag.DateTime" />
+<input type="hidden" id="payToSign" value="@ViewBag.PayToSign" />
+<div class="popback"></div>
+<div class="custom" style="height: 3.7rem;">
+    <p>您确定要取消此订单吗？</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="adrqx">取消</a>
+        <a href="javascript:;" class="adrqd">确定</a>
+    </p>
+</div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        var orderCancelobj;
+        var PGIUrl = "@System.Configuration.ConfigurationManager.AppSettings["PGIUrl"]";
+        $(".orderPay").click(function () {
+            var orderid = $(this).data("orderid");
+            window.location.href = PGIUrl + "Payment/Pay?orderId=" + orderid + "&userId=" + $("#uid").val() + "&dataTime=" + $("#dataTime").val() + "&sign=" + $("#payToSign").val() + "&FromPlatform=PreferentialShopH5";
+        })
+        $(".order_delivery_img img").on("click", function () {
+            if ($(this).hasClass("big")) {
+                $(this).removeClass("big");
+            } else {
+                $(this).addClass("big");
+            }
+        })
+        $(".orderCancel").click(function () {
+            var index = $(".adrdel").index(this);
+            var $window_w = $(window).width();
+            var $window_h = $(window).height();
+            var $custom_w = $(".custom").width();
+            var $custom_h = $(".custom").height();
+            var $scroll_height = document.body.scrollTop;
+            $(".custom").css({ "top": ($window_h - $custom_h) / 2, "left": ($window_w - $custom_w) / 2 });
+            $(".popback").show();
+            $(".custom").show();
+            orderCancelobj = $(this);
+        })
+        $(".adrqx").click(function () {
+            $(".popback").hide();
+            $(".custom").hide();
+        });
+        $(".adrqd").click(function () {
+            var orderId = $(orderCancelobj).data("orderid");
+            apiRequest({
+                method: 'Order/DxlqCancelOrder',
+                async: false,
+                data: { OrderId: orderId },
+                success: function (obj) {
+                    if (obj.isBizSuccess) {
+                        smGlobal.error("订单取消成功！");
+                        window.location.href = "./orderList";
+                    }
+                    $(".popback").hide();
+                    $(".custom").hide();
+                },
+                error: function (obj) {
+                    $(".popback").hide();
+                    $(".custom").hide();
+                    smGlobal.error(obj);
+                }
+            });
+        });
+        $(function () {
+            $.each($(".imgBo"), function (i, v) {
+                $(v).css("height", $(v).parents(".disblock").outerHeight());
+            })
+            //查看商品分类和商品详情
+            $(".clickDetail").on("click", function () {
+                var productId = $(this).data("product"), title = $(this).data("title");
+
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.orderDetails) {
+
+                    window.webkit.messageHandlers.orderDetails.postMessage([productId, title]);
+                    return;
+                }
+
+                window.location.href = '/Classify/themePromoList?ProductId='+productId+'&isShareProduct=2&hideCat=1&title='+title;
+            })
+        })
+
+        //function a() {
+        //    alert("11")
+        //    apiRequest({
+        //        method: 'Order/DxlqOrderGet',
+        //        async: false,
+        //        data: {orderId:4584},
+        //        success: function (data) {
+        //            console.log(data)
+        //        },
+        //        error: function (data) {
+        //        }
+        //    });
+        //}
+        //a();
+    </script>
+}

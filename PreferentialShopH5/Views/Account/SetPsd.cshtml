@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "设置密码";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("account.css")
+    
+}
+
+
+<div class="accountRegisterArea">
+    <h2 class="ac pb6"><img src="~/Content/images/setpsd.png" style="height:32px" /></h2>
+    <div style="height:8.3rem" class="fullbg_register">
+        <div class="pl30 pr30 pt6">
+            <div class="parbox comlineAreaRegister">
+                <label class="comlabel"><i class="person_Code"></i></label>
+                <input placeholder="请输入密码" class="flex1 comAccinput psd1" type="password" id="userName" data-bind="value:psd" />
+            </div>
+            @*<div class="parbox comlinearearegister">
+                <label class="comlabel"><i class="home_accticon"></i></label>
+                <input placeholder="请输入用户昵称(首位不能为数字)" class="flex1 comaccinput" type="text" id="username" data-bind="value: nickname" />
+            </div>
+            <div class="parbox comlinearearegister">
+                <label class="comlabel"><i class="home_acctpass"></i></label>
+                <input placeholder="请输入6-12位密码" class="flex1 comaccinput" type="password" id="password" data-bind="value: password" />
+            </div>*@
+            <div class="parbox comlineAreaRegister">
+                <div class="codeBody  parbox box">
+                    <label class="comlabel"><i class="person_Code"></i></label>
+                    <input placeholder="请确认密码" class="flex1 comAccinput psd2" type="password" id="passWord" data-bind="value:rePsd" />
+                </div>
+
+            </div>
+            @*<div class="fs12 feature mt8 mb8 clearfix"><span class="fl" data-bind="click:pwdtypchange"><i class="showbox mr2"></i>显示密码</span><span class="fr"><a href="/account/login">已有登录账号</a></span></div>*@
+            <span class="subText ac fs14" style="margin-top:20px;" data-bind="click:confirm">确定</span>
+        </div>
+    </div>
+</div>
+<div class="accountbg">
+</div>
+
+
+
+<input type="hidden" id="shareid" value='@(Request.QueryString["shareid"]??"")' />
+@section Footer
+{
+    @WebHelper4H5.RegisterScripts("Account/resetPsd.js")
+}
+@section Scripts
+{
+
+}

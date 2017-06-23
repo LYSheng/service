@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "我的0元体验";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("Classify/classify.css")
+}
+@section SearchArea
+{
+}
+<div class="loadingFixed" style="display:block" isglobleload=true></div>
+<div class="youhuiTab ac white-bg full-width posFixed" style="z-index:10000">
+    <div class="parbox">
+        <div class="tab1 active tabs  flex1 disblock posrelative">我的报名</div>
+        <div class="tab2 tabs  flex1 disblock posrelative">报名成功</div>
+        <div class="tab2 tabs  flex1 disblock posrelative">报名失败</div>
+    </div>
+</div>
+<div style="height:1.7rem;"></div>
+<div class="clearfix white-bg">
+    <!-- 已发起的众筹订单 -->
+    <div class="pb2" id="order">
+        <div class="mb6" id="proOrder" data-bind="foreach:crowdfundingList">
+            <div class="parbox  pl20 pr20 mt4">
+                <div class="disblock zeroListImgBox">
+                    <img class="full-width" data-bind="attr:{'src':productImg}">
+                </div>
+                <div class="disblock flex1 pl20">
+                    <ul>
+                        <li data-bind="text:productName" class="fs14 checkProductName pb3"></li>
+                        <li class="fs14 checkLine">
+                            <i data-bind="text:'￥'+salesPrice" class="checkSaleprice fs15"></i>
+                            <i data-bind="text:enterCount+'人已报名'" class="ml4 fs10 checkEnterCount"></i>
+                        </li>
+                        <li data-bind='attr:{"class":enterStatus==10?"displayFlexStart fs12 checkStaue pl30 zeroIng":(enterStatus==20?"displayFlexStart fs12 checkStaue pl30 zeroSuc":"displayFlexStart fs12 checkStaue pl30 zeroFail")}'>
+                            <span class="" data-bind='text:enterStatus==10?"审核中":(enterStatus==20?"报名成功":"报名失败")'></span>
+                        </li>
+                        <li class="displayFlexStart fs12 checkStaue">
+                            <span class="displayFlexStart" data-bind="text:'申请于'+createTimeStr"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div style="height:2rem;"></div>
+@section Footer
+{
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/zeroList.js")
+}

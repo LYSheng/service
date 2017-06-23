@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Malls·五洲精选";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("account.css")
+    <style type="text/css">
+        .shawdowCell {
+            background-color: black;
+            opacity: 0.2;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: none;
+        }
+
+        .userList {
+            display: none;
+            border-radius: 0.2rem;
+            background-color: #fff;
+            z-index: 1000;
+            text-align: center;
+            font-size: 0.55rem;
+            position: fixed;
+            top: 22%;
+            left: 10%;
+            width: 80%;
+        }
+
+        .userTitle {
+            text-align: center;
+            font-size: 0.65rem;
+            padding-top: 10px;
+            padding-bottom: 0px;
+            line-height: 1rem;
+            height: 1rem;
+            color: white;
+            color: black;
+            /*background: #dc6263;*/
+        }
+
+        .userItem {
+            margin-top: 10px;
+            font-size: 0.6rem;
+            color: #333;
+            margin-bottom: 5px;
+            color: white;
+            background-color: red;
+            height: 1.5rem;
+            line-height: 1.5rem;
+            background-color: #dc6263;
+            margin-left: 0.8rem;
+            margin-right: 0.8rem;
+        }
+
+            .userItem:last-child {
+                margin-bottom: 15px;
+            }
+
+        .alertmsg {
+            text-align: left;
+            color: red;
+            margin-left: 0.8rem;
+            margin-right: 0.8rem;
+            padding-bottom: 0.4rem;
+        }
+
+        .msgTitle {
+            padding-top: 1rem;
+        }
+
+        .padding_bottom {
+            padding-bottom: 1rem;
+        }
+    </style>
+}
+
+
+<div class="accountRegisterArea">
+
+    <h2 class="ac pb6"><img src="~/Content/images/login_title_new01.png" style="height:28px" /></h2>
+
+
+
+    <div class="fullbg_register">
+        <div class="pl30 pr30 pt6">
+            <div class="parbox comlineAreaRegister">
+                <label class="comlabel"><i class="person_Code"></i></label>
+                <input placeholder="请输入手机号" class="flex1 comAccinput" type="text" id="userName" data-bind="value:phone" maxlength="11" />
+            </div>
+            <div class="parbox  comlineAreaRegister">
+                <label class="comlabel"><i class="home_acctIcon"></i></label>
+                <input placeholder="请输入用户昵称(首位不能为数字)" class="flex1 comAccinput" type="text" id="nickName" data-bind="value: nickName" />
+            </div>
+            <div class="parbox  comlineAreaRegister">
+                <label class="comlabel"><i class="home_acctPass"></i></label>
+                <input placeholder="请输入6-12位密码" class="flex1 comAccinput" type="password" id="password" data-bind="value: password" />
+            </div>
+            <div class="parbox comlineAreaRegister">
+                <div class="codeBody  parbox box">
+                    <label class="comlabel"><i class="person_Code"></i></label>
+                    <input placeholder="请输入验证码" class="flex1 comAccinput" type="text" id="validateCode" data-bind="value: captcha" />
+                </div>
+                <span class="disblock getCode ac " data-bind="click:getCaptcha">获取验证码</span>
+            </div>
+            <div class="fs12 feature mt8 mb8 clearfix"><span class="fl" data-bind="click:pwdtypChange"><i class="showbox mr2"></i>显示密码</span><span class="fr"><a href='/account/login?ReturnUrl=@Request["ReturnUrl"]'>已有登录账号</a></span></div>
+
+            <span class="subText ac fs14" style="margin-top:20px;" data-bind="click:rejister">注册</span>
+        </div>
+    </div>
+</div>
+<div class="accountbg">
+</div>
+
+<div class="shawdowCell"></div>
+<div class="userList">
+    <div class="userTitle">您的手机号已注册用户</div>
+    <div data-bind="foreach:userlist" class="newgester_item">
+        <div class="userItem" onclick="selectedUser(this)" data-bind="attr:{'userId':userId},text:userName"></div>
+    </div>
+    <div class="alertmsg">*已注册用户点击即可登陆</div>
+    <div class="bottomDiv">
+        <div class="userTitle">新用户注册</div>
+        <div class="userItem regesterName" onclick="selectedUser(this)" register="true"></div>
+        <div class="alertmsg padding_bottom">*新用户注册点击即可注册成功</div>
+    </div>
+</div>
+
+
+<input type="hidden" id="shareid" value='@(Request.QueryString["shareid"]??"")' />
+@section Footer
+{
+    @WebHelper4H5.RegisterScripts("Account/newRegister.js")
+}
+@section Scripts
+{
+
+}

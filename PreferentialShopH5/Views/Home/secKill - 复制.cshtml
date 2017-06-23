@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "限时抢购";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("Classify/classify.css")
+    @WebHelper4H5.RegisterStyles("shoppingCart.css")
+}
+<div class="loading3" style="display:block" isglobleload=true></div>
+<div class="clearfix">
+    <div class="secKillCon pt2" id="shop">
+        <div class="pr20 pl20  pb4" data-bind="foreach:proList" id="proList" style="display:none">
+            <div class="clasicList categBox desCategBox">
+                <a data-bind='attr:{href:productAmount <= 0?"javascript:void(0)":"/product/detail?activityId="+promotionId}'>
+                    <dl class="parbox ">
+                        <dd class="imgb disblock imgbox">
+                            <img class="fl" data-bind="attr:{src:src}" onerror="this.src = '/content/images/maoshi.png'">
+                        </dd>
+                        <dt class="detail disblock pl10 box flex1 posrelative skilObj">
+                            <p class="skillDescriton textEllipsis disblock full-width fs14" data-bind="text:productName">-</p>
+                            <!-- ko if: productAmount > 0 -->
+                            <p class="word-descriton parbox  fs12" data-bind='attr:{"data-counttime":endTime}'>
+                                距促销结束还有
+                                <span class="countdown">
+                                    <span class="days"></span>天<span class="hours"></span>小时<span class="minutes"></span>分<span class="seconds"></span>秒
+                                </span>
+                            </p>
+                            <!-- /ko -->
+                            <p class="kucun_qishou  fs12">
+                                <span class="qishou pr20">剩余：<i data-bind='text:productAmount>999?" 999+":productAmount'>-</i></span>
+                                <span class="kucun" data-bind='text:limitedQuantity==0?"":"限购："+limitedQuantity'></span>
+                            </p>
+                            <!-- ko if: retailPrice != salePrice -->
+                            <p class="clearfix"><span class="sm-price fs12" data-bind="text:retailPrice">-</span></p>
+                            <!-- /ko -->
+                            <p class="clearfix">
+                                <em class="redword fs14 mr2"><strong data-bind="text:'￥'+salePrice">-</strong></em>
+                            </p>
+                            <div class="posabsolute skillStatus">
+                                <!-- ko if: productAmount <= 0 -->
+                                <div class="skillOver ac fs12">
+                                    <p class="skiTitle">已抢光</p>
+                                    @*<p class="left" data-bind='text:"已抢"+tradeAmout+"件"'>-</p>*@
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: productAmount > 0 -->
+                                <div class="skilling ac fs12">
+                                    <p class="skiTitle">马上抢 ></p>
+                                    <p class="left" data-bind='text:"已抢"+tradeAmout+"件"'>-</p>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </dt>
+                    </dl>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:2rem;"></div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/jquery.downCount.js"></script>
+    @WebHelper4H5.RegisterScripts("Site/secKill.js")
+}

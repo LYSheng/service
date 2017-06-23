@@ -1,0 +1,54 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "提现";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("newStyles/mzui/amazeui.css")
+    @WebHelper4H5.RegisterStyles("newStyles/style.css")
+    @WebHelper4H5.RegisterStyles("newStyles/main.css")
+    @WebHelper4H5.RegisterStyles("newStyles/dyl.css")
+}
+
+<section class="withdrawalsForm">
+    <div>
+        <p><f>&yen;</f>228
+        </p>
+        <p>可提现金额，最低提现额度为500元</p>
+    </div>
+    <div>
+        <input type="text" placeholder="请输入提现金额">
+    </div>
+</section>
+
+<div class="submit_btn pad4 skips" data-src="/userAbout/withdrawalStype">
+    <span>提现</span>
+</div>
+
+@*<div class="white-bg fs14 mt5 pl30 pr30">
+    <p class="comAdrArea parbox">
+        <label>储蓄卡</label>
+        <input class="flex1 addusername disblock" type="text" value="" id="cardDetail" data-bind="value: withdrawalsCard,attr:{'data-bankcardid':bankCardId,'data-bankcardnum':bankCardNum},click:withCardList" placeholder="请选择银行卡" readonly>
+    </p>
+    <p class="comAdrArea parbox">
+        <label>金额(元)</label>
+        <input class="flex1 addiphone disblock" type="text" value="" id="newPwd" maxlength="16" data-bind="value: withdrawalsAmount" placeholder="可提现金额 @ViewBag.comsionAccount["commission"]元">
+    </p>
+    <p class="comAdrArea parbox">
+        <label>密码</label>
+        <input class="flex1 addiphone disblock" type="password" value="" id="confirmPwd" maxlength="16" data-bind="value: withdrawalsPwd" placeholder="请输入登录密码">
+    </p>
+</div>
+<p class="pt4 pb2 pl20 pr20 fs14">最低提现金额：<i>@ViewBag.comsionAccount["commissionMinWithdraw"]</i>元</p>
+<p class="adraddBtn ac fs16" data-bind="click:confirm">提交</p>
+
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("Account/withDrawals.js")
+}*@

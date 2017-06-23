@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "猫市七夕大促,8月9日-8月10日";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+
+        //微信分享到朋友，朋友圈，qq等  目前只能 修改内容不能 按钮 弹出
+        wx.config({
+            debug: false,
+            appId: '@Service.Site.wxService.wxappid',
+            timestamp: '@ViewData["timestamp"]',
+            nonceStr: '@ViewData["noncestr"]',
+            signature: '@ViewData["signature"]',
+            jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            ]
+        });
+
+        wx.ready(function () {
+          
+            var linkUrl = '@WebConfig.WXMVCUrl/Share/Arrive?ReferrerUserId=@CurrentUser.Instance.UserId&ReturnUrl=@HttpUtility.UrlEncode("/Home/qixi2016")';
+           
+            wx.onMenuShareAppMessage({
+                title: '别人都快嘿嘿嘿了，七夕你没礼物是要怎样？',
+                desc: "如果爱就深爱，深爱不能嘴上说说，爱就要行动起来！", // 分享描述
+                link: linkUrl,
+                imgUrl: '@WebConfig.WXMVCUrl/content/images/qiximain.jpg',
+                trigger: function (res) {
+                   // alert(2);
+                    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                },
+                success: function (res) {
+
+                 //   alert('已分享');
+                },
+                cancel: function (res) {
+                   // alert('已取消');
+                },
+                fail: function (res) {
+                  //  alert(JSON.stringify(res));
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: "别人都快嘿嘿嘿了，七夕你没礼物是要怎样？",
+                desc: '测试描述', // 朋友圈不支持
+                link: linkUrl,
+                imgUrl: '@WebConfig.WXMVCUrl/content/images/qiximain.jpg',
+                trigger: function (res) {
+                  //  alert(2);
+                    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                },
+                success: function (res) {
+                   // alert('已分享');
+                },
+                cancel: function (res) {
+                  //  alert('已取消');
+                },
+                fail: function (res) {
+                   // alert(JSON.stringify(res));
+                }
+            });
+        })
+
+    </script>
+    @WebHelper4H5.RegisterStyles("Classify/classify.css")
+}
+<img src="/content/images/qiximain.jpg" width="0" height="0" style="display:none"/>
+<div class="clearfix">
+    <div class="fl">
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi01.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi02.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi03.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi04.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi05.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=2796&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi06.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=1919&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi07.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi08.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=1917&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi09.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi10.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=1048&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi11.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi12.jpg" class="fl full-width scrollLoading" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi13.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=2926&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi14.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=2929&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi15.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=1630&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi16.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=3369&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi17.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=1062&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi18.jpg" class="fl full-width scrollLoading" onclick="window.location.href = 'https://shop.591malls.com/Share/Arrive?ReferrerUserId=&ReturnUrl=@System.Web.HttpUtility.UrlEncode("/classify/themePromoList?ProductId=1144&hideCat=1&isShareProduct=1&title=%25e4%25b8%2583%25e5%25a4%2595%25e6%25b4%25bb%25e5%258a%25a8")'" />
+        <img src="~/Content/Images/loading.gif" data-url="/content/images/qixi19.jpg" class="fl full-width scrollLoading" />
+    </div>
+</div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("scrollLoading.js")
+    <script>
+        $(".scrollLoading").scrollLoading();
+    </script>
+}

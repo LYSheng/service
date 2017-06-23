@@ -1,0 +1,119 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "订单确认";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+
+}
+<section class="order_details pb24" style="visibility:hidden">
+    <div class="order_delivery white-bg">
+        <p class="fs14">配送方式：</p>
+        <ul class="order_delivery_tab clearfix" id="tabs">
+            <li class="ac fs14 active right">门店自提</li>
+            <li class="ac fs14">快递配送</li>
+        </ul>
+    </div>
+    <!-- ko if: defaultAddress.userAddressId !=0 -->
+    <div class="goods_receipt bargain_details">
+        <div>
+            <p class="goods_person clearfix">
+                <span class="fl shr" data-bind='text:"收货人:"+defaultAddress.name'>-</span>
+                <span class="fr tel" data-bind='text:defaultAddress.phone'>-</span>
+            </p>
+            <p class="goods_address" data-bind='text:"收货地址："+defaultAddress.provinceName+defaultAddress.cityName+defaultAddress.areaName+defaultAddress.address'>-</p>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: defaultAddress.userAddressId ==0 -->
+    <div class="goods_receipt bargain_details">
+        <div style="margin-top: 0.75rem;">
+            <span>添加收货地址</span>
+            <i class="fr jiantou"></i>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: defaultStore.storeUserId ==0 -->
+    <div class="order_delivery_address">
+        <div style="margin-top: 0.75rem;">
+            <span>请选择自提门店</span>
+            <i class="fr jiantou"></i>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: defaultStore.storeUserId !=0 -->
+    <div class="order_delivery_address">
+        <div>
+            <p>自提门店:<span data-bind='text:defaultStore.storeName'></span></p>
+            <p>门店地址:<span data-bind="text:defaultStore.address">上海市浦东新区杨新路118号</span></p>
+            <p>联系电话:<span data-bind="text:defaultStore.storeTelPhone"></span></p>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="fs12 red pt4 pb10 pl20">
+        请在24小时内完成付款,超出时限系统会自动取消订单
+    </div>
+    <div class="goods_details" data-bind='foreach:orderReality.list'>
+        <div class="mt4 white-bg providerlist padlr">
+            <!--供应商列表start-->
+            <p class="store_name"><i class="mr4 person_store"></i><i data-bind="text:providerName">-</i></p>
+            <!--商品列表start-->
+            <div data-bind='foreach:data'>
+                <dl class="orderConfirmInfor clearfix parbox fs12">
+                    <dt class="confirmImgbox">
+                        <img data-bind='attr:{"src":src}' alt="茉莉清茶" onerror="this.src = 'content/images/defaultAvatar.png'" />
+                    </dt>
+                    <dd class="flex1">
+                        <p class="confirmTitle">
+                            <span class="fl" data-bind='text:longName'>-</span>
+                        </p>
+                        <p class="confirmSpec" data-bind='text:"已选："+specs()'>-</p>
+                    </dd>
+                    <dd class="othspe ar">
+                        <i data-bind='text:"￥"+salesPrice()'>-</i><br />
+                        X<i data-bind='text:amount'>-</i>
+                        </p>
+                    </dd>
+                </dl>
+            </div>
+            <!--商品列表end-->
+            <div class="fs12 confirmDesire1 parbox">
+                <p class="label">买家留言：</p>
+                <p class="flex1 pl10"><input type="text" class="messageObj fs12" placeholder="选填，可填写您和卖家达成一致的要求" data-bind="value:reMark" value="" /></p>
+            </div>
+
+            <div class="fs12 confirmDesire" data-bind='attr:{"data-id":expNewSpecilDesc==""?expressPrice():(parseFloat(expressPrice())==0?expNewSpecilDesc:expressPrice()+"+"+expNewSpecilDesc)}'>
+                运费:<span class="fr expNewSpecilDesc" id="expNewSpecilDesc">-</span>
+            </div>
+            <div class="fs12 confirmTotal ar">
+                @*共20件商品*@   小计@*（含运费）*@：<i class="couponTip pl10 orderRealityTotal" >-</i>
+            </div>
+            <!--供应商列表start-->
+        </div>
+    </div>
+</section>
+<div class="confirmBtn white-bg box fs14" style="display:none">
+    <p class="" style=" line-height: 0.8rem; display: inline-block; padding-top: .2rem; margin-right: 0.2rem;">
+        合计：<i class="couponTip fs18 pl10 orderRealityTotal" >-</i><br />
+        <span>(运费：<i class="couponTip pl10 expNewSpecilDesc " >-</i>)</span>
+    </p>
+    <span class="fr confbtn fs16 ac">确认</span>
+</div>
+<input type="hidden" id="uid" value="@ViewBag.uid" />
+<input type="hidden" id="dataTime" value="@ViewBag.DateTime" />
+<input type="hidden" id="payToSign" value="@ViewBag.PayToSign" />
+<div class="loading3" style="display:block"></div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        var defaultAdr = @Html.Raw(ViewBag.GetDefaultAddress);
+        var PGIUrl = "@System.Configuration.ConfigurationManager.AppSettings["PGIUrl"]";
+    </script>
+    @WebHelper4H5.RegisterScripts("malls/bargainOrderImmediate.js")
+}

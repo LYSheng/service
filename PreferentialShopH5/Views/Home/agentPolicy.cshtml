@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "促销商城";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("home/home.css")
+}
+@section Title
+{
+    <h1 class="am-header-title">代理政策</h1>
+}
+@section SearchArea
+{
+<div class="am-padding-per parbox locaarea">
+    <span class="location pr30 fs13">上海 <i class="home_sarrowdown"></i></span>
+    <p class="flex1 searchArea posrela">
+        <i class="home_mirror"></i>
+        <input type="text" class="searchBotton full-width white-bg fs12" id="" placeholder="搜索您要找的商品" />
+    </p>
+</div>
+}
+
+<div class="mt2 am-margin-per"> 
+    <div>
+        <div class="iscon am-margin-mer white-bg mt2 pb2">
+            <ul class="list-li-policy clearfix ">
+                <li> 
+                    <div class="list-thumb mr4" >
+                        <img src="~/Content/Images/food01.jpg" />
+                    </div>
+                    <div class="list-descriptions">
+                        <div class="list-descriptions-wrapper">
+                            <p class="name">
+                                <a tid="467" class="flex1">项目名称：台湾快食</a>
+                            </p>
+                            <p class="itemName">项目简介：</p>
+                            <span class="list-content">台湾快食源于台湾本土具有当地特色的天然食材与传统制作方法</span>
+                            
+                            <p class="apply mt2"><a data-bind="attr:{href:'/home/agentApply?activityId='+actId}">申请代理</a></p>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="list-thumb mr4">
+                        <img src="~/Content/Images/food01.jpg" />
+                    </div>
+                    <div class="list-descriptions">
+                        <div class="list-descriptions-wrapper">
+                            <p class="name">
+                                <a tid="467" class="flex1 fs13">项目名称：台湾快食</a>
+                            </p>
+                            <p class="itemName fs13">项目简介：</p>
+                            <span class="list-content fs10">台湾快食源于台湾本土具有当地特色的天然食材与传统制作方法</span>
+
+                            <p class="apply fs12 mt2"><a href="#">申请代理</a></p>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="list-thumb mr4">
+                        <img src="~/Content/Images/food01.jpg" />
+                    </div>
+                    <div class="list-descriptions">
+                        <div class="list-descriptions-wrapper">
+                            <p class="name">
+                                <a tid="467" class="flex1 fs13">项目名称：台湾快食</a>
+                            </p>
+                            <p class="itemName fs13">项目简介：</p>
+                            <span class="list-content fs10">台湾快食源于台湾本土具有当地特色的天然食材与传统制作方法</span>
+
+                            <p class="apply fs12 mt2"><a href="#">申请代理</a></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+     
+    </div>
+</div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+    @*<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll4.2.0.js"></script>*@
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll.js"> </script>
+}

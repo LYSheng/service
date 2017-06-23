@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "猫市礼品卡";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("Classify/classify.css")
+    @WebHelper4H5.RegisterStyles("shoppingCart.css")
+    <style>
+        body {
+            background: #f6f6f6;
+        }
+    </style>
+}
+@*<div class="loading3" style="display:block"></div>*@
+<div class="bargainHeader white-bg fs14 box">
+    <ul class="parbox" id="stuTab">
+        <li class="flex1 ac" data-pageindex="1" data-pullup_num="1"><i>礼品卡中心</i></li>
+        <li class="flex1 ac on" data-pageindex="1" data-pullup_num="1"><i>我的礼品卡</i></li>
+    </ul>
+</div>
+<div style="height:1.6rem;"></div>
+<div class="  pieceLoading clearfix full-width box" id="shop">
+    <div class="clearfix mallCardCenter pl10 pr10" id="proList" style="display:none">
+        <div data-bind="foreach:proList" class="clearfix">
+            <div class="box fl mt4 desCategBox posrelative categBox" style="width:100%">
+                <div class="fl full-width imgbox">
+                    <a data-bind="attr:{href:promotionType==-9?'/product/zeroexpDetail?activityId='+promotionId:'/product/detail?activityId='+promotionId}">
+                        <img class="fl" data-bind='attr:{src:src}'>
+                    </a>
+                </div>
+                <div class="white-bg pl15 pr15 fl box full-width pt2 pb2">
+                    <p class="word-descriton parbox pt2 mb2">
+                        <a style="text-decoration:none;" class="flex1 fs13 te" data-bind="attr:{href:promotionType==-9?'/product/zeroexpDetail?activityId='+promotionId:'/product/detail?activityId='+promotionId},text:productName">-</a>
+                    </p>
+                    <p class="kucun_qishou mb2 fs12">
+                        <span class="qishou fr">起售量：<i data-bind="text:saleAmount">-</i></span>
+                        <span class="kucun">库存：<i data-bind='text:productAmount>999?" 999+":productAmount'>-</i></span>
+                    </p>
+                    <p class="clearfix pb2">
+                        <em class="redword fs16 mr2">
+                            <strong data-bind="text:'￥'+salePrice">-</strong>
+                        </em>
+                        <!-- ko if: retailPrice != salePrice -->
+                        <span class="sm-price fs12" data-bind="text:retailPrice">-</span>
+                        <!-- /ko -->
+                        <span class="home_cart  fr goods_cart" data-bind='attr:{"data-promotionid":promotionId}'></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="pl20 pr20 tipBody">
+            <p class="fs12 warmTip pb8">温馨提示：购买礼品卡后，请及时充值到猫市礼品卡账户中。</p>
+            <p class="ac">
+                <span class="disInblock fs16 immecz" data-bind="click:recharge">立即充值</span>
+            </p>
+        </div>
+    </div>
+    <div class="clearfix mallCardCenter" style="display:none">
+        <div class="pl30 pr30 mallCenterWallet pt4 mt5">
+            <p class="fs14  walletPackge">当前余额（元）</p>
+            <p class="ac fs55" data-bind="text:rmb"></p>
+        </div>
+        <div class="jumpAction ac">
+            <span class="disInblock recharge mr4 fs16" data-bind="click:recharge">充值</span>
+            <span class="disInblock goDetail fs16" data-bind="click:rechargeDetail">查看明细</span>
+        </div>
+        <div class="fs12 mallCardAction pl30 pr30">
+            <p>温馨提示：</p>
+            <p class="pb3">
+                1、礼品卡的密码位于卡片背面，密码需要刮开涂层获得。
+            </p>
+            <p class="pb3">
+                2、礼品卡为不记名卡、不记名、不挂失、不计息、不兑换现金，获得礼品卡及密码后，请妥善保管，并及时充值到猫市礼品卡中。
+            </p>
+            <p class="pb3">
+                3、每张礼品卡均有使用期限，请及时充值到猫市礼品卡中。
+            </p>
+            <p class="pb3">4、操作过程中如有疑问，请联系客服中心：400-963-3696。</p>
+        </div>
+    </div>
+</div>
+<div style="height:50px"></div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("mallCard/MallCard.js")
+    @WebHelper4H5.RegisterScripts("shoppingCart.js")
+}

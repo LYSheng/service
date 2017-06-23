@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "查看白条申请";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/baitiao.css")
+}
+
+<div>
+    <p class="warning red" id="bohui"></p>
+    <p class="warning">注:基本信息的有效性决定您是否激活白条，以及最终可获得的额度。</p>
+    <div class="contents">
+        <div class="contents-input">
+            <span>姓名</span>
+            <p data-bind="text:identityCardUserName"></p>
+        </div>
+        <div class="contents-input">
+            <span>身份证</span>
+            <p data-bind="text:identityCardCode"></p>
+        </div>
+        <ul class="contents-upload clearfix">
+            <li data-bind='style:{"background":"url("+frontSideSrc+")"}'></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="contents-input">
+            <span>储蓄卡</span>
+            <p data-bind="text:bankCardNum"></p>
+        </div>
+        <div class="contents-input">
+            <span>手机号</span>
+            <p data-bind="text:iouMobilePhone"></p>
+        </div>
+        <div class="contents-input">
+            <span>服务密码</span>
+            <p data-bind="text:iouMobilePhonePwd"></p>
+            
+        </div>
+    </div>
+    <div class="height60"></div>
+</div>
+
+
+@section Footer
+{
+}
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/baitiaoinfo.js")
+
+}
+
+
+
+
+

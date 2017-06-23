@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "充值会员卡";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("newStyles/main.css")
+    <style>
+        html, body {
+            background: white !important;
+        }
+        .app_d_area1 {
+            padding: 15px 0 10px 15px;
+            border-bottom: 1px solid #d6d6d6;
+            display: -webkit-box
+        }
+        .app_d_area1 > img {
+            width: 60px;
+        }
+        .app_d_area1 > div {
+            padding: 5px 0 0 10px;
+            -webkit-box-flex: 1;
+            line-height: 25px;
+            color: #343434;
+            font-size: 14px;
+        }
+        .app_d_area1 > div > p:nth-child(1) {
+            font-size: 16px;
+        }
+        .app_d_area2 {
+            text-align: center;
+        }
+        .app_d_area2 > img {
+            margin: 30px 0 30px 0;
+            max-width: 70%;
+        }
+        .app_d_area3 {
+            width: 85%;
+            margin: 0 auto;
+        }
+        .app_d_area3 > div {
+            border-bottom: 1px solid #d6d6d6;
+            font-size: 13px;
+            padding: 10px 0;
+        }
+        .app_d_area3 > div > span {
+            border-left: 2px solid #b4282d;
+            font-weight: bold;
+            color: black;
+            padding-left: 5px;
+        }
+        .app_d_area3 > p {
+            font-size: 12px;
+            color: #343434;
+            margin-top: 15px;
+        }
+        .app_d_area4 {
+            display: -webkit-box;
+            margin: 35px 4%;
+        }
+        .app_d_area4 > div {
+            -webkit-box-flex: 1;
+            text-align: center;
+        }
+        .app_d_area4 > div > img {
+            max-width: 80%;
+        }
+    </style>
+}
+
+<div class="app_d_area1">
+    <img src="/Content/Images/NewImages/icon.png"/>
+    <div>
+        <p>猫市特惠v 1.0</p>
+        @*<p>10MB</p>*@
+    </div>
+</div>
+
+<div class="app_d_area2">
+    <img src="/Content/Images/NewImages/app_d_img.png" />
+</div>
+
+<div class="app_d_area3">
+    <div><span>产品信息</span></div>
+    <p>1.Malls·五洲精选严选国内外优质，刚需的产品包括保险品、个人护理、居家护理、食品、日用品等、产品直供给终端消费者。</p>
+    <p>2.产品直接由垮国品牌商供货、直接发往国内消费者。去掉国外产品高昂品牌溢价，挤掉广告公关成本，摒弃传统销售模式，使得价格回归合理性，让消费者享受物超所值的优质产品和服务。</p>
+    <p>3.平台补贴会员用户,充值会员费让猫市币和每月有猫市金币奖励！</p>
+</div>
+
+<div class="app_d_area4">
+    <div><img src="/Content/Images/NewImages/app_d_ios.png" /></div>
+    <div><img src="/Content/Images/NewImages/app_d_android.png" /></div>
+</div>

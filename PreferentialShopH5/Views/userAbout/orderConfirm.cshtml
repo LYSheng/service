@@ -1,0 +1,200 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "订单确认";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+    @WebHelper4H5.RegisterStyles("malls/seaOrder.css")
+    @WebHelper4H5.RegisterScripts("exif.js")
+
+}
+<section class="order_details pb24" style="visibility:hidden">
+    <!-- ko if: defaultAddress.userAddressId !=0 -->
+    <div class="goods_receipt">
+        <div>
+            <p class="goods_person clearfix">
+                <span class="fl shr" data-bind='text:"收货人:"+defaultAddress.name'>-</span>
+                <span class="fr tel" data-bind='text:defaultAddress.phone'>-</span>
+            </p>
+            <p class="goods_address" data-bind='text:"收货地址："+defaultAddress.provinceName+defaultAddress.cityName+defaultAddress.areaName+defaultAddress.address'>-</p>
+        </div>  
+    </div>
+    <!-- /ko -->
+    <!-- ko if: defaultAddress.userAddressId ==0 -->
+    <div class="goods_receipt">
+        <div style="margin-top: 0.75rem;">
+            <span>添加收货地址</span>
+            <i class="fr jiantou"></i>
+        </div>
+    </div>
+    <!-- /ko -->
+    @* 服务门店 *@
+    @*<div class="white-bg serviceShop">
+        <p>服务门店：<span id="serviceShop"></span></p>
+    </div>*@
+    <div class="fs12 red pt4 pb10 pl20">
+        请在24小时内完成付款,超出时限系统会自动取消订单
+    </div>
+    @* 海外购信息模块 *@
+    <div class="mt4 white-bg seaUserInfo" id="seaUserInfo">
+        <div>
+            <p class="seaTitle red fs12">跨境商品需填写以下信息：</p>
+        </div>
+        <div class="parbox seaInput fs12">
+            <p class="left">姓名：</p>
+            <input class=" flex1 fs12" placeholder="请输入您的真实姓名" id="declarationUserName" />
+        </div>
+        <div class="parbox seaInput fs12">
+            <p class="left">身份证号码：</p>
+            <input class=" flex1 fs12" placeholder="请输入您的身份证号码" id="declarationIdCard" />
+        </div>
+        <div>
+            <p class="fs12 seaCardTitle">身份证正反面照片</p>
+            <ul class="clearfix seaCardPhoto">
+                <li>
+                    <a href="javascript:void(0)" class="seaPhotoRemove"></a>
+                    <input type="file" id="uploadFile1" class="uploadImg" accept="image/*">
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="seaPhotoRemove"></a>
+                    <input type="file" id="uploadFile2" class="uploadImg" accept="image/*">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="goods_details" data-bind='foreach:orderReality.list'>
+        <div class="mt4 white-bg providerlist padlr" data-bind='attr:{"data-provideid":providerUserId}'>
+            <!--供应商列表start-->
+            <p class="store_name">
+                <i data-bind="text:providerName">-</i>
+                @*<span data-bind='attr: { "class": isSea == true ? "overseas fr" : ""}'></span>*@
+            </p>
+            <!--商品列表start-->
+            <div data-bind='foreach:data'>
+                <dl class="orderConfirmInfor clearfix parbox fs12" data-bind='attr:{"data-promotionid":promotionId,"data-proId":productId,"data-skuid":skuId,"data-price":salesPrice,"data-amount":amount}'>
+                    <dt class="confirmImgbox">
+                        <img data-bind='attr:{"src":src}' alt="茉莉清茶" onerror="this.src = '../content/images/loading_250.png'" />
+                    </dt>
+                    <dd class="flex1">
+                        <p class="confirmTitle">
+                            <span class="fl" data-bind='text:longName'>-</span>
+                        </p>
+                        <p class="confirmSpec" data-bind='text:"已选："+specs'>-</p>
+                    </dd>
+                    <dd class="othspe ar">
+                        <i data-bind='text:"￥"+salesPrice'>-</i><br />
+                        X<i data-bind='text:amount'>-</i>
+                        </p>
+                    </dd>
+                </dl>
+            </div>
+            <!--商品列表end-->
+            @*<div class="fs11 confirmDesire pt4 " style="color: #f00 !important; padding: 0.3rem 0.64rem 0 0.64rem;">
+                    购买猫市全球购产品的亲们请注意：为确保产品顺利报关，请在买家留言中留下您的真实姓名及身份证号，猫市商城承诺您的信息将被完全保密。
+                </div>*@
+            <div class="fs12 confirmDesire parbox" style="border:none;">
+                <p class="label colorB" @*data-bind='text:"买家留言："+coupObj.length'*@>买家留言：</p>
+                <p class="flex1 pl10"><input type="text" class="message fs12" placeholder="选填，可填写您和卖家达成一致的要求" /></p>
+            </div>
+            <!-- ko if: !$root.orderReality.useGlobalCoupon|| parseFloat($root.orderReality.useGlobalCoupon.deductAmount)<=0-->
+            <!-- ko if: coupObj.length >0 -->
+            <!-- ko if: packageCoupon.length >0 && parseFloat(packageCoupon[0].deductAmount)>0-->
+            <div class="fs12 confirmDesire couponShop">
+                <span class="colorB">店铺优惠:</span><span class="fr pl10"><i data-bind='text:"已减￥"+packageCoupon[0].realityDeductAmount' class="couponTip"></i><i class="ml2"><img src="/content/images/arowright.png" style="width:.2rem"></i></span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:  packageCoupon.length <=0 || parseFloat(packageCoupon[0].deductAmount)<=0-->
+            <div class="fs12 confirmDesire couponShop">
+                <span class="colorB">店铺优惠:</span><span class="fr pl10"><i data-bind='text:coupObj.length+"张优惠券可用"' class="couponTip"></i><i class="ml2"><img src="/content/images/arowright.png" style="width:.2rem"></i></span>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: $root.orderReality.useGlobalCoupon&&parseFloat($root.orderReality.useGlobalCoupon.deductAmount)>0-->
+            <div class="fs12 confirmDesire">
+                <span class="colorB">分摊优惠:</span><span class="fr pl10"><i data-bind='text:"已减￥"+packageCoupon[0].realityDeductAmount' class="couponTip"></i></span>
+            </div>
+            <!-- /ko -->
+
+
+            <div class="fs12 confirmDesire">
+                <span class="colorB">运费:</span><span class="fr" data-bind='text:expNewSpecilDesc==""?"￥"+expressPrice:(parseFloat(expressPrice)==0?expNewSpecilDesc:"￥"+expressPrice+"+"+expNewSpecilDesc)'>-</span>
+            </div>
+            <div class="fs12 confirmTotal ar">
+                @*共20件商品*@   <span class="colorB">小计@*（含运费）*@：</span><i class="couponTip pl10" data-bind='text:"￥"+(parseFloat(totalPrice).toFixed(2))'>-</i>
+            </div>
+            <!--供应商列表start-->
+        </div>
+    </div>
+    <div class="payList fs12 mt4 white-bg" style="border:none;">
+        @*<dl class="parbox cardList">
+                <dd class="flex1">平台优惠：<i class="couponTip">已使用满99元减4元</i></dd>
+                <dt class="cardRight ar">-￥4.00</dt>
+            </dl>*@
+        <div data-bind="if:comReality.cardId">
+            <dl class="parbox cardList" style="border-bottom: 1px solid #e8e8e8;" data-bind='attr:{"data-projectId":comReality.projectIds,"data-cardid":comReality.cardId}' data-type="2">
+                <dd class="flex1"><i class="colorB" data-bind="text:comReality.cardName" id="cardName">-</i>：余额可支付<i class="couponTip"<i data-bind='text:comReality.canPay()'>-</i>元</dd>
+                <dt class="switchCom off">
+                    <a class="switch_marins off selectInvoice" href="javascript:void(0);" id="selectInvoice" onclick="switchChoose(this)" data-bind='attr:{"data-canPay":comReality.canPay(),"data-projectId":comReality.projectIds,"data-cardid":comReality.cardId,"data-cardTotalPay":comReality.cardTotalPay}' data-type="2">
+                        <em>开</em>
+                    </a>
+                </dt>
+            </dl>
+        </div>
+        <div data-bind="foreach:specialCardList">
+            <dl class="parbox cardList" data-bind='attr:{"data-projectId":projectId,"data-cardid":cardId}' data-type="1">
+                <dd class="flex1"><i class="colorB" data-bind="text:cardName" id="cardName">-</i>：余额可支付<i class="couponTip" data-bind='text:canPay'>-</i>元</dd>
+                <dt class="switchCom off">
+                    <a class="switch_marins off selectInvoice" href="javascript:void(0);" id="selectInvoice" onclick="switchChoose(this)" data-bind='attr:{"data-canPay":canPay,"data-projectId":projectId,"data-cardid":cardId}' data-type="1">
+                        <em>开</em>
+                    </a>
+                </dt>
+            </dl>
+        </div>
+    </div>
+</section>
+<!-- ko if: orderReality.globalCoupon.length >0 -->
+<div style="height:50px;"></div>
+<div id="couponGlobal" class="couponA">
+    <!-- ko if: orderReality.useGlobalCoupon&&parseFloat(orderReality.useGlobalCoupon.deductAmount)>0-->
+    <div class="fs12 confirmDesire couponShop" data-bind='attr:{"data-deductamount":orderReality.useGlobalCoupon.deductAmount,"data-mycouponid":orderReality.useGlobalCoupon.myCouponId,"data-fullamount":orderReality.useGlobalCoupon.fullAmount}'>
+        <span class="colorB">全场优惠:</span><span class="fr pl10"><i data-bind='text:"已减￥"+orderReality.useGlobalCoupon.realityDeductAmount' class="couponTip"></i><i class="ml2"><img src="/content/images/arowright.png" style="width:.2rem"></i></span>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: !orderReality.useGlobalCoupon|| parseFloat(orderReality.useGlobalCoupon.deductAmount)<=0-->
+    <div class="fs12 confirmDesire couponShop" data-bind='attr:{"data-deductamount":0,"data-mycouponid":0,"data-fullamount":0}'>
+        <span class="colorB">全场优惠:</span><span class="fr pl10"><i data-bind='text:orderReality.globalCoupon.length+"张优惠券可用"' class="couponTip"></i><i class="ml2"><img src="/content/images/arowright.png" style="width:.2rem"></i></span>
+    </div>
+    <!-- /ko -->
+
+</div>
+<!-- /ko -->
+<div class="confirmBtn white-bg box fs14" style="display:none">
+    <p class="" style=" line-height:0.8rem; display:inline-block; padding-top: .2rem; margin-right: 0.2rem;">
+        合计：<i class="couponTip fs18 pl10" data-bind='text:"￥"+orderReality.total()'>-</i><br />
+        <span>(运费：<i class="couponTip pl10" data-bind='text:(orderReality.specialShipDesc=="")?"￥"+orderReality.transExpenses:(parseFloat(orderReality.transExpenses)==0?orderReality.specialShipDesc:"￥"+orderReality.transExpenses+"+"+orderReality.specialShipDesc)'>-</i>)</span>
+      </p>
+    <span class="fr confbtn fs16 ac">确认</span>
+</div>
+<input type="hidden" id="uid" value="@ViewBag.uid" />
+<input type="hidden" id="dataTime" value="@ViewBag.DateTime" />
+<input type="hidden" id="payToSign" value="@ViewBag.PayToSign" />
+<div class="loading3" style="display:block"></div>
+
+<div class="picLoading fs16" id="picLoading">
+    证照上传中...
+</div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        var defaultAdr = @Html.Raw(ViewBag.GetDefaultAddress);
+        var PGIUrl = "@System.Configuration.ConfigurationManager.AppSettings["PGIUrl"]";
+    </script>
+    @WebHelper4H5.RegisterScripts("malls/orderConfirm.js")
+}

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "设置支付密码";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/payPwd.css")
+}
+
+<section class="setPayPwd" id="setPayPwd">
+    <div class="warning fs12">请验证手机号，若未绑定或原手机号不再使用，请先绑定或修改原手机号</div>
+    <div class="white-bg inputArea">
+        <div class="parbox inputTxt">
+            <span class="input-title fs14">手机号</span>
+            <span class="inputSpan fs14" id="inputSpan"></span>
+            <a class="phoneCall fs12 two" href="/account/register?isUpdateBind=true">去绑定</a>
+        </div>
+        <div class="parbox inputTxt">
+            <span class="input-title fs14">验证码</span>
+            <input class="flex1 fs14" type="tel" id="code" maxlength="6" />
+            <a href="javascript:void(0)" class="fs12" id="upCode">获取验证码</a>
+        </div>
+    </div>
+    <div class="warning fs12">支付密码由六位数字组成</div>
+    <div class="white-bg inputArea">
+        <div class="parbox inputTxt">
+            <span class="input-title fs14">密码</span>
+            <input class="flex1 fs14" type="password" id="newPwd" maxlength="6" placeholder="请输入支付密码" />
+        </div>
+        <div class="parbox inputTxt">
+            <span class="input-title fs14">确认密码</span>
+            <input class="flex1 fs14" type="password" id="newPwd1" maxlength="6" placeholder="请再次输入支付密码" />
+        </div>
+    </div>
+
+    <div class="btns">
+        <a class="btnClick" href="javascript:void(0)" id="btnClick">保存</a>
+    </div>
+</section>
+
+
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/payPwd.js")
+
+}

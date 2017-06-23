@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "砍价";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+	@WebHelper4H5.RegisterStyles("bargain/bargainList.css")
+    @WebHelper4H5.RegisterStyles("shoppingCart.css")
+}
+<div class="bargainHeader white-bg fs14 box">
+    <ul class="parbox" id="stuTab">
+        <li class="flex1 ac on" data-pageindex="1" data-pullup_num="1"><i>发起砍价</i></li>
+        <li class="flex1 ac" data-pageindex="1" data-pullup_num="1"><i>砍价进行中</i></li>
+        <li class="flex1 ac" data-pageindex="1" data-pullup_num="1"><i>已成功砍价</i></li>
+    </ul>
+</div>
+<div style="height:1.6rem;" ></div>
+<ul class="full-width" id="bargin">
+    <li class="bargainList" id="bargainList">
+        <!-- ko foreach: bargainList -->
+        <section class="white-bg bargainSecPM bdline" data-bind="click:function() {$parent.clickDetail(this)}">
+            <div class="parbox center">
+                <div class="bargainSec-imgBox">
+                    <img data-bind='attr:{src:src}' />
+                </div>
+                <div class="flex1 bargain-detail">
+                    <p class="fs13 mb2 bargain-detail-title" data-bind="text:productName"></p>
+                    <p class="fs12 mb2 bargain-detail-detail" data-bind="text:promotionTitle"></p>
+                    <p class="fs12 mb2 bargain-detail-member"><span data-bind="text:liveName"></span>及以上级别会员可参与</p>
+                    <div class="parbox bargain-btns">
+                        <div class="flex1 bargain-btns-detail">
+                            <p class="fs12 bargain-detail-number mb2">售价:￥<span data-bind="text:retailPrice"></span></p>
+                            <p class=""><span class="bargain-btns-moneyOne fs12">目标价:￥<em data-bind="text:salePrice"></em></span></p>
+                        </div>
+                        <a href="javascript:void(0)" class="fs14 bargain-btn mt4 ml2" data-bind="click:function() {$parent.clickFunc(this)},clickBubble: false,text:(bargainJoinId && bargainJoinId!=null?'查看砍价':'我要砍价')">我要众砍</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /ko -->
+        <div class="nodata" style="display:none"><div class="nodata_shop"><p class="no-icon wdgwc"></p><p class="nodatatip">暂无数据</p></div></div>
+    </li>
+    <li>
+        <!-- ko foreach: bargainListSuccess -->
+        <section class=" white-bg mt4" data-bind="click:function() {$parent.clickScan(this)}">
+            <div class="parbox center bargain-headinfo bdline">
+                <img data-bind='attr:{src:userPhoto}' onerror="this.src = '/Content/images/myAvatar.png'" class="bargain-headinfo-src" />
+                @*<!-- ko if: userPhoto =="" -->
+                <img src="~/Content/Images/myAvatar.png" class="bargain-headinfo-src" />
+                <!-- /ko -->
+                <!-- ko if: userPhoto  -->
+                <img data-bind='attr:{src:src}' class="bargain-headinfo-src" />
+                <!-- /ko -->*@
+                <p class="ml4 fs12 flex1 bargain-headinfo-name" data-bind="text:userName"></p>
+                <p class="ml4 fs12" data-bind="text:createTime"></p>
+            </div>
+            <div class="parbox bargainSec center">
+                <div class="bargainSec-imgBox">
+                    <img data-bind='attr:{src:src}' />
+                </div>
+                <div class="flex1 bargain-detail">
+                    <p class="fs13 mb2 flex1 bargain-detail-title" data-bind="text:productName"></p>
+                    <p class="fs12 mb2 bargain-detail-detail" data-bind="text:promotionTitle"></p>
+                    <p class="fs12 mb2 bargain-detail-member"><span data-bind="text:liveName"></span>及以上级别会员可参与</p>
+                    <div class="parbox">
+                        <div class="flex1">
+                            <p class="fs12 bargain-detail-number mb2">已选:<span data-bind="text:specs">箱4瓶*3盒</span></p>
+                            <p class=" bargain-detail-number flex1"><span class="fs12 ">建议零售价:￥<i data-bind="text:maxAmount/count"></i></span></p>
+                        </div>
+                        <div>
+                            <p class="fs12 bargain-detail-number mb2">数量:<span data-bind="text:count">1</span></p>
+                            <p class="bargain-btns-moneyOne fs12">已有<em data-bind="text:supportCount"></em>人帮砍</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="parbox center bargain-other">
+                <p class="bargain-other-icon bargain-other-number  fs13"><img src="/Content/images/target.png">目标:￥<span data-bind="text:minAmount"></span></p>
+                <p class="bargain-other-icon bargain-other-money flex1 fs13 ac"><img src="/Content/images/supportedAmount.png">已砍:￥<span data-bind="text:(maxAmount-nowAmount).toFixed(2)"></span></p>
+                <p class="bargain-other-icon bargain-other-number  fs13 "><img src="/Content/images/remainingDay.png">剩余:<span data-bind="text:remainingDay"></span>天</p>
+                
+            </div>
+        </section>
+        <!-- /ko -->
+        <div class="nodata" style="display:none"><div class="nodata_shop"><p class="no-icon wdgwc"></p><p class="nodatatip">暂无数据</p></div></div>
+    </li>
+    <li>
+        <!-- ko foreach: bargainListGo -->
+        <section class=" white-bg mt4" data-bind="click:function() {$parent.clickScan(this)}">
+            <div class="parbox center bargain-headinfo bdline">
+                <img data-bind='attr:{src:userPhoto}' onerror="this.src = '/Content/images/myAvatar.png'" class="bargain-headinfo-src" />
+                <p class="ml4 fs12 flex1 bargain-headinfo-name" data-bind="text:userName"></p>
+                <p class="ml4 fs12" data-bind="text:reachTime"></p>
+            </div>
+            <div class="parbox bargainSec center">
+                <div class="bargainSec-imgBox">
+                    <img data-bind='attr:{src:src}' />
+                </div>
+                <div class="flex1 bargain-detail ">
+                    <p class="fs13 mb2 flex1 bargain-detail-title" data-bind="text:productName"></p>
+                    <p class="fs12 mb2 bargain-detail-detail" data-bind="text:promotionTitle"></p>
+                    <p class="fs12 mb2 bargain-detail-member"><span data-bind="text:liveName"></span>及以上级别会员可参与</p>
+                    <div class="parbox">
+                        <div class="flex1">
+                            <p class="fs12 bargain-detail-number mb2">已选:<span data-bind="text:specs">箱4瓶*3盒</span></p>
+                            <p class=" bargain-detail-number flex1"><span class="fs12 ">建议零售价：￥<i data-bind="text:maxAmount/count"></i></span></p>
+                        </div>
+                        <div>
+                            <p class="fs12 bargain-detail-number mb2">数量:<span data-bind="text:count">1</span></p>
+                            @*<p class="bargain-btns-moneyOne fs12">已有<em data-bind="text:supportCount"></em>人帮砍</p>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="parbox center bargain-other">
+                <p class="bargain-other-icon bargain-other-number  fs13"><img src="/Content/images/target.png">目标:￥<span data-bind="text:minAmount"></span></p>
+                <p class="bargain-other-icon bargain-other-money flex1 fs13 ac"><img src="/Content/images/supportedAmount.png">已砍:￥<span data-bind="text:(maxAmount-nowAmount).toFixed(2)"></span></p>
+                @*<p class="bargain-other-icon bargain-other-number  fs13 "><img src="/Content/images/remainingDay.png">剩余:<span data-bind="text:remainingDay"></span>天</p>*@
+                <p class="bargain-other-icon bargain-other-money  fs13 ac bargain-btns-moneyOne">共<em data-bind="text:supportCount"></em>人帮砍</p>
+                
+            </div>
+        </section>
+        <!-- /ko -->
+        <div class="nodata" style="display:none"><div class="nodata_shop"><p class="no-icon wdgwc"></p><p class="nodatatip">暂无数据</p></div></div>
+    </li>
+</ul>
+<div class="_alert" id="_alert">
+    <div class="in">
+        <div class="alert_title">
+            <p class="fs14">
+                即刻成为充值会员，立享超低商品折扣！
+            </p>
+        </div>
+        <div class="alert_btns parbox">
+            <a href="javascript:void(0)" class="alert_btn alert_calcle flex1 fs14" id="alertCancle">暂不参与</a>
+            <a href="javascript:void(0)" class="alert_btn alert_save flex1 fs14" id="alertSave">去充值</a>
+        </div>
+    </div>
+</div>
+
+
+<input type="hidden" id="barCode" value="@Request["barcode"]" />
+@*<div id="proList" style="display:none"><div class="nodata_shop"><p class="no-icon wdgwc"></p><p class="nodatatip">暂无数据</p></div></div>*@
+@*<div style="height:55px;"></div>*@
+@section Scripts
+{
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+    @WebHelper4H5.RegisterScripts("bargain/bargainList.js")
+}

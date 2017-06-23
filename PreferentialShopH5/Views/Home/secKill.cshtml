@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "限时抢购";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("home/home.css")
+    @WebHelper4H5.RegisterStyles("home/home_new.css")
+    @WebHelper4H5.RegisterStyles("shoppingCart.css")
+    <script type="text/javascript">
+        var WXMVCUrl = "@WebConfig.WXMVCUrl";
+        var CurrentUserId=@CurrentUser.Instance.UserId;
+    </script>
+}
+@section SearchArea
+{
+
+}
+<div class="pb2">
+    <ul class="parbox skillTitle fs14 posrelative" id="snapUp">
+        <li class="disblock flex1 cur ac">今日9点抢购</li>
+        <li class="disblock flex1 ac">明日9点抢购</li>
+    </ul>
+    <div class="pt2">
+        <div class="tabs">
+            <!-- ko if: snapUplength() >0 -->
+            <h2 class="leftTime fs14 ac">@*距离结束还有<span class="skiIrfame">00</span>:<span class="skiIrfame">00</span>:<span class="skiIrfame">00</span>*@</h2>
+            <div class="mt2 full-width posrelative">
+                <div class=" mt2 full-width">
+                    <div class="posrelative full-width" id="sliders">
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /ko -->
+            <!-- ko if: snapUplength() <=0 -->
+            <div class="pl30 pr30 fs14">暂无抢购</div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<div style="height:50px"></div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("xr.ui.slider.js")
+    @WebHelper4H5.RegisterScripts("Site/secKill.js")
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/upScoll.js"></script>
+    @WebHelper4H5.RegisterScripts("shoppingCart.js")
+}

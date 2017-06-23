@@ -1,0 +1,86 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "确认报名";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/order.css")
+    @WebHelper4H5.RegisterStyles("LArea.min.css")
+
+}
+<section class="order_details pb24">
+    <div class="adrAdd fs14">
+        <p class="comAdrArea parbox">
+            <label>申请人</label>
+            <input class="flex1 addusername disblock" type="text" value="" id="receiveName" maxlength="16" placeholder="请输入申请人姓名" data-bind="value:experienceEnter.ContactName">
+        </p>
+        <p class="comAdrArea parbox">
+            <label>联系电话</label>
+            <input class="flex1 addiphone disblock" type="text" value="" id="phone" maxlength="12" placeholder="请输入申请人联系电话" data-bind="value:experienceEnter.ContactNumber">
+        </p>
+        <p class="comAdrArea parbox">
+            <label>所属地区</label>
+            <input class="flex1 addiphone disblock"  placeholder="请选择所属地区" type="text" value="" id="area" data-bind='attr:{"data-provinceid":experienceEnter.Province,"data-cityid":experienceEnter.City,"data-areaid":experienceEnter.Area}' readonly="">
+        </p>
+        <p class="comAdrArea parbox border0">
+            <label style="width:3.5rem;">申请人留言</label>
+            <input class="flex1 addiphone disblock" placeholder="选填" type="text" value="" id="area" data-bind="value:experienceEnter.UserNote">
+        </p>
+    </div>
+    <div class="mt5 white-bg pl20 pr20">
+        <h2 class="fs14 zConformTitle">体验商品</h2>
+        <div class="white-bg   parbox">
+            <p class="disblock zConformImg">
+                <img src="@ViewBag.productList["mainImg"]" class="full-width" onerror='this.src = "~/Content/Images/loading.gif"'/>
+            </p>
+            <div class="disblock flex1 pl20 pb4">
+                <ul>
+                    <li class="zConformTitleR fs14">@ViewBag.productList["productName"]</li>
+                    <li class="displayStartEnd zConformPriceR pb2 fs12">
+                        <span class="molPrice mr4 displayFlex"><em>￥</em><em>@ViewBag.productList["productPrice"]</em></span>
+                        <span class="modulSb displayFlex">0元体验</span>
+                    </li>
+                    <li class="displayFlexStart zConformBm fs12">
+                        <span class="displayFlex zConformBm">@ViewBag.productList["tradeAmount"]人已报名</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="adraddBtn ac fs16">我要报名</p>
+</section>
+<input type="hidden" id="promotionId" value="@ViewBag.promotionId" />
+<input type="hidden" id="skuId" value="@ViewBag.skuId" />
+<div class="popback"></div>
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        var PGIUrl = "@System.Configuration.ConfigurationManager.AppSettings["PGIUrl"]";
+    </script>
+    @WebHelper4H5.RegisterScripts("malls/zeroConfirm.js")
+    @WebHelper4H5.RegisterScripts("areaChoose.js")
+    @WebHelper4H5.RegisterScripts("LAreaData.js")
+    <script>
+            var area = new LArea();
+            area.init({
+                'trigger': '#area',//触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+                'valueTo': '',//选择完毕后id属性输出到该位置  该方法已经改为回调函数
+                'keys': { id: 'id', name: 'name' },//绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+                'type': 1,//数据源类型
+                'data': LAreaData,//数据源
+                'callBackFun': function (data) {
+                    addressIds = data;
+                    zeroConfirmModel.experienceEnter.Province(data[0])
+                    zeroConfirmModel.experienceEnter.City(data[1])
+                    zeroConfirmModel.experienceEnter.Area(data[2])
+                    $("#area").attr({ "data-provinceid": data[0], "data-cityid": data[1], "data-areaid": data[2] })
+                   // console.log(data);
+                }
+            });
+    </script>
+}

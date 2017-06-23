@@ -1,0 +1,242 @@
+﻿@{
+    ViewBag.Title = "猫市";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("home/home.css")
+    @WebHelper4H5.RegisterStyles("home/home_new.css")
+    @WebHelper4H5.RegisterStyles("shoppingCart.css")
+    <script type="text/javascript">
+        @*var productList=@Html.Raw(ViewBag.ProductList);
+        var categories=@Html.Raw(ViewBag.Categories);
+        var banners=@Html.Raw(ViewBag.Banners);*@
+        var WXMVCUrl = "@WebConfig.WXMVCUrl";
+        var CurrentUserId=@CurrentUser.Instance.UserId;
+    </script>
+}
+@section SearchArea
+{
+    <div isglobleload="true" style="width:120px;height:100px;position: fixed;top: 60%;left: 50%; margin-left:-60px;">
+        <img src="/Content/Images/homeloadingGif.gif" style="width:100%;height:100%" />
+    </div>
+    <!--   <div class="am-padding-per parbox locaarea">
+          <span class="location pr30 fs13 location_city"><i class="home_sarrowdown"></i></span>
+          <p class="flex1 searchArea posrela">
+              <i class="home_mirror"></i>
+              <input type="text" readonly="readonly" class="searchBotton white-bg fs12" placeholder="搜索您要找的商品" />
+              <i class="btn-reset" style="display: none;">x</i>
+          </p>
+          @*<span class="searchBtn" disabled="disabled">搜索</span>*@
+      </div> -->
+    <div class="am-padding-per parbox locaarea new_header displayFlex">
+        <span class="pr30 fs13"><a href="/Classify/themePromoList?title=%E7%8C%AB%E5%B8%82"><i class="home_classfify"></i><i class="class_font">分类</i></a></span>
+        <!-- <span class="new_title fs18">猫市</span> -->
+        <span class="new_city">
+            <span class="fs15 location_city"><i class="home_sarrowdown"></i></span>
+            <span class="location_city_xia"><i class="home_sarrowdown"></i></span>
+        </span>
+        <span class="fs13 new_search"><a href="/home/search"><i class="home_search"></i></a></span>
+    </div>
+    <!-- <div class="fs12 parbox broadcast">
+        <p class="pl20 pr20"><span class="home_broadcast"></span></p>
+
+
+        <ul id="broadCastScrollul" class="flex1 textEllipsis">
+            @foreach (var news in ViewBag.NoticeList)
+            {
+                <li onclick="javascript:(window.location = '/BroadCast/Index')">@Html.Raw("&nbsp;&nbsp;&nbsp;&nbsp;" + news["noticeTitle"])</li>
+
+            }
+        </ul>
+
+
+
+
+
+
+    </div> -->
+
+
+    <div class="block localWhere" style="top: 1.7rem;">
+        <section class="areaSection">
+            <header class="areaHeader">
+                <input type="text" id="search_input" placeholder="请输入城市名">
+            </header>
+            <div id="location">当前位置：<span class="location_city"></span><span class="location_type">GPS定位</span></div>
+        </section>
+        <div id="wrapper">
+            <div id="scroller">
+
+            </div>
+
+        </div>
+        <div id="orderbyLetter"></div>
+        <!-- beforesend start-->
+        <div class="loading3"></div>
+        <!-- beforesend end-->
+    </div>
+}
+<div class="slidePic banner" style="overflow: hidden;display:none" id="focus">
+    <div class="bd">
+        <ul id="div_banners">
+            @for (int i = 0; i < ViewBag.BannerList.Length; i++)
+            {
+
+                var bannerUrl = string.IsNullOrEmpty(ViewBag.BannerList[i]["openType"]) ? "#" :
+                    ViewBag.BannerList[i]["openType"] == "mall" ?
+                    WebConfig.WXMVCUrl + "/Classify/themePromoList?" + ViewBag.BannerList[i]["openPar"] :
+                     ViewBag.BannerList[i]["openPar"]
+                    ;
+
+                <li style="@(i>0 ?"display:none":"")">
+                    <a href="@bannerUrl"><img src='@ViewBag.BannerList[i]["src"]' style="width:100%;"></a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="hd">
+        <ul class="slide text_indent clear"></ul>
+    </div>
+</div>
+<!--导航区-->
+<div class="am-g pt4 new_navbar">
+    <ul class="parbox fs12 new_img">
+        <li class="flex1 disblock ac">
+            <a href="/Classify/themePromoList?moduleType=-10&matchValue=@Server.UrlEncode(Server.UrlEncode("会员特惠"))&title=@Server.UrlEncode(Server.UrlEncode("会员特惠"))">
+                <p class="pb1">
+                    <img src="/content/images/secKill.png" class="new_img" style="width: 57px;">
+                </p>
+                <p class="cateTitle">会员特惠</p>
+            </a>
+        </li>
+        <li class="flex1 disblock ac">
+            <a href="/Classify/themePromoList?id=-9">
+                <p class="pb1">
+                    <img src="/content/images/home2.jpg" class="new_img" style="width: 57px;">
+                </p>
+                <p class="cateTitle">0元体验</p>
+            </a>
+        </li>
+        <li class="flex1 disblock ac">
+            <a data-bind="attr:{href:'/CustPlanning/index'}">
+                <p class=" pb1">
+                    <img src="/content/images/home3.png" class="new_img" style="width: 57px;">
+                </p>
+                <p class="cateTitle">众筹</p>
+            </a>
+        </li>
+        <li class="flex1 disblock ac">
+            <a data-bind="attr:{href:'/UserAbout/myCoupon'}">
+                <p class=" pb1">
+                    <img src="/content/images/home3.jpg" class="new_img" style="width: 57px;">
+                </p>
+                <p class="cateTitle">领券中心</p>
+            </a>
+        </li>
+        @*<li class="flex1 disblock ac">
+                <a href="/userAbout/orderList">
+                    <p class="pb1">
+                        <img src="/content/images/home4.jpg" class="new_img" style="width: 57px;">
+                    </p>
+                    <p class="cateTitle">我的订单</p>
+                </a>
+            </li>*@
+    </ul>
+</div>
+<div class="pb4">
+    <ul class="parbox skillTitle fs14 posrelative">
+        <li class="disblock flex1 cur ac">今日10点抢购</li>
+        <li class="disblock flex1 ac">明日10点抢购</li>
+    </ul>
+    <div class="pt2">
+        <div class="tabs">
+            <!-- ko if: snapUplength() >0 -->
+            <h2 class="leftTime fs14 ac">@*距离结束还有<span class="skiIrfame">00</span>:<span class="skiIrfame">00</span>:<span class="skiIrfame">00</span>*@</h2>
+            <div class="mt2 full-width posrelative">
+                <div class="homeskillSlide mt2 full-width">
+                    <div class="posrelative full-width" id="sliders">
+
+                    </div>
+                </div>
+                <i class='posabsolute skilledStatue'></i>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: snapUplength() <=0 -->
+            <div class="pl30 pr30 fs14">暂无抢购</div>
+            <!-- /ko -->
+        </div>
+        @*<div class="tabs" style="display:none;">
+            <h2 class="leftTime fs14 ac"></h2>
+            <div class="mt2 full-width posrelative">
+                <div class="homeskillSlide mt2 full-width">
+                    <div class="posrelative full-width" id="tomSliders">
+
+                    </div>
+                </div>
+                <i class='posabsolute skilledStatue'></i>
+            </div>
+        </div>*@
+    </div>
+</div>
+<div class="cproList clearfix pb55 mt4" id="shop" style="background: #fff;">
+    <h3 class="ac pl20 pr20 malldjfs mb4 posrelative"><img src="/content/images/malldjfs.png" style="width:3.7rem;" /></h3>
+    <div class="homecontentList homeImgs" data-bind="foreach:homeImgs" style="display:none;background: #fff;">
+        <a data-bind="attr:{href:'/Classify/themePromoList?providerUserId='+providerUserId+'&ProductId='+productId+'&PromotionId=&providerUserName='+encodeURIComponent(encodeURIComponent(providerUserName))+ '&isShareProduct=2&hideCat=1&title='+encodeURIComponent(encodeURIComponent(productName))}"><img data-bind="attr:{src:src}" width="100%" height="100%" style=" display: block;" /></a>
+        <div class="new_line"></div>
+        <p class="kucun_qishou mb2 fs12 promotion pl20 new_style" data-bind='attr:{dataIndex: $index}' style="font-size: 0.6rem;">
+            <span data-bind='attr:{class:hasPraise?"qishou fl productPraise hasPraise":"qishou fl productPraise"}' style="">
+                <!-- <img src="/content/images/home5.png" style="width: 16px;"> -->
+            </span><i class="praiseCount new_little_img fs5" data-bind='text:praiseCount>999?"999+":praiseCount'></i>
+
+            <a data-bind='attr:{href:"/product/evaluation?skuId="+skuIds}' class="new_a">
+                <span class="kucun inlineBlock"><img src="/content/images/home6.png" style="width: 14px;"></span><i data-bind='text:evaluationCount>999?"999+":evaluationCount' class="new_little_img fs5"></i>
+            </a>
+            <span class="kucun inlineBlock" style="margin-left: 0.8rem;"><img src="/content/images/home7.png" style="width: 14px;"></span><i data-bind='text:sumTradeAmout>999?"999+":sumTradeAmout' class="new_little_img fs5">-</i>
+            <span class="new_share"><span class="kucun ml2 inlineBlock"><img src="/content/images/home8.png" style="width: 14px;"></span><span class="fs5">&nbsp;&nbsp;分享</span></span>
+        </p>
+        <div class="new_line1"></div>
+    </div>
+    <div class="new_more">更多猫市精品，为您优选！</div>
+    <!-- <div data-bind="visible:homeImgs().length!=allHomeImgs().length" class="loadMore" style="display:none">点击查看更多匠品</div> -->
+    <div data-bind="visible:homeImgs().length==allHomeImgs().length" class="loadMore" style="display:none" onclick="location.href='/Classify/themePromoList?title=%E7%8C%AB%E5%B8%82'">点击查看全部匠品</div>
+    <div class="new_more1"></div>
+
+</div>
+<div class="custom" style="height: auto;z-index:10000">
+    <p class="cityLocationTip  pl20 pr20">系统定位您现在在上海市，是否切换到上海市？</p>
+    <p class="custom_button" style="margin-bottom: 0;">
+        <a href="javascript:;" class="quxiao locSure" data-locationcityname="" data-curcityid="">取消</a>
+        <a href="javascript:;" class="locSure" data-locationcityname="" data-curcityid="">确定</a>
+    </p>
+</div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+    <script type="text/javascript">
+        //banner图效果
+        TouchSlide({
+            slideCell: "#focus",
+            titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell: ".bd ul",
+            effect: "leftLoop",
+            autoPlay: true,//自动播放
+            autoPage: true //自动分页
+        });
+        //暂时兼容app端城市搜索框不显示的bug
+        $(function(){
+            setTimeout(function(){
+                $('.areaHeader').show();
+            },2000)
+        })
+    </script>
+    r
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/jquery.bigautocomplete.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]/Scripts/BDconvertor.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/city_select.js"></script>
+    @WebHelper4H5.RegisterScripts("xr.ui.slider.js")
+    @WebHelper4H5.RegisterScripts("Site/home.js")
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/upScoll.js"></script>
+    @WebHelper4H5.RegisterScripts("shoppingCart.js")
+}

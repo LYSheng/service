@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "充值";
+}
+@section Head
+{
+
+    @WebHelper4H5.RegisterStyles("userAbout/chargeMoney.css")
+}
+
+<section class="accountinfo">
+    <div class="accountLbl">账户信息</div>
+    <div class="accountName">用户名:<span>@ViewBag.UserResult.NickName</span></div>
+    <div class="bottomInfo-line"></div>
+    <div class="accountType">账户类型:<span>猫市联合卡</span></div>
+    <div class="bottomInfo-line"></div>
+    <div class="info-cardNum">卡号:<span></span></div>
+</section>
+
+<section class="accountChargeArea">
+    <div class="accountMoneyLbl">选择充值金额</div>
+    <div class="selectedmoneyArea">
+        <span class="selectedmoneyAreaspan">50000元</span><span class="selectedmoneyAreaspan">60000元</span>
+    </div>
+    <div class="selectedmoneyArea">
+        <span class="selectedmoneyAreaspan">3000元</span><span class="selectedmoneyAreaspan">5000元</span>
+    </div>
+    <div class="otherMoneyArea">
+        其他金额:<input type="number" class="input-otherMoney" /><button onclick="setOtherMoneyCount()">确定</button>
+    </div>
+</section>
+
+<section class="chargeResultArea">
+    <div>充值金额:<strong><span class="chargeCount"></span></strong></div>
+    <div>实际支付金额:<strong><span class="lastchargeCount"></span></strong></div>
+</section>
+
+<div class="confirm-btn">确认支付</div>
+<input type="hidden" id="dataTime" value="@ViewBag.DateTime" />
+<input type="hidden" id="payToSign" value="@ViewBag.PayToSign" />
+@section Footer
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/userabout/chargemoney.js"></script>
+}

@@ -1,0 +1,34 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "历史提现";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+}
+<div class="">
+    <section class="selttleList">
+        <div class="disNone proList" data-bind="foreach:getList">
+            <ul class="mt4 white-bg fs13">
+                <li>申请时间：<span class="" data-bind="text:applyTime"></span></li>
+                <li>结款时间：<span class="" data-bind="text:paymentTime"></span></li>
+                <li>申请金额：<span class="" data-bind="text:withdrawalsAmount+'元'" style="color: #09baee"></span></li>
+                <li>打款金额：<i data-bind="text:payment+'元'" class="red"></i></li>
+                <li>手续费：<i data-bind="text:serviceCharge+'元'" class="red"></i></li>
+                <!-- ko if: payment < withdrawalsAmount -->
+                <li>备注：<i data-bind="text:outOfPaymentRemark"></i></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <div id="proList"></div>
+    </section>
+    <input id="accountType" type="hidden" value="@Request["AccountType"]" />
+
+</div>
+<div style="height:55px"></div>
+
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/withDrawalsList.js")
+}

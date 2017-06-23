@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "登录";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("account.css")
+
+}
+<div class="accountArea">
+    <h2 class="ac pb6"><img src="~/Content/images/serviceimage/Malls.png" style="height:28px" /></h2>
+    <div class="fullbg">
+        <div class="pl30 pr30 pt6">
+            <div class="parbox comlineArea posrela">
+                <label class="comlabel"><i class="home_acctIcon"></i></label>
+                <input placeholder="请输入手机号或用户昵称" class="flex1 comAccinput accInput" type="text" id="userName" data-bind="value: userName" />
+                <i class="iconClear disNone"></i>
+            </div>
+            <div class="parbox comlineArea posrela pt6">
+                <label class="comlabel"><i class="home_acctPass"></i></label>
+                <input placeholder="请输入密码" class="flex1 comAccinput accInput" type="password" id="passWord" data-bind="value: password" />
+                <i class="iconClear disNone"></i>
+            </div>
+            <div class="fs14 feature mt8 mb8 clearfix">
+                <span class="fl">
+                   
+                </span><span class="fr"><a href="javaScript:void(0)" id="forgetPwd">找回密码</a></span>
+            </div>
+            <span class="subText ac fs14" data-bind="click:login">登录</span>
+        </div>
+    </div>
+</div>
+<div class="accountbg">
+</div>
+<div class="fixedbg" data-bind='style:{display:isShow()?"none":"block"}'></div>
+<div class="nickSelect" data-bind='style:{display:isShow()?"none":"block"}'>
+    <h2 class="fs16 ac">请选择您的用户昵称</h2>
+    <ul class="" data-bind='foreach:nickNameList'>
+        <li data-bind='text:nickName,attr:{"dada-userid":userId},click:$parent.jumpoperate'></li>
+    </ul>
+</div>
+@section Footer
+{
+    @WebHelper4H5.RegisterScripts("Account/login.js")
+}
+@section Scripts
+{
+    <script>
+        $("#forgetPwd").on("click", function () {
+            var _phone = $("#userName").val();
+            if (isNaN(_phone)) {
+                _phone = "";
+            }
+            window.location.href = "/Account/forgetPwd?phone="+_phone;
+        })
+    </script>
+}

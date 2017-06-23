@@ -1,0 +1,62 @@
+﻿body {
+
+}
+.header{
+    display:flex;
+    padding:0.0rem 0.2rem;
+    background-color:#000;
+    color:#fff;
+    align-items:center;
+}
+.back{
+    color:#fff !important;
+    width:0.64rem;
+    line-height:0.64rem;
+    text-align:center;
+}
+.Title{
+    flex-grow:1;
+    text-align:center;
+}
+.Text_Title{
+    width:100%;
+    height:0.9rem;
+    display:flex;
+    background-color:#fff;
+    align-items:center;
+    border-bottom:1px solid #dfdfdf;
+}
+.Title_input{
+    width:1.65rem;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Title_title{
+    font-size:16px;
+    flex-grow:1;
+    text-align:center
+}
+.Title_sou{
+    width:0.33rem;
+    display:flex;
+    align-items:center;
+}
+.Total_Store{
+    padding:0rem 0.2rem;
+}
+.Total_Store_section{
+    position: relative;
+    z-index: 999;
+    padding-bottom: 0.5rem;
+}
+.tables_bgbox{
+    background-color: #fff; 
+    box-shadow: 0px 0px 14px #E0E0E0; 
+    padding:0rem 0.15rem;
+    padding-bottom:0.3rem;
+}
+thead tr{
+    border-top:none;
+}

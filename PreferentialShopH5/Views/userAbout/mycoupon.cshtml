@@ -1,0 +1,103 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "我的优惠券";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/mine.css")
+    <script>
+        var WXMVCUrl = "@WebConfig.WXMVCUrl";
+        var CurrentUserId=@CurrentUser.Instance.UserId;
+    </script>
+
+}
+<style>
+    body {
+        background: #515151;
+    }
+</style>
+<div class="loadingShowBlock" style="display:block" isglobleload=true></div>
+<div class="youhuiTab ac white-bg">
+    <div class="fl tab1 active" data-pageindex="1" data-pullup_num="0" data-nodata="false">领取优惠券</div>
+    <div class="fr tab2" data-pageindex="1" data-pullup_num="1" data-nodata="false">我的优惠券</div>
+</div>
+<div style="height:1.56rem;"></div>
+<div class="clearfix">
+    <div class="getYouhui coupBody">
+        <!-- ko foreach:getWaitReceive-->
+        <div class="parbox  white-bg mt4 posrelative">
+            <i class="posabsolute leftCenterCircle"></i>
+            <div class="parbox actionSpan  displayFlex  ac" data-bind="style:{'background':mainColor && mainColor!=''?mainColor:'#60bd2e'},attr:{'data-coupid':couponActivityId}">
+                <img src=" /content/images/couponAction01.png" style="width:.66rem; margin-left:.2rem" />
+            </div>
+            <div class="flex1 parbox boxAlignC pt3 pb3 posrelative">
+                <div class="couponImgBox">
+                    <img data-bind="attr: { 'src': backgroundImg && backgroundImg!=''?backgroundImg:'/content/images/maoshi.png' }" />
+                </div>
+                <div class="flex1 couponDetail">
+                    <p class="fs12 " data-bind="style:{'color':mainColor && mainColor!=''?mainColor:'#60bd2e'}">￥<i data-bind="text:deductAmount" class="fs40 deductAmount"></i></p>
+                    <p class="fs12 couponTitle" data-bind="text:couponTitle"></p>
+                    <dl class="colst">
+                        <dt class="fs8" data-bind='text:validBeginTime +" 至 "+validEndTime'></dt>
+                        <dt class="fs9" data-bind='text:"使用规则："+(fullAmount==0?"":"满"+fullAmount +"元减"+ deductAmount+"，")+couponRule'></dt>
+                    </dl>
+                </div>
+                <i class="posabsolute rightCenterCircle"></i>
+                <i class="posabsolute leftTopCircle"></i>
+                <i class="posabsolute leftBottomCircle"></i>
+            </div>
+        </div>
+        <!-- /ko -->
+        <div class="noMoreData" style="display:none;">没有更多数据</div>
+    </div>
+    <div class="myYouhui coupBody" style="display:none;">
+        <!-- ko foreach:getMyCoupon-->
+        <div class="couponCon  white-bg mt4 posrelative">
+            <a class="parbox" href="javascript:void(0)">
+                <i class="posabsolute leftCenterCircle"></i>
+                <div class="parbox actionSpan  displayFlex "data-bind="    style:{'background':(couponStatus == 3000 ||couponStatus == 1000)?'#777':(mainColor && mainColor!=''?mainColor:'#60bd2e')},attr:{'data-proid':productId,'data-providerid':providerUserId,'data-title':couponTitle,'data-couponstatus':couponStatus}">
+                    <img src=" /content/images/couponAction02.png" style="width:.66rem; margin-left:.2rem" class="" />
+                </div>
+                <div class="flex1 parbox boxAlignC pt3 pb3 posrelative">
+                    <div class="couponImgBox">
+                        <img data-bind="attr: { 'src': backgroundImg && backgroundImg!=''?backgroundImg:'/content/images/maoshi.png' }" />
+                    </div>
+                    <div class="flex1 couponDetail">
+                        <p class="fs12" data-bind="style:{'color':mainColor && mainColor!=''?mainColor:'#60bd2e'}">￥<i data-bind="text:deductAmount" class="fs40 deductAmount"></i></p>
+                        <p class="fs12 couponTitle" data-bind="text:couponTitle"></p>
+                        <p class="fs8 couponTitle" data-bind="text:'券码：'+couponCode"></p>
+                        <dl class="colst">
+                            <dt class="fs8" data-bind='text:validBeginTime +" 至 "+validEndTime'></dt>
+                            <dt class="fs9" data-bind='text:"使用规则："+(fullAmount==0?"":"满"+fullAmount +"元减"+ deductAmount+"，")+couponRule'></dt>
+                        </dl>
+                    </div>
+                    <i class="posabsolute rightCenterCircle"></i>
+                    <i class="posabsolute leftTopCircle"></i>
+                    <i class="posabsolute leftBottomCircle"></i>
+                   <!-- ko if: isShare ==1 && couponStatus != 1000 && couponStatus != 3000 -->
+                    <i class="posabsolute coupshareIcon" onclick="coupClick(this)" data-bind="attr:{ 'shareTitle':shareTitle,'shareImg':shareImg,'shareDesc':shareDesc }"><img src="/content/images/coupshareIcon.png" /></i>
+                    <!-- /ko -->
+                    <!-- ko if: couponStatus == 3000 -->
+                    <i class="posabsolute couponUsed"><img src="/content/images/couponTimeOver.png" /></i>
+                    <!-- /ko -->
+                    <!-- ko if: couponStatus == 1000 -->
+                    <i class="posabsolute couponUsed"><img src="/content/images/couponUsed.png" /></i>
+                    <!-- /ko -->
+                </div>
+            </a>
+        </div>
+        <!-- /ko -->
+        <div class="noMoreData" style="display:none;">没有更多数据</div>
+    </div>
+</div>
+<div id="hfooter"></div>
+<input type="hidden" id="showTab" value="@Request["showTab"]" />
+@section Footer
+{
+}
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/rem.js"></script>
+    @WebHelper4H5.RegisterScripts("userabout/myCoupon.js?v=1.0")
+}

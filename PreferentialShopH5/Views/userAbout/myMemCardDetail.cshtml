@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "会员卡明细";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("userAbout/myMemCard.css")
+}
+
+<section class="memCardDetail white-bg" id="memCardDetail">
+    <ul class="memContent">
+        <!-- ko foreach: cardListDetail -->
+        <li class="detailList parbox white-bg">
+            <div class=" dleft">
+                <p class="time1" data-bind="text:time1"></p>
+                <p class="time2" data-bind="text:time2"></p>
+            </div>
+            <div class="flex1 dright">
+                <p class="memAmount" ><span data-bind="text:shouZhi==2?'-':'+'"></span><span data-bind="text:amount.toFixed(2)"></span></p>
+                <p class="memDetail" data-bind="text:investmentAmountTrade+' '+relateNo"></p>
+            </div>
+        </li>
+        <!-- /ko-->
+    </ul>
+
+</section>
+<div style="height:5px;"></div>
+<div id="proList"></div>
+@section Scripts
+{
+    @WebHelper4H5.RegisterScripts("userabout/myMemCardDetail.js")
+
+}
+

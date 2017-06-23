@@ -1,0 +1,21 @@
+﻿body {
+}
+.header{
+    display:flex;
+    width:100%;
+    padding:0.0rem 0.2rem;
+    background-color:#000;
+    color:#fff;
+    align-items:center;
+}
+.back{
+    color:#fff !important;
+    width:0.64rem;
+    line-height:0.64rem;
+    text-align:center;
+}
+.Title{
+    flex-grow:1;
+    text-align:center;
+}
+

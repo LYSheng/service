@@ -1,0 +1,456 @@
+﻿@{
+    ViewBag.Title = ViewBag.getBargainJoin["productName"];
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("bargain/bargainDetail.css")
+    @WebHelper4H5.RegisterStyles("shoppingCart.css")
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        var isSetShare = true;
+        var isShareLoadOk = false;
+        var isShare0Yuan = false;
+        var serviceStoreUserId = getCookie("serviceStoreUserId") ? getCookie("serviceStoreUserId") : "";
+        var appShareUrl = '@WebConfig.WXMVCUrl/Share/Arrive?ReferrerUserId=@CurrentUser.Instance.UserId&serviceStoreUserId=' + serviceStoreUserId + '&ReturnUrl=@HttpUtility.UrlEncode(
+        string.Format("/bargain/listDetail?bargainJoinId={0}", ViewBag.getBargainJoin["bargainJoinId"]))';
+         
+        //微信分享到朋友，朋友圈，qq等  目前只能 修改内容不能 按钮 弹出
+        wx.config({
+            debug: false,
+            appId: '@Service.Site.wxService.wxappid',
+            timestamp: '@ViewData["timestamp"]',
+            nonceStr: '@ViewData["noncestr"]',
+            signature: '@ViewData["signature"]',
+            jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            ]
+        });
+        var linkUrl = '@WebConfig.WXMVCUrl/Share/Arrive?ReferrerUserId=@CurrentUser.Instance.UserId&ReturnUrl=@HttpUtility.UrlEncode(
+        string.Format("/bargain/listDetail?bargainJoinId={0}", ViewBag.getBargainJoin["bargainJoinId"]))';
+        wx.ready(function () {
+
+            wx.onMenuShareAppMessage({
+                title: '【Malls·五洲精选】@ViewBag.getBargainJoin["promotionName"]',
+                desc: "@ViewBag.getBargainJoin["promotionTitle"]", // 分享描述
+                link: linkUrl,
+                imgUrl: '@ViewBag.getBargainJoin["productImgSrc"]',
+                trigger: function (res) {
+                    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                },
+                success: function (res) {
+                    $('[name=shareLayer]').remove();
+                    //   alert('已分享');
+                },
+                cancel: function (res) {
+                    //alert('已取消');
+                },
+                fail: function (res) {
+                    alert(JSON.stringify(res));
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: "【Malls·五洲精选】@ViewBag.getBargainJoin["promotionName"]-@ViewBag.getBargainJoin["promotionTitle"].ToString().Trim().Replace("\n", "").Replace("\r", "")",
+                desc: '测试描述', // 朋友圈不支持
+                link: linkUrl,
+                imgUrl: '@ViewBag.getBargainJoin["productImgSrc"]',
+                trigger: function (res) {
+                    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                },
+                success: function (res) {
+                    $('[name=shareLayer]').remove();
+                    // alert('已分享');
+                },
+                cancel: function (res) {
+                    // alert('已取消');
+                },
+                fail: function (res) {
+                    alert(JSON.stringify(res));
+                }
+            });
+            isShareLoadOk = true;
+        })
+
+    </script>
+}
+@* banner *@
+<div class="banner-buy">
+    <div class="announce full-width parbox center">
+        <span class="banner_announce"></span>
+        <span class="banner_announce_text" id="announce_text">
+            <div id="Marquee">
+                @foreach (var getBargainDynamic in ViewBag.getBargainDynamic)
+                {
+                    <div>
+                        <div class="announce_kv">
+                            <p class="fs12"><span>@getBargainDynamic["userName"]  </span>@getBargainDynamic["content"]</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </span>
+    </div>
+    <div class="swiper-container" id="slider">
+        <div class="slidePic banner">
+            <img class="scrollLoading" src="~/Content/Images/loading.gif" data-url="@ViewBag.getBargainJoin["imgSrc"]">
+        </div>
+    </div>
+    <div class="banner-info full-width parbox center">
+        <div class="flex1 banner-info-detail">
+            <p class="banner-info-time fs14" id="countdown">
+                倒计时：
+                <span class="days">00</span>天
+                <span class="hours">00</span>小时
+                <span class="minutes">00</span>分
+                <span class="seconds">00</span>秒
+            </p>
+            <p class="banner-info-no fs14">剩余份数：<span>@ViewBag.getBargainJoin["remainingCount"]</span>份</p>
+        </div>
+        <div class="banner-info-detailM">
+            <p class="banner-info-money fs16">目标价：<br /><span class="fs16">@ViewBag.getBargainJoin["minAmount"]</span>元</p>
+        </div>
+    </div>
+</div>
+
+<div class="bargain-nav-liveName">
+    <p class="fs12 bargain-detail-member"><span>@ViewBag.getBargainJoin["liveName"]</span>及以上级别会员可参与</p>
+</div>
+@* 用户信息 *@
+<div class="user white-bg border-b border-t mt4 parbox center">
+    <div class="user-info">
+        <img class="user-info-src" src="@ViewBag.getBargainJoin["userPhoto"]" onerror="this.src = '/Content/images/myAvatar.png'" />
+        <p class="user-info-name fs12 mt2">@ViewBag.getBargainJoin["userName"]</p>
+    </div>
+    <div class="flex1 user-info-title m12 mr2">
+        @if (ViewBag.isMyBargain)
+        {
+            if (ViewBag.getBargainJoin["joinStatus"] == 10)
+            {
+                <p class="fs14">主人，您还可以砍掉<span>@((ViewBag.getBargainJoin["nowAmount"] - ViewBag.getBargainJoin["minAmount"]).ToString("0.00"))</span>元,分享一下召唤好友帮您砍吧！</p>
+            }
+            else if (ViewBag.getBargainJoin["joinStatus"] == 20)
+            {
+                <p class="fs14">
+                    @ViewBag.getBargainJoin["userName"]的砍价已经成功完成，感谢砍友们的大力支持~~~
+                </p>
+            }
+            else if (ViewBag.getBargainJoin["joinStatus"] != -10)
+            {
+                <p class="fs14">
+                    活动已经结束了，下次记得赶早哦~
+                </p>
+            }
+        }
+        else
+        {
+            if (ViewBag.getBargainJoin["joinStatus"] == 10)
+            {
+                <p class="fs14">您的朋友<span>@ViewBag.getBargainJoin["userName"]</span>还可以砍掉<span>@((ViewBag.getBargainJoin["nowAmount"] - ViewBag.getBargainJoin["minAmount"]).ToString("0.00"))</span>元,感情深就快快帮他砍一刀！</p>
+            }
+            else if (ViewBag.getBargainJoin["joinStatus"] == 20)
+            {
+                <p class="fs14">
+                    @ViewBag.getBargainJoin["userName"]的砍价已经成功完成，感谢砍友们的大力支持~~~
+                </p>
+            }
+            else if (ViewBag.getBargainJoin["joinStatus"] == -10)
+            {
+                <p class="fs14">
+                    活动已经结束了，下次记得赶早哦~
+                </p>
+            }
+        }
+
+    </div>
+    @if (ViewBag.isMyBargain && ViewBag.getBargainJoin["joinStatus"] != -10 && DateTime.Now <= Convert.ToDateTime(ViewBag.getBargainJoin["bargainEndTime"]))
+    {
+        if (ViewBag.getBargainJoin["relateOrderPackageId"] == null)
+        {
+            <a href="javascript:void(0)" class="user-btn fs14 bargainCreate box disblock">立即<br />下单</a>
+        }
+        else
+        {
+            if (ViewBag.getBargainJoin["relateOrderPackageStatus"] <= 10)
+            {
+                <a href="/userAbout/showOrderDetail?orderId=@ViewBag.getBargainJoin["relateOrderId"]" class="user-btn fs14 disblock">查看<br />订单</a>
+            }
+            else
+            {
+                <a href="/userAbout/showPackageDetail?orderPackageId=@ViewBag.getBargainJoin["relateOrderPackageId"]" class="user-btn fs14 disblock">查看<br />订单</a>
+            }
+        }
+    }
+</div>
+@* 砍价进度 *@
+<div class="progress white-bg border-b border-t mt4">
+    <div class="parbox progress-info">
+        <div class="progress-number">
+            <span class="progress-info-icon progress-info-icon1"></span>
+            <p class="fs12">@ViewBag.getBargainJoin["supportCount"]人</p>
+            <p class="fs12">砍友团人数</p>
+        </div>
+        <div class="flex1">
+            <span class="progress-info-icon progress-info-icon2"></span>
+            <p class="fs12">￥@((ViewBag.getBargainJoin["maxAmount"] - ViewBag.getBargainJoin["nowAmount"]).ToString("0.00"))</p>
+            <p class="fs12">已砍金额</p>
+        </div>
+        <div class="progress-number">
+            <span class="progress-info-icon progress-info-icon3"></span>
+            <p class="fs12">￥@ViewBag.getBargainJoin["nowAmount"]</p>
+            <p class="fs12">砍后金额</p>
+        </div>
+    </div>
+    <div class="progress-detail parbox mt4">
+        <div class="progress-detail-img mr4">
+            <img src="~/Content/images/progress_tip.png" />
+        </div>
+        <div class="flex1">
+            <div class="progress-detail-info" data-id="@((ViewBag.getBargainJoin["nowAmount"] - ViewBag.getBargainJoin["minAmount"]).ToString("0.00"))" data-id2="@((ViewBag.getBargainJoin["maxAmount"] - ViewBag.getBargainJoin["minAmount"]).ToString("0.00"))">
+                <span style="width:@((100 - ((ViewBag.getBargainJoin["nowAmount"] - ViewBag.getBargainJoin["minAmount"]) / (ViewBag.getBargainJoin["maxAmount"] - ViewBag.getBargainJoin["minAmount"])) * 100).ToString("0.00"))%"></span>
+            </div>
+            <div class="progress-detail-money mt2">
+                <p class="fs12">￥<span class="fs15">@(ViewBag.getBargainJoin["maxAmount"].ToString("0.00"))</span></p>
+                <p class="fr fs12">￥<span class="fs15">@(ViewBag.getBargainJoin["minAmount"].ToString("0.00"))</span></p>
+            </div>
+
+            @if (ViewBag.getBargainJoin["joinStatus"] == -10)
+            {
+                if (!ViewBag.getBargainJoin["isPromotionOver"])
+                {
+                    <div class="mt4">
+                        <p class="progress-over-title ac fs14 mb2">当前砍价已结束</p>
+                        @if (!ViewBag.isMyBargain)
+                        {
+                            <img class="progress-arrow" src="~/Content/images/arowdownred.png" />
+                            <div class="parbox">
+                                <a class="flex1 bargainGain" href="javascript:void(0)" data-promoid="@ViewBag.getBargainJoin["promotionId"]" id="bargainGain">我也要发起砍价</a>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="mt4">
+                        <p class="progress-over-title ac fs14">此活动已结束，点击查看更多活动</p>
+                        <img class="progress-arrow" src="~/Content/images/arowdownred.png" />
+                        <div class="ac mt4 progress-success-more fs14 goBainList">
+                            <img class="progress-success-icon mr2" src="~/Content/images/moreIcon.png" />
+                            查看更多砍价活动
+                            <img class="progress-success-arrow ml2" src="~/Content/images/arowrightred.png" />
+                        </div>
+                    </div>
+                }
+            }
+            else if (ViewBag.getBargainJoin["joinStatus"] == 10)
+            {
+                //if (ViewBag.getBargainJoin["mySupporCount"] == 0)
+                //{
+                <div class="progress-btn mine mt4">
+                    @if (ViewBag.isMyBargain)
+                    {
+                        if (ViewBag.getBargainJoin["mySupporCount"] < ((ViewBag.getBargainJoin["isSubscribe"] ?? false) ? 2 : 1))
+                        {
+                            <div class="progress-btn-mine">
+                                <a href="javascript:void(0)" id="mineBargain">自己先小试牛刀</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="progress-btn-mine">
+                                <a href="javascript:void(0)" id="mineBargain" class="progressEnabled">自己先小试牛刀</a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="parbox">
+                            @if (ViewBag.getBargainJoin["mySupporCount"] < ((ViewBag.getBargainJoin["isSubscribe"] ?? false) ? 2 : 1))
+                            {
+                                <a class="flex1 mr4" href="javascript:void(0)" id="mineBargain">帮砍一刀</a>
+                            }
+                            else
+                            {
+                                <a class="flex1 mr4 progressEnabled" href="javascript:void(0)" id="mineBargain">帮砍一刀</a>
+                            }
+                            @if (!ViewBag.getBargainJoin["isPromotionOver"])
+                            {
+                                <a class="flex1 bargainGain" href="javascript:void(0)" data-promoid="@ViewBag.getBargainJoin["promotionId"]" id="bargainGain">我也要发起砍价</a>
+                            }
+                        </div>
+                    }
+                    <div class="progress-share ac fs14" id="onMenuShareTimeline">
+                        <img class="progress-share-icon mr2" src="~/Content/images/shareIcon.png" />
+                        分享给好友，帮我一起砍
+                    </div>
+                </div>
+                //}
+            }
+            else if (ViewBag.getBargainJoin["joinStatus"] == 20)
+            {
+                if (ViewBag.isMyBargain)
+                {
+                    if (ViewBag.getBargainJoin["relateOrderPackageId"] == null && DateTime.Now <= Convert.ToDateTime(ViewBag.getBargainJoin["bargainEndTime"]))
+                    {
+                        <div class="mt4">
+                            <div class="progress-btn-over ">
+                                <a href="javascript:void(0)" class="bargainCreate">砍价成功，前去下单支付</a>
+                            </div>
+                            <div class="ac mt4 progress-success-more fs14 goBainList">
+                                <img class="progress-success-icon mr2" src="~/Content/images/moreIcon.png" />
+                                查看更多砍价活动
+                                <img class="progress-success-arrow ml2" src="~/Content/images/arowrightred.png" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mt4">
+                            <img class="progress-arrow" src="~/Content/images/arowdownred.png" />
+                            <div class="ac mt4 progress-success-more fs14 goBainList">
+                                <img class="progress-success-icon mr2" src="~/Content/images/moreIcon.png" />
+                                查看更多砍价活动
+                                <img class="progress-success-arrow ml2" src="~/Content/images/arowrightred.png" />
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    if (!ViewBag.getBargainJoin["isPromotionOver"])
+                    {
+                        <div class="parbox">
+                            <a class="flex1 mt4 bargainGain" href="javascript:void(0)" data-promoid="@ViewBag.getBargainJoin["promotionId"]" id="bargainGain">我也要发起砍价</a>
+                        </div>
+                    }
+                    <div class="mt4">
+                        <img class="progress-arrow" src="~/Content/images/arowdownred.png" />
+                        <div class="ac mt4 progress-success-more fs14 goBainList">
+                            <img class="progress-success-icon mr2" src="~/Content/images/moreIcon.png" />
+                            查看更多砍价活动
+                            <img class="progress-success-arrow ml2" src="~/Content/images/arowrightred.png" />
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+@* 砍友 *@
+<div class="friend white-bg border-t mt4">
+    <p class="friend-title fs14 border-b ">@ViewBag.getBargainJoin["userName"]的砍友团</p>
+    <ul class="friend-list">
+        @if (ViewBag.getBargainJoin["supportList"].Length > 0)
+        {
+            foreach (var supportList in ViewBag.getBargainJoin["supportList"])
+            {
+                <li class="friend-list-info parbox border-b ">
+                    <div class="friend-list-img">
+                        <img src="@supportList["userPhoto"]" onerror="this.src = '/Content/images/myAvatar.png'" />
+                    </div>
+                    <div class="flex1 ml2 mr2">
+                        <p class="fs12 fr">－@supportList["supportAmount"]元</p>
+                        <p class="fs12">@supportList["userName"]</p>
+                        <p class="mt2 fs12 oc">@supportList["createTime"]</p>
+                        <p class="mt2 fs12">@supportList["supportNote"]</p>
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+            <li class="friend-list-info parbox border-b ">
+                <p class="mt2 fs12">暂无砍友团信息</p>
+            </li>
+        }
+    </ul>
+</div>
+@*查看商品详情*@
+<div class="detail white-bg border-b border-t mt4 parbox center">
+    <img class="detail-img" src="~/Content/images/mallslog.png" />
+    <p class="flex1 fs14 ml2">malls·五洲精选</p>
+    <a class="detail-btn fs14" href="/bargain/bargainShopDetail?activityId=@ViewBag.getBargainJoin["promotionId"]">查看商品详情<i class="ml4 fr"><img src="/content/images/arowrightred.png" style="width:.2rem"></i></a>
+
+</div>
+@* 活动规则 *@
+<div class="role white-bg border-b border-t mt4">
+    <p class="role-title fs14 border-b ">活动规则</p>
+    <div class="">
+        <img class="role-img-src scrollLoading" src="~/Content/Images/loading.gif" data-url="@ViewBag.getBargainJoin["ruleDescImg"]" />
+    </div>
+</div>
+@* 关注二维码 *@
+<div class="qrcode white-bg border-b border-t mt4">
+    <div class="qrcode-info ac fs13">请长按二维码图片关注malls·五洲精选公众号<br /></div>
+    <div class="qrcode-img mt4">
+        <img src="~/Content/images/tdigCode.jpg" class="qrcode-img-src" />
+    </div>
+</div>
+<div class="other white-bg parbox fs13">
+    <div><p>发起砍价</p><p class="mt4">@ViewBag.getBargainJoin["sumJoinCount"]次</p></div>
+    <div class="flex1"><p>帮忙砍价</p><p class="mt4">@ViewBag.getBargainJoin["sumSupportCount"]次</p></div>
+    <div><p>查看砍价</p><p class="mt4">@ViewBag.getBargainJoin["sumViewJoinCount"]次</p></div>
+</div>
+<div class="_alert" id="_alert">
+    <div class="popMask"></div>
+    <div class="in">
+        <div class="success-title">
+            <img src="~/Content/images/bargain_success.png" />
+        </div>
+        <div class="success-info">
+            <h2 class="title fs14 ac mt4"><span>恭喜！</span>您已砍价<span class="fs17" id="bargain">0.00</span>元.</h2>
+            <p class="ac fs14 mt2">砍价感言:</p>
+            <div class="input">
+                <input class="success-input mt2" type="text" value="@ViewBag.getBargainJoin["defaultSpeech"]" id="supportNote" />
+            </div>
+            <a class="btn mt4 fs12" href="javascript:void(0)" id="save" data-bargainjoinid="0">确定</a>
+            @*<p class="fs12 mt4 al">
+                确定后关注底部malls·五洲精选公众号，<i class="detail-btn">关注后</i>可再砍一刀。
+            </p>*@
+        </div>
+    </div>
+</div>
+<div class="_alert2" id="_alert2">
+    <div class="in">
+        <div class="alert_title">
+            <p class="fs14">
+                即刻成为充值会员，立享超低商品折扣！
+            </p>
+        </div>
+        <div class="alert_btns parbox">
+            <a href="javascript:void(0)" class="alert_btn alert_calcle flex1 fs14" id="alertCancle2">暂不参与</a>
+            <a href="javascript:void(0)" class="alert_btn alert_save flex1 fs14" id="alertSave2">去充值</a>
+        </div>
+    </div>
+</div>
+
+@*<div style="height:50px;"></div>*@
+<input type="hidden" id="bargainEndTime" value="@ViewBag.getBargainJoin["bargainEndTime"]" />
+<input type="hidden" id="bargainJoinId" value="@ViewBag.getBargainJoin["bargainJoinId"]" />
+<input type="hidden" id="src" value="@ViewBag.getBargainJoin["productImgSrc"]" />
+<input type="hidden" id="postFee" value="@ViewBag.getBargainJoin["postFee"]" />
+<input type="hidden" id="amount" value="@ViewBag.getBargainJoin["count"]" />
+<input type="hidden" id="specs" value="@ViewBag.getBargainJoin["specs"]" />
+<input type="hidden" id="providerUserName" value="@ViewBag.getBargainJoin["providerUserName"]" />
+<input type="hidden" id="totalPrice" value="@ViewBag.getBargainJoin["nowAmount"]" />
+<input type="hidden" id="longName" value="@ViewBag.getBargainJoin["productName"]" />
+<input type="hidden" id="myBargainJoinId" value="@ViewBag.getBargainJoin["myBargainJoinId"]" />
+<input type="hidden" id="mySupporCount" value="@ViewBag.getBargainJoin["mySupporCount"]" />
+<input type="hidden" id="isSubscribe" value="@ViewBag.getBargainJoin["isSubscribe"]" />
+<input type="hidden" id="minAmount" value="@ViewBag.getBargainJoin["minAmount"]" />
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/jquery.downCount.js"></script>
+    @WebHelper4H5.RegisterScripts("scrollLoading.js")
+    @WebHelper4H5.RegisterScripts("bargain/bargainDetail.js")
+    <script>
+        //alert(@((ViewBag.getBargainJoin["isSubscribe"] ?? false) ? 2 : 1));
+        //alert($("#isSubscribe").val())
+        $(".scrollLoading").scrollLoading();
+    </script>
+}

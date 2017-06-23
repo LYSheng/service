@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "促销商城";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("wallet/wallet.css")
+}
+@section Title
+{
+    <h1 class="am-header-title">我的钱包</h1>
+}
+ 
+<header class="topfixed">
+    <ul class="tap-list">
+        <li class="cur" id="wallet_special"> 
+            <span class="tap-left">二炮专项卡</span>
+        </li>
+        <li id="wallet_uni">
+            <span class="tap-right">二炮联合卡</spanclass>
+        </li>
+    </ul>
+</header>
+
+<ul class="wallet_list">
+    <li>
+        <div class="wallet_card">
+            <p class="title">冲脑门二炮卡</p>
+            <p class="cardNum">2311657689797895409</p>
+            <p class="account">88790.00<em>元（余额）</em></p>
+            <p class="integral">积分：300</p>
+        </div>
+        <div class="wallet_operate">
+            <a class="recharge" href="#"><img src="/content/images/wallet_recharge_more.png" width="60" height="30" /><p>充值</p></a>
+            <a class="recharge" href="#"><img src="/content/images/wallet_income_more.png" width="60" height="30" /><p>收支明细</p></a>
+        </div>
+    </li>
+    <li>
+        <div class="wallet_card">
+            <p class="title">小仙仙二炮卡</p>
+            <p class="cardNum">2311657689797895409</p>
+            <p class="account">88790.00<em>元（余额）</em></p>
+            <p class="integral">积分：300</p>
+        </div>
+        <div class="wallet_operate">
+            <a class="recharge" href="#"><img src="/content/images/wallet_recharge_more.png" width="60" height="30" /><p>充值</p></a>
+            <a class="recharge" href="#"><img src="/content/images/wallet_income_more.png" width="60" height="30" /><p>收支明细</p></a>
+        </div>
+    </li>
+    </ul>
+<ul class="wallet_uni_list">
+    <li>
+        <div class="wallet_card">
+            <p class="title">冲脑门联合卡</p>
+            <p class="cardNum">2311657689797895409</p>
+            <p class="account">88790.00<em>元（余额）</em></p>
+            <p class="integral">积分：300</p>
+        </div>
+        <div class="wallet_operate">
+            <a class="recharge" href="#"><img src="/content/images/wallet_recharge_more.png" width="60" height="30" /><p>充值</p></a>
+            <a class="recharge" href="#"><img src="/content/images/wallet_income_more.png" width="60" height="30" /><p>收支明细</p></a>
+        </div>
+    </li>
+    <li>
+        <div class="wallet_card">
+            <p class="title">小仙仙联合卡</p>
+            <p class="cardNum">2311657689797895409</p>
+            <p class="account">88790.00<em>元（余额）</em></p>
+            <p class="integral">积分：300</p>
+        </div>
+        <div class="wallet_operate">
+            <a class="recharge" href="#"><img src="/content/images/wallet_recharge_more.png" width="60" height="30" /><p>充值</p></a>
+            <a class="recharge" href="#"><img src="/content/images/wallet_income_more.png" width="60" height="30" /><p>收支明细</p></a>
+        </div>
+    </li>
+</ul>
+<div class="mt2 am-margin-per">
+ 
+</div>
+@section Scripts
+{
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+    <script type="text/javascript">
+        $("#wallet_special").click(function () {
+            $("#wallet_uni").removeClass('curr');
+            $(".wallet_uni_list").hide();
+            $("#wallet_special").addClass('cur');
+            $(".wallet_list").show();
+        });
+        $("#wallet_uni").click(function () {
+            $("#wallet_special").removeClass('cur');
+            $(".wallet_list").hide();
+            $("#wallet_uni").addClass('curr');
+            $(".wallet_uni_list").show();
+        });
+    </script>
+    @*<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll4.2.0.js"></script>*@
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/iScroll/iscroll.js"> </script>
+}

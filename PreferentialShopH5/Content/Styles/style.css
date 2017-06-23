@@ -1,0 +1,10 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*分享*/
+.shareTitle{ line-height:1.6rem; background:#efeff4; font-weight:normal; color:#333}
+.shareDes{ color:#767676}
+.soperate{ background:#66c1c4; color:#fff; border-radius:5px;}
+.shareDss{border:1px dashed #f2f2f2; word-break:break-all}
+.nlogo { width:2rem;}
+.nlogo img{ width:100%}
+.st{ line-height:1.2rem; font-weight:normal}

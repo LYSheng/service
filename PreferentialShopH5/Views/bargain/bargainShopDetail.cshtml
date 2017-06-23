@@ -1,0 +1,393 @@
+﻿@using System.Configuration;
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "商品详情";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+    string mainImg = ViewBag.DetailObj[0]["productImageUrls"][0];
+}
+@section HeadTop
+{
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    
+    var isSetShare = true;
+    var isShareLoadOk = false;
+    var isShareBargain = false;
+    var remainingTime = "@ViewBag.DetailObj[0]["remainingTime"]";
+
+    var appShareUrl = '@WebConfig.WXMVCUrl/Share/Arrive?ReferrerUserId=@CurrentUser.Instance.UserId&ReturnUrl=@HttpUtility.UrlEncode(
+        string.Format("/Classify/themePromoList?providerUserId={0}&ProductId={1}&PromotionId={2}&providerUserName={3}&Title="+HttpUtility.UrlEncode(HttpUtility.UrlEncode("推荐商品"))+"&isShareProduct=1&hideCat=1"
+, ViewBag.DetailObj[0]["providerUserId"],
+ViewBag.DetailObj[0]["productId"],
+        Request["activityId"],
+HttpUtility.UrlEncode(HttpUtility.UrlEncode(ViewBag.DetailObj[0]["publisherNickName"].ToString()))))';
+
+    //微信分享到朋友，朋友圈，qq等  目前只能 修改内容不能 按钮 弹出
+    wx.config({
+        debug: false,
+        appId: '@Service.Site.wxService.wxappid',
+        timestamp: '@ViewData["timestamp"]',
+        nonceStr: '@ViewData["noncestr"]',
+        signature: '@ViewData["signature"]',
+        jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem',
+        ]
+    });
+
+    wx.ready(function () {
+
+        var linkUrl = '@WebConfig.WXMVCUrl/Share/Arrive?ReferrerUserId=@CurrentUser.Instance.UserId&ReturnUrl=@HttpUtility.UrlEncode(
+string.Format("/bargain/bargainShopDetail?activityId=" + @Request["activityId"]))';
+
+        wx.onMenuShareAppMessage({
+            title: '【Malls·五洲精选】@ViewBag.DetailObj[0]["productName"]',
+            desc: "@ViewBag.DetailObj[0]["activityDescription"].ToString().Trim().Replace("\n", "").Replace("\r", "")", // 分享描述
+            link: linkUrl,
+            imgUrl: '@mainImg',
+            trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+            },
+            success: function (res) {
+                $('[name=shareLayer]').remove();
+                //   alert('已分享');
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+        wx.onMenuShareTimeline({
+            title: "【Malls·五洲精选】@ViewBag.DetailObj[0]["productName"]-@ViewBag.DetailObj[0]["activityDescription"].ToString().Trim().Replace("\n", "").Replace("\r", "")",
+            desc: '测试描述', // 朋友圈不支持
+            link: linkUrl,
+            imgUrl: '@mainImg',
+                trigger: function (res) {
+                    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                },
+                success: function (res) {
+                    $('[name=shareLayer]').remove();
+                    // alert('已分享');
+                },
+                cancel: function (res) {
+                    // alert('已取消');
+                },
+                fail: function (res) {
+                    alert(JSON.stringify(res));
+                }
+            });
+            isShareLoadOk = true;
+            //if (isShareLoadOk) {
+            //    isShareBargain = true;
+            //    $("#onMenuShareTimeline").click();
+            //}
+
+        })
+
+</script>
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("product/product.css")
+    @WebHelper4H5.RegisterStyles("shoppingCart.css")
+    @WebHelper4H5.RegisterStyles("Touch.css")
+    @WebHelper4H5.RegisterStyles("bargain/shop.css")
+}
+<script>
+
+
+    $(function () {
+        $(".nav").hide();
+        $("#onMenuShareTimeline").click(function () {
+            if (!getCookie(".ASPXAUTHH5")) {
+                autoLogin(this);
+                return;
+            }
+            var des = "@ViewBag.DetailObj[0]["activityDescription"].ToString().Trim().Replace("\n", "").Replace("\r", "")";
+            var imgUrl = '@mainImg';
+            var title = '【Malls·五洲精选】@ViewBag.DetailObj[0]["productName"]';
+            //移动端专用
+            try {
+                if (typeof mobile.appShareClickDo == "function") {
+                    mobile.appShareClickDo(appShareUrl, des, imgUrl, title);
+                    return;
+                }
+            } catch (e) {
+
+            }
+            if (typeof appShareClickDo == "function") {
+                appShareClickDo(appShareUrl, des, imgUrl, title);
+                return;
+            }
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.showName) {
+
+                window.webkit.messageHandlers.showName.postMessage([appShareUrl, des, imgUrl, title])
+                return;
+            }
+            if (!isShareLoadOk) {
+                alert('请等待页面加载完成');
+                return;
+            }
+            var shareImg = 'share.png'
+            $("body").append("<div class='layer' style='z-index:9999;height:100%;width:100%;top:0px;position:fixed;background:rgba(0, 0, 0,0.70);text-align:right'> <img id='sharefriend' style='width:80%;' src='/Content/images/share.png'  /></div>")
+            setTimeout(function () {
+                $(".layer").off().on("click", function () {
+                    $(this).remove();
+                })
+            }, 0);
+            
+        });
+
+    })
+</script>
+<div class="categBox desCategBox">
+    <div class="banner-buy">
+        <div class="swiper-container" id="slider">
+            <div class="slidePic banner" style="overflow: hidden" id="focusInner">
+                <div class="swiper-wrapper">
+                    <ul>
+                        @foreach (var productImageUrl in ViewBag.DetailObj[0]["productImageUrls"])
+                        {
+                            <li class="imgbox"><img src="~/Content/Images/loading.gif" class="scrollLoading" data-url="@productImageUrl" /></li>
+                        }
+                    </ul>
+                </div>
+                <div class="hd">
+                    <ul class="slide text_indent clear">
+                        @foreach (var productImageUrl in ViewBag.DetailObj[0]["productImageUrls"])
+                        {
+                            <li></li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="details">
+        <div class="details-name fs15 pb3  word-descriton">
+            <a href="javascript:void(0)">@ViewBag.DetailObj[0]["productName"]</a>
+        </div>
+        <div class="fs13 describe pb6">@Html.Raw(ViewBag.DetailObj[0]["activityDescription"])</div>
+        <div class="details-price parbox fs12 mb2">
+            <div class="bargain-price flex1">
+                <p>
+                    <em>砍价目标：</em><em class="fs14">￥</em><em class="fs14">@ViewBag.DetailObj[0]["skuPriceRange"]</em>
+                    <span style="text-decoration: line-through"><i>￥</i><i>@ViewBag.DetailObj[0]["productPrice"]</i></span>
+                </p>
+                <p class="mt2">库存仅剩<em>@ViewBag.DetailObj[0]["sumInventoryAmount"]</em>件，已有<em>@ViewBag.DetailObj[0]["sumSupportCount"]</em>人砍价</p>
+            </div>
+            <span class="bargain-zan ar" id="zan">
+                <i class="@(ViewBag.DetailObj[0]["isProudctPraise"]==true ? "home_heart ar home_heart_on" : "home_heart ar")"></i>
+                <em class="fs10 praiseCount">@(ViewBag.DetailObj[0]["praiseCount"])</em>
+            </span>
+        </div>
+        <div class="promotion fs12 pb2 ac mb2">
+            <p class="txt">
+                <em>
+                    距活动结束还有
+                    <span class="countdown">
+                        <span class="days">00</span>天
+                        <span class="hours">00</span>小时
+                        <span class="minutes">00</span>分
+                        <span class="seconds">00</span>秒
+                    </span>
+                </em>
+            </p>
+        </div>
+        <ul class="list-extra clearfix parbox fs12 box">
+            <li class="flex1">起售量：<span class="redword">@ViewBag.DetailObj[0]["saleAmount"]</span></li>
+            <li class="flex1 ac">人气数：<span class="redword">@(ViewBag.DetailObj[0]["viewCount"] >= 9999 ? "9999+" : ViewBag.DetailObj[0]["viewCount"])</span></li>
+            <li class="flex1 ac">交易量：<span class="redword">@ViewBag.DetailObj[0]["tradeAmount"]</span></li>
+        </ul>
+    </div>
+    <div class="choose clearfix open fs12">
+        <span class="fl fenlei">
+            <i>运费：</i>
+            <span class="redword">@ViewBag.DetailObj[0]["shippingFreeDescription"]</span>
+        </span>
+    </div>
+    <div class="parbox pl20 pr20 white-bg mt4 shopRelative" style="display: none;">
+        <a class="fs15 shopName  flex1 disblock" href="/classify/themePromoList?providerUserId=@ViewBag.DetailObj[0]["providerUserId"]&title=@ViewBag.DetailObj[0]["publisherNickName"]">
+            <img src="@ViewBag.DetailObj[0]["publisherAvatar"]" style=" vertical-align:middle" onerror="this.src = '../Content/images/myAvatar.png'" /><em>@ViewBag.DetailObj[0]["publisherNickName"]</em>
+        </a>
+        <a class="disblock red  fs14  box  conSerCall " href="tel:4009633696"><b class="person_phoneCall"></b>联系客服</a>
+    </div>
+    <div class="goodseval choose" style="display: none;">
+        @{string skuList = ViewBag.skuList; }
+        <input type="hidden" value="@skuList" id="skuId" />
+    </div>
+
+    <div class="mt4 otherAsept white-bg">
+        <div class="tabs">
+            <ul class="tabscon parbox">
+                <li class="flex1 ac  fs13 active">活动规则</li>
+                <li class="flex1 ac  fs13">商品详情</li>
+                <li class="flex1 ac  fs13">评价（@ViewBag.DetailObj[0]["evaluationCount"]）</li>
+            </ul>
+        </div>
+        <div class="pads">
+            <div class="padsCon clearfix" style="display: block;">
+                <div>
+                    <img src="~/Content/Images/loading.gif" class="scrollLoading" data-url="@ViewBag.DetailObj[0]["ruleDescImg"]">
+                </div>
+            </div>
+            <div class="padsCon clearfix" style="display: none;">
+                <div>
+                    @foreach (var productEvaluation in ViewBag.DetailObj[0]["productDescription"])
+                    {
+                        <img src="~/Content/Images/loading.gif" class="scrollLoading" data-url="@productEvaluation" />
+
+                    }
+                </div>
+            </div>
+            <div class="padsCon" style="display:none;">
+                <div class="pt4 pb4 pl20 pr20" id="proList">
+                    <!-- ko foreach: evaluationList -->
+                    <section class="parbox pl20 pr20 pt4 pb4 fs14 eSec">
+                        <a class="ablum disblock">
+                            <img onerror="this.src = '../Content/images/myAvatar.png'" data-bind='attr:{"src":photo}' />
+                        </a>
+                        <ul class="flex1 pl30">
+                            <li class="evaluatHead pb2">
+                                <i data-bind="text:nickName" class="fs15"></i>
+                                <i data-bind="text:createTime" class="fr fs12 crtime"></i>
+                            </li>
+                            <li class="evaluatCon fs14" data-bind="text:content">
+                            </li>
+                            <!-- ko if: evalPicsList.length>0 -->
+                            <li class="evaluatCon fs14 clearfix pt4" data-bind="foreach:evalPicsList">
+                                <span class="disblock fl mr4 praiseImgbox">
+                                    <img data-bind="attr:{'src':$data}" class="praise" />
+                                </span>
+                            </li>
+                            <!-- /ko -->
+                            <li class="evaluatCon fs14">
+                                <!-- ko if: answerContent -->
+                                <div class="evaluat-item-request">
+                                    <p class="fs14 evaluat-item-title pb2">
+                                        <i class="fs12" data-bind="text:'【'+adminUserName+'】：'"></i>
+                                        <i class="fr fs12 crtime" data-bind="text:answerTime"></i>
+                                    </p>
+                                    <p class="fs12 evaluat-item-content" data-bind="text:answerContent">
+                                    </p>
+                                </div>
+                                <!-- /ko -->
+                            </li>
+                        </ul>
+                    </section>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="activityId" value="@Request["activityId"]" />
+    <input type="hidden" id="mainImg" value='@ViewBag.DetailObj[0]["mainImg"]' />
+    <div class="bargain-nav-liveName">
+        <p class="fs12 bargain-detail-member"><span>@ViewBag.DetailObj[0]["liveName"]</span>及以上级别会员可参与</p>
+    </div>
+    <nav class="cart-btm-fixed bargainDetail">
+        <div class="cart-concern fl fs14 ac">
+            <a class="love-heart-icn " id="onMenuShareTimeline">
+                <span class="shareIcon focus-out mr2"></span>
+                <span class="focus-info">分享</span>
+            </a>
+        </div>
+        <div class="bargain-action-list fr fs15" id="shop">
+            @if (ViewBag.DetailObj[0]["remainingTime"] <= 0)
+            {
+                <a class="cart-btn bargain-btn disabled" data-bargainjoinid="@ViewBag.DetailObj[0]["remainingTime"]"> 活动已结束 </a>
+            }
+            else
+            {
+                if (ViewBag.DetailObj[0]["bargainJoinId"] > 0)
+                {
+                    <a class="cart-btn bargain-btn " data-bargainjoinid="@ViewBag.DetailObj[0]["bargainJoinId"]" data-proid="@ViewBag.DetailObj[0]["productId"]" data-minproductfee="@ViewBag.DetailObj[0]["minProductFee"]" data-provideruserid="@ViewBag.DetailObj[0]["providerUserId"]" data-shippingfee="@ViewBag.DetailObj[0]["shippingFee"]" data-promotionid="@Request["activityId"]"> 查看砍价 </a>
+                }
+                else
+                {
+                    <a class="cart-btn bargain-btn " data-bargainjoinid="@ViewBag.DetailObj[0]["bargainJoinId"]" data-proid="@ViewBag.DetailObj[0]["productId"]" data-minproductfee="@ViewBag.DetailObj[0]["minProductFee"]" data-provideruserid="@ViewBag.DetailObj[0]["providerUserId"]" data-shippingfee="@ViewBag.DetailObj[0]["shippingFee"]" data-promotionid="@Request["activityId"]"> 发起砍价 </a>
+                }
+            }
+            
+        </div>
+    </nav>
+    <div class="popCart"></div>
+</div>
+<div class="callServicer" id="callServicer">
+    <a href="tel:4009633696"></a>
+</div>
+<div class="_alert" id="_alert">
+    <div class="in">
+        <div class="alert_title">
+            <p class="fs14">
+                即刻成为充值会员，立享超低商品折扣！
+            </p>
+        </div>
+        <div class="alert_btns parbox">
+            <a href="javascript:void(0)" class="alert_btn alert_calcle flex1 fs14" id="alertCancle">暂不参与</a>
+            <a href="javascript:void(0)" class="alert_btn alert_save flex1 fs14" id="alertSave">去充值</a>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+<script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/TouchSlide.1.1.source.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/jquery.downCount.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Touch.jquery.js"> </script>
+    @*@WebHelper4H5.RegisterScripts("Product/detail.js")*@
+    @WebHelper4H5.RegisterScripts("bargain/bargainShopDetail.js")
+    @WebHelper4H5.RegisterScripts("scrollLoading.js")   
+    @WebHelper4H5.RegisterScripts("Product/evaluation.js")
+<script>
+    $(".scrollLoading").scrollLoading();
+    $('.praise').Touch();
+
+    var _element = $("#callServicer");
+    var startX, startY, endX, endY, startMove = false, target, targetId, _top, _left, _x, _y;
+
+    var eventdown = function (e) {
+        _top = _element.position().top, _left = _element.position().left;
+        console.log(_top, _left)
+        startX = e.originalEvent.targetTouches[0].pageX;
+        startY = e.originalEvent.targetTouches[0].pageY;
+        startMove = true;
+        target = $(e.target);
+
+    }
+    var eventmove = function (e) {
+        e.preventDefault();
+        if (!startMove) {
+            return false;
+        }
+        endX = e.originalEvent.changedTouches[0].pageX;
+        endY = e.originalEvent.changedTouches[0].pageY;
+
+        //target.css({ "-webkit-transform": "translate(" + (endX - startX) + "px, " + (endY - startY) + "px)", "-moz-transform": "translate(" + (endX - startX) + "px, " + (endY - startY) + "px)", "-ms-transform": "translate(" + (endX - startX) + "px, " + (endY - startY) + "px)", "-o-transform": "translate(" + (endX - startX) + "px, " + (endY - startY) + "px)", "-webkit-transition": "none", "-moz-transition": "none", "-ms-transition": "none", "-o-transition": "none" });
+        _x = endX - startX;
+        _y = endY - startY;
+
+
+
+        _element.css({ "left": _x + _left, "top": _y + _top })
+    }
+    var eventup = function (e) {
+        startMove = false;
+
+    }
+    _element.on('touchstart', eventdown);
+    _element.on('touchmove', eventmove);
+    _element.on('touchend', eventup);
+
+</script>
+
+
+
+}

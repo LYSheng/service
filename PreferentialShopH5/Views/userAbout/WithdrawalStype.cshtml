@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "选择提现方式";
+    Layout = "../Shared/_LayoutNone.cshtml";
+}
+
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("newStyles/mzui/amazeui.css")
+    @WebHelper4H5.RegisterStyles("newStyles/style.css")
+    @WebHelper4H5.RegisterStyles("newStyles/main.css")
+    @WebHelper4H5.RegisterStyles("newStyles/dyl.css")
+    @WebHelper4H5.RegisterStyles("newStyles/wxq.css")
+    @WebHelper4H5.RegisterStyles("newStyles/lsm.css")
+}
+
+
+<section class="bgwt">
+    <section class="webkit_box pay_data_list pay_data bm_f0f0f0">
+        <section class="pay_icon mr17"><span class="icon-zhi f25" style="color:#34b133;"></span></section>
+        <section class="box_flex">
+            <div class="pay_data_con">
+                <p>提现到微信</p>
+                <p class="c99">无须审核</p>
+            </div>
+        </section>
+        <section class="pay_choose" paytype='1'><span class="icon-nochose cdb f19"></span></section>
+    </section>
+</section>
+<section class="bgwt">
+    <section class="webkit_box pay_data_list pay_data bm_f0f0f0">
+        <section class="pay_icon mr17"><span class="icon-wei f25" style="color:#00aaef;"></span></section>
+        <section class="box_flex">
+            <div class="pay_data_con">
+                <p>提现到支付宝</p>
+                <p class="c99">无须审核</p>
+            </div>
+        </section>
+        <section class="pay_choose" paytype='2'><span class="icon-nochose cdb f19"></span></section>
+    </section>
+</section>
+<section class="bgwt">
+    <section class="webkit_box pay_data_list pay_data bm_f0f0f0">
+        <section class="pay_icon mr17"><span class="icon-bcart f20" style="color:#36bc99"></span></section>
+        <section class="box_flex">
+            <div class="pay_data_con">
+                <p>提现到银行卡</p>
+                <p class="c99">即时到账</p>
+            </div>
+        </section>
+        <section class="pay_choose" paytype='2'><span class="icon-nochose cdb f19"></span></section>
+    </section>
+</section>
+<div class="submit_btn pad4 skips" data-src="../personal/withdrawalstype.html">
+    <span>提现</span>
+</div>

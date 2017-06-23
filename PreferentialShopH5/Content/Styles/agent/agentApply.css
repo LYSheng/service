@@ -1,0 +1,49 @@
+[class*='agent_'] {background: url(../../images/agent_icon.png);display: inline-block;background-size: 1.26rem 5.32rem;width:0.8rem;height:0.75rem;margin-right: 0.2rem;position: relative;}
+
+.title{padding:0.4rem;}
+.form{border-top:1px solid #dcdcdc;border-bottom:1px solid #dcdcdc;padding:0 0.8rem;}
+.center{-webkit-box-align:center;align-items: center;}
+.bb{border-bottom:1px solid #c9c9c9;}
+.form-detail{line-height:1.6rem;}
+.form-title{color: #707070;width:3.8rem;}
+.form-title em{color:#ff0000;}
+.form-info{color:#434343;}
+.form-input{display:block;width: 100%;background:#fff;border:none;color:#434343;}
+.form-area{color:#a9a9a9;-webkit-line-clamp: 1;-webkit-box-orient: vertical;display: -webkit-box;overflow: hidden;text-overflow: ellipsis;word-break: break-word;}
+.form-area.on{color:#434343;}
+.form-textarea{padding:0;}
+.form-message{width: calc(100% - 1.6rem);height:5rem;resize: none;border:none;padding:0.4rem 0.8rem;outline:none;font-size:0.56rem !important;}
+/*图标*/
+.agent_project{background-position:0 0;}
+.agent_user{background-position:0 -0.85rem;}
+.agent_name{background-position:0 -1.7rem;}
+.agent_tel{background-position:0 -2.6rem;}
+.agent_merchant{background-position:0 -3.5rem;}
+/*提交按钮*/
+.btns{    padding: 1.1rem 2.7rem 0 2.7rem;}
+.apply-btn{display:block;width:100%;height:1.6rem;line-height:1.6rem;color:#fff !important;background:#fa5d68;border-radius:4px;}
+.apply-btn.disabled{background:#ccc;pointer-events: none;}
+/*区域选择*/
+.areas{ position: fixed;width: 100%;height: calc(100% - 50px);top: 0;left: 0;background: #f6f6f6;z-index: 999;opacity:0;-webkit-transition: all 0.3s linear;-webkit-transform: translate(0,100%);}
+.areas.show{-webkit-transform: translate(0,0);opacity:1;}
+
+.area-list{position: absolute;width: 100%;height: calc(100% - 51px);overflow: auto;-webkit-overflow-scrolling: touch;}
+.area-province{background:#fff;}
+.area-detail{display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;align-items: center;padding:0.4rem 0.6rem;border-bottom:1px solid #e8e8e8;}
+.area-city{display:none;}
+.area-city .area-detail{padding:0.4rem 0.6rem 0.4rem 0;margin-left:1.52rem;}
+.area-choice-icon{display:block;width:0.9rem;height:0.9rem;background:url("../../../content/images/choice_icon.png") 0 0 no-repeat;background-size:1.0rem 2.0rem;}
+.area-choice-icon.open{background-position:0 100%}
+.area-arrow-icon{display:block;width:0.52rem;height:0.28rem;margin-right:0.4rem;background:url("../../../content/images/arrow_icon.png") 0 0 no-repeat;background-size:0.6rem 0.6rem;}
+.area-arrow-icon.open{background-position:0 100%;}
+.areas-btn{position:fixed;bottom:0;width:100%;height:50px;border-top:1px solid #dedede;}
+.areas-btn a{display:block;width:100%;height:1.2rem;margin:0 0.8rem;line-height:1.2rem;color:#fff !important;background:#fa5d68;border-radius:4px;}
+/*提交成功的弹窗*/
+#_alert { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 1999; display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center; background: rgba(0,0,0,0.3); opacity: 0; pointer-events: none;}
+
+#_alert>.in { background: #fff;min-width:11rem; border-radius: 0.3rem;position:relative;}
+#_alert>.in .alert_title{padding:0.6rem 0.4rem;border:1px solid #dedede;border-radius: 0.3rem 0.3rem 0 0 ;}
+
+#_alert>.in .alert_btn{display:block;border-radius: 6px;text-align:center;line-height:1.6rem;color:#f15454;}
+/*.btn:link,.btn:visited,.btn:hover,.btn:active{color:#fc5962;}*/
+#_alert.show { opacity: 1; pointer-events: auto;}

@@ -1,0 +1,184 @@
+﻿@model FrontSDK.Domain.DxlqOrderPackageCount
+@{
+    ViewBag.Title = "购物车";
+    Layout = "../Shared/_LayoutFooter.cshtml";
+    int sum = 0;
+}
+@section Head
+{
+    @WebHelper4H5.RegisterStyles("malls/shoppingCart.css")
+
+}
+<div class="perInfo">
+    <ul class="cart_index box" id="scroller">
+        <!-- 整个进购车是这个大的ul 然后supplier这个class对应的Li是一个供应商内的商品，循环这个大supplier -->
+        @if (ViewBag.shoppingCarts.Length > 0)
+        {
+            foreach (var cartobj in ViewBag.shoppingCarts)
+            {
+                sum++;
+                <li class="supplier box">
+                    <div class="supplier_word box">
+                        <span class="fl round round_circle"></span>
+                        @if (cartobj["isSea"])
+                        {
+                            <span class="supplier_name">猫市跨境购</span>
+                            @*if (string.IsNullOrEmpty(cartobj["shoppingName"]))
+                            {
+                                <span class="supplier_name">猫市跨境购</span>
+                            }
+                            else
+                            {
+                                <span class="supplier_name">cartobj["shoppingName"]</span>
+                            }*@
+                            
+                        }
+                        else
+                        {
+                            <span class="supplier_name">五洲精选</span>
+                            @*if (string.IsNullOrEmpty(cartobj["shoppingName"]))
+                            {
+                                <span class="supplier_name">五洲精选</span>
+                            }
+                            else
+                            {
+                                <span class="supplier_name">cartobj["shoppingName"]</span>
+                            }*@
+                        }
+                        @*<span class="supplier_name">@cartobj["nickName"]</span>*@
+                        @if (cartobj["isSea"])
+                        {
+                            <span class="overseas fr"></span>
+                        }
+                        @*<span class="post fr">运费￥<i class="post_price">0</i></span>*@
+                    </div>
+                    <ul class="goods_list box" style="width:100%; overflow-x: hidden;" id="@sum" data-minsalequantity='@cartobj["minSaleQuantity"]'>
+                        @* <li class="list_li count_li box">
+                                <div class="subtotal">
+                                    <b class="colpink"></b><b class="purPrice"></b><span class="fr">小计：<i data-pricelimit='0' data-expressprice="0">￥0</i>$1$（含运费）#1#</span>
+                                </div>
+                            </li>*@
+                        @foreach (var obj in cartobj["data"])
+                        {
+                            <li class="list_li box webkitbox">
+                                <div class="choose">
+                                    @*<span class='round round_circle  @obj["productId"]?"backnone eventNone font24 inv data-flag='@obj["productId"]'>失效</span>*@
+                                    @if (obj["isPromotionEnd"] == 0 && ((obj["boughtNum"] < obj["purchase_quantity"]) || obj["purchase_quantity"] == 0 || obj["purchase_quantity"] == null))
+                                    {
+                                        <span class='round round_circle start prolist' data-purprice="@obj["purchase_price"]" data-flag='@obj["isPromotionEnd"]' data-shipruleid='@obj["shippingFeeRuleId"]' data-minproduct='@obj["minProductFee"]' data-shippingfee='@obj["shippingFee"]' data-computationrule='@obj["computationRule"]' data-issea="@(cartobj["isSea"])"></span>
+                                    }
+                                    else
+                                    {
+                                        <span class='round round_circle  backnone eventNone font12 invaobj' data-flag='@obj["isPromotionEnd"]' data-issea="@(cartobj["isSea"])">失效</span>
+                                    }
+                                </div>
+                                <div class=" goods_picture" onclick="window.location.href = '/Classify/themePromoList?ProductId=@obj["productId"]&isShareProduct=2&hideCat=1&title=@System.Web.HttpUtility.UrlEncode(obj["longName"])'">
+                                    <img src="@obj["src"]" onerror="this.src = '../content/images/loading_250.png'">
+                                </div>
+                                <div class=" goods_details flex1">
+                                    <p class="goods_name" data-puserid='@cartobj["providerUserId"]' data-pro_id='@obj["productId"]' data-oripuserid='@cartobj["provider_id"]' data-promoid=@obj["promotion_id"] data-skuid='@obj["skuId"]'>@obj["longName"]</p>
+                                    <p class="goods_sku">@obj["specs"]</p>
+                                    <div class="calculate">
+                                        <span class="shangpin_price">￥<i>@(obj["isMemberOnly"] == 1 ? (ViewBag.IsMember == false ? obj["salesPrice"] : obj["purchase_price"]) : obj["purchase_price"])</i></span>
+                                        <span class="fr">
+                                            @if (obj["isPromotionEnd"] == 0 && ((obj["boughtNum"] < obj["purchase_quantity"]) || obj["purchase_quantity"] == 0 || obj["purchase_quantity"] == null))
+                                            {
+                                                <span id="minnum" class="minnum fl box" style="@(obj["isPromotionEnd"] != 0 ? "pointer-events:none;" : "")"></span>
+    <input type="text" onblur="GetCombineNum(this)" onfocus="lockGocheck()" class="count_num fl box" data-promoid=@obj["promotion_id"] data-boughtnum=@obj["boughtNum"] data-skuid='@obj["skuId"]' data-id='@obj["productId"]' data-price='@(obj["isMemberOnly"] == 1 ? (ViewBag.IsMember == false ? obj["salesPrice"] : obj["purchase_price"]) : obj["purchase_price"])' data-least='@obj["sale_amount"]' data-limit='@obj["purchase_quantity"]' data-saleprice='@obj["salesPrice"]' data-canpurchase='@obj["pro_amount"]' value='@obj["amount"]'>
+                                                <span id="addnum" class="addnum fl box" style="@(obj["isPromotionEnd"] != 0 ? "pointer-events:none;" : "")"></span>
+                                            }
+                                            else
+                                            {
+                                                <span id="minnum" class="minnum fl box" style="pointer-events: none;"></span>
+    <input type="text" class="count_num fl box" data-promoid=@obj["promotion_id"] data-boughtnum=@obj["boughtNum"] data-skuid='@obj["skuId"]' data-id='@obj["productId"]' data-saleprice='@obj["salesPrice"]' data-price='@(obj["isMemberOnly"] == 1 ? (ViewBag.IsMember == false ? obj["salesPrice"] : obj["purchase_price"]) : obj["purchase_price"])' data-least='@obj["sale_amount"]' data-limit='@obj["purchase_quantity"]' data-canpurchase='@obj["pro_amount"]' value='@obj["amount"]' readonly>
+                                                <span id="addnum" class="addnum fl box" style="pointer-events: none;"></span>
+                                            }
+                                        </span>
+
+                                    </div>
+                                    <div class="redword word_tips"></div>
+                                </div>
+                                <div class="operation ar">
+                                    <span class="delete" data-cartid='@obj["cartId"]'></span>
+                                    @*<span class="shangpin_price">￥<i>@obj["purchase_price"]</i></span>*@
+                                </div>
+                            </li>
+
+                        }
+                        <li class="list_li box count_li">
+
+
+                            <div class="subtotal clearfix">
+                                <b class="colpink"></b>
+                                <b class="purPrice"></b>
+                                @*@if (cartobj["isSea"])
+                                    {
+                                        <p class="fl fs13">跨境商品不能享受会员回馈</p>
+                                    }*@
+                                <p class="fl minsale">
+                                    该类商品<span></span>件起售<br />
+                                    <a href="/classify/themePromoList?providerUserId=@cartobj["providerUserId"]&title=@cartobj["nickName"]" class="minSaleBtn ac">去凑单</a>
+                                </p>
+                                <p class="total_info">
+                                    运费：<i class="post_price">0.00</i>
+                                </p>
+                                <div class="total_info">
+                                    <a href="taxRateInfo"><img class="doubtful" src="../../Content/images/icon_doubtful.png"></a>税费：<i class="tax_price">0.00</i>
+                                </div>
+                                <span class="total_info">小计：<i data-pricelimit='0' data-expressprice="0">0.00</i></span>
+                            </div>
+                            @*<div class="subtotal">
+                                    <b class="colpink"></b><b class="purPrice"></b><span class="fr">小计：<i data-pricelimit='0' data-expressprice="0">￥0</i>$2$（含运费）#2#</span>
+                                </div>*@
+                        </li>
+                    </ul>
+                </li>
+            }
+        }
+        else
+        {
+            <div class="nodata_shop">
+                <p class="no-icon wddz"></p>
+                <p class="nodatatip">您的购物车内还没有任何商品</p>
+            </div>
+        }
+    </ul>
+</div>
+<div class="popback"></div>
+<div class="custom" style="height: 3.7rem;">
+    <p>确定要删除该商品吗？</p>
+    <p class="custom_button">
+        <a href="javascript:;" class="quxiao">取消</a>
+        <a href="javascript:;" class="queding">确定</a>
+    </p>
+</div>
+@if (ViewBag.shoppingCarts.Length > 0)
+{
+    <footer class="footer box">
+        <span class="fl round round_circle" style="position:relative;left:-8px;"></span>
+        <span class="fl quanxuan">全选</span>
+        <span class="gocheck fr">去结算<i></i></span>
+        <div class="fr total">
+            <p class="redword ar">合计：<span>￥<i class="total_price">0</i></span></p>
+            <p class="post_index ar">（运费:<i id="express">￥0</i>）</p>
+        </div>
+    </footer>
+    <div class="popCart">
+
+    </div>
+}
+<input type="hidden" value="@ViewBag.uid" id="uid" />
+<input type="hidden" value="@Convert.ToString(ViewBag.IsMember)" id="isMember" />
+@section Footer
+{
+
+}
+@section Scripts
+{
+    <script>
+        $(function () {
+            $(".footer span").eq(0).click();
+        })
+    </script>
+    @WebHelper4H5.RegisterScripts("malls/getShopCart.js")
+}

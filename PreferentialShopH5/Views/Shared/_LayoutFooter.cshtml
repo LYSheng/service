@@ -1,0 +1,204 @@
+﻿@using Service.Site;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@(string.IsNullOrEmpty(ViewBag.Title) ? "Malls·五洲精选" : ViewBag.Title)</title>
+    <meta name="referrer" content="always">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @RenderSection("HeadTop", false)
+
+    @*@Styles.Render("~/Content/css")*@
+    @WebHelper4H5.RegisterStyles("reset.css")
+    @WebHelper4H5.RegisterStyles("common.css")
+
+
+
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/jquery-2.1.1.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/modernizr-2.6.2.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/jquery.cookie.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/knockout-2.2.0.debug.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]scripts/knockout.validation.js"></script>
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/cookieHandle.js?v=1.0"></script>
+
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Content/Scripts/NewScripts/main.js?v=1.12"></script>
+
+    @*  @Scripts.Render("~/bundles/scripts/plugin")*@
+    @WebHelper4H5.RegisterScripts("global.js")
+    <!--弹出层插件-->
+    <link href="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/layer.m/need/layer.css" rel="stylesheet" />
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/Plugin/layer.m/layer.m.js"></script>
+    @WebHelper4H5.RegisterScripts("base.js")
+    <!--全局弹出loading -->
+    @RenderSection("Head", false)
+    @if (!string.IsNullOrEmpty(System.Configuration.ConfigurationManager.AppSettings["BaiDuTongJi"]))
+    {
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?@System.Configuration.ConfigurationManager.AppSettings["BaiDuTongJi"]";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    }
+    @if (Request.Cookies.Get("IsHasCoupons") != null && Request.Cookies.Get("IsHasCoupons").Value == "1")
+    {
+        <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        var WXShare = Service.Site.wxService.WXShare(Request.Url.ToString());
+        <script>
+            $(function () {
+                setTimeout(function () { platinumBag(@(Html.Raw(Json.Encode(WXShare)))); }, 500)
+            });
+        </script>
+    }
+    @{
+        var CurrentUserId = string.IsNullOrEmpty(CurrentUser.Instance.UserId.ToString()) ? "0" : CurrentUser.Instance.UserId.ToString();
+    }
+    @if (ViewData["IsAlreadySetShare"] == null)
+    {
+        var WXShare = wxService.WXShare(Request.Url.ToString());
+        <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script type="text/javascript">
+            var isShareLoadOk = false;
+            wx.config({
+                debug: false,
+                appId: '@wxService.wxappid',
+                timestamp: '@WXShare.Timestamp',
+                nonceStr: '@WXShare.Noncestr',
+                signature: '@WXShare.Signature',
+                jsApiList: [
+              'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+                ]
+            });
+            wx.ready(function () {
+                wx.onMenuShareAppMessage({
+                    title: 'Malls·五洲精选',
+                    desc: '严选世间好物，品质生活，值得拥有', // 分享描述
+                    link: '@string.Format(WebConfig.WXMVCUrl + "/Share/Arrive?ReferrerUserId={0}&ReturnUrl=/userAbout/bindMember?ReferrerUserId={0}", CurrentUserId)',
+                    imgUrl: '@WebConfig.WXMVCUrl/Content/images/mallslog.png',
+                    trigger: function (res) {
+                        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+
+                    },
+                    success: function (res) {
+                        $("body .layer").remove();
+                    },
+                    cancel: function (res) {
+                        $("body .layer").remove();
+                    },
+                    fail: function (res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
+                wx.onMenuShareTimeline({
+                    title: '严选世间好物，品质生活，值得拥有',
+                    desc: '测试描述', // 朋友圈不支持
+                    link: '@string.Format(WebConfig.WXMVCUrl + "/Share/Arrive?ReferrerUserId={0}&ReturnUrl=/userAbout/bindMember?ReferrerUserId={0}", CurrentUserId)',
+                    imgUrl: '@WebConfig.WXMVCUrl/Content/images/mallslog.png',
+                    trigger: function (res) {
+                        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+
+                    },
+                    success: function (res) {
+                        $("body .layer").remove();
+                    },
+                    cancel: function (res) {
+                        $("body .layer").remove();
+                    },
+                    fail: function (res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
+                isShareLoadOk = true;
+            });
+        </script>
+    }
+    <script type="text/javascript">
+        var H5Url = '@System.Configuration.ConfigurationManager.AppSettings["H5Url"]';
+        $(function () {
+            var hasMatch = false;
+            $(this).find("i").removeClass("on");
+            var isShareProduct = smGlobal.getQueryString("isShareProduct");
+            if (location.href.indexOf("/product/detail") > -1 && (!isShareProduct || isShareProduct != 1)) {
+                $(".nav").hide();
+                return false;
+            }
+            if (location.href.indexOf("/Classify/themePromoList") > -1) {
+                $(".nav").hide();
+                return false;
+            }
+            $(".box.nav ul.navUl li a").each(function (index) {
+                var href = $(this).attr("href");
+                if (href == '/Classify/category') {
+                    href = '/Classify';
+                }
+                if (href != "/" && location.href.indexOf(href) > -1 && hasMatch == false) {
+                    $(this).find("i").addClass("on");
+                    hasMatch = true;
+                }
+            });
+            if (!hasMatch)
+                $(".box.nav ul.navUl li:first a i").addClass("on");
+
+        });
+    </script>
+</head>
+<body>
+    @RenderSection("SearchArea", false)
+    @RenderBody()
+    @RenderSection("Footer", false)
+    @if (Request["from"] != "ios")
+    {
+        <nav class="nav full-width box posFixed">
+            <ul class="clearfix navUl ac">
+                <li class="flex1">
+                    <a href="/">
+                        <i class="user_home on"></i>
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li class="flex1">
+                    <a href="/Classify/category">
+                        <i class="user_variety"></i>
+                        <p>分类</p>
+                    </a>
+                </li>
+
+                <li class="flex1">
+                    <a href="/mall/getShoppingCart">
+                        <i class="user_cart"></i>
+                        <p class="p02">购物车</p>
+                    </a>
+                </li>
+                @*<li class="flex1">
+                        <a href="/Daman">
+                            <i class="user_order"></i>
+                            <p>匠人秀</p>
+                        </a>
+                    </li>*@
+                <li class="flex1">
+                    <a href="/userAbout">
+                        <i class="user_my"></i>
+                        <p>我的</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+    <div class="back_top">
+        <div class="back_top_ico"></div>
+        <div class="back_top_bg"></div>
+    </div>
+
+    <script src="@System.Configuration.ConfigurationManager.AppSettings["H5Url"]Scripts/iplocation.js?v=2.8"></script>
+    @RenderSection("Scripts", false)
+    <div style="display: none;">
+        @Html.AntiForgeryToken()
+    </div>
+</body>
+</html>
